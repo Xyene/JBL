@@ -1,11 +1,11 @@
 package com.github.Icyene.BytecodeStudio.Disassembler.Pools;
 
 import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
-import com.github.Icyene.BytecodeStudio.Disassembler.Indices.InterfacePoolIndex;
+import com.github.Icyene.BytecodeStudio.Disassembler.Indices.Interface;
 
 import java.util.LinkedList;
 
-public class InterfacePool extends LinkedList<InterfacePoolIndex> {
+public class InterfacePool extends LinkedList<Interface> {
     private int offset = 16;
 
     public InterfacePool(byte[] clazz, ConstantPool pool) {
@@ -13,12 +13,12 @@ public class InterfacePool extends LinkedList<InterfacePoolIndex> {
         short size = Bytes.readShort(clazz, offset);
         if (size <= 0) return;
         for (int i = 0; i != size; i++)
-            add(new InterfacePoolIndex(pool, Bytes.slice(clazz, offset, (offset += 2)), i));
+            add(new Interface(pool, Bytes.slice(clazz, offset, (offset += 2)), i));
     }
 
     public byte[] assemble() {
-        byte[] raw = Bytes.getShort((short)size());
-        for (InterfacePoolIndex cpi : this)
+        byte[] raw = Bytes.getShort((short) size());
+        for (Interface cpi : this)
             raw = Bytes.append(raw, cpi.assemble());
         return raw;
     }

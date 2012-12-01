@@ -1,6 +1,6 @@
 package com.github.Icyene.BytecodeStudio.Disassembler;
 
-import com.github.Icyene.BytecodeStudio.Disassembler.Indices.ConstantPoolIndex;
+import com.github.Icyene.BytecodeStudio.Disassembler.Indices.Constant;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.InterfacePool;
 
@@ -15,8 +15,8 @@ public class ClassFile {
     private short minorVersion;
     private short accessFlags;
     private ConstantPool constantPool;
-    private ConstantPoolIndex thisClass;
-    private ConstantPoolIndex superClass;
+    private Constant thisClass;
+    private Constant superClass;
     private InterfacePool interfacePool;
 
     public ClassFile(File f) throws IOException {
@@ -84,19 +84,19 @@ public class ClassFile {
         this.constantPool = constantPool;
     }
 
-    public ConstantPoolIndex getThisClass() {
+    public Constant getThisClass() {
         return thisClass;
     }
 
-    public void setThisClass(ConstantPoolIndex thisClass) {
+    public void setThisClass(Constant thisClass) {
         this.thisClass = thisClass;
     }
 
-    public ConstantPoolIndex getSuperClass() {
+    public Constant getSuperClass() {
         return superClass;
     }
 
-    public void setSuperClass(ConstantPoolIndex superClass) {
+    public void setSuperClass(Constant superClass) {
         this.superClass = superClass;
     }
 

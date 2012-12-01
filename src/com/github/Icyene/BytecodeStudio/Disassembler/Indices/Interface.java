@@ -3,13 +3,13 @@ package com.github.Icyene.BytecodeStudio.Disassembler.Indices;
 import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
 
-public class InterfacePoolIndex {
+public class Interface {
 
-    ConstantPoolIndex classReference;
-    ConstantPoolIndex descriptor;
+    Constant classReference;
+    Constant descriptor;
     int index;
 
-    public InterfacePoolIndex(ConstantPool pool, byte[] value, int index) {
+    public Interface(ConstantPool pool, byte[] value, int index) {
         this.classReference = pool.get(Bytes.readShort(value, 0));
         this.descriptor = pool.get(Bytes.readShort(value, 2));
         this.index = index;
@@ -23,19 +23,19 @@ public class InterfacePoolIndex {
         return 2;
     }
 
-    public ConstantPoolIndex getClassReference() {
+    public Constant getClassReference() {
         return classReference;
     }
 
-    public void setClassReference(ConstantPoolIndex classReference) {
+    public void setClassReference(Constant classReference) {
         this.classReference = classReference;
     }
 
-    public ConstantPoolIndex getDescriptor() {
+    public Constant getDescriptor() {
         return descriptor;
     }
 
-    public void setDescriptor(ConstantPoolIndex descriptor) {
+    public void setDescriptor(Constant descriptor) {
         this.descriptor = descriptor;
     }
 

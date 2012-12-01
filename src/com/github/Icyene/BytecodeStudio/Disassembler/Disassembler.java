@@ -1,6 +1,6 @@
 package com.github.Icyene.BytecodeStudio.Disassembler;
 
-import com.github.Icyene.BytecodeStudio.Disassembler.Indices.ConstantPoolIndex;
+import com.github.Icyene.BytecodeStudio.Disassembler.Indices.Constant;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
 
 import java.io.File;
@@ -32,14 +32,14 @@ public class Disassembler {
             se.append("\n===Constant Pool===");
             se.append("\nSize of pool: " + cp.size());
             se.append("\nIndex   Type   Value");
-            for(ConstantPoolIndex cpi: cp) {
+            for(Constant cpi: cp) {
                se.append("\n#" + (cpi.getIndex()+1) + " = " + cpi.getType().name() + ":   " + cpi.prettyPrint()+";");
             }
 
             Bytes.writeBytesToFile(se.toString().getBytes(), clazz.getAbsoluteFile() + ".prettyprint");
 
             ClassFile cc = new ClassFile(clazz);
-            cc.getConstantPool().set(1, new ConstantPoolIndex(2, Tag.STRING, Bytes.getShort((short)36)));
+            cc.getConstantPool().set(1, new Constant(2, Tag.STRING, Bytes.getShort((short) 36)));
             Bytes.writeBytesToFile(cc.assemble(), clazz.getAbsoluteFile() + ".test");
 
             System.out.println("V bytes: " + Bytes.bytesToString(Bytes.read(clazz)));

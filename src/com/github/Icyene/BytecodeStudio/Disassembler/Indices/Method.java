@@ -2,11 +2,11 @@ package com.github.Icyene.BytecodeStudio.Disassembler.Indices;
 
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.AttributePool;
 
-public class MethodPoolIndex {
+public class Method {
 
     private short accessFlags;
-    private ConstantPoolIndex name;
-    private ConstantPoolIndex descriptor;
+    private Constant name;
+    private Constant descriptor;
     private AttributePool attributePool;
 
     public byte[] assemble() {
@@ -25,19 +25,19 @@ public class MethodPoolIndex {
         this.accessFlags = accessFlags;
     }
 
-    public ConstantPoolIndex getName() {
+    public Constant getName() {
         return name;
     }
 
-    public void setName(ConstantPoolIndex name) {
+    public void setName(Constant name) {
         this.name = name;
     }
 
-    public ConstantPoolIndex getDescriptor() {
+    public Constant getDescriptor() {
         return descriptor;
     }
 
-    public void setDescriptor(ConstantPoolIndex descriptor) {
+    public void setDescriptor(Constant descriptor) {
         this.descriptor = descriptor;
     }
 

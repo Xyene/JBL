@@ -3,12 +3,12 @@ package com.github.Icyene.BytecodeStudio.Disassembler.Indices;
 import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
 import com.github.Icyene.BytecodeStudio.Disassembler.Tag;
 
-public class ConstantPoolIndex {
+public class Constant {
     int index;
     Tag type;
     byte[] value;
 
-    public ConstantPoolIndex(int index, Tag type, byte[] value) {
+    public Constant(int index, Tag type, byte[] value) {
         this.index = index;
         this.type = type;
         this.value = value;

@@ -27,12 +27,12 @@ public class Bytes {
     }
 
     public static int readInt(byte[] bytes, int start) {
-            int ret = 0;
-            for (int i=0; i<4 && i+start<bytes.length; i++) {
-                ret <<= 8;
-                ret |= (int)bytes[i] & 0xFF;
-            }
-            return ret;
+        int ret = 0;
+        for (int i = 0; i < 4 && i + start < bytes.length; i++) {
+            ret <<= 8;
+            ret |= (int) bytes[i] & 0xFF;
+        }
+        return ret;
     }
 
     public static byte[] getShort(short in) {
