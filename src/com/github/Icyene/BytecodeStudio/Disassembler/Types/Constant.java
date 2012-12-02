@@ -1,12 +1,12 @@
-package com.github.Icyene.BytecodeStudio.Disassembler.Indices;
+package com.github.Icyene.BytecodeStudio.Disassembler.Types;
 
 import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
 import com.github.Icyene.BytecodeStudio.Disassembler.Tag;
 
 public class Constant {
-    int index;
-    Tag type;
-    byte[] value;
+    private final int index;
+    private Tag type;
+    private byte[] value;
 
     public Constant(int index, Tag type, byte[] value) {
         this.index = index;

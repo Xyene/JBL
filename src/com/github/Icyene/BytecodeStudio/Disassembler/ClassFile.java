@@ -1,8 +1,9 @@
 package com.github.Icyene.BytecodeStudio.Disassembler;
 
-import com.github.Icyene.BytecodeStudio.Disassembler.Indices.Constant;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
+import com.github.Icyene.BytecodeStudio.Disassembler.Types.Flag;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.InterfacePool;
+import com.github.Icyene.BytecodeStudio.Disassembler.Types.Constant;
 
 import java.io.File;
 import java.io.IOException;
@@ -13,7 +14,7 @@ public class ClassFile {
 
     private short majorVersion;
     private short minorVersion;
-    private short accessFlags;
+    private Flag accessFlags;
     private ConstantPool constantPool;
     private Constant thisClass;
     private Constant superClass;
@@ -21,7 +22,7 @@ public class ClassFile {
 
     public ClassFile(File f) throws IOException {
         bytes = Bytes.read(f);
-        if (Bytes.readInt(bytes, 0) != 0xCAFEBABE)  //3405691582
+        if (Bytes.readInt(bytes, 0) != 0xCAFEBABE)
             throw new IllegalStateException("File does not contain magic number 0xCAFEBABE");
         setMinorVersion(Bytes.readShort(bytes, 4));
         setMajorVersion(Bytes.readShort(bytes, 6));
@@ -29,7 +30,7 @@ public class ClassFile {
 
         int offset = getConstantPool().getOffset();
 
-        setAccessFlags(Bytes.readShort(bytes, offset));
+        setAccessFlags(new Flag(Bytes.readShort(bytes, offset)));
         setThisClass(getConstantPool().get(Bytes.readShort(bytes, 2 + offset)));  //12, 13
         setSuperClass(getConstantPool().get(Bytes.readShort(bytes, 4 + offset))); //13, 14
 
@@ -45,34 +46,34 @@ public class ClassFile {
         raw = Bytes.append(raw, Bytes.getShort(getMinorVersion()));
         raw = Bytes.append(raw, Bytes.getShort(getMajorVersion()));
         raw = Bytes.append(raw, getConstantPool().assemble());
-        raw = Bytes.append(raw, Bytes.getShort(getAccessFlags()));
+        raw = Bytes.append(raw, getAccessFlags().assemble());
         raw = Bytes.append(raw, Bytes.getShort((short) getThisClass().getIndex()));
         raw = Bytes.append(raw, Bytes.getShort((short) getSuperClass().getIndex()));
         raw = Bytes.append(raw, getInterfacePool().assemble());
         return raw;
     }
 
-    public short getMajorVersion() {
+    short getMajorVersion() {
         return majorVersion;
     }
 
-    public void setMajorVersion(short majorVersion) {
+    void setMajorVersion(short majorVersion) {
         this.majorVersion = majorVersion;
     }
 
-    public short getMinorVersion() {
+    short getMinorVersion() {
         return minorVersion;
     }
 
-    public void setMinorVersion(short minorVersion) {
+    void setMinorVersion(short minorVersion) {
         this.minorVersion = minorVersion;
     }
 
-    public short getAccessFlags() {
+    Flag getAccessFlags() {
         return accessFlags;
     }
 
-    public void setAccessFlags(short accessFlags) {
+    void setAccessFlags(Flag accessFlags) {
         this.accessFlags = accessFlags;
     }
 
@@ -80,31 +81,31 @@ public class ClassFile {
         return constantPool;
     }
 
-    public void setConstantPool(ConstantPool constantPool) {
+    void setConstantPool(ConstantPool constantPool) {
         this.constantPool = constantPool;
     }
 
-    public Constant getThisClass() {
+    Constant getThisClass() {
         return thisClass;
     }
 
-    public void setThisClass(Constant thisClass) {
+    void setThisClass(Constant thisClass) {
         this.thisClass = thisClass;
     }
 
-    public Constant getSuperClass() {
+    Constant getSuperClass() {
         return superClass;
     }
 
-    public void setSuperClass(Constant superClass) {
+    void setSuperClass(Constant superClass) {
         this.superClass = superClass;
     }
 
-    public InterfacePool getInterfacePool() {
+    InterfacePool getInterfacePool() {
         return interfacePool;
     }
 
-    public void setInterfacePool(InterfacePool interfacePool) {
+    void setInterfacePool(InterfacePool interfacePool) {
         this.interfacePool = interfacePool;
     }
 }

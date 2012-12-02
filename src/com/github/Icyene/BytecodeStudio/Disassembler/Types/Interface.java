@@ -1,13 +1,13 @@
-package com.github.Icyene.BytecodeStudio.Disassembler.Indices;
+package com.github.Icyene.BytecodeStudio.Disassembler.Types;
 
 import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
 
 public class Interface {
 
-    Constant classReference;
-    Constant descriptor;
-    int index;
+    private Constant classReference;
+    private Constant descriptor;
+    private final int index;
 
     public Interface(ConstantPool pool, byte[] value, int index) {
         this.classReference = pool.get(Bytes.readShort(value, 0));

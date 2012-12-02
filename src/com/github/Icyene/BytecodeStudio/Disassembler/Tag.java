@@ -37,7 +37,7 @@ public enum Tag {
         return null;
     }
 
-    public int getLengthOfByte(int b) {
+    int getLengthOfByte(int b) {
         switch (b) {
             case 3:
                 return 4;

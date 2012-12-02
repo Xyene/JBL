@@ -1,13 +1,24 @@
-package com.github.Icyene.BytecodeStudio.Disassembler.Indices;
+package com.github.Icyene.BytecodeStudio.Disassembler.Types;
 
+import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.AttributePool;
+import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
 
-public class Method {
+class Field {
 
-    private short accessFlags;
+    private Flag accessFlags;
     private Constant name;
     private Constant descriptor;
     private AttributePool attributePool;
+
+    Field(byte[] clazz, ConstantPool cpool, int offset) {
+        accessFlags = new Flag(Bytes.readShort(clazz, offset));
+        name = cpool.get(Bytes.readShort(clazz, offset + 2) - 1);
+        descriptor = cpool.get(Bytes.readShort(clazz, offset + 4) - 1);
+        int attributeSize = Bytes.readShort(clazz, offset + 6);
+        offset += 8;
+    }
+
 
     public byte[] assemble() {
         return null;
@@ -17,11 +28,11 @@ public class Method {
         return 6 + attributePool.size();
     }
 
-    public short getAccessFlags() {
+    public Flag getAccessFlags() {
         return accessFlags;
     }
 
-    public void setAccessFlags(short accessFlags) {
+    public void setAccessFlags(Flag accessFlags) {
         this.accessFlags = accessFlags;
     }
 

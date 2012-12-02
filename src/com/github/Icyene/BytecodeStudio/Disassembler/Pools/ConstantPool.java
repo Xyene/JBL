@@ -1,7 +1,7 @@
 package com.github.Icyene.BytecodeStudio.Disassembler.Pools;
 
 import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
-import com.github.Icyene.BytecodeStudio.Disassembler.Indices.Constant;
+import com.github.Icyene.BytecodeStudio.Disassembler.Types.Constant;
 import com.github.Icyene.BytecodeStudio.Disassembler.Tag;
 
 import java.util.LinkedList;
