@@ -10,7 +10,7 @@ public class AttributePool extends LinkedList<Attribute> {
     public byte[] assemble() {
         byte[] ret = Bytes.getShort((short) size());
         for (Attribute a : this)
-            ret = Bytes.append(ret, a.assemble());
+            ret = Bytes.concat(ret, a.assemble());
         return ret;
     }
 }

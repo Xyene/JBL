@@ -16,7 +16,7 @@ public class Interface {
     }
 
     public byte[] assemble() {
-        return Bytes.append(classReference.assemble(), classReference.assemble());
+        return Bytes.concat(classReference.assemble(), classReference.assemble());
     }
 
     public int getSizeInBytes() {

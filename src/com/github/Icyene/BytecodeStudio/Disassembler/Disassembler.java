@@ -9,23 +9,21 @@ import java.io.IOException;
 public class Disassembler {
 
     public static void main(String[] args) {
-
         File clazz = new File(args.length > 1 ? args[0] : System.getenv("USERPROFILE") + "/Desktop/Test.class");
         try {
+            new ClassFile(clazz);
             long average;
             int iterations = 500;
             long start = System.nanoTime();
             for (int i = 1; i != iterations; i++) {
                 new ClassFile(clazz);
-
-               // System.out.println((System.currentTimeMillis() - start));
             }
 
             average = (System.nanoTime() - start) / iterations;
             System.out.println("Average time taken over " + iterations + " iterations: " + average + "n");
             System.out.println(new ClassFile(clazz).getConstantPool().toString());
 
-            Bytes.writeBytesToFile(ClassFile.get(clazz).assemble(), clazz.getAbsoluteFile() + ".bytes");
+            Bytes.writeBytesToFile(new ClassFile(clazz).assemble(), clazz.getAbsoluteFile() + ".bytes");
 
             ConstantPool cp = new ClassFile(clazz).getConstantPool();
             StringBuilder se = new StringBuilder();

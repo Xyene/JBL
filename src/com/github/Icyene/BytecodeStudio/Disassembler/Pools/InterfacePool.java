@@ -19,7 +19,7 @@ public class InterfacePool extends LinkedList<Interface> {
     public byte[] assemble() {
         byte[] raw = Bytes.getShort((short) size());
         for (Interface cpi : this)
-            raw = Bytes.append(raw, cpi.assemble());
+            raw = Bytes.concat(raw, cpi.assemble());
         return raw;
     }
 

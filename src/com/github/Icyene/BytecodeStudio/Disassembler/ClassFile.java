@@ -1,12 +1,13 @@
 package com.github.Icyene.BytecodeStudio.Disassembler;
 
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.ConstantPool;
-import com.github.Icyene.BytecodeStudio.Disassembler.Types.Flag;
 import com.github.Icyene.BytecodeStudio.Disassembler.Pools.InterfacePool;
 import com.github.Icyene.BytecodeStudio.Disassembler.Types.Constant;
+import com.github.Icyene.BytecodeStudio.Disassembler.Types.Flag;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 
 public class ClassFile {
 
@@ -20,8 +21,8 @@ public class ClassFile {
     private Constant superClass;
     private InterfacePool interfacePool;
 
-    public ClassFile(File f) throws IOException {
-        bytes = Bytes.read(f);
+    public ClassFile(byte[] bytes) {
+        this.bytes = bytes;
         if (Bytes.readInt(bytes, 0) != 0xCAFEBABE)
             throw new IllegalStateException("File does not contain magic number 0xCAFEBABE");
         setMinorVersion(Bytes.readShort(bytes, 4));
@@ -37,43 +38,47 @@ public class ClassFile {
         setInterfacePool(new InterfacePool(bytes, getConstantPool()));
     }
 
-    public static ClassFile get(File f) throws IOException {
-        return new ClassFile(f);
+    public ClassFile(InputStream stream) throws IOException {
+        this(Bytes.read(stream));
+    }
+
+    public ClassFile(File f) throws IOException {
+        this(Bytes.read(f));
     }
 
     public byte[] assemble() {
         byte[] raw = Bytes.getInt(0xCAFEBABE);
-        raw = Bytes.append(raw, Bytes.getShort(getMinorVersion()));
-        raw = Bytes.append(raw, Bytes.getShort(getMajorVersion()));
-        raw = Bytes.append(raw, getConstantPool().assemble());
-        raw = Bytes.append(raw, getAccessFlags().assemble());
-        raw = Bytes.append(raw, Bytes.getShort((short) getThisClass().getIndex()));
-        raw = Bytes.append(raw, Bytes.getShort((short) getSuperClass().getIndex()));
-        raw = Bytes.append(raw, getInterfacePool().assemble());
+        raw = Bytes.concat(raw, Bytes.getShort(getMinorVersion()));
+        raw = Bytes.concat(raw, Bytes.getShort(getMajorVersion()));
+        raw = Bytes.concat(raw, getConstantPool().assemble());
+        raw = Bytes.concat(raw, getAccessFlags().assemble());
+        raw = Bytes.concat(raw, Bytes.getShort((short) getThisClass().getIndex()));
+        raw = Bytes.concat(raw, Bytes.getShort((short) getSuperClass().getIndex()));
+        raw = Bytes.concat(raw, getInterfacePool().assemble());
         return raw;
     }
 
-    short getMajorVersion() {
+    public short getMajorVersion() {
         return majorVersion;
     }
 
-    void setMajorVersion(short majorVersion) {
+    public void setMajorVersion(short majorVersion) {
         this.majorVersion = majorVersion;
     }
 
-    short getMinorVersion() {
+    public short getMinorVersion() {
         return minorVersion;
     }
 
-    void setMinorVersion(short minorVersion) {
+    public void setMinorVersion(short minorVersion) {
         this.minorVersion = minorVersion;
     }
 
-    Flag getAccessFlags() {
+    public Flag getAccessFlags() {
         return accessFlags;
     }
 
-    void setAccessFlags(Flag accessFlags) {
+    public void setAccessFlags(Flag accessFlags) {
         this.accessFlags = accessFlags;
     }
 
@@ -81,31 +86,31 @@ public class ClassFile {
         return constantPool;
     }
 
-    void setConstantPool(ConstantPool constantPool) {
+    public void setConstantPool(ConstantPool constantPool) {
         this.constantPool = constantPool;
     }
 
-    Constant getThisClass() {
+    public Constant getThisClass() {
         return thisClass;
     }
 
-    void setThisClass(Constant thisClass) {
+    public void setThisClass(Constant thisClass) {
         this.thisClass = thisClass;
     }
 
-    Constant getSuperClass() {
+    public Constant getSuperClass() {
         return superClass;
     }
 
-    void setSuperClass(Constant superClass) {
+    public void setSuperClass(Constant superClass) {
         this.superClass = superClass;
     }
 
-    InterfacePool getInterfacePool() {
+    public InterfacePool getInterfacePool() {
         return interfacePool;
     }
 
-    void setInterfacePool(InterfacePool interfacePool) {
+    public void setInterfacePool(InterfacePool interfacePool) {
         this.interfacePool = interfacePool;
     }
 }

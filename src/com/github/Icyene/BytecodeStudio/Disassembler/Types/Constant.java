@@ -16,7 +16,7 @@ public class Constant {
 
     public byte[] assemble() {
         if (type == Tag.UTF_STRING)
-            return Bytes.prepend(Bytes.append(Bytes.getShort((short) value.length), value), (byte) type.getByte());
+            return Bytes.prepend(Bytes.concat(Bytes.getShort((short) value.length), value), (byte) Tag.UTF_STRING.getByte());
         return Bytes.prepend(value, (byte) type.getByte());
     }
 

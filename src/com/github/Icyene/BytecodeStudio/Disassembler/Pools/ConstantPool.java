@@ -40,7 +40,7 @@ public class ConstantPool extends LinkedList<Constant> {
     public byte[] assemble() {
         byte[] raw = Bytes.getShort((short) (size() + 1)); //Constant pool size
         for (Constant cpi : this)
-            raw = Bytes.append(raw, cpi.assemble());
+            raw = Bytes.concat(raw, cpi.assemble());
         return raw;
     }
 

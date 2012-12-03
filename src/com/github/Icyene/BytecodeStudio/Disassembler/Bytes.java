@@ -5,21 +5,15 @@ import java.util.Arrays;
 
 public class Bytes {
 
-    public static byte[] prepend(byte[] arr, byte firstElement) {
-        byte[] ret = new byte[arr.length + 1];
-        ret[0] = firstElement;
-        for (int i = 0; i != arr.length; i++)
-            ret[i + 1] = arr[i];
-        return ret;
+    public static byte[] prepend(byte[] arr, byte... firstElement) {
+        return concat(firstElement, arr);
     }
 
-    public static byte[] append(byte[] one, byte... two) {
-        byte[] ret = new byte[one.length + two.length];
-        for (int i = 0; i != one.length; i++)
-            ret[i] = one[i];
-        for (int i = 0; i != two.length; i++)
-            ret[i + one.length] = two[i];
-        return ret;
+    public static byte[] concat(byte[] A, byte... B) {
+        byte[] C = new byte[A.length + B.length];
+        System.arraycopy(A, 0, C, 0, A.length);
+        System.arraycopy(B, 0, C, A.length, B.length);
+        return C;
     }
 
     public static short readShort(byte[] bytes, int start) {
@@ -28,9 +22,9 @@ public class Bytes {
 
     public static int readInt(byte[] bytes, int start) {
         int ret = 0;
-        for (int i = 0; i < 4 && i + start < bytes.length; i++) {
+        for (int i = 0; i != 4; i++) {
             ret <<= 8;
-            ret |= (int) bytes[i] & 0xFF;
+            ret |= (int) bytes[i + start] & 0xFF;
         }
         return ret;
     }
@@ -47,12 +41,19 @@ public class Bytes {
         return Arrays.copyOfRange(bytes, start, end);
     }
 
+    public static byte[] read(InputStream stream) throws IOException {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        int nRead;
+        byte[] data = new byte[16384];
+        while ((nRead = stream.read(data, 0, data.length)) != -1) {
+            buffer.write(data, 0, nRead);
+        }
+        buffer.flush();
+        return buffer.toByteArray();
+    }
+
     public static byte[] read(File file) throws IOException {
-        byte[] buffer = new byte[(int) file.length()];
-        BufferedInputStream bin = new BufferedInputStream(new FileInputStream(file));
-        bin.read(buffer);
-        bin.close();
-        return buffer;
+        return read(new FileInputStream(file));
     }
 
     public static String bytesToString(byte[] bytes) {

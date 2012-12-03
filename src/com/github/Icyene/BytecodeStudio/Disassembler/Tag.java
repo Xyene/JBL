@@ -15,10 +15,11 @@ public enum Tag {
     DESCRIPTOR(12),
     PHANTOM(-1); //Longs and doubles have a phantom index
 
-    private final int val, len;
+    private final byte val;
+    private final int len;
 
     Tag(int c) {
-        val = c;
+        val = (byte)c;
         len = getLengthOfByte(val);
     }
 
@@ -26,7 +27,7 @@ public enum Tag {
         return len;
     }
 
-    public int getByte() {
+    public byte getByte() {
         return val;
     }
 

@@ -1,28 +1,16 @@
 package com.github.Icyene.BytecodeStudio.Disassembler.Types;
 
-import com.github.Icyene.BytecodeStudio.Disassembler.Bytes;
-
-public class Attribute {
+public abstract class Attribute {
 
     private Constant name;
-    private byte[] info;
+    private int length;
 
-    public Attribute(byte[] info, Constant name) {
+    public Attribute(int length, Constant name) {
         this.name = name;
-        this.info = info;
+        this.length = length;
     }
 
-    public byte[] assemble() {
-        return Bytes.append(Bytes.append(Bytes.getShort((short) name.getIndex()), Bytes.getInt(info.length)), info);
-    }
-
-    public byte[] getInfo() {
-        return info;
-    }
-
-    public void setInfo(byte[] info) {
-        this.info = info;
-    }
+    public abstract byte[] assemble();
 
     public Constant getName() {
         return name;
@@ -30,5 +18,13 @@ public class Attribute {
 
     public void setName(Constant name) {
         this.name = name;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void setLength(int length) {
+        this.length = length;
     }
 }
