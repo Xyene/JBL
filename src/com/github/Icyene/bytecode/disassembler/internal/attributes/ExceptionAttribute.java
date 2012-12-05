@@ -1,11 +1,12 @@
 package com.github.Icyene.bytecode.disassembler.internal.attributes;
 
-import com.github.Icyene.bytecode.disassembler.util.ByteStream;
-import com.github.Icyene.bytecode.disassembler.util.Bytes;
 import com.github.Icyene.bytecode.disassembler.internal.objects.Attribute;
 import com.github.Icyene.bytecode.disassembler.internal.objects.Constant;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
+import com.github.Icyene.bytecode.disassembler.util.ByteStream;
+import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
+import java.util.HashSet;
 import java.util.Set;
 
 public class ExceptionAttribute extends Attribute {
@@ -19,10 +20,15 @@ public class ExceptionAttribute extends Attribute {
     }
      */
 
-    private Set<Constant> exceptionTable;
+    private Set<Constant> exceptionTable = new HashSet<Constant>();
 
     public ExceptionAttribute(ByteStream stream, ConstantPool pool) {
         super(stream, pool);
+        short size = stream.readShort();
+        if (size <= 0) return;
+        for (int i = 0; i != size; i++) {
+            exceptionTable.add(pool.get(i - 1));
+        }
     }
 
     @Override

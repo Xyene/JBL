@@ -1,7 +1,8 @@
 package com.github.Icyene.bytecode.disassembler.internal.objects;
 
-import com.github.Icyene.bytecode.disassembler.util.Bytes;
 import com.github.Icyene.bytecode.disassembler.internal.Tag;
+import com.github.Icyene.bytecode.disassembler.util.Bytes;
+
 import java.lang.Exception;
 
 public class Constant {
@@ -18,7 +19,7 @@ public class Constant {
     public byte[] assemble() {
         if (type == Tag.UTF_STRING)
             return Bytes.prepend(Bytes.concat(Bytes.toByteArray((short) value.length), value), (byte) Tag.UTF_STRING.getByte());
-        if(type == Tag.PHANTOM)
+        if (type == Tag.PHANTOM)
             return new byte[]{};
         return Bytes.prepend(value, (byte) type.getByte());
     }
@@ -61,7 +62,7 @@ public class Constant {
                     return new String(value, "UTF-8");
                 case STRING:
                 case CLASS:
-                    return  "#" + Bytes.toShort(value, 0);
+                    return "#" + Bytes.toShort(value, 0);
                 case METHOD:
                 case FIELD:
                 case INTERFACE_METHOD:

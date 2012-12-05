@@ -1,8 +1,8 @@
 package com.github.Icyene.bytecode.disassembler.internal.pools;
 
+import com.github.Icyene.bytecode.disassembler.internal.objects.Interface;
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
 import com.github.Icyene.bytecode.disassembler.util.Bytes;
-import com.github.Icyene.bytecode.disassembler.internal.objects.Interface;
 
 import java.util.LinkedList;
 

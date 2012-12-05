@@ -1,9 +1,7 @@
 package com.github.Icyene.bytecode.disassembler.internal;
 
 import com.github.Icyene.bytecode.disassembler.internal.objects.Constant;
-import com.github.Icyene.bytecode.disassembler.internal.objects.Flag;
-import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
-import com.github.Icyene.bytecode.disassembler.internal.pools.InterfacePool;
+import com.github.Icyene.bytecode.disassembler.internal.pools.*;
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
 import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
@@ -20,6 +18,9 @@ public class ClassFile {
     private Constant thisClass;
     private Constant superClass;
     private InterfacePool interfacePool;
+    private FieldPool fieldPool;
+    private MethodPool methodPool;
+    private AttributePool attributePool;
 
     public ClassFile(byte[] bytes) {
         ByteStream stream = new ByteStream(bytes);
@@ -33,6 +34,9 @@ public class ClassFile {
         thisClass = constantPool.get(stream.readShort());
         superClass = constantPool.get(stream.readShort());
         interfacePool = new InterfacePool(stream, constantPool);
+        fieldPool = new FieldPool(stream, constantPool);
+        methodPool = new MethodPool(stream, constantPool);
+        attributePool = new AttributePool(stream, constantPool);
     }
 
     public ClassFile(InputStream stream) throws IOException {
@@ -44,7 +48,8 @@ public class ClassFile {
     }
 
     public byte[] assemble() {
-        ByteStream out = new ByteStream(Bytes.toByteArray(0xCAFEBABE));
+        ByteStream out = new ByteStream();
+        out.write(Bytes.toByteArray(0xCAFEBABE));
         out.write(Bytes.toByteArray(minorVersion));
         out.write(Bytes.toByteArray(majorVersion));
         out.write(constantPool.assemble());
@@ -52,6 +57,9 @@ public class ClassFile {
         out.write(Bytes.toByteArray((short) thisClass.getIndex()));
         out.write(Bytes.toByteArray((short) superClass.getIndex()));
         out.write(interfacePool.assemble());
+        out.write(fieldPool.assemble());
+        out.write(methodPool.assemble());
+        out.write(attributePool.assemble());
         return out.toByteArray();
     }
 
@@ -109,5 +117,29 @@ public class ClassFile {
 
     public void setInterfacePool(InterfacePool interfacePool) {
         this.interfacePool = interfacePool;
+    }
+
+    public FieldPool getFieldPool() {
+        return fieldPool;
+    }
+
+    public void setFieldPool(FieldPool fieldPool) {
+        this.fieldPool = fieldPool;
+    }
+
+    public MethodPool getMethodPool() {
+        return methodPool;
+    }
+
+    public void setMethodPool(MethodPool methodPool) {
+        this.methodPool = methodPool;
+    }
+
+    public AttributePool getAttributePool() {
+        return attributePool;
+    }
+
+    public void setAttributePool(AttributePool attributePool) {
+        this.attributePool = attributePool;
     }
 }

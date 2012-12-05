@@ -6,6 +6,7 @@ import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ExceptionPool;
 import com.github.Icyene.bytecode.disassembler.internal.pools.InstructionPool;
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
+import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
 public class CodeAttribute extends Attribute {
 
@@ -41,12 +42,19 @@ public class CodeAttribute extends Attribute {
         maxLocals = stream.readShort();
         codePool = new InstructionPool(stream);
         exceptionPool = new ExceptionPool(stream);
-        attributePool = new AttributePool(stream);
+        attributePool = new AttributePool(stream, pool);
     }
 
     @Override
     public byte[] assemble() {
-        return new byte[0];
+        ByteStream out = new ByteStream();
+        out.write(super.assemble());
+        out.write(Bytes.toByteArray(maxStack));
+        out.write(Bytes.toByteArray(maxLocals));
+        out.write(codePool.assemble());
+        out.write(exceptionPool.assemble());
+        out.write(attributePool.assemble());
+        return out.toByteArray();
     }
 
     public short getMaxStack() {

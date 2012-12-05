@@ -10,6 +10,10 @@ public class ByteStream {
         this.bytes = bytes;
     }
 
+    public ByteStream() {
+        this.bytes = new byte[]{};
+    }
+
     public void write(byte... byt) {
         bytes = Bytes.concat(bytes, byt);
     }

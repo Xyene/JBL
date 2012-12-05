@@ -1,6 +1,7 @@
 package com.github.Icyene.bytecode.disassembler.internal.objects;
 
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
+import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
 public class Exception {
 
@@ -14,6 +15,14 @@ public class Exception {
         endPC = stream.readShort();
         handlerPC = stream.readShort();
         catchType = stream.readShort();
+    }
+
+    public byte[] assemble() {
+        ByteStream out = new ByteStream(Bytes.toByteArray(startPC));
+        out.write(Bytes.toByteArray(endPC));
+        out.write(Bytes.toByteArray(handlerPC));
+        out.write(Bytes.toByteArray(catchType));
+        return out.toByteArray();
     }
 
     public short getStartPC() {

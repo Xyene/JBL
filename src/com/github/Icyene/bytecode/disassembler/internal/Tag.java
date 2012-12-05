@@ -19,7 +19,7 @@ public enum Tag {
     private final int len;
 
     Tag(int c) {
-        val = (byte)c;
+        val = (byte) c;
         len = getLengthOfByte(val);
     }
 

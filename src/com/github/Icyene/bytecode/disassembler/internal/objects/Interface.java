@@ -1,7 +1,7 @@
 package com.github.Icyene.bytecode.disassembler.internal.objects;
 
-import com.github.Icyene.bytecode.disassembler.util.Bytes;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
+import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
 public class Interface {
 

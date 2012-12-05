@@ -1219,7 +1219,21 @@ public enum Opcodes {
      */
     BREAKPOINT(0xca);
 
+    public static Opcodes getByValue(byte index) {
+        for (Opcodes b : values())
+            if (b.val == index)
+                return b;
+        return null;
+    }
+
+    public byte getByte() {
+        return val;
+    }
+
+    byte val;
+
     Opcodes(int code) {
+        val = (byte) code;
     }
 
 }

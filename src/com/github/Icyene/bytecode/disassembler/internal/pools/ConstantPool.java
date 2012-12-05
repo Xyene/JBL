@@ -33,8 +33,8 @@ public class ConstantPool extends LinkedList<Constant> {
     public byte[] assemble() {
         byte[] raw = Bytes.toByteArray((short) (size() + 1)); //Constant pool size
         for (Constant cpi : this)
-            if (cpi != null) //Basically, if not phantom
-                raw = Bytes.concat(raw, cpi.assemble());
+
+            raw = Bytes.concat(raw, cpi.assemble());
         return raw;
     }
 

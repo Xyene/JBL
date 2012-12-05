@@ -1,27 +1,33 @@
 package com.github.Icyene.bytecode.disassembler.internal.objects;
 
-import com.github.Icyene.bytecode.disassembler.util.Bytes;
+import com.github.Icyene.bytecode.disassembler.internal.Flag;
 import com.github.Icyene.bytecode.disassembler.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
+import com.github.Icyene.bytecode.disassembler.util.ByteStream;
+import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
-class Field {
+public class Field {
 
     private Flag accessFlags;
     private Constant name;
     private Constant descriptor;
     private AttributePool attributePool;
 
-    Field(byte[] clazz, ConstantPool cpool, int offset) {
-        accessFlags = new Flag(Bytes.toShort(clazz, offset));
-        name = cpool.get(Bytes.toShort(clazz, offset + 2) - 1);
-        descriptor = cpool.get(Bytes.toShort(clazz, offset + 4) - 1);
-        int attributeSize = Bytes.toShort(clazz, offset + 6);
-        offset += 8;
+    public Field(ByteStream stream, ConstantPool pool) {
+        accessFlags = new Flag(stream.readShort());
+        name = pool.get(stream.readShort());
+        descriptor = pool.get(stream.readShort());
+        attributePool = new AttributePool(stream, pool);
     }
 
 
     public byte[] assemble() {
-        return null;
+        ByteStream out = new ByteStream();
+        out.write(accessFlags.assemble());
+        out.write(Bytes.toByteArray((short) name.getIndex()));
+        out.write(Bytes.toByteArray((short) descriptor.getIndex()));
+        out.write(attributePool.assemble());
+        return out.toByteArray();
     }
 
     public int getSizeInBytes() {

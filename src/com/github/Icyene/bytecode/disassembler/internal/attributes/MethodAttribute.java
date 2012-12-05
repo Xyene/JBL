@@ -1,11 +1,13 @@
 package com.github.Icyene.bytecode.disassembler.internal.attributes;
 
 import com.github.Icyene.bytecode.disassembler.internal.objects.Attribute;
-import com.github.Icyene.bytecode.disassembler.internal.objects.Constant;
+import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
+import com.github.Icyene.bytecode.disassembler.util.ByteStream;
 
 public class MethodAttribute extends Attribute {
-    public MethodAttribute(int length, Constant name) {
-        super(length, name);
+
+    public MethodAttribute(ByteStream stream, ConstantPool pool) {
+        super(stream, pool);
     }
 
     @Override

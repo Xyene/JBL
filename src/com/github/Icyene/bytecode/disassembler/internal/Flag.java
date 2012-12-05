@@ -1,4 +1,4 @@
-package com.github.Icyene.bytecode.disassembler.internal.objects;
+package com.github.Icyene.bytecode.disassembler.internal;
 
 import com.github.Icyene.bytecode.disassembler.util.Bytes;
 

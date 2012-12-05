@@ -11,12 +11,14 @@ public class Disassembler {
     public static void main(String[] args) {
         File clazz = new File(args.length > 1 ? args[0] : System.getenv("USERPROFILE") + "/Desktop/PhantomTest.class");
         try {
-            System.out.println(new ClassFile(clazz).getConstantPool().toString());
+            ClassFile cc = new ClassFile(clazz);
+            System.out.println(cc.getConstantPool().toString());
 
             System.out.println("V bytes: " + Bytes.bytesToString(Bytes.read(clazz)));
-            System.out.println("M bytes: " + Bytes.bytesToString(new ClassFile(clazz).assemble()));
+            System.out.println("M bytes: " + Bytes.bytesToString(cc.assemble()));
 
-            Bytes.writeBytesToFile(new ClassFile(clazz).getConstantPool().toString().getBytes(), clazz.getAbsoluteFile() + ".bytes");
+            cc.setMajorVersion((short) 5000);
+            Bytes.writeBytesToFile(cc.assemble(), clazz.getAbsoluteFile() + ".class");
 
         } catch (IOException e) {
             e.printStackTrace();
