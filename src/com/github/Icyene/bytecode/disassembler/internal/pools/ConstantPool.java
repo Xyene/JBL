@@ -30,18 +30,22 @@ public class ConstantPool extends LinkedList<Constant> {
         }
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         byte[] raw = Bytes.toByteArray((short) (size() + 1)); //Constant pool size
         for (Constant cpi : this)
-
-            raw = Bytes.concat(raw, cpi.assemble());
+            raw = Bytes.concat(raw, cpi.getBytes());
         return raw;
     }
 
-    public int getSizeInBytes() {
-        int totalSize = 0;
-        for (Constant cpi : this)
-            totalSize += cpi.getSizeInBytes();
-        return totalSize;
+    public Constant get(int in) {
+        return super.get(in - 1);
+    }
+
+    public Constant get(short sh) {
+        return this.get((int) sh);
+    }
+
+    public void add(Tag type, byte[] value) {
+        add(new Constant(size() + 1, type, value));
     }
 }

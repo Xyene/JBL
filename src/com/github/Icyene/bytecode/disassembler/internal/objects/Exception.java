@@ -17,7 +17,7 @@ public class Exception {
         catchType = stream.readShort();
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         ByteStream out = new ByteStream(Bytes.toByteArray(startPC));
         out.write(Bytes.toByteArray(endPC));
         out.write(Bytes.toByteArray(handlerPC));

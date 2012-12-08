@@ -1,5 +1,6 @@
 package com.github.Icyene.bytecode.disassembler.internal;
 
+import com.github.Icyene.bytecode.disassembler.internal.attributes.SourceFileAttribute;
 import com.github.Icyene.bytecode.disassembler.internal.objects.Constant;
 import com.github.Icyene.bytecode.disassembler.internal.pools.*;
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
@@ -13,14 +14,15 @@ public class ClassFile {
 
     private short majorVersion;
     private short minorVersion;
-    private Flag accessFlags;
+    private AccessFlag accessFlags;
     private ConstantPool constantPool;
     private Constant thisClass;
     private Constant superClass;
     private InterfacePool interfacePool;
-    private FieldPool fieldPool;
-    private MethodPool methodPool;
+    private PropertyPool fieldPool;
+    private PropertyPool methodPool;
     private AttributePool attributePool;
+    private SourceFileAttribute sourceFile;
 
     public ClassFile(byte[] bytes) {
         ByteStream stream = new ByteStream(bytes);
@@ -30,13 +32,16 @@ public class ClassFile {
         minorVersion = stream.readShort();
         majorVersion = stream.readShort();
         constantPool = new ConstantPool(stream);
-        accessFlags = new Flag(stream.readShort());
-        thisClass = constantPool.get(stream.readShort());
-        superClass = constantPool.get(stream.readShort());
+        accessFlags = new AccessFlag(stream.readShort());
+        thisClass = constantPool.get(stream.readShort() );
+        superClass = constantPool.get(stream.readShort() );
         interfacePool = new InterfacePool(stream, constantPool);
-        fieldPool = new FieldPool(stream, constantPool);
-        methodPool = new MethodPool(stream, constantPool);
+        fieldPool = new PropertyPool(stream, constantPool);
+        methodPool = new PropertyPool(stream, constantPool);
         attributePool = new AttributePool(stream, constantPool);
+        sourceFile = (SourceFileAttribute) attributePool.getInstancesOf(SourceFileAttribute.class).get(0);
+
+       // Pool<Constant> cpool = new Pool<Constant>(stream, null);
     }
 
     public ClassFile(InputStream stream) throws IOException {
@@ -47,19 +52,19 @@ public class ClassFile {
         this(Bytes.read(f));
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         ByteStream out = new ByteStream();
         out.write(Bytes.toByteArray(0xCAFEBABE));
         out.write(Bytes.toByteArray(minorVersion));
         out.write(Bytes.toByteArray(majorVersion));
-        out.write(constantPool.assemble());
-        out.write(accessFlags.assemble());
+        out.write(constantPool.getBytes());
+        out.write(accessFlags.getBytes());
         out.write(Bytes.toByteArray((short) thisClass.getIndex()));
         out.write(Bytes.toByteArray((short) superClass.getIndex()));
-        out.write(interfacePool.assemble());
-        out.write(fieldPool.assemble());
-        out.write(methodPool.assemble());
-        out.write(attributePool.assemble());
+        out.write(interfacePool.getBytes());
+        out.write(fieldPool.getBytes());
+        out.write(methodPool.getBytes());
+        out.write(attributePool.getBytes());
         return out.toByteArray();
     }
 
@@ -67,24 +72,28 @@ public class ClassFile {
         return majorVersion;
     }
 
-    public void setMajorVersion(short majorVersion) {
-        this.majorVersion = majorVersion;
+    public void setMajorVersion(short version) {
+        majorVersion = version;
     }
 
     public short getMinorVersion() {
         return minorVersion;
     }
 
-    public void setMinorVersion(short minorVersion) {
-        this.minorVersion = minorVersion;
+    public void setMinorVersion(short version) {
+        minorVersion = version;
     }
 
-    public Flag getAccessFlags() {
+    public AccessFlag getAccessFlags() {
         return accessFlags;
     }
 
-    public void setAccessFlags(Flag accessFlags) {
-        this.accessFlags = accessFlags;
+    public void setAccessFlags(AccessFlag accessFlag) {
+        accessFlags = accessFlag;
+    }
+
+    public void setAccessFlags(int accessFlags) {
+        this.accessFlags = new AccessFlag(accessFlags);
     }
 
     public ConstantPool getConstantPool() {
@@ -119,19 +128,19 @@ public class ClassFile {
         this.interfacePool = interfacePool;
     }
 
-    public FieldPool getFieldPool() {
+    public PropertyPool getFieldPool() {
         return fieldPool;
     }
 
-    public void setFieldPool(FieldPool fieldPool) {
+    public void setFieldPool(PropertyPool fieldPool) {
         this.fieldPool = fieldPool;
     }
 
-    public MethodPool getMethodPool() {
+    public PropertyPool getMethodPool() {
         return methodPool;
     }
 
-    public void setMethodPool(MethodPool methodPool) {
+    public void setMethodPool(PropertyPool methodPool) {
         this.methodPool = methodPool;
     }
 
@@ -141,5 +150,13 @@ public class ClassFile {
 
     public void setAttributePool(AttributePool attributePool) {
         this.attributePool = attributePool;
+    }
+
+    public String getSourceFile() {
+        return sourceFile.getSource();
+    }
+
+    public void setSourceFile(String source) {
+        sourceFile.setSource(source);
     }
 }

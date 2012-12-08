@@ -7,16 +7,14 @@ public class Interface {
 
     private Constant classReference;
     private Constant descriptor;
-    private final int index;
 
-    public Interface(ConstantPool pool, byte[] value, int index) {
+    public Interface(ConstantPool pool, byte[] value) {
         this.classReference = pool.get(Bytes.toShort(value, 0));
         this.descriptor = pool.get(Bytes.toShort(value, 2));
-        this.index = index;
     }
 
-    public byte[] assemble() {
-        return Bytes.concat(classReference.assemble(), classReference.assemble());
+    public byte[] getBytes() {
+        return Bytes.concat(classReference.getBytes(), classReference.getBytes());
     }
 
     public int getSizeInBytes() {
@@ -40,6 +38,6 @@ public class Interface {
     }
 
     public String prettyPrint() {
-        return "[C=" + classReference.prettyPrint() + ", D=" + descriptor.prettyPrint() + "]";
+        return "[C=" + classReference.getStringValue() + ", D=" + descriptor.getStringValue() + "]";
     }
 }

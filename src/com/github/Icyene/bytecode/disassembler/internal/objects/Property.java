@@ -1,32 +1,30 @@
 package com.github.Icyene.bytecode.disassembler.internal.objects;
 
-import com.github.Icyene.bytecode.disassembler.internal.Flag;
+import com.github.Icyene.bytecode.disassembler.internal.AccessFlag;
 import com.github.Icyene.bytecode.disassembler.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
 import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
-public class Field {
-
-    private Flag accessFlags;
+public class Property {
+    private AccessFlag accessFlags;
     private Constant name;
     private Constant descriptor;
     private AttributePool attributePool;
 
-    public Field(ByteStream stream, ConstantPool pool) {
-        accessFlags = new Flag(stream.readShort());
-        name = pool.get(stream.readShort());
-        descriptor = pool.get(stream.readShort());
+    public Property(ByteStream stream, ConstantPool pool) {
+        accessFlags = new AccessFlag(stream.readShort());
+        name = pool.get(stream.readShort() );
+        descriptor = pool.get(stream.readShort() );
         attributePool = new AttributePool(stream, pool);
     }
 
-
-    public byte[] assemble() {
+    public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        out.write(accessFlags.assemble());
+        out.write(accessFlags.getBytes());
         out.write(Bytes.toByteArray((short) name.getIndex()));
         out.write(Bytes.toByteArray((short) descriptor.getIndex()));
-        out.write(attributePool.assemble());
+        out.write(attributePool.getBytes());
         return out.toByteArray();
     }
 
@@ -34,11 +32,11 @@ public class Field {
         return 6 + attributePool.size();
     }
 
-    public Flag getAccessFlags() {
+    public AccessFlag getAccessFlags() {
         return accessFlags;
     }
 
-    public void setAccessFlags(Flag accessFlags) {
+    public void setAccessFlags(AccessFlag accessFlags) {
         this.accessFlags = accessFlags;
     }
 

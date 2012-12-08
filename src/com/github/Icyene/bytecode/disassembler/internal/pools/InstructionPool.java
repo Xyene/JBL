@@ -9,14 +9,14 @@ import java.util.LinkedList;
 public class InstructionPool extends LinkedList<Opcodes> {
 
     public InstructionPool(ByteStream stream) {
-        short size = stream.readShort();
+        int size = stream.readInt();
         for (int i = 0; i != size; i++)
             add(Opcodes.getByValue(stream.readByte()));
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        out.write(Bytes.toByteArray((short) size()));
+        out.write(Bytes.toByteArray(size()));
         for (Opcodes code : this)
             out.write(code.getByte());
         return out.toByteArray();

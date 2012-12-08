@@ -2,7 +2,7 @@ package com.github.Icyene.bytecode.disassembler.internal;
 
 import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
-public class Flag {
+public class AccessFlag {
 
     //As close to an enum as possible :-)
     public static final int
@@ -18,11 +18,11 @@ public class Flag {
 
     private final int flag;
 
-    public Flag(int flag) {
+    public AccessFlag(int flag) {
         this.flag = flag;
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         return Bytes.toByteArray((short) flag);
     }
 
@@ -62,7 +62,7 @@ public class Flag {
         return is(ACC_STRICT);
     }
 
-    boolean is(int mask) {
+    public boolean is(int mask) {
         return (flag & mask) == 1;
     }
 }

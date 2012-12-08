@@ -14,11 +14,17 @@ public class Disassembler {
             ClassFile cc = new ClassFile(clazz);
             System.out.println(cc.getConstantPool().toString());
 
-            System.out.println("V bytes: " + Bytes.bytesToString(Bytes.read(clazz)));
-            System.out.println("M bytes: " + Bytes.bytesToString(cc.assemble()));
+            String inBytes =  Bytes.bytesToString(Bytes.read(clazz));
+            String outBytes = Bytes.bytesToString(cc.getBytes());
 
-            cc.setMajorVersion((short) 5000);
-            Bytes.writeBytesToFile(cc.assemble(), clazz.getAbsoluteFile() + ".class");
+            System.out.println("V bytes: " + inBytes);
+            System.out.println("M bytes: " + outBytes);
+            if(!outBytes.equals(inBytes))
+                System.out.println("Streams do not match!");
+
+            cc.setSourceFile("DO NOT DECOMPILE THIS.java");
+            Bytes.writeBytesToFile(cc.getBytes(), clazz.getAbsoluteFile() + ".class");
+            Bytes.writeBytesToFile(Bytes.read(clazz), clazz.getAbsoluteFile() + ".writetest");
 
         } catch (IOException e) {
             e.printStackTrace();

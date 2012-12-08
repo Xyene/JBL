@@ -6,25 +6,24 @@ import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.disassembler.util.ByteStream;
 import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
-public class ConstantValueAttribute extends Attribute {
+public class SourceFileAttribute extends Attribute {
 
-    private Constant value;
+    private Constant source;
 
-    public ConstantValueAttribute(ByteStream stream,  Constant name,ConstantPool pool) {
+    public SourceFileAttribute(ByteStream stream, Constant name, ConstantPool pool) {
         super(stream, name, pool);
-        this.value = pool.get(stream.readShort() );
+        source = pool.get(stream.readShort() );
     }
 
-    @Override
     public byte[] getBytes() {
-        return Bytes.concat(super.getBytes(), Bytes.toByteArray((short) value.getIndex()));
+        return Bytes.concat(super.getBytes(), Bytes.toByteArray((short)source.getIndex()));
     }
 
-    public Constant getValue() {
-        return value;
+    public String getSource() {
+        return source.getStringValue();
     }
 
-    public void setValue(Constant value) {
-        this.value = value;
+    public void setSource(String source) {
+        this.source.setValue(source.getBytes());
     }
 }

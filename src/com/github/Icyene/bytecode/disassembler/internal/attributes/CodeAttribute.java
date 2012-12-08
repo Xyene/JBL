@@ -1,6 +1,7 @@
 package com.github.Icyene.bytecode.disassembler.internal.attributes;
 
 import com.github.Icyene.bytecode.disassembler.internal.objects.Attribute;
+import com.github.Icyene.bytecode.disassembler.internal.objects.Constant;
 import com.github.Icyene.bytecode.disassembler.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.disassembler.internal.pools.ExceptionPool;
@@ -35,25 +36,25 @@ public class CodeAttribute extends Attribute {
     private ExceptionPool exceptionPool;
     private AttributePool attributePool;
 
-
-    public CodeAttribute(ByteStream stream, ConstantPool pool) {
-        super(stream, pool);
+    public CodeAttribute(ByteStream stream, Constant name, ConstantPool pool) {
+        super(stream, name, pool);
         maxStack = stream.readShort();
         maxLocals = stream.readShort();
         codePool = new InstructionPool(stream);
+        System.out.println("Code pool: " + codePool);
         exceptionPool = new ExceptionPool(stream);
         attributePool = new AttributePool(stream, pool);
+
     }
 
-    @Override
-    public byte[] assemble() {
+    public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        out.write(super.assemble());
+        out.write(super.getBytes());
         out.write(Bytes.toByteArray(maxStack));
         out.write(Bytes.toByteArray(maxLocals));
-        out.write(codePool.assemble());
-        out.write(exceptionPool.assemble());
-        out.write(attributePool.assemble());
+        out.write(codePool.getBytes());
+        out.write(exceptionPool.getBytes());
+        out.write(attributePool.getBytes());
         return out.toByteArray();
     }
 

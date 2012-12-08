@@ -69,5 +69,13 @@ public class ByteStream {
     public void seek(int pos) {
         this.pos = pos;
     }
+
+    public int position() {
+        return pos;
+    }
+
+    public void backtrack(int n) {
+        pos = pos-n;
+    }
 }
 

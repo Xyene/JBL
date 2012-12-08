@@ -52,7 +52,7 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
 
     public static byte[] read(InputStream stream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        byte[] data = new byte[16384];
+        byte[] data = new byte[1024];
         int nRead;
         while ((nRead = stream.read(data, 0, data.length)) != -1)
             buffer.write(data, 0, nRead);
@@ -75,8 +75,8 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
     }
 
     private static void writeBytesToFile(byte[] bytes, File file) throws IOException {
-        FileOutputStream out;
-        (out = new FileOutputStream(file)).write(bytes);
+        FileOutputStream out = new FileOutputStream(file);
+        out.write(bytes);
         out.close();
     }
 }

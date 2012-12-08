@@ -14,10 +14,10 @@ public class ExceptionPool extends LinkedList<Exception> {
             add(new Exception(stream));
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         byte[] raw = Bytes.toByteArray((short) size());
         for (Exception e : this)
-            raw = Bytes.concat(raw, e.assemble());
+            raw = Bytes.concat(raw, e.getBytes());
         return raw;
     }
 }

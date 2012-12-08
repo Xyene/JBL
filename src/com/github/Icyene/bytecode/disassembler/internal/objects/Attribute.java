@@ -6,17 +6,16 @@ import com.github.Icyene.bytecode.disassembler.util.Bytes;
 
 public abstract class Attribute {
 
-    protected Constant name;
     protected int length;
+    protected Constant name;
 
-    public Attribute(ByteStream stream, ConstantPool pool) {
-        short index = stream.readShort();
-        this.name = pool.get(index);
-        System.out.println(">Creating attribute with cpool index: " + index + "(" + name.prettyPrint() + ")");
+    public Attribute(ByteStream stream, Constant name, ConstantPool pool) {
+        this.name = name;
+        //System.out.println(">>> Creating attribute with cpool index: " + index + "(" + name.prettyPrint() + ")");
         this.length = stream.readInt();
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         return Bytes.concat(Bytes.toByteArray((short) name.getIndex()), Bytes.toByteArray(length));
     }
 
@@ -28,11 +27,11 @@ public abstract class Attribute {
         this.name = name;
     }
 
-    public int getLength() {
+    public final int getLength() {
         return length;
     }
 
-    public void setLength(int length) {
+    public final void setLength(int length) {
         this.length = length;
     }
 }

@@ -22,21 +22,21 @@ public class ExceptionAttribute extends Attribute {
 
     private Set<Constant> exceptionTable = new HashSet<Constant>();
 
-    public ExceptionAttribute(ByteStream stream, ConstantPool pool) {
-        super(stream, pool);
+    public ExceptionAttribute(ByteStream stream,  Constant name, ConstantPool pool) {
+        super(stream, name, pool);
         short size = stream.readShort();
         if (size <= 0) return;
         for (int i = 0; i != size; i++) {
-            exceptionTable.add(pool.get(i - 1));
+            exceptionTable.add(pool.get(i ));
         }
     }
 
     @Override
-    public byte[] assemble() {
+    public byte[] getBytes() {
         byte[] raw = Bytes.toByteArray((short) exceptionTable.size());
         for (Constant c : exceptionTable)
             raw = Bytes.concat(raw, Bytes.toByteArray((short) c.getIndex()));
-        return Bytes.concat(super.assemble(), raw);
+        return Bytes.concat(super.getBytes(), raw);
     }
 
     public Set<Constant> getExceptionTable() {

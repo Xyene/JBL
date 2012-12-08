@@ -16,7 +16,7 @@ public class Constant {
         this.value = value;
     }
 
-    public byte[] assemble() {
+    public byte[] getBytes() {
         if (type == Tag.UTF_STRING)
             return Bytes.prepend(Bytes.concat(Bytes.toByteArray((short) value.length), value), (byte) Tag.UTF_STRING.getByte());
         if (type == Tag.PHANTOM)
@@ -33,7 +33,7 @@ public class Constant {
     }
 
     public int getIndex() {
-        return index - 1;
+        return index;
     }
 
     public void setValue(byte[] value) {
@@ -44,18 +44,12 @@ public class Constant {
         return value;
     }
 
-    public int getSizeInBytes() {
-        if (type == Tag.UTF_STRING)
-            return value.length + 1;
-        return value.length;
-    }
-
     @Override
     public String toString() {
-        return "[I=" + index + ", T=" + type.name() + ", V='" + prettyPrint() + "']";
+        return "[I=" + index + ", T=" + type.name() + ", V='" + getStringValue() + "']";
     }
 
-    public String prettyPrint() {
+    public String getStringValue() {
         try {
             switch (type) {
                 case UTF_STRING:
@@ -70,7 +64,7 @@ public class Constant {
                 case DESCRIPTOR:
                     return "#" + Bytes.toShort(value, 0) + ":#" + Bytes.toShort(value, 2);
                 case PHANTOM:
-                    return "NULL";
+                    return "PHANTOM_INDEX";
                 case DOUBLE:
                     return Bytes.toDouble(value, 0) + "";
                 default:
