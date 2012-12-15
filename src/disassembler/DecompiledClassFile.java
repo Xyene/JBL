@@ -6,7 +6,7 @@ import com.github.Icyene.bytecode.introspection.internal.members.attributes.Code
 import com.github.Icyene.bytecode.introspection.internal.members.attributes.ConstantValueAttribute;
 import com.github.Icyene.bytecode.introspection.internal.metadata.AccessFlag;
 import disassembler.instructions.Operator;
-import disassembler.readers.SignatureReader;
+import com.github.Icyene.bytecode.introspection.internal.metadata.readers.SignatureReader;
 
 import java.io.File;
 import java.io.IOException;
