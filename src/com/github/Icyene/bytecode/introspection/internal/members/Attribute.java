@@ -4,15 +4,19 @@ import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
-public abstract class Attribute {
+public class Attribute {
 
     protected int length;
     protected Constant name;
 
     public Attribute(ByteStream stream, Constant name, ConstantPool pool) {
         this.name = name;
-        //System.out.println(">>> Creating attribute with cpool index: " + index + "(" + name.prettyPrint() + ")");
         this.length = stream.readInt();
+    }
+
+    public Attribute(Constant name, int length) {
+        this.name = name;
+        this.length = length;
     }
 
     public byte[] getBytes() {

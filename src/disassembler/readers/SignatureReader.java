@@ -1,6 +1,7 @@
-package disassembler;
+package disassembler.readers;
 
-import com.github.Icyene.bytecode.introspection.internal.BaseType;
+import com.github.Icyene.bytecode.introspection.internal.members.Member;
+import com.github.Icyene.bytecode.introspection.internal.metadata.BaseType;
 
 import java.util.LinkedList;
 
@@ -9,17 +10,15 @@ public class SignatureReader {
     private String returnType;
     private LinkedList<String> parameterTypes = new LinkedList<String>();
 
-    public SignatureReader(String descriptor) {
+    public SignatureReader(Member mem) {
+        String descriptor = mem.getDescriptor().getStringValue();
         int separatorPos = descriptor.lastIndexOf(")");
         this.returnType = tokenize(descriptor.substring(separatorPos + 1, descriptor.length())).get(0);
         this.parameterTypes = tokenize(descriptor.substring(1, separatorPos));
-        System.out.println("Return type: " + returnType);
-        System.out.println("Parameter types: " + parameterTypes);
     }
 
     public LinkedList<String> tokenize(String inString) {
         LinkedList<String> params = new LinkedList<String>();
-
         String remainingParams = inString;
         boolean isArray = false;
         while (remainingParams.length() != 0) {
@@ -53,12 +52,11 @@ public class SignatureReader {
         return params;
     }
 
-    public String getReturnType() {
+    public String getType() {
         return returnType;
     }
 
-    public LinkedList<String> getParameterTypes() {
+    public LinkedList<String> getAugmentingTypes() {
         return parameterTypes;
     }
-
 }

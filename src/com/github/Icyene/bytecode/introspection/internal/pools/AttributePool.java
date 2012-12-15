@@ -2,18 +2,17 @@ package com.github.Icyene.bytecode.introspection.internal.pools;
 
 import com.github.Icyene.bytecode.introspection.internal.members.Attribute;
 import com.github.Icyene.bytecode.introspection.internal.members.Constant;
-import com.github.Icyene.bytecode.introspection.internal.members.attributes.CodeAttribute;
-import com.github.Icyene.bytecode.introspection.internal.members.attributes.UnknownAttribute;
-import com.github.Icyene.bytecode.introspection.util.ByteStream;
-import com.github.Icyene.bytecode.introspection.util.Bytes;
+import com.github.Icyene.bytecode.introspection.internal.members.attributes.*;
+import com.github.Icyene.bytecode.introspection.util.*;
 
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.regex.Pattern;
 
 public class AttributePool extends LinkedList<Attribute> {
 
-    private final List<String> recognized = Arrays.asList("Code");
+    private final List<String> recognized = Arrays.asList("Code", "ConstantValue");
 
     public AttributePool(ByteStream stream, ConstantPool pool) {
         short size = stream.readShort();
@@ -26,6 +25,8 @@ public class AttributePool extends LinkedList<Attribute> {
                 add(new UnknownAttribute(stream, name, pool));
             } else if (realName.equals("Code")) {
                 add(new CodeAttribute(stream, name, pool));
+            } else if (realName.equals("ConstantValue")) {
+                add(new ConstantValueAttribute(stream, name, pool));
             }
         }
     }
@@ -43,5 +44,23 @@ public class AttributePool extends LinkedList<Attribute> {
             if (a.getClass().equals(type))
                 out.add(a);
         return out;
+    }
+
+
+    public LinkedList<Attribute> getInstancesOf(String type) {
+        Pattern t = Pattern.compile(type, Pattern.DOTALL);
+        LinkedList<Attribute> out = new LinkedList<Attribute>();
+        for (Attribute a : this)
+            if (t.matcher(a.getName().getStringValue()).matches())
+                out.add(a);
+        return out;
+    }
+
+    public boolean hasAttribute(String attr) {
+        Pattern m = Pattern.compile(attr, Pattern.DOTALL);
+        for (Attribute a : this)
+            if (m.matcher(a.getName().getStringValue()).matches())
+                return true;
+        return false;
     }
 }

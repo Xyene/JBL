@@ -1,4 +1,4 @@
-package com.github.Icyene.bytecode.introspection.internal;
+package com.github.Icyene.bytecode.introspection.internal.metadata;
 
 public enum BaseType {
 

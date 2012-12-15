@@ -6,9 +6,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.LinkedList;
 
-public class PropertyPool extends LinkedList<Member> {
+public class MemberPool extends LinkedList<Member> {
 
-    public PropertyPool(ByteStream stream, ConstantPool pool) {
+    public MemberPool(ByteStream stream, ConstantPool pool) {
         short size = stream.readShort();
         for (int i = 0; i != size; i++)
             add(new Member(stream, pool));

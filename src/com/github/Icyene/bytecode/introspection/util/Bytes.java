@@ -28,6 +28,17 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
         return ret;
     }
 
+    public static long toLong(byte[] bytes, int start) {
+        return ((bytes[start] & 0xFFL) << 56) |
+                ((bytes[start + 1] & 0xFFL) << 48) |
+                ((bytes[start + 2] & 0xFFL) << 40) |
+                ((bytes[start + 3] & 0xFFL) << 32) |
+                ((bytes[start + 4] & 0xFFL) << 24) |
+                ((bytes[start + 5] & 0xFFL) << 16) |
+                ((bytes[start + 6] & 0xFFL) << 8) |
+                ((bytes[start + 7] & 0xFFL) << 0);
+    }
+
     public static double toDouble(byte[] bytes, int start) {
         return ByteBuffer.wrap(Arrays.copyOfRange(bytes, start, start + 8)).getDouble();
     }

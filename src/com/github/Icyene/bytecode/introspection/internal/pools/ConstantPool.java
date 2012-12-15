@@ -1,6 +1,6 @@
 package com.github.Icyene.bytecode.introspection.internal.pools;
 
-import com.github.Icyene.bytecode.introspection.internal.Tag;
+import com.github.Icyene.bytecode.introspection.internal.metadata.Tag;
 import com.github.Icyene.bytecode.introspection.internal.members.Constant;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;

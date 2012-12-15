@@ -1,7 +1,7 @@
 package com.github.Icyene.bytecode.introspection.internal.members;
 
-import com.github.Icyene.bytecode.introspection.internal.AccessFlag;
-import com.github.Icyene.bytecode.introspection.internal.members.Constant;
+import com.github.Icyene.bytecode.introspection.internal.metadata.AccessFlag;
+import com.github.Icyene.bytecode.introspection.internal.metadata.Tag;
 import com.github.Icyene.bytecode.introspection.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
@@ -12,12 +12,14 @@ public class Member {
     protected Constant name;
     protected Constant descriptor;
     protected AttributePool attributePool;
+    private ConstantPool owner;
 
     public Member(ByteStream stream, ConstantPool pool) {
         accessFlags = new AccessFlag(stream.readShort());
-        name = pool.get(stream.readShort() );
-        descriptor = pool.get(stream.readShort() );
+        name = pool.get(stream.readShort());
+        descriptor = pool.get(stream.readShort());
         attributePool = new AttributePool(stream, pool);
+        owner = pool;
     }
 
     public byte[] getBytes() {
@@ -107,5 +109,17 @@ public class Member {
             }
         }
         return (atFront + atEnd + " " + name).trim();
+    }
+
+    public boolean isDeprecated() {
+        return attributePool.hasAttribute("Deprecated");
+    }
+
+    public void setDeprecated() {
+        if (!attributePool.hasAttribute("Deprecated")) {
+            Constant dep = new Constant(owner.size() + 2, Tag.UTF_STRING, "Deprecated".getBytes(), owner);
+            owner.add(dep);
+            attributePool.add(new Attribute(dep, 0));
+        }
     }
 }

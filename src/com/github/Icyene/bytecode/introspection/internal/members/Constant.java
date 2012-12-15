@@ -1,6 +1,6 @@
 package com.github.Icyene.bytecode.introspection.internal.members;
 
-import com.github.Icyene.bytecode.introspection.internal.Tag;
+import com.github.Icyene.bytecode.introspection.internal.metadata.Tag;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
@@ -27,24 +27,8 @@ public class Constant {
         return Bytes.prepend(value, (byte) type.getByte());
     }
 
-    public void setType(Tag type) {
-        this.type = type;
-    }
-
-    public Tag getType() {
-        return type;
-    }
-
     public int getIndex() {
         return index;
-    }
-
-    public void setValue(byte[] value) {
-        this.value = value;
-    }
-
-    public byte[] getValue() {
-        return value;
     }
 
     @Override
@@ -69,7 +53,11 @@ public class Constant {
                 case PHANTOM:
                     return "PHANTOM_INDEX";
                 case DOUBLE:
-                    return Bytes.toDouble(value, 0) + "";
+                    return Bytes.toDouble(value, 0) + "D";
+                case LONG:
+                    return Bytes.toLong(value, 0) + "L";
+                case INTEGER:
+                    return Bytes.toInteger(value, 0) + "";
                 default:
                     return value.toString();
             }

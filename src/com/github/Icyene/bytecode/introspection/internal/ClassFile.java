@@ -1,6 +1,7 @@
 package com.github.Icyene.bytecode.introspection.internal;
 
 import com.github.Icyene.bytecode.introspection.internal.members.Constant;
+import com.github.Icyene.bytecode.introspection.internal.metadata.AccessFlag;
 import com.github.Icyene.bytecode.introspection.internal.pools.*;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
@@ -18,8 +19,8 @@ public class ClassFile {
     protected Constant thisClass;
     protected Constant superClass;
     protected InterfacePool interfacePool;
-    protected PropertyPool fieldPool;
-    protected PropertyPool methodPool;
+    protected MemberPool fieldPool;
+    protected MemberPool methodPool;
     protected AttributePool attributePool;
 
     public ClassFile(byte[] bytes) {
@@ -35,8 +36,8 @@ public class ClassFile {
         thisClass = constantPool.get(stream.readShort() );
         superClass = constantPool.get(stream.readShort() );
         interfacePool = new InterfacePool(stream, constantPool);
-        fieldPool = new PropertyPool(stream, constantPool);
-        methodPool = new PropertyPool(stream, constantPool);
+        fieldPool = new MemberPool(stream, constantPool);
+        methodPool = new MemberPool(stream, constantPool);
         attributePool = new AttributePool(stream, constantPool);
     }
 
@@ -124,19 +125,19 @@ public class ClassFile {
         this.interfacePool = interfacePool;
     }
 
-    public PropertyPool getFieldPool() {
+    public MemberPool getFieldPool() {
         return fieldPool;
     }
 
-    public void setFieldPool(PropertyPool fieldPool) {
+    public void setFieldPool(MemberPool fieldPool) {
         this.fieldPool = fieldPool;
     }
 
-    public PropertyPool getMethodPool() {
+    public MemberPool getMethodPool() {
         return methodPool;
     }
 
-    public void setMethodPool(PropertyPool methodPool) {
+    public void setMethodPool(MemberPool methodPool) {
         this.methodPool = methodPool;
     }
 
