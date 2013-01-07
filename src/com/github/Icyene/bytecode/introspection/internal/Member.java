@@ -1,21 +1,24 @@
-package com.github.Icyene.bytecode.introspection.internal.members;
+package com.github.Icyene.bytecode.introspection.internal;
 
-import com.github.Icyene.bytecode.introspection.internal.metadata.AccessFlag;
-import com.github.Icyene.bytecode.introspection.internal.metadata.Tag;
+import com.github.Icyene.bytecode.introspection.internal.members.Attribute;
+import com.github.Icyene.bytecode.introspection.internal.members.Constant;
 import com.github.Icyene.bytecode.introspection.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
-public class Member {
-    protected AccessFlag accessFlags;
+import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.ACC_NATIVE;
+import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.ACC_SYNCHRONIZED;
+import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.TAG_UTF_STRING;
+
+public class Member extends AccessibleMember {
     protected Constant name;
     protected Constant descriptor;
     protected AttributePool attributePool;
-    private ConstantPool owner;
+    private final ConstantPool owner;
 
     public Member(ByteStream stream, ConstantPool pool) {
-        accessFlags = new AccessFlag(stream.readShort());
+        flag = stream.readShort();
         name = pool.get(stream.readShort());
         descriptor = pool.get(stream.readShort());
         attributePool = new AttributePool(stream, pool);
@@ -24,35 +27,30 @@ public class Member {
 
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        out.write(accessFlags.getBytes());
+        out.write(Bytes.toByteArray((short)flag));
         out.write(Bytes.toByteArray((short) name.getIndex()));
         out.write(Bytes.toByteArray((short) descriptor.getIndex()));
         out.write(attributePool.getBytes());
         return out.toByteArray();
     }
 
-    public AccessFlag getAccessFlags() {
-        return accessFlags;
+    public String getName() {
+        return name.getStringValue();
     }
 
-    public void setAccessFlags(AccessFlag accessFlags) {
-        this.accessFlags = accessFlags;
+    public void setName(String newName) {
+        int index = name.getIndex();
+        System.out.println("Set name of " + name.getStringValue() + " @ " + index + " to " + newName);
+        owner.set(index, (name = new Constant(index, TAG_UTF_STRING, newName.getBytes(), owner)));
     }
 
-    public Constant getName() {
-        return name;
+    public String getDescriptor() {
+        return descriptor.getStringValue();
     }
 
-    public void setName(Constant name) {
-        this.name = name;
-    }
-
-    public Constant getDescriptor() {
-        return descriptor;
-    }
-
-    public void setDescriptor(Constant descriptor) {
-        this.descriptor = descriptor;
+    public void setDescriptor(String newDescriptor) {
+        int index = descriptor.getIndex();
+        owner.set(index, (descriptor = new Constant(index, TAG_UTF_STRING, newDescriptor.getBytes(), owner)));
     }
 
     public AttributePool getAttributePool() {
@@ -104,7 +102,6 @@ public class Member {
                         continue;
                     case '[':
                         atEnd += "[]";
-                        continue;
                 }
             }
         }
@@ -117,9 +114,25 @@ public class Member {
 
     public void setDeprecated() {
         if (!attributePool.hasAttribute("Deprecated")) {
-            Constant dep = new Constant(owner.size() + 2, Tag.UTF_STRING, "Deprecated".getBytes(), owner);
+            Constant dep = new Constant(owner.size() + 2, TAG_UTF_STRING, "Deprecated".getBytes(), owner);
             owner.add(dep);
             attributePool.add(new Attribute(dep, 0));
         }
+    }
+
+    public boolean isSynchronized() {
+        return is(ACC_SYNCHRONIZED);
+    }
+
+    public void setSynchronized(boolean i) {
+        flag = i ? flag | ACC_SYNCHRONIZED : flag & ~ACC_SYNCHRONIZED;
+    }
+
+    public boolean isNative() {
+        return is(ACC_NATIVE);
+    }
+
+    public void setNative(boolean i) {
+        flag = i ? flag | ACC_NATIVE : flag & ~ACC_NATIVE;
     }
 }

@@ -36,7 +36,7 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
                 ((bytes[start + 4] & 0xFFL) << 24) |
                 ((bytes[start + 5] & 0xFFL) << 16) |
                 ((bytes[start + 6] & 0xFFL) << 8) |
-                ((bytes[start + 7] & 0xFFL) << 0);
+                ((bytes[start + 7] & 0xFFL));
     }
 
     public static double toDouble(byte[] bytes, int start) {
@@ -63,7 +63,7 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
 
     public static byte[] read(InputStream stream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
-        byte[] data = new byte[1024];
+        byte[] data = new byte[655653];
         int nRead;
         while ((nRead = stream.read(data, 0, data.length)) != -1)
             buffer.write(data, 0, nRead);
@@ -74,7 +74,7 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
         return read(new FileInputStream(file));
     }
 
-    public static String bytesToString(byte[] bytes) {
+    public static String bytesToString(byte... bytes) {
         StringBuilder build = new StringBuilder();
         for (byte bi : bytes)
             build.append(bi).append(", ");
@@ -85,7 +85,7 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
         writeBytesToFile(bytes, new File(file));
     }
 
-    private static void writeBytesToFile(byte[] bytes, File file) throws IOException {
+    public static void writeBytesToFile(byte[] bytes, File file) throws IOException {
         FileOutputStream out = new FileOutputStream(file);
         out.write(bytes);
         out.close();

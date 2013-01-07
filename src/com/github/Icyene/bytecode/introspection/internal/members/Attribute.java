@@ -19,6 +19,9 @@ public class Attribute {
         this.length = length;
     }
 
+    public Attribute() {
+    }
+
     public byte[] getBytes() {
         return Bytes.concat(Bytes.toByteArray((short) name.getIndex()), Bytes.toByteArray(length));
     }

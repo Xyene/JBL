@@ -3,41 +3,29 @@ package com.github.Icyene.bytecode.introspection.internal.members;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
+import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.TAG_UTF_STRING;
+
 public class Interface {
 
     private Constant classReference;
-    private Constant descriptor;
+    private final ConstantPool owner;
 
-    public Interface(ConstantPool pool, byte[] value) {
-        this.classReference = pool.get(Bytes.toShort(value, 0));
-        this.descriptor = pool.get(Bytes.toShort(value, 2));
+    public Interface(ConstantPool pool, Constant value) {
+        System.out.println("New interface: " + classReference);
+        classReference = value;
+        owner = pool;
     }
 
     public byte[] getBytes() {
-        return Bytes.concat(classReference.getBytes(), classReference.getBytes());
+        return Bytes.toByteArray((short) classReference.getIndex());
     }
 
-    public int getSizeInBytes() {
-        return 2;
+    public String getClassReference() {
+        return classReference.getStringValue();
     }
 
-    public Constant getClassReference() {
-        return classReference;
-    }
-
-    public void setClassReference(Constant classReference) {
-        this.classReference = classReference;
-    }
-
-    public Constant getDescriptor() {
-        return descriptor;
-    }
-
-    public void setDescriptor(Constant descriptor) {
-        this.descriptor = descriptor;
-    }
-
-    public String prettyPrint() {
-        return "[C=" + classReference.getStringValue() + ", D=" + descriptor.getStringValue() + "]";
+    public void setClassReference(String newRef) {
+        int source = classReference.getIndex();
+        owner.set(source, (classReference = new Constant(source, TAG_UTF_STRING, newRef.getBytes(), owner)));
     }
 }

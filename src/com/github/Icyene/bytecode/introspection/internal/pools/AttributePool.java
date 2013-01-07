@@ -3,30 +3,36 @@ package com.github.Icyene.bytecode.introspection.internal.pools;
 import com.github.Icyene.bytecode.introspection.internal.members.Attribute;
 import com.github.Icyene.bytecode.introspection.internal.members.Constant;
 import com.github.Icyene.bytecode.introspection.internal.members.attributes.*;
-import com.github.Icyene.bytecode.introspection.util.*;
+import com.github.Icyene.bytecode.introspection.util.ByteStream;
+import com.github.Icyene.bytecode.introspection.util.Bytes;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
-public class AttributePool extends LinkedList<Attribute> {
+public class AttributePool extends ArrayList<Attribute> {
 
-    private final List<String> recognized = Arrays.asList("Code", "ConstantValue");
+    private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "SourceFile", "LocalVariableTable");
 
     public AttributePool(ByteStream stream, ConstantPool pool) {
         short size = stream.readShort();
         for (int i = 0; i != size; i++) {
-
             Constant name = pool.get(stream.readShort());
             String realName = name.getStringValue();
-
             if (!recognized.contains(realName)) {
                 add(new UnknownAttribute(stream, name, pool));
             } else if (realName.equals("Code")) {
-                add(new CodeAttribute(stream, name, pool));
+                add(new Code(stream, name, pool));
             } else if (realName.equals("ConstantValue")) {
-                add(new ConstantValueAttribute(stream, name, pool));
+                add(new ConstantValue(stream, name, pool));
+            } else if (realName.equals("LineNumberTable")) {
+                add(new LineNumberTable(stream, name, pool));
+            } else if (realName.equals("LocalVariableTable")) {
+                add(new LineNumberTable(stream, name, pool));
+            } else if (realName.equals("SourceFile")) {
+                add(new SourceFile(stream, name, pool));
             }
         }
     }
@@ -54,6 +60,14 @@ public class AttributePool extends LinkedList<Attribute> {
             if (t.matcher(a.getName().getStringValue()).matches())
                 out.add(a);
         return out;
+    }
+
+    public void removeInstancesOf(Class type) {
+        removeAll(getInstancesOf(type));
+    }
+
+    public void removeInstancesOf(String type) {
+        removeAll(getInstancesOf(type));
     }
 
     public boolean hasAttribute(String attr) {

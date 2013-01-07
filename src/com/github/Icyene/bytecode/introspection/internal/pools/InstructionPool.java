@@ -1,21 +1,25 @@
 package com.github.Icyene.bytecode.introspection.internal.pools;
 
-import com.github.Icyene.bytecode.introspection.internal.metadata.Opcode;
+import com.github.Icyene.bytecode.introspection.internal.pools.instructions.Operator;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
-import disassembler.instructions.Operand;
-import disassembler.instructions.Operator;
 
-import java.util.LinkedList;
+import java.util.ArrayList;
 
-public class InstructionPool extends LinkedList<Operator> {
+import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
-    public InstructionPool(ByteStream stream) {
+public class InstructionPool extends ArrayList<Operator> {
+
+    public InstructionPool(byte[] bytes, ConstantPool pool) {
+        this(new ByteStream(bytes), pool);
+    }
+
+    public InstructionPool(ByteStream stream, ConstantPool pool) {
         int size = stream.readInt();
-
+        System.out.println("Code pool of size " + stream.toByteArray().length);
         for (int i = 0; i != size; i++) {
-            Operand operand = null;
-            Opcode op = Opcode.getByValue(stream.readByte());
+            byte[] operand = new byte[]{};
+            int op = (int) stream.readByte();
             switch (op) {
                 case ALOAD:
                 case AASTORE:
@@ -26,17 +30,14 @@ public class InstructionPool extends LinkedList<Operator> {
                 case FSTORE:
                 case ILOAD:
                 case ISTORE:
-                case LDC:
                 case LSTORE:
                 case NEWARRAY:
                 case RET:
-                    operand = new Operand(stream.readByte());
+                case LDC:
+                    operand = stream.read(1);
                     i++;
                     break;
                 case ANEWARRAY:
-                case CHECKCAST:
-                case GETFIELD:
-                case GETSTATIC:
                 case GOTO:
                 case IF_ACMPEQ:
                 case IF_ACMPNE:
@@ -55,31 +56,45 @@ public class InstructionPool extends LinkedList<Operator> {
                 case IFNONNULL:
                 case IFNULL:
                 case IINC:
-                case INSTANCEOF:
-                case INVOKEDYNAMIC:
-                case INVOKEINTERFACE:
-                case INVOKESPECIAL:
-                case INVOKESTATIC:
-                case INVOKEVIRTUAL:
                 case JSR:
-                case LDC_W:
-                case LDC2_W:
-                case NEW:
+                case SIPUSH:
+                case GETFIELD:
+                case GETSTATIC:
                 case PUTFIELD:
                 case PUTSTATIC:
-                case SIPUSH:
-                    operand = new Operand(stream.readShort());
+                case INVOKESTATIC:
+                case INVOKESPECIAL:
+                case INVOKEVIRTUAL:
+                case CHECKCAST:
+                case LDC_W:
+                case LDC2_W:
+                case INSTANCEOF:
+                case NEW:
+                    // case INVOKEDYNAMIC:       //TODO: Add to Opcode.java
+                case INVOKEINTERFACE:
+                    operand = stream.read(2);
                     i = i + 2;
                     break;
                 case GOTO_W:
                 case JSR_W:
-                    operand = new Operand(stream.readInt());
+                    operand = stream.read(4);
                     i = i + 4;
                     break;
-
             }
             add(new Operator(op, operand));
         }
+    }
+
+    public InstructionPool() {
+
+    }
+
+    public InstructionPool subList(int from, int to) {
+        InstructionPool out = new InstructionPool();
+        for(int i = from; i != to; i++) {
+            out.add(get(i));
+        }
+        return out;
     }
 
     public byte[] getBytes() {
@@ -88,5 +103,13 @@ public class InstructionPool extends LinkedList<Operator> {
         // for (Operator code : this)
         //   out.write(code.getByte());
         return out.toByteArray();
+    }
+
+    public int sizeInBytes() {
+        int size = size();
+        for(Operator op: this) {
+            size += op.getOperand().length;
+        }
+        return size;
     }
 }

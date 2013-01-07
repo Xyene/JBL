@@ -12,7 +12,7 @@ public enum BaseType {
     Z("boolean"),
     V("void");
 
-    private String real;
+    private final String real;
 
     public String getReal() {
         return real;

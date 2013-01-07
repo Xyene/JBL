@@ -1,4 +1,4 @@
-package disassembler;
+package core.decompiler;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -7,10 +7,11 @@ import java.util.List;
 
 public class ImportList extends LinkedList<String> {
 
-    private List<String> primitive = Arrays.asList("int", "boolean", "byte", "void", "long", "double", "long", "float");
+    private final List<String> primitive = Arrays.asList("int", "boolean", "byte", "void", "long", "double", "long", "float");
 
     public String getWImport(String s) {
-        if (!primitive.contains(s) && !s.startsWith("java.lang")) add(s.replaceAll("\\[\\]", ""));
+        String aLess = (s = s.replace("/", ".")).replaceAll("\\[\\]", "");
+        if (!primitive.contains(aLess) && !s.startsWith("java.lang")) add(aLess);
         return s.contains(".") ? s.substring(s.lastIndexOf(".") + 1, s.length()) : s;
     }
 

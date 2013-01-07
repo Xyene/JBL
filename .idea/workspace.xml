@@ -2,45 +2,108 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="19576d7b-54e5-45f4-b6a2-ec141e46edb6" name="Default" comment="First  commit to Git.">
-      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\FieldAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\MethodAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\AttributeAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\PropertyAdapter.java" />
       <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\disassembler\NameAndTypeDescriptor.java" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\AttributeAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\FieldAdapter.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\PropertyAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\MethodAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\FieldAdapter.java" />
+      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\AttributeAdapter.java" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\CodeAttribute.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\ConstantValueAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\FieldAdapter.java" afterPath="" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\MethodAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\PropertyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\SourceFileAttribute.java" afterPath="" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\UnknownAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\AttributeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\ConstantValueAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\SourceFileAttribute.java" afterPath="" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\ExceptionAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\PropertyAdapter.java" afterPath="" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Constant.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Constant.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Opcodes.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Opcode.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Property.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Property.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ExceptionPool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ExceptionPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Exception.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Exception.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\AccessFlag.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\AccessFlag.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\ClassFile.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/ClassFile.java" />
-      <change type="MODIFICATION" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\profiler\Test\Agent.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\profiler\Test\Agent.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\AttributePool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/AttributePool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Opcodes.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Opcode.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\InstructionPool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InstructionPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\InterfacePool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InterfacePool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\Bytes.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Tag.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Tag.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\ByteStream.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Attribute.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Attribute.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\Disassembler.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\disassembler\Disassembler.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\PropertyPool.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\PropertyPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ConstantPool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ConstantPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\AccessFlag.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\AccessFlag.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\Bytes.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Exception.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/TryCatch.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Attribute.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Attribute.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ExceptionPool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ExceptionPool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\AttributePool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/AttributePool.java" />
+      <change type="MODIFICATION" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\profiler\Test\Agent.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\profiler\Test\Agent.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Property.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Property.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Tag.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Tag.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\ByteStream.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\InterfacePool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InterfacePool.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Interface.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Interface.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ConstantPool.java" afterPath="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ConstantPool.java" />
     </list>
     <ignored path="Java Disassembler.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/fragment.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355593575140" ignored="false" />
-    <file path="/ImportList.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355593336015" ignored="false" />
-    <file path="/ClassRef.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355594748109" ignored="false" />
+    <file path="/DecompiledInstructionPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355957576453" ignored="false" />
+    <file path="/DecompiledMethod.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355957293062" ignored="false" />
+    <file path="/ClassFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357055608734" ignored="false" />
+    <file path="/Decompiler.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356116548984" ignored="false" />
+    <file path="/InstructionStack.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355956083437" ignored="false" />
+    <file path="/ScopedWriter.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355881770703" ignored="false" />
+    <file path="/Scope.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355881883203" ignored="false" />
+    <file path="/Attribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355794274375" ignored="false" />
+    <file path="/AttributePool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357139181109" ignored="false" />
+    <file path="/SignatureReader.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357093541937" ignored="false" />
+    <file path="/StackDecompiler.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355786768109" ignored="false" />
+    <file path="/MemberRef.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355801467890" ignored="false" />
+    <file path="/ConstantPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357063360312" ignored="false" />
+    <file path="/Descriptor.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355714221140" ignored="false" />
+    <file path="/Opcode.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356039988187" ignored="false" />
+    <file path="/DecompiledClassFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357055531828" ignored="false" />
+    <file path="/Constant.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242401062" ignored="false" />
+    <file path="/CodeAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355670172093" ignored="false" />
+    <file path="/Operand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355687782062" ignored="false" />
+    <file path="/Operator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357160198921" ignored="false" />
+    <file path="/InstructionPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357161786515" ignored="false" />
+    <file path="/Stack.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355956145359" ignored="false" />
+    <file path="/ClassRef.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355712895921" ignored="false" />
+    <file path="/ImportList.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355955162312" ignored="false" />
+    <file path="/fragment.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357517557015" ignored="false" />
+    <file path="/Member.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357091347859" ignored="false" />
+    <file path="/DecompiledMethodPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357055497031" ignored="false" />
+    <file path="/Groovy Console" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357073907125" ignored="false" />
+    <file path="/ClassMetadata.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356114355468" ignored="false" />
+    <file path="/DClassMeta.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356052105234" ignored="false" />
+    <file path="$PROJECT_DIR$/src/disassembler/decompiling/DClassMeta.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356052198453" ignored="false" />
+    <file path="/Obfuscator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357516828656" ignored="false" />
+    <file path="/MemberPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357091812812" ignored="false" />
+    <file path="/AccessibleMember.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357055594593" ignored="false" />
+    <file path="/ConstantValueAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357058731484" ignored="false" />
+    <file path="/Obfuscation.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357167968406" ignored="false" />
+    <file path="/ByteStream.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357137982187" ignored="false" />
+    <file path="/SourceFileAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357138225093" ignored="false" />
+    <file path="/LineNumberTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357143890015" ignored="false" />
+    <file path="/LocalVariableTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242641765" ignored="false" />
+    <file path="/SourceFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357140327421" ignored="false" />
+    <file path="/Exception.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357145780015" ignored="false" />
+    <file path="/Code.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357148867593" ignored="false" />
+    <file path="/CodeGenerator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357505350656" ignored="false" />
+    <file path="/Dummy.txt" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242548218" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/ReflectCommand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="/ReflectCommand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357158882671" ignored="false" />
+    <file path="/TryCatch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357245360453" ignored="false" />
+    <file path="/Interface.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357233131187" ignored="false" />
+    <file path="/InterfacePool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357233270734" ignored="false" />
+    <file path="/Bytes.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357321675296" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/BlockTickSelector.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Volcano/VolcanoWorker.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/StormUtil.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/ErrorLogger.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Blizzard/SnowModder.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Meteors/Entities/EntityMeteor.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Acid_Rain/AcidRainWeather.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574265" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Storm.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Volcano/Tasks/LifeTask.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Weather/StormWeather.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Volcano/Tasks/EruptTask.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/EntityShelterer.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Blizzard/BlizzardWeather.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574265" ignored="false" />
+    <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/Earthquake/EarthquakeControl.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574265" ignored="false" />
+    <file path="/Parser.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357518716546" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,7 +123,6 @@
     <disable_hints />
   </component>
   <component name="DebuggerManager">
-    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint>
         <option name="NOTIFY_CAUGHT" value="true" />
@@ -95,6 +157,7 @@
         <option name="LOG_MESSAGE" value="" />
       </breakpoint>
     </breakpoint_any>
+    <breakpoint_rules default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
     <breakpoint_rules />
     <ui_properties />
@@ -105,95 +168,67 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Exception.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Exception.java">
+      <file leaf-file-name="Obfuscator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="13" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0">
+            <state line="84" column="96" selection-start="3602" selection-end="3602" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeAttribute.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/CodeAttribute.java">
+      <file leaf-file-name="Obfuscation.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="46" column="33" selection-start="1830" selection-end="1830" vertical-scroll-proportion="0.0">
+            <state line="22" column="15" selection-start="740" selection-end="740" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Constant.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Constant.java">
+      <file leaf-file-name="CodeGenerator.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/core/obfuscator/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="22" column="47" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="IMethodRef.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/IMethodRef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="23" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Descriptor.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/Descriptor.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="23" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MethodRef.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/MethodRef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="22" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="FieldRef.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/FieldRef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="21" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ClassRef.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/ClassRef.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="11" column="42" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
+            <state line="34" column="18" selection-start="992" selection-end="992" vertical-scroll-proportion="0.038636364">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#1069#1075#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="DecompiledClassFile.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/disassembler/DecompiledClassFile.java">
+      <file leaf-file-name="ExceptionPool.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ExceptionPool.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="41" column="56" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.76218325">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
+            <state line="14" column="75" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Attribute.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Attribute.java">
+      <file leaf-file-name="ByteStream.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="59" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
+            <state line="75" column="0" selection-start="1605" selection-end="1605" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="InstructionPool.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InstructionPool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="36" column="20" selection-start="1294" selection-end="1319" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Opcode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/Opcode.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="135" column="27" selection-start="2972" selection-end="2972" vertical-scroll-proportion="-2.8">
               <folding />
             </state>
           </provider>
@@ -219,22 +254,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/UnknownAttribute.java" />
-        <option value="$PROJECT_DIR$/src/disassembler/DisassembledClassFile.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InstructionPool.java" />
-        <option value="$PROJECT_DIR$/src/disassembler/instructions/Operator.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/ConstantValueAttribute.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/AttributePool.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Attribute.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Member.java" />
-        <option value="$PROJECT_DIR$/src/disassembler/readers/SignatureReader.java" />
-        <option value="$PROJECT_DIR$/Java Disassembler.iml" />
-        <option value="$PROJECT_DIR$/src/disassembler/ImportList.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/CodeAttribute.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InterfacePool.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/Opcode.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/Member.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/instructions/Operator.java" />
+        <option value="$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Constant.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/ClassRef.java" />
-        <option value="$PROJECT_DIR$/src/disassembler/DecompiledClassFile.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/Descriptor.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/MemberRef.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/TryCatch.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InstructionPool.java" />
+        <option value="$PROJECT_DIR$/src/core/obfuscator/Parser.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ExceptionPool.java" />
+        <option value="$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java" />
+        <option value="$PROJECT_DIR$/src/core/obfuscator/CodeGenerator.java" />
       </list>
     </option>
   </component>
@@ -296,7 +331,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator currentView="PackagesPane" proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -308,16 +343,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope">
-        <subPane subId="Project Files">
-          <PATH>
-            <PATH_ELEMENT USER_OBJECT="Root">
-              <option name="myItemId" value="" />
-              <option name="myItemType" value="" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
       <pane id="PackagesPane">
         <subPane>
           <PATH>
@@ -330,7 +355,148 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="obfuscator" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode.introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode.introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode.introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="pools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode.introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metadata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode.introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="members" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
+      </pane>
+      <pane id="Scope">
+        <subPane subId="Project Files">
+          <PATH>
+            <PATH_ELEMENT USER_OBJECT="Root">
+              <option name="myItemId" value="" />
+              <option name="myItemType" value="" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+        <subPane subId="All" />
       </pane>
       <pane id="ProjectPane">
         <subPane>
@@ -340,169 +506,25 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="instructions" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="introspection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="introspection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="internal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="introspection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="internal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="metadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="introspection" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="internal" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="metadata" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="readers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="options.lastSelected" value="appearance" />
-    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
+    <property name="options.lastSelected" value="android.dex.compiler" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="dynamic.classpath" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -515,7 +537,7 @@
   </component>
   <component name="RunManager" selected="Application.Decompiler">
     <configuration default="false" name="Decompiler" type="Application" factoryName="Application" temporary="true">
-      <option name="MAIN_CLASS_NAME" value="disassembler.Decompiler" />
+      <option name="MAIN_CLASS_NAME" value="core.decompiler.Decompiler" />
       <option name="VM_PARAMETERS" value="" />
       <option name="PROGRAM_PARAMETERS" value="" />
       <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
@@ -697,31 +719,35 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1688" height="1024" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+      <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32912844" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329455" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2498469" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39908257" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.6495536" sideWeight="0.6660714" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39776537" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3385475" sideWeight="0.66964287" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3635321" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.35418993" sideWeight="0.49761903" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32912844" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329455" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39987752" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19940476" sideWeight="0.6044693" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39553073" sideWeight="0.3297619" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21607143" sideWeight="0.5206704" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47932962" sideWeight="0.32619047" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="ASM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23086344" sideWeight="0.67087156" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32798165" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32513967" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="IRC Favorites" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="IntellIRC" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliHeap" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32912844" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="ASM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23086344" sideWeight="0.67087156" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.49761903" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33486238" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33407822" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -797,114 +823,111 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Method.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/AccessibleMember.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="224" selection-end="224" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/MemberPool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="36" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/readers/SignatureReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="66" selection-start="511" selection-end="511" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InstructionPool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="126" selection-start="1272" selection-end="1272" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/disassembler/ImportList.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="5" selection-start="537" selection-end="537" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Member.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="47" selection-start="1945" selection-end="1945" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Exception.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="13" selection-start="207" selection-end="207" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/CodeAttribute.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="46" column="33" selection-start="1830" selection-end="1830" vertical-scroll-proportion="0.0">
+        <state line="19" column="18" selection-start="412" selection-end="412" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Attribute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="59" selection-start="269" selection-end="269" vertical-scroll-proportion="0.0">
+        <state line="11" column="53" selection-start="406" selection-end="406" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/Descriptor.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/MemberPool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="23" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/MethodRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="22" selection-start="100" selection-end="100" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/FieldRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="21" selection-start="99" selection-end="99" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/IMethodRef.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="23" selection-start="101" selection-end="101" vertical-scroll-proportion="0.0">
+        <state line="9" column="13" selection-start="368" selection-end="368" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Constant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="47" selection-start="700" selection-end="700" vertical-scroll-proportion="0.0">
+        <state line="87" column="43" selection-start="2705" selection-end="2721" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/ClassRef.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/Descriptor.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="42" selection-start="470" selection-end="470" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
+        <state line="6" column="23" selection-start="319" selection-end="319" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/constants/MemberRef.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="60" selection-start="546" selection-end="546" vertical-scroll-proportion="0.2594697" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/TryCatch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="59" selection-start="667" selection-end="667" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/disassembler/DecompiledClassFile.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="41" column="56" selection-start="1819" selection-end="1819" vertical-scroll-proportion="0.76218325">
+        <state line="78" column="39" selection-start="2630" selection-end="2630" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="79" column="58" selection-start="2573" selection-end="2573" vertical-scroll-proportion="0.3219697" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="0" selection-start="1605" selection-end="1605" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/Opcode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="135" column="27" selection-start="2972" selection-end="2972" vertical-scroll-proportion="-2.8">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/InstructionPool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="20" selection-start="1294" selection-end="1319" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="22" column="15" selection-start="740" selection-end="740" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/ExceptionPool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="75" selection-start="525" selection-end="525" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="96" selection-start="3602" selection-end="3602" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/CodeGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="18" selection-start="992" selection-end="992" vertical-scroll-proportion="0.038636364">
           <folding>
             <element signature="imports" expanded="true" />
+            <element signature="e#1069#1075#0" expanded="true" />
           </folding>
         </state>
       </provider>

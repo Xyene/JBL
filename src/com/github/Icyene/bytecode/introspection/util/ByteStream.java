@@ -18,6 +18,24 @@ public class ByteStream {
         bytes = Bytes.concat(bytes, byt);
     }
 
+    public void write(String s) {
+        for(char c: s.toCharArray()) {
+            write(c);
+        }
+    }
+
+    public void write(int i) {
+        write(Bytes.toByteArray(i));
+    }
+
+    public void write(short s) {
+        write((char)s);
+    }
+
+    public void write(char c) {
+        write(Bytes.toByteArray((short)c));
+    }
+
     public boolean readBoolean() {
         return readByte() != 0;
     }
@@ -43,7 +61,7 @@ public class ByteStream {
     }
 
     public long readLong() {
-        return (readInt() << 32) + (readInt() & 0xFFFFFFFF);
+        return (readInt() << 32) + (readInt());
     }
 
     public float readFloat() {
@@ -75,7 +93,11 @@ public class ByteStream {
     }
 
     public void backtrack(int n) {
-        pos = pos-n;
+        pos = pos - n;
+    }
+
+    public int remaining() {
+        return bytes.length - pos;
     }
 }
 

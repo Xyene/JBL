@@ -9,57 +9,62 @@ import com.github.Icyene.bytecode.introspection.internal.pools.InstructionPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
-public class CodeAttribute extends Attribute {
+public class Code extends Attribute {
 
-    private short maxStack;
-    private short maxLocals;
-    private InstructionPool codePool;
+    private int maxStack;
+    private int maxLocals;
+    private byte[] codePool;
     private ExceptionPool exceptionPool;
     private AttributePool attributePool;
 
-    public CodeAttribute(ByteStream stream, Constant name, ConstantPool pool) {
+    public Code(ByteStream stream, Constant name, ConstantPool pool) {
         super(stream, name, pool);
         maxStack = stream.readShort();
         maxLocals = stream.readShort();
-        codePool = new InstructionPool(stream);
-        System.out.println("Code pool: " + codePool);
+        codePool = stream.read(stream.readInt());
         exceptionPool = new ExceptionPool(stream);
         attributePool = new AttributePool(stream, pool);
+    }
+
+    public Code() {
 
     }
 
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        out.write(super.getBytes());
-        out.write(Bytes.toByteArray(maxStack));
-        out.write(Bytes.toByteArray(maxLocals));
-        out.write(codePool.getBytes());
+        //out.write(super.getBytes());
+        out.write((short)maxStack);
+        out.write((short)maxLocals);
+        out.write(Bytes.toByteArray(codePool.length));
+        out.write(codePool);
         out.write(exceptionPool.getBytes());
         out.write(attributePool.getBytes());
-        return out.toByteArray();
+        byte[] bytes = out.toByteArray();
+        length = bytes.length;
+        return Bytes.prepend(bytes, super.getBytes());
     }
 
-    public short getMaxStack() {
+    public int getMaxStack() {
         return maxStack;
     }
 
-    public void setMaxStack(short maxStack) {
+    public void setMaxStack(int maxStack) {
         this.maxStack = maxStack;
     }
 
-    public short getMaxLocals() {
+    public int getMaxLocals() {
         return maxLocals;
     }
 
-    public void setMaxLocals(short maxLocals) {
+    public void setMaxLocals(int maxLocals) {
         this.maxLocals = maxLocals;
     }
 
-    public InstructionPool getCodePool() {
+    public byte[] getCodePool() {
         return codePool;
     }
 
-    public void setCodePool(InstructionPool codePool) {
+    public void setCodePool(byte[] codePool) {
         this.codePool = codePool;
     }
 

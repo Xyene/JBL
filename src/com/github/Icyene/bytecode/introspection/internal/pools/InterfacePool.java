@@ -9,9 +9,8 @@ import java.util.LinkedList;
 public class InterfacePool extends LinkedList<Interface> {
     public InterfacePool(ByteStream stream, ConstantPool pool) {
         short size = stream.readShort();
-        if (size <= 0) return;
         for (int i = 0; i != size; i++)
-            add(new Interface(pool, stream.read(4)));
+            add(new Interface(pool, pool.get(Bytes.toShort(stream.read(2), 0))));
     }
 
     public byte[] getBytes() {
@@ -21,7 +20,10 @@ public class InterfacePool extends LinkedList<Interface> {
         return raw;
     }
 
-    public int getSizeInBytes() {
-        return size() << 1; //Everything is u2
+    public boolean contains(String s) {
+        for(Interface c: this)
+            if(c.getClassReference().equals(s))
+                return true;
+        return false;
     }
 }
