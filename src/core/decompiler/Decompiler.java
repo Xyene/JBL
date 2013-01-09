@@ -1,15 +1,12 @@
 package core.decompiler;
 
-import core.decompiler.decompiling.DecompiledClassFile;
 import core.obfuscator.Obfuscator;
-
-import java.io.File;
-import java.io.IOException;
 
 public class Decompiler {
 
     public static void main(String[] args) {
-        Obfuscator.main(args);
+        for (int i = 0; i != 1; i++)
+            Obfuscator.main(args);
         /*File clazz = new File(args.length > 1 ? args[0] : System.getenv("USERPROFILE") + "/Desktop/PhantomTest.class");
         try {
             long start;

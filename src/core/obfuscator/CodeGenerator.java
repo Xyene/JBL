@@ -8,13 +8,14 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
 public class CodeGenerator {
 
-    private final List jumps = Arrays.asList(
+    public static final List jumps = Arrays.asList(
             GOTO,
             JSR,
             IF_ACMPEQ,
@@ -37,11 +38,12 @@ public class CodeGenerator {
 
     public byte[] raw;
     public List<Jump> jumpMap = new ArrayList<Jump>();
+    public LinkedList<Instruction> instructions = new LinkedList<Instruction>();
     public ExceptionPool exceptionPool = new ExceptionPool();
 
     public CodeGenerator(Code code) {
         this(code.getCodePool(), 0);
-        code.getExceptionPool();
+        exceptionPool = code.getExceptionPool();
     }
 
     public CodeGenerator(byte[] bytes, int index) {
@@ -51,12 +53,22 @@ public class CodeGenerator {
         for (int i = 0; i != bytes.length; i++) {
             int opcode = in.readByte() & 0xFF;
             if (jumps.contains(opcode)) {
+                byte[] to = in.read(2);
+                instructions.add(new Instruction(opcode, i + index, to));
+                jumpMap.add(new Jump(opcode, i + index, Bytes.toShort(to, 0), false));
                 i = i + 2;
-                jumpMap.add(new Jump(opcode, i + index, in.readShort(), false));
                 continue;
             }
 
             switch (opcode) {
+                //Handle WIDE jumps
+                case GOTO_W:
+                case JSR_W:
+                    byte[] to = in.read(4);
+                    jumpMap.add(new Jump(opcode, i + index, Bytes.toInteger(to, 0), false));
+                    instructions.add(new Instruction(opcode, i + index, to));
+                    i = i + 4;
+                    continue;
                 case ALOAD:
                 case AASTORE:
                 case BIPUSH:
@@ -70,8 +82,8 @@ public class CodeGenerator {
                 case NEWARRAY:
                 case RET:
                 case LDC:
+                    instructions.add(new Instruction(opcode, i + index, in.read(1)));
                     i++;
-                    in.readByte();
                     continue;
                 case ANEWARRAY:
                 case IINC:
@@ -89,14 +101,12 @@ public class CodeGenerator {
                 case INSTANCEOF:
                 case NEW:
                 case INVOKEINTERFACE:
+                    instructions.add(new Instruction(opcode, i + index, in.read(2)));
                     i = i + 2;
-                    in.readShort();
                     continue;
-                case GOTO_W:
-                case JSR_W:
-                    i = i + 4;
-                    in.readInt();
-                    continue;
+                default:
+                    instructions.add(new Instruction(opcode, i + index, new byte[]{}));
+
             }
         }
         System.out.println("-------------------------------------->" + jumpMap);
@@ -104,13 +114,23 @@ public class CodeGenerator {
     }
 
     public byte[] synthesize() {
+
         for (Jump j : jumpMap) {
             if (jumps.contains(raw[j.address])) {
-                byte[] jump = Bytes.toByteArray((short) j.jump);
-                raw[j.address + 1] = jump[0];
-                raw[j.address + 2] = jump[1];
+                if (!j.wide) {
+                    byte[] jump = Bytes.toByteArray((short) j.jump);
+                    raw[j.address + 1] = jump[0];
+                    raw[j.address + 2] = jump[1];
+                } else {
+                    byte[] jump = Bytes.toByteArray(j.jump);
+                    raw[j.address + 1] = jump[0];
+                    raw[j.address + 2] = jump[1];
+                    raw[j.address + 3] = jump[2];
+                    raw[j.address + 4] = jump[3];
+                }
             }
         }
+
         return raw;
     }
 
@@ -128,16 +148,31 @@ public class CodeGenerator {
             }
         }
 
-        for (TryCatch e : exceptionPool) {
-            if (e.getEndPC() >= pc)
-                e.setEndPC(e.getEndPC() + pc);
-            if (e.getStartPC() >= pc)
-                e.setStartPC(e.getStartPC() + pc);
-            if (e.getHandlerPC() >= pc)
-                e.setHandlerPC(e.getHandlerPC() + pc);
+        for(Instruction i: instructions) {
+            if (i.address >= pc) {
+                i.address += bytes.length;
+            }
         }
 
-        jumpMap.addAll(new CodeGenerator(bytes, pc).jumpMap);
+        for (TryCatch e : exceptionPool) {
+            if (e.getEndPC() >= pc) {
+                System.out.println("Adjusting endPC of " + e);
+                e.setEndPC(e.getEndPC() + bytes.length);
+            }
+            if (e.getStartPC() >= pc) {
+                System.out.println("Adjusting startPC of " + e);
+                e.setStartPC(e.getStartPC() + bytes.length);
+            }
+            if (e.getHandlerPC() >= pc) {
+                System.out.println("Adjusting handlerPC of " + e);
+                e.setHandlerPC(e.getHandlerPC() + bytes.length);
+            }
+        }
+
+        CodeGenerator cg = new CodeGenerator(bytes, pc);
+
+        jumpMap.addAll(cg.jumpMap);
+        instructions.addAll(cg.instructions);
         raw = Bytes.concat(Bytes.concat(Bytes.slice(raw, 0, pc), bytes), Bytes.slice(raw, pc, raw.length));
         System.out.println("Injected " + bytes.length + " bytes at location " + pc + ", new jumps are " + jumpMap);
         return this;
@@ -156,6 +191,21 @@ public class CodeGenerator {
 
         public String toString() {
             return String.format("[Jump at %s of type %s jumps to %s]", address, opcode, jump);
+        }
+    }
+
+    public class Instruction {
+        public transient int address, opcode;
+        public transient byte[] args;
+
+        public Instruction(int opcode, int address, byte[] args) {
+            this.opcode = opcode;
+            this.address = address;
+            this.args = args;
+        }
+
+        public String toString() {
+            return String.format("[Instruction at %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
         }
     }
 }

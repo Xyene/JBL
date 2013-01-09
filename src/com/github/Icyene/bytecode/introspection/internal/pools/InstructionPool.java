@@ -3,6 +3,7 @@ package com.github.Icyene.bytecode.introspection.internal.pools;
 import com.github.Icyene.bytecode.introspection.internal.pools.instructions.Operator;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
+import com.sun.istack.internal.NotNull;
 
 import java.util.ArrayList;
 
@@ -89,6 +90,7 @@ public class InstructionPool extends ArrayList<Operator> {
 
     }
 
+    @NotNull
     public InstructionPool subList(int from, int to) {
         InstructionPool out = new InstructionPool();
         for(int i = from; i != to; i++) {

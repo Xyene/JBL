@@ -49,9 +49,6 @@ public class Obfuscator {
 
                     String name = c.getName();
 
-                    if (name.equals("main"))
-                        continue;
-
                     System.out.println("Handling method " + name);
 
                     AttributePool attributes = c.getAttributePool();
@@ -63,37 +60,63 @@ public class Obfuscator {
                     Code code = (Code) attributes.getInstancesOf(Code.class).get(0);
                     ExceptionPool epool = code.getExceptionPool();
 
-                    byte[] opcodes = code.getCodePool();
-                    CodeGenerator gen = new CodeGenerator(opcodes, 0);
+                    CodeGenerator gen = new CodeGenerator(code);
 
                     // if(new Random().nextInt(5) < 50) continue;
 
                     //GOTO a JSR after RETURN, which goes to a POP after the GOTO, removing the return address
 
+                    {
+                        boolean stackGrew = false;
+                        for (int i = 0; i != gen.instructions.size(); i++) {
+                            CodeGenerator.Instruction inc = gen.instructions.get(i);
+                            if (inc.opcode == IF_ICMPEQ) {
+                                System.out.println("INSTRCT at address " + inc.address + " is an if!");
+
+                                short loc = (byte) ((inc.address + Bytes.toShort(inc.args, 0)));
+                                loc -= gen.raw.length;
+                                byte[] back = Bytes.toByteArray(loc);
+                                gen.inject(
+                                        gen.raw.length,
+                                        (byte) GOTO,
+                                        back[0],
+                                        back[1]
+                                );
+
+                                byte[] to = Bytes.toByteArray((short) ((gen.raw.length - inc.address) - 3));
+                                gen.raw[inc.address + 1] = to[0];
+                                gen.raw[inc.address + 2] = to[1];
+                                stackGrew = true;
+                            }
+                        }
+                        if (stackGrew && code.getMaxStack() < 2)
+                            code.setMaxStack(code.getMaxStack() + 1);
+                    }
+
 
                     { //Jump to a JSR instruction at end of method
-                        byte[] jumpToJSR = Bytes.toByteArray((short) (gen.raw.length + 4));
+                        byte[] jumpTo = Bytes.toByteArray((short) (gen.raw.length + 3));
                         //Jump back to the POP instruction
-                        byte[] jumpBack = Bytes.toByteArray((short) -(gen.raw.length - 3));
+                        byte[] jumpBack = Bytes.toByteArray((short) -(gen.raw.length));
                         gen.inject(0,
                                 (byte) GOTO,
-                                jumpToJSR[0],
-                                jumpToJSR[1],
-                                (byte) POP
+                                jumpTo[0],
+                                jumpTo[1]
                         ).inject(gen.raw.length,
-                                (byte) JSR,
+                                (byte) GOTO,
                                 jumpBack[0],
                                 jumpBack[1],
-                                (byte) ATHROW //Allow any uncaught exception to propagate
+                                (byte) ATHROW
                         );
                         //Manufacture exception block to protect indirection
                         epool.add(new TryCatch(0, gen.raw.length - 4, gen.raw.length - 1));
-                        code.setMaxStack(code.getMaxStack() + 1);
+                        if (code.getMaxStack() < 2)
+                            code.setMaxStack(code.getMaxStack() + 1);
                     }
 
                     code.setCodePool(gen.synthesize());
 
-                    if (new Random().nextInt(5) < 50) continue;  //TODO remove for renaming
+                    //  if (new Random().nextInt(5) < 50) continue;  //TODO remove for renaming
 
                     System.out.println("Handling " + name + ":" + c.getDescriptor());
                     if (name.equals("<init>") || name.equals("<clinit>") || name.equals("main"))

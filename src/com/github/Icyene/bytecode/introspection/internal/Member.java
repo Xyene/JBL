@@ -22,7 +22,9 @@ public class Member extends AccessibleMember {
         name = pool.get(stream.readShort());
         descriptor = pool.get(stream.readShort());
         attributePool = new AttributePool(stream, pool);
+
         owner = pool;
+        System.out.println("Loaded member " + getName());
     }
 
     public byte[] getBytes() {

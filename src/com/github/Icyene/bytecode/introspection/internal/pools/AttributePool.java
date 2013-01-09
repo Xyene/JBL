@@ -14,7 +14,7 @@ import java.util.regex.Pattern;
 
 public class AttributePool extends ArrayList<Attribute> {
 
-    private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "SourceFile", "LocalVariableTable");
+    private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "SourceFile");
 
     public AttributePool(ByteStream stream, ConstantPool pool) {
         short size = stream.readShort();
