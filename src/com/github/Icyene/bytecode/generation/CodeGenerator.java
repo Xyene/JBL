@@ -1,45 +1,32 @@
-package core.obfuscator;
+package com.github.Icyene.bytecode.generation;
 
+import com.github.Icyene.bytecode.introspection.internal.Member;
+import com.github.Icyene.bytecode.introspection.internal.code.ExceptionPool;
 import com.github.Icyene.bytecode.introspection.internal.members.TryCatch;
 import com.github.Icyene.bytecode.introspection.internal.members.attributes.Code;
-import com.github.Icyene.bytecode.introspection.internal.pools.ExceptionPool;
+import com.github.Icyene.bytecode.introspection.internal.metadata.Opcode;
+import com.github.Icyene.bytecode.introspection.internal.metadata.readers.SignatureReader;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
+import static com.github.Icyene.bytecode.generation.Groups.JUMPS;
+import static com.github.Icyene.bytecode.generation.Groups.JUMPS_W;
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
 public class CodeGenerator {
-
-    public static final List jumps = Arrays.asList(
-            GOTO,
-            JSR,
-            IF_ACMPEQ,
-            IF_ACMPNE,
-            IF_ICMPEQ,
-            IF_ICMPGE,
-            IF_ICMPGT,
-            IF_ICMPLE,
-            IF_ICMPLT,
-            IF_ICMPNE,
-            IFEQ,
-            IFNE,
-            IFLT,
-            IFGE,
-            IFGT,
-            IFLE,
-            IFNONNULL,
-            IFNULL
-    );
 
     public byte[] raw;
     public List<Jump> jumpMap = new ArrayList<Jump>();
     public LinkedList<Instruction> instructions = new LinkedList<Instruction>();
     public ExceptionPool exceptionPool = new ExceptionPool();
+    private Member method = null;
+
+    public CodeGenerator(Code code, Member member) {
+        this(code);
+        method = member;
+    }
 
     public CodeGenerator(Code code) {
         this(code.getCodePool(), 0);
@@ -49,26 +36,20 @@ public class CodeGenerator {
     public CodeGenerator(byte[] bytes, int index) {
         raw = bytes;
         ByteStream in = new ByteStream(bytes);
-        System.out.println("Raw: " + Bytes.bytesToString(in.toByteArray()));
         for (int i = 0; i != bytes.length; i++) {
             int opcode = in.readByte() & 0xFF;
-            if (jumps.contains(opcode)) {
+
+            if (JUMPS.contains(opcode)) {
                 byte[] to = in.read(2);
                 instructions.add(new Instruction(opcode, i + index, to));
                 jumpMap.add(new Jump(opcode, i + index, Bytes.toShort(to, 0), false));
                 i = i + 2;
-                continue;
-            }
-
-            switch (opcode) {
-                //Handle WIDE jumps
-                case GOTO_W:
-                case JSR_W:
-                    byte[] to = in.read(4);
-                    jumpMap.add(new Jump(opcode, i + index, Bytes.toInteger(to, 0), false));
-                    instructions.add(new Instruction(opcode, i + index, to));
-                    i = i + 4;
-                    continue;
+            } else if (JUMPS_W.contains(opcode)) {
+                byte[] to = in.read(4);
+                instructions.add(new Instruction(opcode, i + index, to));
+                jumpMap.add(new Jump(opcode, i + index, Bytes.toInteger(to, 0), true));
+                i = i + 4;
+            } else switch (opcode) {
                 case ALOAD:
                 case AASTORE:
                 case BIPUSH:
@@ -106,31 +87,25 @@ public class CodeGenerator {
                     continue;
                 default:
                     instructions.add(new Instruction(opcode, i + index, new byte[]{}));
-
             }
         }
-        System.out.println("-------------------------------------->" + jumpMap);
-        System.out.println("Exited!");
     }
 
     public byte[] synthesize() {
-
         for (Jump j : jumpMap) {
-            if (jumps.contains(raw[j.address])) {
-                if (!j.wide) {
-                    byte[] jump = Bytes.toByteArray((short) j.jump);
-                    raw[j.address + 1] = jump[0];
-                    raw[j.address + 2] = jump[1];
-                } else {
-                    byte[] jump = Bytes.toByteArray(j.jump);
-                    raw[j.address + 1] = jump[0];
-                    raw[j.address + 2] = jump[1];
-                    raw[j.address + 3] = jump[2];
-                    raw[j.address + 4] = jump[3];
-                }
+            if (!j.wide) {
+                byte[] jump = Bytes.toByteArray((short) j.jump);
+                raw[j.address + 1] = jump[0];
+                raw[j.address + 2] = jump[1];
+            } else {
+                byte[] jump = Bytes.toByteArray(j.jump);
+                raw[j.address + 1] = jump[0];
+                raw[j.address + 2] = jump[1];
+                raw[j.address + 3] = jump[2];
+                raw[j.address + 4] = jump[3];
             }
-        }
 
+        }
         return raw;
     }
 
@@ -148,7 +123,7 @@ public class CodeGenerator {
             }
         }
 
-        for(Instruction i: instructions) {
+        for (Instruction i : instructions) {
             if (i.address >= pc) {
                 i.address += bytes.length;
             }
@@ -156,15 +131,12 @@ public class CodeGenerator {
 
         for (TryCatch e : exceptionPool) {
             if (e.getEndPC() >= pc) {
-                System.out.println("Adjusting endPC of " + e);
                 e.setEndPC(e.getEndPC() + bytes.length);
             }
             if (e.getStartPC() >= pc) {
-                System.out.println("Adjusting startPC of " + e);
                 e.setStartPC(e.getStartPC() + bytes.length);
             }
             if (e.getHandlerPC() >= pc) {
-                System.out.println("Adjusting handlerPC of " + e);
                 e.setHandlerPC(e.getHandlerPC() + bytes.length);
             }
         }
@@ -174,8 +146,37 @@ public class CodeGenerator {
         jumpMap.addAll(cg.jumpMap);
         instructions.addAll(cg.instructions);
         raw = Bytes.concat(Bytes.concat(Bytes.slice(raw, 0, pc), bytes), Bytes.slice(raw, pc, raw.length));
-        System.out.println("Injected " + bytes.length + " bytes at location " + pc + ", new jumps are " + jumpMap);
         return this;
+    }
+
+    private void sortJumps() {
+        Collections.sort(jumpMap, new Comparator<Jump>() {
+            public int compare(Jump f, Jump s) {
+                return f.address - s.address;
+            }
+        });
+    }
+
+    public int computeStackSize() {
+        if (method == null) {
+            throw new RuntimeException("Cannot compute max stack size without method descriptor");
+        }
+
+        SignatureReader reader = new SignatureReader(method.getDescriptor());
+        int maxStackSize = reader.getAugmentingTypes().size();
+        int currentStackSize = 0;
+
+        for (int i = 0; i != instructions.size(); i++) {
+            currentStackSize += Opcode.STACK_GROW[instructions.get(i).opcode];
+            if (currentStackSize > maxStackSize) {
+                maxStackSize = currentStackSize;
+            }
+        }
+        return maxStackSize;
+    }
+
+    public int computeMaxLocals() {
+        throw new UnsupportedOperationException("Max local fetching not yet implemented!");
     }
 
     public class Jump {
@@ -190,7 +191,7 @@ public class CodeGenerator {
         }
 
         public String toString() {
-            return String.format("[Jump at %s of type %s jumps to %s]", address, opcode, jump);
+            return String.format("[Jump @ %s of type %s JUMPS to %s]", address, opcode, jump);
         }
     }
 
@@ -205,7 +206,7 @@ public class CodeGenerator {
         }
 
         public String toString() {
-            return String.format("[Instruction at %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
+            return String.format("[Instruction @ %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
         }
     }
 }

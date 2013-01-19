@@ -1,5 +1,7 @@
 package core.obfuscator;
 
+import com.github.Icyene.bytecode.generation.CodeGenerator;
+import com.github.Icyene.bytecode.generation.Groups;
 import com.github.Icyene.bytecode.introspection.internal.ClassFile;
 import com.github.Icyene.bytecode.introspection.internal.Member;
 import com.github.Icyene.bytecode.introspection.internal.members.TryCatch;
@@ -7,7 +9,7 @@ import com.github.Icyene.bytecode.introspection.internal.members.attributes.Code
 import com.github.Icyene.bytecode.introspection.internal.metadata.readers.SignatureReader;
 import com.github.Icyene.bytecode.introspection.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
-import com.github.Icyene.bytecode.introspection.internal.pools.ExceptionPool;
+import com.github.Icyene.bytecode.introspection.internal.code.ExceptionPool;
 import com.github.Icyene.bytecode.introspection.internal.pools.MemberPool;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
@@ -30,7 +32,7 @@ public class Obfuscator {
             //  System.out.println(cc.getConstantPool());
             // System.out.println(Bytes.bytesToString(Bytes.read(clazz)));
 
-            MemberPool<Member> mp = cc.getMethodPool();
+            MemberPool mp = cc.getMethodPool();
             ConstantPool cpool = cc.getConstantPool();
 
             //Class obfuscation
@@ -57,22 +59,19 @@ public class Obfuscator {
                     attributes.removeInstancesOf("Deprecated");
                     attributes.removeInstancesOf("Exceptions");
 
-                    Code code = (Code) attributes.getInstancesOf(Code.class).get(0);
+                    Code code = (Code) attributes.getInstancesOf("Code").get(0);
                     ExceptionPool epool = code.getExceptionPool();
 
-                    CodeGenerator gen = new CodeGenerator(code);
+                    CodeGenerator gen = new CodeGenerator(code, c);
 
                     // if(new Random().nextInt(5) < 50) continue;
 
                     //GOTO a JSR after RETURN, which goes to a POP after the GOTO, removing the return address
 
                     {
-                        boolean stackGrew = false;
                         for (int i = 0; i != gen.instructions.size(); i++) {
                             CodeGenerator.Instruction inc = gen.instructions.get(i);
-                            if (inc.opcode == IF_ICMPEQ) {
-                                System.out.println("INSTRCT at address " + inc.address + " is an if!");
-
+                            if (inc.opcode != GOTO && Groups.IFS.contains(inc.opcode)) {
                                 short loc = (byte) ((inc.address + Bytes.toShort(inc.args, 0)));
                                 loc -= gen.raw.length;
                                 byte[] back = Bytes.toByteArray(loc);
@@ -86,11 +85,8 @@ public class Obfuscator {
                                 byte[] to = Bytes.toByteArray((short) ((gen.raw.length - inc.address) - 3));
                                 gen.raw[inc.address + 1] = to[0];
                                 gen.raw[inc.address + 2] = to[1];
-                                stackGrew = true;
                             }
                         }
-                        if (stackGrew && code.getMaxStack() < 2)
-                            code.setMaxStack(code.getMaxStack() + 1);
                     }
 
 
@@ -110,19 +106,16 @@ public class Obfuscator {
                         );
                         //Manufacture exception block to protect indirection
                         epool.add(new TryCatch(0, gen.raw.length - 4, gen.raw.length - 1));
-                        if (code.getMaxStack() < 2)
-                            code.setMaxStack(code.getMaxStack() + 1);
                     }
 
+                    code.setMaxStack(gen.computeStackSize());
                     code.setCodePool(gen.synthesize());
-
-                    //  if (new Random().nextInt(5) < 50) continue;  //TODO remove for renaming
 
                     System.out.println("Handling " + name + ":" + c.getDescriptor());
                     if (name.equals("<init>") || name.equals("<clinit>") || name.equals("main"))
                         continue;
 
-
+                    long stssart = System.currentTimeMillis();
                     final String descriptor = new SignatureReader(c).getRawAugmentingTypes();
 
                     for (Map.Entry<String, HashSet<String>> en : overloads.entrySet()) {
@@ -146,12 +139,13 @@ public class Obfuscator {
                     overloads.put(obfuscatedName, new HashSet<String>() {{
                         add(descriptor);
                     }});
+                    System.out.println("Method renaming: " + (System.currentTimeMillis() - stssart) + "ms");
                 }
             }
 
             {
                 Set<String> overloads = new HashSet<String>();
-                MemberPool<Member> fieldPool = cc.getFieldPool();
+                MemberPool fieldPool = cc.getFieldPool();
                 for (Member f : fieldPool) {
                     String obfuscatedName = "";
                     while (true) {

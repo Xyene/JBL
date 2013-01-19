@@ -1,10 +1,7 @@
 package core.obfuscator;
 
-import com.github.Icyene.bytecode.introspection.internal.Member;
-
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.LinkedList;
 import java.util.Random;
 
 public class Obfuscation {
@@ -20,13 +17,12 @@ public class Obfuscation {
     }
 
     public static String genRandomName(HashMap<String, HashSet<String>> overloads) {
-        String obfuscatedName = "";
-        while (true) {
+        String str;
+        do {
             System.out.println("Generating random name");
-            obfuscatedName = Obfuscation.randomString(new Random().nextInt(1) + 1);
-            if (!overloads.containsKey(obfuscatedName))
-                break;
+            str = randomString(new Random().nextInt(1) + 1);
         }
-        return obfuscatedName;
+        while (overloads.containsKey(str));
+        return str;
     }
 }

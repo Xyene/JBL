@@ -10,16 +10,16 @@ import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.
 
 public class SourceFile extends Attribute {
     private Constant sourceIndex;
-    private final ConstantPool owner;
 
     public SourceFile(ByteStream stream, Constant name, ConstantPool pool) {
-        super(stream, name, pool);
+        super(name, stream.readInt());
         sourceIndex = pool.get(stream.readShort());
-        owner = pool;
     }
 
     public byte[] getBytes() {
-        return Bytes.concat(super.getBytes(), Bytes.toByteArray((short)sourceIndex.getIndex()));
+        byte[] bytes = Bytes.toByteArray((short) sourceIndex.getIndex());
+        length = bytes.length;
+        return Bytes.prepend(bytes, super.getBytes());
     }
 
     public String getSourceFile() {
@@ -27,7 +27,6 @@ public class SourceFile extends Attribute {
     }
 
     public void setSourceFile(String newSource) {
-        int source = sourceIndex.getIndex();
-        owner.set(source, (sourceIndex = new Constant(source, TAG_UTF_STRING, newSource.getBytes(), owner)));
+        sourceIndex.getOwner().set(sourceIndex.getIndex(), (sourceIndex = new Constant(TAG_UTF_STRING, newSource.getBytes())));
     }
 }

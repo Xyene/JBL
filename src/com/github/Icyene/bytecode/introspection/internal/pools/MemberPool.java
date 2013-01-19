@@ -7,31 +7,36 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.LinkedList;
 
-public class MemberPool<E extends Member> extends LinkedList<E> {
-    protected ClassFile owner;
+public class MemberPool extends LinkedList<Member> {
 
+    /**
+     * Constructs a member pool.
+     *
+     * @param stream The stream of bytes containing the pool data.
+     * @param pool   An associated constant pool.
+     */
     public MemberPool(ByteStream stream, ConstantPool pool, ClassFile owner) {
-        this.owner = owner;
         short size = stream.readShort();
         for (int i = 0; i != size; i++)
-            add(make(stream, pool));
+            add(new Member(stream, pool));
     }
 
-    public MemberPool() {}
-
-    protected E make(ByteStream stream, ConstantPool pool) {
-        return (E)new Member(stream, pool);
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
+    public MemberPool() {
     }
 
+    /**
+     * Gets a byte[] representation of this object.
+     *
+     * @return a byte[] representation of this object.
+     */
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
         out.write(Bytes.toByteArray((short) size()));
         for (Member p : this)
             out.write(p.getBytes());
         return out.toByteArray();
-    }
-
-    public ClassFile getOwner() {
-        return owner;
     }
 }

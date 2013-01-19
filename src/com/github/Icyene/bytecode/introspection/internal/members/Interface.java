@@ -1,6 +1,5 @@
 package com.github.Icyene.bytecode.introspection.internal.members;
 
-import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.TAG_UTF_STRING;
@@ -8,24 +7,46 @@ import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.
 public class Interface {
 
     private Constant classReference;
-    private final ConstantPool owner;
 
-    public Interface(ConstantPool pool, Constant value) {
-        System.out.println("New interface: " + classReference);
+    /**
+     * Constructs an interface from the given constant.
+     *
+     * @param value the data constant.
+     */
+    public Interface(Constant value) {
         classReference = value;
-        owner = pool;
     }
 
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
+    public Interface() {
+    }
+
+    /**
+     * Gets a byte[] representation of this object.
+     *
+     * @return a byte[] representation of this object.
+     */
     public byte[] getBytes() {
         return Bytes.toByteArray((short) classReference.getIndex());
     }
 
+    /**
+     * Gets the class reference that this interface references.
+     *
+     * @return the class.
+     */
     public String getClassReference() {
         return classReference.getStringValue();
     }
 
+    /**
+     * Sets the class reference that this interface references.
+     *
+     * @param newRef the new reference.
+     */
     public void setClassReference(String newRef) {
-        int source = classReference.getIndex();
-        owner.set(source, (classReference = new Constant(source, TAG_UTF_STRING, newRef.getBytes(), owner)));
+        classReference.getOwner().set(classReference.getIndex(), (classReference = new Constant(TAG_UTF_STRING, newRef.getBytes())));
     }
 }

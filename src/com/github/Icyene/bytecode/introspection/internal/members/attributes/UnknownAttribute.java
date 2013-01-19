@@ -11,12 +11,12 @@ public class UnknownAttribute extends Attribute {
     private byte[] value;
 
     public UnknownAttribute(ByteStream stream, Constant name, ConstantPool pool) {
-        super(stream, name, pool);
+        super(name, stream.readInt());
         value = stream.read(length);
     }
 
     public byte[] getBytes() {
-        // System.out.println("Returning assembled attribute: " + Bytes.bytesToString(ret));
+        length = value.length;
         return Bytes.concat(super.getBytes(), value);
     }
 

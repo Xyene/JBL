@@ -19,7 +19,7 @@ public class ByteStream {
     }
 
     public void write(String s) {
-        for(char c: s.toCharArray()) {
+        for (char c : s.toCharArray()) {
             write(c);
         }
     }
@@ -29,11 +29,11 @@ public class ByteStream {
     }
 
     public void write(short s) {
-        write((char)s);
+        write((char) s);
     }
 
     public void write(char c) {
-        write(Bytes.toByteArray((short)c));
+        write(Bytes.toByteArray((short) c));
     }
 
     public boolean readBoolean() {

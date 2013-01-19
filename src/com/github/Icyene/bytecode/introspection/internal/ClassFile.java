@@ -11,7 +11,8 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
+
+import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.TAG_UTF_STRING;
 
 public class ClassFile extends AccessibleMember {
 
@@ -21,86 +22,60 @@ public class ClassFile extends AccessibleMember {
     protected Constant thisClass;
     protected Constant superClass;
     protected InterfacePool interfacePool;
-    protected MemberPool<Member> fieldPool;
-    protected MemberPool<Member> methodPool;
+    protected MemberPool fieldPool;
+    protected MemberPool methodPool;
     protected AttributePool attributePool;
-    protected final HashMap<String, Object> meta = new HashMap<String, Object>();
 
+    /**
+     * Constructs a class file object.
+     *
+     * @param bytes The bytes to construct this object from.
+     */
     public ClassFile(byte[] bytes) {
-        long start;
-        start = System.currentTimeMillis();
         ByteStream stream = new ByteStream(bytes);
-        System.out.println("Opened stream: " + (System.currentTimeMillis() - start) + "ms");
         if (stream.readInt() != 0xCAFEBABE)
             throw new IllegalStateException("File does not contain magic number 0xCAFEBABE");
 
         minorVersion = stream.readShort();
         majorVersion = stream.readShort();
-        handleConstantPool(stream);
-        meta.put("accessFlags", flag = stream.readShort());
-        meta.put("thisClass", thisClass = constantPool.get(stream.readShort()));
-        meta.put("superClass", superClass = constantPool.get(stream.readShort()));
-
-        handleInterfacePool(stream);
-        handleFieldPool(stream);
-        handleMethodPool(stream);
-        handleAttributePool(stream);
+        constantPool = new ConstantPool(stream);
+        flag = stream.readShort();
+        thisClass = constantPool.get(stream.readShort());
+        superClass = constantPool.get(stream.readShort());
+        interfacePool = new InterfacePool(stream, constantPool);
+        fieldPool = new MemberPool(stream, constantPool, this);
+        methodPool = new MemberPool(stream, constantPool, this);
+        attributePool = new AttributePool(stream, constantPool);
     }
 
+    /**
+     * Constructs a class file object.
+     *
+     * @param stream The stream to construct this object from.
+     */
     public ClassFile(InputStream stream) throws IOException {
         this(Bytes.read(stream));
     }
 
-    protected void handleConstantPool(ByteStream stream) {
-        long start;
-        start = System.currentTimeMillis();
-        constantPool = new ConstantPool(stream);
-        System.out.println("Constant pool: " + (System.currentTimeMillis() - start) + "ms");
+    /**
+     * Constructs a class file object.
+     *
+     * @param file The file to construct this object from.
+     */
+    public ClassFile(File file) throws IOException {
+        this(Bytes.read(file));
     }
 
-    protected void handleInterfacePool(ByteStream stream) {
-        long start;
-        start = System.currentTimeMillis();
-        interfacePool = new InterfacePool(stream, constantPool);
-        System.out.println("Interface pool: " + (System.currentTimeMillis() - start) + "ms");
-    }
-
-    protected void handleFieldPool(ByteStream stream) {
-        long start;
-        start = System.currentTimeMillis();
-        fieldPool = new MemberPool<Member>(stream, constantPool, this);
-        System.out.println("Field pool: " + (System.currentTimeMillis() - start) + "ms");
-    }
-
-    protected void handleMethodPool(ByteStream stream) {
-        long start;
-        start = System.currentTimeMillis();
-        methodPool = new MemberPool<Member>(stream, constantPool, this);
-        System.out.println("Method pool: " + (System.currentTimeMillis() - start) + "ms");
-    }
-
-    protected void handleAttributePool(ByteStream stream) {
-        long start;
-        start = System.currentTimeMillis();
-        attributePool = new AttributePool(stream, constantPool);
-        System.out.println("Attribute pool: " + (System.currentTimeMillis() - start) + "ms");
-    }
-
-    public HashMap<String, Object> getMetadata() {
-        return meta;
-    }
-
-    public ClassFile(File f) throws IOException {
-        this(Bytes.read(f));
-    }
-
+    /**
+     * {@inheritDoc}
+     */
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
         out.write(Bytes.toByteArray(0xCAFEBABE));
         out.write(Bytes.toByteArray(minorVersion));
         out.write(Bytes.toByteArray(majorVersion));
         out.write(constantPool.getBytes());
-        out.write(Bytes.toByteArray((short)flag));
+        out.write(Bytes.toByteArray((short) flag));
         out.write(Bytes.toByteArray((short) thisClass.getIndex()));
         out.write(Bytes.toByteArray((short) superClass.getIndex()));
         out.write(interfacePool.getBytes());
@@ -110,74 +85,177 @@ public class ClassFile extends AccessibleMember {
         return out.toByteArray();
     }
 
+    /**
+     * Defines a Class from this class file.
+     *
+     * @return a defined class.
+     */
+    public Class define() {
+        return new ClassLoader() {
+            public Class defineClass(byte[] bytes) {
+                return super.defineClass(null, bytes, 0, bytes.length);
+            }
+        }.defineClass(getBytes());
+    }
+
+    /**
+     * Fetches the major version of this class.
+     *
+     * @return the major version of this class.
+     */
     public short getMajorVersion() {
         return majorVersion;
     }
 
+    /**
+     * Sets the major version of this class.
+     *
+     * @param version the version to set it to.
+     */
     public void setMajorVersion(short version) {
         majorVersion = version;
     }
 
+    /**
+     * Fetches the minor version of this class.
+     *
+     * @return the minor version of this class.
+     */
     public short getMinorVersion() {
         return minorVersion;
     }
 
+    /**
+     * Sets the minor version of this class.
+     *
+     * @param version the version to set it to.
+     */
     public void setMinorVersion(short version) {
         minorVersion = version;
     }
 
+    /**
+     * Returns this class' constant pool.
+     *
+     * @return a constant pool.
+     */
     public ConstantPool getConstantPool() {
         return constantPool;
     }
 
+    /**
+     * Sets this class' constant pool.
+     *
+     * @param constantPool the pool to set it to.
+     */
     public void setConstantPool(ConstantPool constantPool) {
         this.constantPool = constantPool;
     }
 
-    public Constant getThisClass() {
-        return thisClass;
+    /**
+     * Returns the fully qualified name of this class.
+     *
+     * @return the fully qualified name of this class.
+     */
+    public String getName() {
+        return thisClass.getStringValue();
     }
 
-    public void setThisClass(Constant thisClass) {
-        this.thisClass = thisClass;
+    /**
+     * Sets the name of this class.
+     *
+     * @param clazz The new name for this class.
+     */
+    public void setThisClass(String clazz) {
+        thisClass.getOwner().set(thisClass.getIndex(), (thisClass = new Constant(TAG_UTF_STRING, clazz.getBytes())));
     }
 
-    public Constant getSuperClass() {
-        return superClass;
+    /**
+     * Returns the fully qualified name of this class' superclass.
+     *
+     * @return the fully qualified name of this class' superclass.
+     */
+    public String getSuperClass() {
+        return superClass.getStringValue();
     }
 
-    public void setSuperClass(Constant superClass) {
-        this.superClass = superClass;
+    /**
+     * Sets the name of this class' superclass.
+     *
+     * @param superclass The new name for this class' superclass.
+     */
+    public void setSuperClass(String superclass) {
+        superClass.getOwner().set(superClass.getIndex(), (superClass = new Constant(TAG_UTF_STRING, superclass.getBytes())));
     }
 
+    /**
+     * Returns this class' interface pool.
+     *
+     * @return an interface pool.
+     */
     public InterfacePool getInterfacePool() {
         return interfacePool;
     }
 
+    /**
+     * Sets this class' interface pool.
+     *
+     * @param interfacePool the pool to set it to.
+     */
     public void setInterfacePool(InterfacePool interfacePool) {
         this.interfacePool = interfacePool;
     }
 
-    public MemberPool<Member> getFieldPool() {
+    /**
+     * Returns this class' field pool.
+     *
+     * @return a field pool.
+     */
+    public MemberPool getFieldPool() {
         return fieldPool;
     }
 
+    /**
+     * Sets this class' field pool.
+     *
+     * @param fieldPool the pool to set it to.
+     */
     public void setFieldPool(MemberPool fieldPool) {
         this.fieldPool = fieldPool;
     }
 
-    public MemberPool<Member> getMethodPool() {
+    /**
+     * Returns this class' method pool.
+     *
+     * @return a method pool.
+     */
+    public MemberPool getMethodPool() {
         return methodPool;
     }
 
+    /**
+     * Sets this class' method pool.
+     *
+     * @param methodPool the pool to set it to.
+     */
     public void setMethodPool(MemberPool methodPool) {
         this.methodPool = methodPool;
     }
 
+    /**
+     * Returns this class' method pool.
+     *
+     * @return a method pool.
+     */
     public AttributePool getAttributePool() {
         return attributePool;
     }
 
+    /**
+     * Sets this class' attribute pool.
+     *
+     * @param attributePool the pool to set it to.
+     */
     public void setAttributePool(AttributePool attributePool) {
         this.attributePool = attributePool;
     }

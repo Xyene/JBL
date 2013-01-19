@@ -1,9 +1,8 @@
 package com.github.Icyene.bytecode.introspection.internal.members;
 
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
-import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
-import java.lang.Exception;
+
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
 public class Constant {
@@ -12,17 +11,34 @@ public class Constant {
     private byte[] value;
     private ConstantPool owner;
 
-    public Constant(int index, int type, byte[] value, ConstantPool owner) {
+    /**
+     * Creates a constant with the given parameters.
+     *
+     * @param index the index of the constant.
+     * @param type  the tag type of the constant.
+     * @param value the value of the constant in byte[] format.
+     */
+    public Constant(int index, int type, byte[] value) {
         this.index = index;
         this.type = type;
         this.value = value;
-        this.owner = owner;
     }
 
-    public Constant(ByteStream stream, ConstantPool owner) {
-
+    /**
+     * Creates a constant with the given parameters.
+     *
+     * @param type  the tag type of the constant.
+     * @param value the value of the constant in byte[] format.
+     */
+    public Constant(int type, byte[] value) {
+        this(-1, type, value);
     }
 
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
+    public Constant() {
+    }
 
     public byte[] getBytes() {
         if (type == TAG_UTF_STRING)
@@ -32,36 +48,92 @@ public class Constant {
         return Bytes.prepend(value, (byte) type);
     }
 
-
-
+    /**
+     * Returns the byte[] value of this constant. Should not be confused with {@link #getBytes()}.
+     *
+     * @return a byte[] value.
+     */
     public byte[] getRawValue() {
         return value;
     }
 
+    /**
+     * Sets the value of this constant.
+     *
+     * @param value the new value.
+     */
     public void setRawValue(byte[] value) {
         this.value = value;
     }
 
+    /**
+     * Fetches the owning constant pool.
+     *
+     * @return the owning constant pool.
+     */
+    public ConstantPool getOwner() {
+        return owner;
+    }
+
+    /**
+     * Sets the owner of the pool. Should not be accessed directly: ConstantPool.add sets it.
+     *
+     * @param owner the owning pool.
+     */
+    public void setOwner(ConstantPool owner) {
+        this.owner = owner;
+    }
+
+    /**
+     * Fetches the index of this constant.
+     *
+     * @return the new index.
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Sets the index of this constant.
+     *
+     * @param index the new index.
+     */
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    /**
+     * Returns the tag byte of this constant as an int.
+     *
+     * @return the tag.
+     */
     public int getType() {
         return type;
     }
 
-   /* @Override
-    public String toString() {
-        return "[I=" + index + ", T=" + type.name() + ", V='" + getStringValue() + "']";
-    }  */
-
-    @Deprecated
-    public String getStringValue() {
-        return toString();
+    /**
+     * Sets the tag of this constant.
+     *
+     * @param type the new tag.
+     */
+    public void setType(int type) {
+        this.type = type;
     }
 
-
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public String toString() {
+        return "[I=" + index + ", T=" + Integer.toHexString(type) + ", V='" + getStringValue() + "']";
+    }
+
+    /**
+     * Pretty-prints this constant's value, redirecting wrappers to raw values.
+     *
+     * @return the true value of this constant.
+     */
+    public String getStringValue() {
         try {
             switch (type) {
                 case TAG_UTF_STRING:

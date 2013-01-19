@@ -1,7 +1,6 @@
 package com.github.Icyene.bytecode.introspection.util;
 
 import java.io.*;
-import java.nio.ByteBuffer;
 import java.util.Arrays;
 
 public class Bytes {  //TODO MAKE NOT USE NIO!!!!
@@ -18,7 +17,7 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
     }
 
     public static short toShort(byte[] bytes, int start) {
-        return (short) ((bytes[start] << 8) + bytes[(start + 1)]);
+        return (short) (((bytes[start] & 0xFF) << 8) + (bytes[(start + 1)] & 0xFF));
     }
 
     public static int toInteger(byte[] bytes, int start) {
@@ -36,25 +35,34 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
                 ((bytes[start + 4] & 0xFFL) << 24) |
                 ((bytes[start + 5] & 0xFFL) << 16) |
                 ((bytes[start + 6] & 0xFFL) << 8) |
-                ((bytes[start + 7] & 0xFFL));
+                ((bytes[start + 7] & 0xFFL) << 0);
     }
 
     public static double toDouble(byte[] bytes, int start) {
-        return ByteBuffer.wrap(Arrays.copyOfRange(bytes, start, start + 8)).getDouble();
+        return Double.longBitsToDouble(toLong(bytes, start));
+    }
+
+    public static byte[] toByteArray(double d) {
+        long l = Double.doubleToRawLongBits(d);
+        return new byte[]{
+                (byte) ((l >> 56) & 0xFF),
+                (byte) ((l >> 48) & 0xFF),
+                (byte) ((l >> 40) & 0xFF),
+                (byte) ((l >> 32) & 0xFF),
+                (byte) ((l >> 24) & 0xFF),
+                (byte) ((l >> 16) & 0xFF),
+                (byte) ((l >> 8) & 0xFF),
+                (byte) ((l >> 0) & 0xFF),
+        };
     }
 
     public static byte[] toByteArray(short in) {
         return new byte[]{(byte) (in >> 8), (byte) in};
     }
 
+
     public static byte[] toByteArray(int in) {
         return new byte[]{(byte) (in >> 24), (byte) (in >>> 16), (byte) (in >>> 8), (byte) in};
-    }
-
-    private static byte[] toByteArray(double value) {
-        byte[] bytes = new byte[8];
-        ByteBuffer.wrap(bytes).putDouble(value);
-        return bytes;
     }
 
     public static byte[] slice(byte[] bytes, int start, int end) {

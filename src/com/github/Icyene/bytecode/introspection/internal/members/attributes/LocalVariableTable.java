@@ -2,9 +2,9 @@ package com.github.Icyene.bytecode.introspection.internal.members.attributes;
 
 import com.github.Icyene.bytecode.introspection.internal.members.Attribute;
 import com.github.Icyene.bytecode.introspection.internal.members.Constant;
-import com.github.Icyene.bytecode.introspection.internal.members.constants.Descriptor;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
+import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -16,7 +16,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
     private final LinkedList<Entry> variables = new LinkedList<Entry>();
 
     public LocalVariableTable(ByteStream stream, Constant name, ConstantPool pool) {
-        super(stream, name, pool);
+        super(name, stream.readInt());
         short size = stream.readShort();
         for (int i = 0; i != size; i++) {
             variables.add(new Entry(stream, pool));
@@ -33,7 +33,9 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
             out.write((short) e.descriptor.getIndex());
             out.write((short) e.index);
         }
-        return out.toByteArray();
+        byte[] bytes = out.toByteArray();
+        length = bytes.length;
+        return Bytes.prepend(bytes, super.getBytes());
     }
 
     @Override
@@ -47,7 +49,6 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         private Constant name;
         private Constant descriptor;
         private int index;
-        private final ConstantPool owner;
 
         public Entry(ByteStream stream, ConstantPool owning) {
             startPC = stream.readShort();
@@ -55,7 +56,6 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
             name = owning.get(stream.readShort());
             descriptor = owning.get(stream.readShort());
             index = stream.readShort();
-            owner = owning;
         }
 
         public int getStartPC() {
@@ -79,8 +79,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         }
 
         public void setName(String newName) {
-            int original = name.getIndex();
-            owner.set(original, (name = new Constant(original, TAG_UTF_STRING, newName.getBytes(), owner)));
+            name.getOwner().set(name.getIndex(), (name = new Constant(TAG_UTF_STRING, newName.getBytes())));
         }
 
         public Constant getDescriptor() {
@@ -92,8 +91,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         }
 
         public void setDescriptor(String newDescriptor) {
-            int original = descriptor.getIndex();
-            owner.set(original, (name = new Constant(original, TAG_UTF_STRING, newDescriptor.getBytes(), owner)));
+            descriptor.getOwner().set(descriptor.getIndex(), (name = new Constant(TAG_UTF_STRING, newDescriptor.getBytes())));
         }
 
         public int getIndex() {

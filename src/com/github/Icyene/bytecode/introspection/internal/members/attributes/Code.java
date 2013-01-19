@@ -1,11 +1,10 @@
 package com.github.Icyene.bytecode.introspection.internal.members.attributes;
 
+import com.github.Icyene.bytecode.introspection.internal.code.ExceptionPool;
 import com.github.Icyene.bytecode.introspection.internal.members.Attribute;
 import com.github.Icyene.bytecode.introspection.internal.members.Constant;
 import com.github.Icyene.bytecode.introspection.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
-import com.github.Icyene.bytecode.introspection.internal.pools.ExceptionPool;
-import com.github.Icyene.bytecode.introspection.internal.pools.InstructionPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
@@ -18,7 +17,7 @@ public class Code extends Attribute {
     private AttributePool attributePool;
 
     public Code(ByteStream stream, Constant name, ConstantPool pool) {
-        super(stream, name, pool);
+        super(name, stream.readInt());
         maxStack = stream.readShort();
         maxLocals = stream.readShort();
         codePool = stream.read(stream.readInt());
@@ -32,9 +31,8 @@ public class Code extends Attribute {
 
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        //out.write(super.getBytes());
-        out.write((short)maxStack);
-        out.write((short)maxLocals);
+        out.write((short) maxStack);
+        out.write((short) maxLocals);
         out.write(Bytes.toByteArray(codePool.length));
         out.write(codePool);
         out.write(exceptionPool.getBytes());

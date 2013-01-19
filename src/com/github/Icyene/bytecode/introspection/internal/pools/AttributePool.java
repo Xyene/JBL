@@ -8,7 +8,6 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -16,6 +15,12 @@ public class AttributePool extends ArrayList<Attribute> {
 
     private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "SourceFile");
 
+    /**
+     * Constructs an attribute pool.
+     *
+     * @param stream The stream of bytes containing the pool data.
+     * @param pool   An associated constant pool.
+     */
     public AttributePool(ByteStream stream, ConstantPool pool) {
         short size = stream.readShort();
         for (int i = 0; i != size; i++) {
@@ -37,6 +42,19 @@ public class AttributePool extends ArrayList<Attribute> {
         }
     }
 
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
+    public AttributePool() {
+    }
+
+    ;
+
+    /**
+     * Gets a byte[] representation of this object.
+     *
+     * @return a byte[] representation of this object.
+     */
     public byte[] getBytes() {
         byte[] ret = Bytes.toByteArray((short) size());
         for (Attribute a : this)
@@ -44,36 +62,40 @@ public class AttributePool extends ArrayList<Attribute> {
         return ret;
     }
 
-    public LinkedList<Attribute> getInstancesOf(Class type) {
-        LinkedList<Attribute> out = new LinkedList<Attribute>();
-        for (Attribute a : this)
-            if (a.getClass().equals(type))
-                out.add(a);
-        return out;
-    }
-
-
-    public LinkedList<Attribute> getInstancesOf(String type) {
+    /**
+     * Gets all the attributes which match the passed String. Supports regex. For example, if one wanted to get all annotations, they would do .*Runtime.*Annotations.*
+     *
+     * @param type The regex to match attribute names.
+     * @return a list containing the latter attributes
+     */
+    public List<Attribute> getInstancesOf(String type) {
         Pattern t = Pattern.compile(type, Pattern.DOTALL);
-        LinkedList<Attribute> out = new LinkedList<Attribute>();
+        List<Attribute> out = new ArrayList<Attribute>();
         for (Attribute a : this)
-            if (t.matcher(a.getName().getStringValue()).matches())
+            if (t.matcher(a.getName()).matches())
                 out.add(a);
         return out;
     }
 
-    public void removeInstancesOf(Class type) {
-        removeAll(getInstancesOf(type));
-    }
-
+    /**
+     * Removes all the attributes which match the passed String. Supports regex. For example, if one wanted to remove all annotations, they would do .*Runtime.*Annotations.*
+     *
+     * @param type The regex to match attribute names.
+     */
     public void removeInstancesOf(String type) {
         removeAll(getInstancesOf(type));
     }
 
-    public boolean hasAttribute(String attr) {
-        Pattern m = Pattern.compile(attr, Pattern.DOTALL);
+    /**
+     * Checks if this pool contains a certain attribute name. Supports regex.
+     *
+     * @param type The regex to match attribute names.
+     * @return True if attribute is found, false otherwise.
+     */
+    public boolean contains(String type) {
+        Pattern m = Pattern.compile(type, Pattern.DOTALL);
         for (Attribute a : this)
-            if (m.matcher(a.getName().getStringValue()).matches())
+            if (m.matcher(a.getName()).matches())
                 return true;
         return false;
     }

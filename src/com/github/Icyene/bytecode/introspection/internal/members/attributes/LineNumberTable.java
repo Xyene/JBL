@@ -14,18 +14,18 @@ public class LineNumberTable extends Attribute implements Iterable<LineNumberTab
     private final LinkedList<Entry> lines = new LinkedList<Entry>();
 
     public LineNumberTable(ByteStream stream, Constant name, ConstantPool pool) {
-        super(stream, name, pool);
+        super(name, stream.readInt());
         short size = stream.readShort();
-        for(int i = 0; i != size; i++) {
+        for (int i = 0; i != size; i++) {
             lines.add(new Entry(stream.readShort(), stream.readShort()));
         }
     }
 
     public byte[] getBytes() {
         ByteStream out = new ByteStream(super.getBytes());
-        out.write((short)lines.size());
-        for(Entry e: lines) {
-            out.write(Bytes.concat(Bytes.toByteArray((short)e.startPC), Bytes.toByteArray((short)e.lineNumber)));
+        out.write((short) lines.size());
+        for (Entry e : lines) {
+            out.write(Bytes.concat(Bytes.toByteArray((short) e.startPC), Bytes.toByteArray((short) e.lineNumber)));
         }
         return out.toByteArray();
     }
@@ -40,9 +40,9 @@ public class LineNumberTable extends Attribute implements Iterable<LineNumberTab
         private int lineNumber;
 
         public Entry(int start, int line) {
-             startPC = start;
-             lineNumber = line;
-         }
+            startPC = start;
+            lineNumber = line;
+        }
 
         public int getStartPC() {
             return startPC;
