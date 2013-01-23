@@ -183,7 +183,7 @@
     <file path="$USER_HOME$/Desktop/Surge/src/main/java/net/minecraft/server/MinecraftServer.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358635690484" ignored="false" />
     <file path="/Hello World.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358719013671" ignored="false" />
     <file path="/Jump.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358896717044" ignored="false" />
-    <file path="/Branch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978600968" ignored="false" />
+    <file path="/Branch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358979101734" ignored="false" />
     <file path="/LookupSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358972487796" ignored="false" />
     <file path="/Instruction.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358908774402" ignored="false" />
     <file path="/TableSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978335156" ignored="false" />
@@ -260,10 +260,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodeGenerator.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="CodeGenerator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="65" selection-start="1999" selection-end="1999" vertical-scroll-proportion="0.92132866">
+            <state line="39" column="42" selection-start="1569" selection-end="1569" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="e#5306#5618#0" expanded="true" />
                 <element signature="e#5607#5608#0" expanded="true" />
@@ -281,11 +281,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Branch.java" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="Branch.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="67" selection-start="614" selection-end="614" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="28" column="68" selection-start="775" selection-end="775" vertical-scroll-proportion="0.80244756">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -380,10 +382,10 @@
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Instruction.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Switch.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java" />
       </list>
     </option>
   </component>
@@ -1013,13 +1015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="67" selection-start="614" selection-end="614" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="10" column="51" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
@@ -1045,10 +1040,19 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="65" selection-start="1999" selection-end="1999" vertical-scroll-proportion="0.92132866">
+        <state line="39" column="42" selection-start="1569" selection-end="1569" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="e#5306#5618#0" expanded="true" />
             <element signature="e#5607#5608#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="28" column="68" selection-start="775" selection-end="775" vertical-scroll-proportion="0.80244756">
+          <folding>
+            <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>

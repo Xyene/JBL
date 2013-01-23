@@ -1,6 +1,7 @@
 package com.github.Icyene.bytecode.generation;
 
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
+import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 public class Branch extends Instruction {
     int jump;
@@ -13,7 +14,7 @@ public class Branch extends Instruction {
     }
 
     public byte[] getArguments() {
-        return new ByteStream().write(wide ? jump : (short) jump).toByteArray();
+        return wide ? Bytes.toByteArray(jump) : Bytes.toByteArray((short) jump);
     }
 
     public int getTarget() {
