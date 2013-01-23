@@ -74,19 +74,19 @@
     <file path="/ClassMetadata.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356114355468" ignored="false" />
     <file path="/DClassMeta.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356052105234" ignored="false" />
     <file path="$PROJECT_DIR$/src/disassembler/decompiling/DClassMeta.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356052198453" ignored="false" />
-    <file path="/Obfuscator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358908836559" ignored="false" />
+    <file path="/Obfuscator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358984537421" ignored="false" />
     <file path="/MemberPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358622182093" ignored="false" />
     <file path="/AccessibleMember.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358621920203" ignored="false" />
     <file path="/ConstantValueAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357058731484" ignored="false" />
     <file path="/Obfuscation.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357167968406" ignored="false" />
     <file path="/ByteStream.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978771203" ignored="false" />
     <file path="/SourceFileAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357138225093" ignored="false" />
-    <file path="/LineNumberTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623675468" ignored="false" />
+    <file path="/LineNumberTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358984413031" ignored="false" />
     <file path="/LocalVariableTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623695546" ignored="false" />
     <file path="/SourceFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623557328" ignored="false" />
     <file path="/Exception.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357145780015" ignored="false" />
     <file path="/Code.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623484703" ignored="false" />
-    <file path="/CodeGenerator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978752375" ignored="false" />
+    <file path="/CodeGenerator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358984882171" ignored="false" />
     <file path="/Dummy.txt" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358888513625" ignored="false" />
     <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/ReflectCommand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
     <file path="/ReflectCommand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357158882671" ignored="false" />
@@ -187,7 +187,7 @@
     <file path="/LookupSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358972487796" ignored="false" />
     <file path="/Instruction.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358908774402" ignored="false" />
     <file path="/TableSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978335156" ignored="false" />
-    <file path="/Switch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358971830062" ignored="false" />
+    <file path="/Switch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358979623046" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -251,43 +251,34 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="Obfuscator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="77" column="67" selection-start="3451" selection-end="3451" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="CodeGenerator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="39" column="42" selection-start="1569" selection-end="1569" vertical-scroll-proportion="0.0">
+            <state line="158" column="22" selection-start="6157" selection-end="6157" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#5306#5618#0" expanded="true" />
-                <element signature="e#5607#5608#0" expanded="true" />
+                <element signature="e#6797#7110#0" expanded="true" />
+                <element signature="e#7099#7100#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Opcode.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/Opcode.java">
+      <file leaf-file-name="TableSwitch.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="219" column="16" selection-start="4739" selection-end="4743" vertical-scroll-proportion="-7.28">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Branch.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="28" column="68" selection-start="775" selection-end="775" vertical-scroll-proportion="0.80244756">
+            <state line="24" column="65" selection-start="775" selection-end="775" vertical-scroll-proportion="0.59891105">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LineNumberTable.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LineNumberTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="50" column="63" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.0">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -295,56 +286,65 @@
       <file leaf-file-name="ByteStream.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="17" column="43" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0">
+            <state line="33" column="62" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="LookupSwitch.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/LookupSwitch.java">
+      <file leaf-file-name="AccessibleMember.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/AccessibleMember.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="16" column="46" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
+            <state line="9" column="13" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="AttributePool.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/AttributePool.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="124" selection-start="766" selection-end="766" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LocalVariableTable.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="51" column="53" selection-start="1950" selection-end="1950" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Obfuscator.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="33" column="27" selection-start="1555" selection-end="1555" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
+                <element signature="e#2104#2129#0" expanded="true" />
+                <element signature="e#6412#6420#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TableSwitch.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java">
+      <file leaf-file-name="ConstantValue.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/ConstantValue.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="51" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Switch.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Switch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="32" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0">
+            <state line="37" column="23" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Instruction.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Instruction.java">
+      <file leaf-file-name="Groups.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Groups.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="53" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Bytes.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="90" column="31" selection-start="3045" selection-end="3045" vertical-scroll-proportion="0.0">
+            <state line="23" column="26" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -370,22 +370,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/Member.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/ClassFile.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/SourceFile.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/ConstantValue.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Jump.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/Opcode.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/LookupSwitch.java" />
-        <option value="$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Instruction.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Switch.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/LookupSwitch.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/AttributePool.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java" />
+        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LineNumberTable.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java" />
+        <option value="$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java" />
         <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java" />
       </list>
     </option>
   </component>
@@ -576,7 +576,89 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="pools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="metadata" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="members" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageViewModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com.github.Icyene.bytecode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="internal" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="members" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="attributes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -936,58 +1018,9 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LineNumberTable.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="16" selection-start="1159" selection-end="1159" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/ConstantValue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="110" selection-start="1867" selection-end="1867" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="13" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/Code.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="45" column="61" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/readers/SignatureReader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="10673584" selection-start="1686" selection-end="1686" vertical-scroll-proportion="0.84696263">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Groups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="47" selection-start="476" selection-end="476" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/metadata/Opcode.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="219" column="16" selection-start="4739" selection-end="4743" vertical-scroll-proportion="-7.28">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="77" column="67" selection-start="3451" selection-end="3451" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -999,25 +1032,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Instruction.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="53" selection-start="811" selection-end="811" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/LookupSwitch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="16" column="46" selection-start="540" selection-end="540" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="51" selection-start="353" selection-end="353" vertical-scroll-proportion="0.0">
+        <state line="14" column="95" selection-start="420" selection-end="420" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
@@ -1026,31 +1043,100 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Switch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="32" selection-start="444" selection-end="444" vertical-scroll-proportion="0.0">
+        <state line="3" column="38" selection-start="113" selection-end="113" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/LookupSwitch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="10" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Instruction.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="74" selection-start="847" selection-end="847" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Groups.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="23" column="26" selection-start="530" selection-end="530" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/ConstantValue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="23" selection-start="1316" selection-end="1316" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="51" column="53" selection-start="1950" selection-end="1950" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/pools/AttributePool.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="124" selection-start="766" selection-end="766" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LineNumberTable.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="63" selection-start="1743" selection-end="1743" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="43" selection-start="383" selection-end="383" vertical-scroll-proportion="0.0">
+        <state line="33" column="62" selection-start="741" selection-end="741" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/AccessibleMember.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="268" selection-end="268" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="33" column="27" selection-start="1555" selection-end="1555" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2104#2129#0" expanded="true" />
+            <element signature="e#6412#6420#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="42" selection-start="1569" selection-end="1569" vertical-scroll-proportion="0.0">
+        <state line="158" column="22" selection-start="6157" selection-end="6157" vertical-scroll-proportion="0.0">
           <folding>
-            <element signature="e#5306#5618#0" expanded="true" />
-            <element signature="e#5607#5608#0" expanded="true" />
+            <element signature="e#6797#7110#0" expanded="true" />
+            <element signature="e#7099#7100#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java">
+    <entry file="file://$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/TableSwitch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="68" selection-start="775" selection-end="775" vertical-scroll-proportion="0.80244756">
+        <state line="24" column="65" selection-start="775" selection-end="775" vertical-scroll-proportion="0.59891105">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

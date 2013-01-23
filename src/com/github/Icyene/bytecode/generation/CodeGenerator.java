@@ -4,7 +4,10 @@ import com.github.Icyene.bytecode.introspection.internal.Member;
 import com.github.Icyene.bytecode.introspection.internal.code.ExceptionPool;
 import com.github.Icyene.bytecode.introspection.internal.members.TryCatch;
 import com.github.Icyene.bytecode.introspection.internal.members.attributes.Code;
+import com.github.Icyene.bytecode.introspection.internal.members.attributes.LineNumberTable;
+import com.github.Icyene.bytecode.introspection.internal.members.attributes.LocalVariableTable;
 import com.github.Icyene.bytecode.introspection.internal.metadata.readers.SignatureReader;
+import com.github.Icyene.bytecode.introspection.internal.pools.AttributePool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
@@ -36,13 +39,7 @@ public class CodeGenerator {
         for (int i = index; i != bytes.length; i++) {
             int opcode = in.readByte() & 0xFF;
 
-            if (JUMPS.contains(opcode)) {
-                instructions.add(new Branch(opcode, false, i, Bytes.toShort(in.read(2), 0)));
-                i += 2;
-            } else if (JUMPS_W.contains(opcode)) {
-                instructions.add(new Branch(opcode, true, i, Bytes.toInteger(in.read(4), 0)));
-                i += 4;
-            } else switch (opcode) {
+            switch (opcode) {
                 case WIDE:
                     wide = true;
                     continue;
@@ -93,7 +90,14 @@ public class CodeGenerator {
                     i += table.trueLen;
                     continue;
                 default:
-                    instructions.add(new Instruction(opcode, i, new byte[]{}));
+                    if (JUMPS.contains(opcode)) {
+                        instructions.add(new Branch(opcode, false, i, Bytes.toShort(in.read(2), 0)));
+                        i += 2;
+                    } else if (JUMPS_W.contains(opcode)) {
+                        instructions.add(new Branch(opcode, true, i, Bytes.toInteger(in.read(4), 0)));
+                        i += 4;
+                    } else
+                        instructions.add(new Instruction(opcode, i, new byte[]{}));
             }
         }
     }
@@ -107,7 +111,7 @@ public class CodeGenerator {
         return out.toByteArray();
     }
 
-    public CodeGenerator inject(int pc, byte... bytes) {
+    public CodeGenerator inject(int pc, byte... bytes) {  //TODO: Should also recalibrate LineNumberTable/LocalVariableTable
         for (Instruction i : instructions) {
             if (i.address >= pc) {
                 i.address += bytes.length;
@@ -131,8 +135,7 @@ public class CodeGenerator {
         for (TryCatch e : exceptionPool) {
             if (e.getEndPC() >= pc) {
                 e.setEndPC(e.getEndPC() + bytes.length);
-            }
-            if (e.getStartPC() >= pc) {
+            } else if (e.getStartPC() >= pc) {
                 e.setStartPC(e.getStartPC() + bytes.length);
             }
             if (e.getHandlerPC() >= pc) {
@@ -140,15 +143,43 @@ public class CodeGenerator {
             }
         }
 
-        instructions.addAll(new CodeGenerator(bytes, pc).instructions);
-     //   raw = Bytes.concat(Bytes.concat(Bytes.slice(raw, 0, pc), bytes), Bytes.slice(raw, pc, raw.length));
+        if(method != null) {
+            AttributePool attrs = method.getAttributePool();
+            if(attrs.contains("LineNumberTable")) {
+                LineNumberTable table = (LineNumberTable)attrs.getInstancesOf("LineNumberTable").get(0);
+                for(LineNumberTable.Entry en: table) {
+                    if (en.getStartPC() >= pc) {
+                        en.setStartPC(en.getStartPC() + bytes.length);
+                    }
+                }
+            }
+            if(attrs.contains("LocalVariableTable")) {
+                LocalVariableTable table = (LocalVariableTable)attrs.getInstancesOf("LocalVariableTable").get(0);
+                for(LocalVariableTable.Entry en: table) {
+                    if (en.getStartPC() >= pc) {
+                        en.setStartPC(en.getStartPC() + bytes.length);
+                    }
+                }
+            }
+        }
+
+        return inject(pc, new CodeGenerator(bytes, pc).instructions);
+    }
+
+    public CodeGenerator inject(int pc, Collection<Instruction> instr) {  //TODO: Has to recalibrate
+        instructions.addAll(instructions);
+        return this;
+    }
+
+    public CodeGenerator inject(int pc, Instruction... instrs) {  //TODO: Has to recalibrate
+        instructions.addAll(instructions);
         return this;
     }
 
     public void sort() {
         Collections.sort(instructions, new Comparator<Instruction>() {
             public int compare(Instruction f, Instruction s) {
-                if(f.address == s.address)
+                if (f.address == s.address)
                     throw new RuntimeException("Invalid same address for instructions " + f + ", " + s);
                 return f.address - s.address;
             }

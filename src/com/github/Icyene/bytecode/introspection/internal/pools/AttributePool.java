@@ -16,7 +16,7 @@ import java.util.regex.Pattern;
  */
 public class AttributePool extends ArrayList<Attribute> {
 
-    private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "SourceFile");
+    private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "LocalVariableTable", "SourceFile");
 
     /**
      * Constructs an attribute pool.

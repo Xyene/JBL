@@ -25,44 +25,45 @@ public class Obfuscator {
 
     public static void main(String[] args) {
         File clazz = new File(args.length > 1 ? args[0] : System.getenv("USERPROFILE") + "/Desktop/PhantomTest.class");
-        try {
-            long start;
-            start = System.currentTimeMillis();
+        for (int i = 0; i != 10; i++)
+            try {
+                long start;
+                start = System.currentTimeMillis();
 
-            ClassFile cc = new ClassFile(clazz);
-            //  System.out.println(cc.getConstantPool());
-            // System.out.println(Bytes.bytesToString(Bytes.read(clazz)));
+                ClassFile cc = new ClassFile(clazz);
+                System.out.println(cc.getConstantPool());
+                System.out.println(Bytes.bytesToString(Bytes.read(clazz)));
 
-            MemberPool mp = cc.getMethodPool();
-            ConstantPool cpool = cc.getConstantPool();
+                MemberPool mp = cc.getMethodPool();
+                ConstantPool cpool = cc.getConstantPool();
 
-            //Class obfuscation
-            {
-                AttributePool apool = cc.getAttributePool();
-                apool.removeInstancesOf("SourceFile");
-            }
+                //Class obfuscation
+                {
+                    AttributePool apool = cc.getAttributePool();
+                    apool.removeInstancesOf("SourceFile");
+                }
 
 
-            //Method obfuscation
-            {
-                HashMap<String, HashSet<String>> overloads = new HashMap<String, HashSet<String>>();
+                //Method obfuscation
+                {
+                    HashMap<String, HashSet<String>> overloads = new HashMap<String, HashSet<String>>();
 
-                _outer:
-                for (Member c : mp) {
+                    _outer:
+                    for (Member c : mp) {
 
-                    String name = c.getName();
+                        String name = c.getName();
 
-                    System.out.println("Handling method " + name);
+                        System.out.println("Handling method " + name);
 
-                    AttributePool attributes = c.getAttributePool();
-                    attributes.removeInstancesOf("LocalVariableTable");
-                    attributes.removeInstancesOf("Deprecated");
-                    attributes.removeInstancesOf("Exceptions");
+                        AttributePool attributes = c.getAttributePool();
+                        // attributes.removeInstancesOf("LocalVariableTable");
+                        //  attributes.removeInstancesOf("Deprecated");
+                        //  attributes.removeInstancesOf("Exceptions");
 
-                    Code code = (Code) attributes.getInstancesOf("Code").get(0);
-                    ExceptionPool epool = code.getExceptionPool();
+                        Code code = (Code) attributes.getInstancesOf("Code").get(0);
+                        ExceptionPool epool = code.getExceptionPool();
 
-                    CodeGenerator gen = new CodeGenerator(code, c);
+                        CodeGenerator gen = new CodeGenerator(code, c);
 
                   /*  //Indirect ifs.
                     {
@@ -105,56 +106,56 @@ public class Obfuscator {
                         epool.add(new TryCatch(0, gen.raw.length - 4, gen.raw.length - 1));
                     }          */
 
-                    code.setMaxStack(gen.computeStackSize());
-                    code.setCodePool(gen.synthesize());
+                        code.setMaxStack(gen.computeStackSize());
+                        code.setCodePool(gen.synthesize());
 
-                    if (name.equals("<init>") || name.equals("<clinit>") || name.equals("main"))
-                        continue;
+                        if (name.equals("<init>") || name.equals("<clinit>") || name.equals("main"))
+                            continue;
 
-                    final String descriptor = new SignatureReader(c).getRawAugmentingTypes();
+                        final String descriptor = new SignatureReader(c).getRawAugmentingTypes();
 
-                    for (Map.Entry<String, HashSet<String>> en : overloads.entrySet()) {
-                        if (!en.getValue().contains(descriptor)) {
-                            String key = en.getKey();
-                            c.setName(key);
-                            overloads.get(key).add(descriptor);
-                            continue _outer;
+                        for (Map.Entry<String, HashSet<String>> en : overloads.entrySet()) {
+                            if (!en.getValue().contains(descriptor)) {
+                                String key = en.getKey();
+                                c.setName(key);
+                                overloads.get(key).add(descriptor);
+                                continue _outer;
+                            }
                         }
-                    }
 
-                    String obfuscatedName = "";
-                    while (true) {
-                        obfuscatedName = Obfuscation.randomString(new Random().nextInt(1) + 1);
-                        if (!overloads.containsKey(obfuscatedName))
-                            break;
+                        String obfuscatedName = "";
+                        while (true) {
+                            obfuscatedName = Obfuscation.randomString(new Random().nextInt(1) + 1);
+                            if (!overloads.containsKey(obfuscatedName))
+                                break;
+                        }
+                        c.setName(obfuscatedName);
+                        overloads.put(obfuscatedName, new HashSet<String>() {{
+                            add(descriptor);
+                        }});
                     }
-                    c.setName(obfuscatedName);
-                    overloads.put(obfuscatedName, new HashSet<String>() {{
-                        add(descriptor);
-                    }});
                 }
-            }
 
-            {
-                Set<String> overloads = new HashSet<String>();
-                MemberPool fieldPool = cc.getFieldPool();
-                for (Member f : fieldPool) {
-                    String obfuscatedName = "";
-                    while (true) {
-                        obfuscatedName = Obfuscation.randomString(new Random().nextInt(1) + 1);
-                        if (!overloads.contains(obfuscatedName))
-                            break;
+                {
+                    Set<String> overloads = new HashSet<String>();
+                    MemberPool fieldPool = cc.getFieldPool();
+                    for (Member f : fieldPool) {
+                        String obfuscatedName = "";
+                        while (true) {
+                            obfuscatedName = Obfuscation.randomString(new Random().nextInt(1) + 1);
+                            if (!overloads.contains(obfuscatedName))
+                                break;
+                        }
+                        f.setName(obfuscatedName);
+                        overloads.add(obfuscatedName);
                     }
-                    f.setName(obfuscatedName);
-                    overloads.add(obfuscatedName);
                 }
-            }
 
-            //   System.out.println(Bytes.bytesToString(cc.getBytes()));
-            System.out.println(System.currentTimeMillis() - start + "ms");
-            Bytes.writeBytesToFile(cc.getBytes(), clazz.getAbsolutePath() + "");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+                //   System.out.println(Bytes.bytesToString(cc.getBytes()));
+                System.out.println(System.currentTimeMillis() - start + "ms");
+                Bytes.writeBytesToFile(cc.getBytes(), clazz.getAbsolutePath() + "");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
     }
 }

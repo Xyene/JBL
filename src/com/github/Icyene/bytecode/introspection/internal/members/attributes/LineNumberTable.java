@@ -40,12 +40,14 @@ public class LineNumberTable extends Attribute implements Iterable<LineNumberTab
      * {@inheritDoc}
      */
     public byte[] getBytes() {
-        ByteStream out = new ByteStream(super.getBytes());
+        ByteStream out = new ByteStream();
         out.write((short) lines.size());
         for (Entry e : lines) {
-            out.write(Bytes.concat(Bytes.toByteArray((short) e.startPC), Bytes.toByteArray((short) e.lineNumber)));
+            out.write(Bytes.toByteArray((short) e.startPC)).write(Bytes.toByteArray((short) e.lineNumber));
         }
-        return out.toByteArray();
+        byte[] bytes = out.toByteArray();
+        length = bytes.length;
+        return Bytes.prepend(bytes, super.getBytes());
     }
 
     /**

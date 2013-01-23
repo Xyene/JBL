@@ -38,7 +38,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
      * {@inheritDoc}
      */
     public byte[] getBytes() {
-        ByteStream out = new ByteStream(super.getBytes());
+        ByteStream out = new ByteStream();
         out.write((short) variables.size());
         for (Entry e : variables) {
             out.write((short) e.startPC);

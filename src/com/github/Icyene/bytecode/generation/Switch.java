@@ -4,7 +4,7 @@ import com.github.Icyene.bytecode.introspection.util.ByteStream;
 
 public abstract class Switch extends Instruction {
     final int padding;
-    int defaultJump, trueLen;
+    int defaultJump, trueLen, length;
     int[] match, indices;
 
     public Switch(int address, ByteStream stream) {

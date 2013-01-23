@@ -9,11 +9,12 @@ public class LookupSwitch extends Switch {
     public LookupSwitch(int addr, ByteStream stream) {
         super(addr, stream);
         opcode = LOOKUPSWITCH;
-        address = addr;
 
-        int length = stream.readInt();
-        trueLen = (short) ((short) (9 + length << 3) + padding);
-        match = indices = new int[length];
+        length = stream.readInt();
+        trueLen = (short) ((short) (12 + (length << 3)) + padding);
+
+        match = new int[length];
+        indices = new int[length];
 
         for (int i = 0; i < length; i++) {
             match[i] = stream.readInt();

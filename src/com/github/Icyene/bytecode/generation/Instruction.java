@@ -41,7 +41,11 @@ public class Instruction {
         return address;
     }
 
+    public boolean isWide() {
+        return wide;
+    }
+
     public String toString() {
-        return String.format("[Op @ %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
+        return String.format("[Opcode @ %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
     }
 }
