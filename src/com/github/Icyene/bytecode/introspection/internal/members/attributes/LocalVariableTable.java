@@ -15,6 +15,12 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
 
     private final LinkedList<Entry> variables = new LinkedList<Entry>();
 
+    /**
+     * Constructs a LocalVariableTable attribute.
+     * @param stream stream containing encoded data.
+     * @param name the name, "LocalVariableTable".
+     * @param pool the associated constant pool.
+     */
     public LocalVariableTable(ByteStream stream, Constant name, ConstantPool pool) {
         super(name, stream.readInt());
         short size = stream.readShort();
@@ -23,6 +29,14 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         }
     }
 
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
+    public LocalVariableTable() {}
+
+    /**
+     * {@inheritDoc}
+     */
     public byte[] getBytes() {
         ByteStream out = new ByteStream(super.getBytes());
         out.write((short) variables.size());
@@ -38,11 +52,17 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         return Bytes.prepend(bytes, super.getBytes());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator<Entry> iterator() {
         return variables.iterator();
     }
 
+    /**
+     * An entry into a LocalVariableTable.
+     */
     public class Entry {
         private int startPC;
         private int length;
@@ -79,7 +99,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         }
 
         public void setName(String newName) {
-            name.getOwner().set(name.getIndex(), (name = new Constant(TAG_UTF_STRING, newName.getBytes())));
+            name.getOwner().set(name.getIndex(), (name = new Constant(name.getIndex(), TAG_UTF_STRING, newName.getBytes())));
         }
 
         public Constant getDescriptor() {
@@ -91,7 +111,7 @@ public class LocalVariableTable extends Attribute implements Iterable<LocalVaria
         }
 
         public void setDescriptor(String newDescriptor) {
-            descriptor.getOwner().set(descriptor.getIndex(), (name = new Constant(TAG_UTF_STRING, newDescriptor.getBytes())));
+            descriptor.getOwner().set(descriptor.getIndex(), (descriptor = new Constant(descriptor.getIndex(),TAG_UTF_STRING, newDescriptor.getBytes())));
         }
 
         public int getIndex() {

@@ -8,6 +8,9 @@ import java.util.LinkedList;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
+/**
+ * A pool to hold all Constant structures.
+ */
 public class ConstantPool extends LinkedList<Constant> {
 
     /**

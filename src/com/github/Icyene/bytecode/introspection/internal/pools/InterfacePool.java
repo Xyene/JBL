@@ -6,6 +6,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.LinkedList;
 
+/**
+ * A pool to hold all Interface structures.
+ */
 public class InterfacePool extends LinkedList<Interface> {
 
     /**
@@ -24,9 +27,7 @@ public class InterfacePool extends LinkedList<Interface> {
      * Public no-args constructor for extending classes. Should not be used directly.
      */
     public InterfacePool() {
-    }
-
-    ;
+    };
 
     /**
      * Gets a byte[] representation of this object.

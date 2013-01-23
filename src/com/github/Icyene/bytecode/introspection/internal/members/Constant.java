@@ -5,6 +5,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
+/**
+ * A constant, found in constant pools and referenced by practically everything.
+ */
 public class Constant {
     private int index;
     private int type;

@@ -4,6 +4,9 @@ import com.github.Icyene.bytecode.introspection.internal.Member;
 
 import java.util.LinkedList;
 
+/**
+ * Reads field & method signatures, and provides information on them.
+ */
 public class SignatureReader {
 
     protected final String returnType;

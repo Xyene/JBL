@@ -3,7 +3,10 @@ package com.github.Icyene.bytecode.introspection.util;
 import java.io.*;
 import java.util.Arrays;
 
-public class Bytes {  //TODO MAKE NOT USE NIO!!!!
+/**
+ * Utility class for operations on byte( array)s.
+ */
+public class Bytes {
 
     public static byte[] prepend(byte[] A, byte... B) {
         return concat(B, A);
@@ -60,7 +63,6 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
         return new byte[]{(byte) (in >> 8), (byte) in};
     }
 
-
     public static byte[] toByteArray(int in) {
         return new byte[]{(byte) (in >> 24), (byte) (in >>> 16), (byte) (in >>> 8), (byte) in};
     }
@@ -84,8 +86,9 @@ public class Bytes {  //TODO MAKE NOT USE NIO!!!!
 
     public static String bytesToString(byte... bytes) {
         StringBuilder build = new StringBuilder();
-        for (byte bi : bytes)
-            build.append(bi).append(", ");
+       for(int i = 0; i != bytes.length; i++) {
+            build.append(bytes[i]).append(i < bytes.length-1 ? ", " : "");
+       }
         return "[" + build.toString() + "]";
     }
 

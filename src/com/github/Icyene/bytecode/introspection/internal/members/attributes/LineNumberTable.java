@@ -9,11 +9,19 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+/**
+ * Line number metadata table, used for stacktraces and debugging.
+ */
 public class LineNumberTable extends Attribute implements Iterable<LineNumberTable.Entry> {
 
     private final LinkedList<Entry> lines = new LinkedList<Entry>();
 
-    public LineNumberTable(ByteStream stream, Constant name, ConstantPool pool) {
+    /**
+     * Constructs a LineNumberTable attribute.
+     * @param stream stream containing encoded data.
+     * @param name the name, "LineNumberTable"
+     */
+    public LineNumberTable(ByteStream stream, Constant name) {
         super(name, stream.readInt());
         short size = stream.readShort();
         for (int i = 0; i != size; i++) {
@@ -21,6 +29,16 @@ public class LineNumberTable extends Attribute implements Iterable<LineNumberTab
         }
     }
 
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
+    public LineNumberTable() {
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
     public byte[] getBytes() {
         ByteStream out = new ByteStream(super.getBytes());
         out.write((short) lines.size());
@@ -30,11 +48,17 @@ public class LineNumberTable extends Attribute implements Iterable<LineNumberTab
         return out.toByteArray();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Iterator<Entry> iterator() {
         return lines.iterator();
     }
 
+    /**
+     * An entry into a LineNumberTable.
+     */
     public class Entry {
         private int startPC;
         private int lineNumber;

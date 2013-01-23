@@ -7,6 +7,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.LinkedList;
 
+/**
+ * A pool to hold all Member structures.
+ */
 public class MemberPool extends LinkedList<Member> {
 
     /**

@@ -6,6 +6,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import java.util.ArrayList;
 
+/**
+ * A pool to hold all Try/Catch structures.
+ */
 public class ExceptionPool extends ArrayList<TryCatch> {
 
     /**

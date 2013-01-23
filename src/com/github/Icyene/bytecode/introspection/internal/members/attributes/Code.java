@@ -8,6 +8,9 @@ import com.github.Icyene.bytecode.introspection.internal.pools.ConstantPool;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
+/**
+ * A code attribute, found in method structures.
+ */
 public class Code extends Attribute {
 
     private int maxStack;
@@ -16,6 +19,12 @@ public class Code extends Attribute {
     private ExceptionPool exceptionPool;
     private AttributePool attributePool;
 
+    /**
+     * Constructs a Code attribute.
+     * @param stream stream containing encoded data.
+     * @param name the name, "Code".
+     * @param pool the associated constant pool.
+     */
     public Code(ByteStream stream, Constant name, ConstantPool pool) {
         super(name, stream.readInt());
         maxStack = stream.readShort();
@@ -25,10 +34,16 @@ public class Code extends Attribute {
         attributePool = new AttributePool(stream, pool);
     }
 
+    /**
+     * Public no-args constructor for extending classes. Should not be used directly.
+     */
     public Code() {
 
     }
 
+    /**
+     * {@inheritDoc}
+     */
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
         out.write((short) maxStack);
@@ -42,42 +57,82 @@ public class Code extends Attribute {
         return Bytes.prepend(bytes, super.getBytes());
     }
 
+    /**
+     * Returns the max stack.
+     * @return the max stack.
+     */
     public int getMaxStack() {
         return maxStack;
     }
 
+    /**
+     * Sets the max stack.
+     * @param maxStack the max stack.
+     */
     public void setMaxStack(int maxStack) {
         this.maxStack = maxStack;
     }
 
+    /**
+     * Returns the max locals.
+     * @return the max locals.
+     */
     public int getMaxLocals() {
         return maxLocals;
     }
 
+    /**
+     * Sets the max locals.
+     * @param maxLocals the max locals.
+     */
     public void setMaxLocals(int maxLocals) {
         this.maxLocals = maxLocals;
     }
 
+    /**
+     * Returns the raw code pool.
+     * @return a byte[] containing all opcodes and augmenting bytes.
+     */
     public byte[] getCodePool() {
         return codePool;
     }
 
+    /**
+     * Sets the raw code pool of this attribute.
+     * @param codePool the pool.
+     */
     public void setCodePool(byte[] codePool) {
         this.codePool = codePool;
     }
 
+    /**
+     * Fetches all Try/Catch structures in a pool.
+     * @return a pool of Try/Catch structures.
+     */
     public ExceptionPool getExceptionPool() {
         return exceptionPool;
     }
 
+    /**
+     * Sets the exception pool of this code segment.
+     * @param exceptionPool the pool.
+     */
     public void setExceptionPool(ExceptionPool exceptionPool) {
         this.exceptionPool = exceptionPool;
     }
 
+    /**
+     * Returns the attributes relating to the code.
+     * @return an attribute pool.
+     */
     public AttributePool getAttributePool() {
         return attributePool;
     }
 
+    /**
+     * Sets the sub-attribute pool of this attribute.
+     * @param attributePool the pool.
+     */
     public void setAttributePool(AttributePool attributePool) {
         this.attributePool = attributePool;
     }

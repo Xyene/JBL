@@ -14,6 +14,9 @@ import java.io.InputStream;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.TAG_UTF_STRING;
 
+/**
+ * A class file structure, used for introspection and modification of classes.
+ */
 public class ClassFile extends AccessibleMember {
 
     protected short majorVersion;
@@ -167,7 +170,7 @@ public class ClassFile extends AccessibleMember {
      * @param clazz The new name for this class.
      */
     public void setThisClass(String clazz) {
-        thisClass.getOwner().set(thisClass.getIndex(), (thisClass = new Constant(TAG_UTF_STRING, clazz.getBytes())));
+        thisClass.getOwner().set(thisClass.getIndex(), (thisClass = new Constant(thisClass.getIndex(), TAG_UTF_STRING, clazz.getBytes())));
     }
 
     /**
@@ -185,7 +188,7 @@ public class ClassFile extends AccessibleMember {
      * @param superclass The new name for this class' superclass.
      */
     public void setSuperClass(String superclass) {
-        superClass.getOwner().set(superClass.getIndex(), (superClass = new Constant(TAG_UTF_STRING, superclass.getBytes())));
+        superClass.getOwner().set(superClass.getIndex(), (superClass = new Constant(superClass.getIndex(), TAG_UTF_STRING, superclass.getBytes())));
     }
 
     /**

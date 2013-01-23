@@ -4,7 +4,6 @@ import com.github.Icyene.bytecode.introspection.internal.Member;
 import com.github.Icyene.bytecode.introspection.internal.code.ExceptionPool;
 import com.github.Icyene.bytecode.introspection.internal.members.TryCatch;
 import com.github.Icyene.bytecode.introspection.internal.members.attributes.Code;
-import com.github.Icyene.bytecode.introspection.internal.metadata.Opcode;
 import com.github.Icyene.bytecode.introspection.internal.metadata.readers.SignatureReader;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
@@ -17,8 +16,6 @@ import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.
 
 public class CodeGenerator {
 
-    public byte[] raw;
-    public List<Jump> jumpMap = new ArrayList<Jump>();
     public LinkedList<Instruction> instructions = new LinkedList<Instruction>();
     public ExceptionPool exceptionPool = new ExceptionPool();
     private Member method = null;
@@ -34,22 +31,21 @@ public class CodeGenerator {
     }
 
     public CodeGenerator(byte[] bytes, int index) {
-        raw = bytes;
-        ByteStream in = new ByteStream(bytes);
-        for (int i = 0; i != bytes.length; i++) {
+        ByteStream in = new ByteStream(bytes, index);
+        boolean wide = false;
+        for (int i = index; i != bytes.length; i++) {
             int opcode = in.readByte() & 0xFF;
 
             if (JUMPS.contains(opcode)) {
-                byte[] to = in.read(2);
-                instructions.add(new Instruction(opcode, i + index, to));
-                jumpMap.add(new Jump(opcode, i + index, Bytes.toShort(to, 0), false));
-                i = i + 2;
+                instructions.add(new Branch(opcode, false, i, Bytes.toShort(in.read(2), 0)));
+                i += 2;
             } else if (JUMPS_W.contains(opcode)) {
-                byte[] to = in.read(4);
-                instructions.add(new Instruction(opcode, i + index, to));
-                jumpMap.add(new Jump(opcode, i + index, Bytes.toInteger(to, 0), true));
-                i = i + 4;
+                instructions.add(new Branch(opcode, true, i, Bytes.toInteger(in.read(4), 0)));
+                i += 4;
             } else switch (opcode) {
+                case WIDE:
+                    wide = true;
+                    continue;
                 case ALOAD:
                 case AASTORE:
                 case BIPUSH:
@@ -63,8 +59,9 @@ public class CodeGenerator {
                 case NEWARRAY:
                 case RET:
                 case LDC:
-                    instructions.add(new Instruction(opcode, i + index, in.read(1)));
+                    instructions.add(new Instruction(opcode, wide, i, in.read(wide ? 2 : 1)));
                     i++;
+                    wide = false;
                     continue;
                 case ANEWARRAY:
                 case IINC:
@@ -82,50 +79,52 @@ public class CodeGenerator {
                 case INSTANCEOF:
                 case NEW:
                 case INVOKEINTERFACE:
-                    instructions.add(new Instruction(opcode, i + index, in.read(2)));
-                    i = i + 2;
+                    instructions.add(new Instruction(opcode, i, in.read(2)));
+                    i += 2;
+                    continue;
+                case LOOKUPSWITCH:
+                    LookupSwitch look = new LookupSwitch(i, in);
+                    instructions.add(look);
+                    i += look.trueLen;
+                    continue;
+                case TABLESWITCH:
+                    TableSwitch table = new TableSwitch(i, in);
+                    instructions.add(table);
+                    i += table.trueLen;
                     continue;
                 default:
-                    instructions.add(new Instruction(opcode, i + index, new byte[]{}));
+                    instructions.add(new Instruction(opcode, i, new byte[]{}));
             }
         }
     }
 
     public byte[] synthesize() {
-        for (Jump j : jumpMap) {
-            if (!j.wide) {
-                byte[] jump = Bytes.toByteArray((short) j.jump);
-                raw[j.address + 1] = jump[0];
-                raw[j.address + 2] = jump[1];
-            } else {
-                byte[] jump = Bytes.toByteArray(j.jump);
-                raw[j.address + 1] = jump[0];
-                raw[j.address + 2] = jump[1];
-                raw[j.address + 3] = jump[2];
-                raw[j.address + 4] = jump[3];
-            }
-
+        sort();
+        ByteStream out = new ByteStream();
+        for (Instruction i : instructions) {
+            out.write(i.getBytes());
         }
-        return raw;
+        return out.toByteArray();
     }
 
     public CodeGenerator inject(int pc, byte... bytes) {
-        for (Jump j : jumpMap) {
-            //Above injection
-            if (j.address < pc && j.jump >= pc)
-                j.jump += bytes.length;
-                //Below injection
-            else if (j.address > pc && j.jump < 0 && j.address - Math.abs(j.jump) < pc)
-                j.jump += -bytes.length;
-
-            if (j.address >= pc) {
-                j.address += bytes.length;
-            }
-        }
-
         for (Instruction i : instructions) {
             if (i.address >= pc) {
                 i.address += bytes.length;
+            }
+
+            if (i instanceof Branch) {
+                Branch j = (Branch) i;
+                //Above injection
+                if (j.address < pc && j.jump > pc)
+                    j.jump += bytes.length;
+                    //Below injection
+                else if (j.address > pc && j.jump < 0 && j.address - Math.abs(j.jump) < pc)
+                    j.jump += -bytes.length;
+
+                if (j.address >= pc) {
+                    j.address += bytes.length;
+                }
             }
         }
 
@@ -141,17 +140,16 @@ public class CodeGenerator {
             }
         }
 
-        CodeGenerator cg = new CodeGenerator(bytes, pc);
-
-        jumpMap.addAll(cg.jumpMap);
-        instructions.addAll(cg.instructions);
-        raw = Bytes.concat(Bytes.concat(Bytes.slice(raw, 0, pc), bytes), Bytes.slice(raw, pc, raw.length));
+        instructions.addAll(new CodeGenerator(bytes, pc).instructions);
+     //   raw = Bytes.concat(Bytes.concat(Bytes.slice(raw, 0, pc), bytes), Bytes.slice(raw, pc, raw.length));
         return this;
     }
 
-    private void sortJumps() {
-        Collections.sort(jumpMap, new Comparator<Jump>() {
-            public int compare(Jump f, Jump s) {
+    public void sort() {
+        Collections.sort(instructions, new Comparator<Instruction>() {
+            public int compare(Instruction f, Instruction s) {
+                if(f.address == s.address)
+                    throw new RuntimeException("Invalid same address for instructions " + f + ", " + s);
                 return f.address - s.address;
             }
         });
@@ -167,7 +165,7 @@ public class CodeGenerator {
         int currentStackSize = 0;
 
         for (int i = 0; i != instructions.size(); i++) {
-            currentStackSize += Opcode.STACK_GROW[instructions.get(i).opcode];
+            currentStackSize += STACK_GROWTH[instructions.get(i).opcode];
             if (currentStackSize > maxStackSize) {
                 maxStackSize = currentStackSize;
             }
@@ -177,36 +175,5 @@ public class CodeGenerator {
 
     public int computeMaxLocals() {
         throw new UnsupportedOperationException("Max local fetching not yet implemented!");
-    }
-
-    public class Jump {
-        public transient int address, jump, opcode;
-        public transient boolean wide;
-
-        public Jump(int opcode, int address, int jump, boolean wide) {
-            this.opcode = opcode;
-            this.address = address;
-            this.jump = jump;
-            this.wide = wide;
-        }
-
-        public String toString() {
-            return String.format("[Jump @ %s of type %s JUMPS to %s]", address, opcode, jump);
-        }
-    }
-
-    public class Instruction {
-        public transient int address, opcode;
-        public transient byte[] args;
-
-        public Instruction(int opcode, int address, byte[] args) {
-            this.opcode = opcode;
-            this.address = address;
-            this.args = args;
-        }
-
-        public String toString() {
-            return String.format("[Instruction @ %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
-        }
     }
 }

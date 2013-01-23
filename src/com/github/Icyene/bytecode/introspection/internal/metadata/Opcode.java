@@ -1,5 +1,8 @@
 package com.github.Icyene.bytecode.introspection.internal.metadata;
 
+/**
+ * All opcodes, tag bytes, access flags, and stack growth patterns.
+ */
 public interface Opcode {
 
     int AALOAD = 50;
@@ -236,8 +239,8 @@ public interface Opcode {
     int TAG_DESCRIPTOR = 12;
     int TAG_PHANTOM = -1;
 
-    /* how many values are pushed on the operand stack. */
-    int[] STACK_GROW = {
+    //Credit: Javaassist
+    int[] STACK_GROWTH = {
             0, // nop, 0
             1, // aconst_null, 1
             1, // iconst_m1, 2

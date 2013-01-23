@@ -4,7 +4,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
-
+/**
+ * Base class for all accessible members.
+ */
 public class AccessibleMember {
 
     protected int flag = 0;

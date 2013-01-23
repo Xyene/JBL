@@ -11,6 +11,9 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+/**
+ * A pool to hold all Attribute structures.
+ */
 public class AttributePool extends ArrayList<Attribute> {
 
     private final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "SourceFile");
@@ -27,15 +30,15 @@ public class AttributePool extends ArrayList<Attribute> {
             Constant name = pool.get(stream.readShort());
             String realName = name.getStringValue();
             if (!recognized.contains(realName)) {
-                add(new UnknownAttribute(stream, name, pool));
+                add(new UnknownAttribute(stream, name));
             } else if (realName.equals("Code")) {
                 add(new Code(stream, name, pool));
             } else if (realName.equals("ConstantValue")) {
                 add(new ConstantValue(stream, name, pool));
             } else if (realName.equals("LineNumberTable")) {
-                add(new LineNumberTable(stream, name, pool));
+                add(new LineNumberTable(stream, name));
             } else if (realName.equals("LocalVariableTable")) {
-                add(new LineNumberTable(stream, name, pool));
+                add(new LocalVariableTable(stream, name, pool));
             } else if (realName.equals("SourceFile")) {
                 add(new SourceFile(stream, name, pool));
             }

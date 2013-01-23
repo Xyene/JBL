@@ -3,6 +3,9 @@ package com.github.Icyene.bytecode.introspection.internal.members;
 import com.github.Icyene.bytecode.introspection.util.ByteStream;
 import com.github.Icyene.bytecode.introspection.util.Bytes;
 
+/**
+ * A try/catch structure, defines blocks of code which should be protected.
+ */
 public class TryCatch {
 
     private int startPC;

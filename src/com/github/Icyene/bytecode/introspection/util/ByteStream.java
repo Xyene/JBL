@@ -2,6 +2,9 @@ package com.github.Icyene.bytecode.introspection.util;
 
 import java.util.Arrays;
 
+/**
+ * A container designed around the Bytes utility class.
+ */
 public class ByteStream {
     private transient byte[] bytes;
     private transient int pos = 0;
@@ -14,26 +17,36 @@ public class ByteStream {
         this.bytes = new byte[]{};
     }
 
-    public void write(byte... byt) {
-        bytes = Bytes.concat(bytes, byt);
+    public ByteStream(byte[] bytes, int index) {
+        this.bytes = bytes;
+        this.pos = index;
     }
 
-    public void write(String s) {
+    public ByteStream write(byte... byt) {
+        bytes = Bytes.concat(bytes, byt);
+        return this;
+    }
+
+    public ByteStream write(String s) {
         for (char c : s.toCharArray()) {
             write(c);
         }
+        return this;
     }
 
-    public void write(int i) {
+    public ByteStream write(int i) {
         write(Bytes.toByteArray(i));
+        return this;
     }
 
-    public void write(short s) {
+    public ByteStream write(short s) {
         write((char) s);
+        return this;
     }
 
-    public void write(char c) {
+    public ByteStream write(char c) {
         write(Bytes.toByteArray((short) c));
+        return this;
     }
 
     public boolean readBoolean() {
@@ -84,8 +97,9 @@ public class ByteStream {
         return bytes;
     }
 
-    public void seek(int pos) {
+    public ByteStream seek(int pos) {
         this.pos = pos;
+        return this;
     }
 
     public int position() {

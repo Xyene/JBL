@@ -9,6 +9,9 @@ import com.github.Icyene.bytecode.introspection.util.Bytes;
 
 import static com.github.Icyene.bytecode.introspection.internal.metadata.Opcode.*;
 
+/**
+ * A generic class member. Can refer to either a field or a member, depending on the pool it is generated from.
+ */
 public class Member extends AccessibleMember {
     protected Constant name;
     protected Constant descriptor;
@@ -54,7 +57,7 @@ public class Member extends AccessibleMember {
      * @param newName the new name of the member.
      */
     public void setName(String newName) {
-        name.getOwner().set(name.getIndex(), (name = new Constant(TAG_UTF_STRING, newName.getBytes())));
+        name.getOwner().set(name.getIndex(), (name = new Constant(name.getIndex(), TAG_UTF_STRING, newName.getBytes())));
     }
 
     /**
@@ -72,7 +75,7 @@ public class Member extends AccessibleMember {
      * @param newDescriptor the new descriptor of the member.
      */
     public void setDescriptor(String newDescriptor) {
-        descriptor.getOwner().set(descriptor.getIndex(), (descriptor = new Constant(TAG_UTF_STRING, newDescriptor.getBytes())));
+        descriptor.getOwner().set(descriptor.getIndex(), (descriptor = new Constant(name.getIndex(), TAG_UTF_STRING, newDescriptor.getBytes())));
     }
 
     /**

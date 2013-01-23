@@ -2,6 +2,7 @@ package core.obfuscator;
 
 import com.github.Icyene.bytecode.generation.CodeGenerator;
 import com.github.Icyene.bytecode.generation.Groups;
+import com.github.Icyene.bytecode.generation.Instruction;
 import com.github.Icyene.bytecode.introspection.internal.ClassFile;
 import com.github.Icyene.bytecode.introspection.internal.Member;
 import com.github.Icyene.bytecode.introspection.internal.members.TryCatch;
@@ -55,7 +56,6 @@ public class Obfuscator {
 
                     AttributePool attributes = c.getAttributePool();
                     attributes.removeInstancesOf("LocalVariableTable");
-                    attributes.removeInstancesOf("LineNumberTable");
                     attributes.removeInstancesOf("Deprecated");
                     attributes.removeInstancesOf("Exceptions");
 
@@ -64,15 +64,12 @@ public class Obfuscator {
 
                     CodeGenerator gen = new CodeGenerator(code, c);
 
-                    // if(new Random().nextInt(5) < 50) continue;
-
-                    //GOTO a JSR after RETURN, which goes to a POP after the GOTO, removing the return address
-
+                  /*  //Indirect ifs.
                     {
                         for (int i = 0; i != gen.instructions.size(); i++) {
-                            CodeGenerator.Instruction inc = gen.instructions.get(i);
-                            if (inc.opcode != GOTO && Groups.IFS.contains(inc.opcode)) {
-                                short loc = (byte) ((inc.address + Bytes.toShort(inc.args, 0)));
+                            Instruction inc = gen.instructions.get(i);
+                            if (inc.getOpcode() != GOTO && Groups.IFS.contains(inc.getOpcode())) {
+                                short loc = (byte) ((inc.getAddress() + Bytes.toShort(inc.getArguments(), 0)));
                                 loc -= gen.raw.length;
                                 byte[] back = Bytes.toByteArray(loc);
                                 gen.inject(
@@ -82,17 +79,17 @@ public class Obfuscator {
                                         back[1]
                                 );
 
-                                byte[] to = Bytes.toByteArray((short) ((gen.raw.length - inc.address) - 3));
-                                gen.raw[inc.address + 1] = to[0];
-                                gen.raw[inc.address + 2] = to[1];
+                                byte[] to = Bytes.toByteArray((short) ((gen.raw.length - inc.getAddress()) - 3));
+                                gen.raw[inc.getAddress() + 1] = to[0];
+                                gen.raw[inc.getAddress() + 2] = to[1];
                             }
                         }
                     }
 
 
-                    { //Jump to a JSR instruction at end of method
-                        byte[] jumpTo = Bytes.toByteArray((short) (gen.raw.length + 3));
-                        //Jump back to the POP instruction
+                    { //Branch to a JSR instruction at end of method
+                        byte[] jumpTo = Bytes.toByteArray((short) (gen.raw.length+3));
+                        //Branch back to the POP instruction
                         byte[] jumpBack = Bytes.toByteArray((short) -(gen.raw.length));
                         gen.inject(0,
                                 (byte) GOTO,
@@ -106,20 +103,17 @@ public class Obfuscator {
                         );
                         //Manufacture exception block to protect indirection
                         epool.add(new TryCatch(0, gen.raw.length - 4, gen.raw.length - 1));
-                    }
+                    }          */
 
                     code.setMaxStack(gen.computeStackSize());
                     code.setCodePool(gen.synthesize());
 
-                    System.out.println("Handling " + name + ":" + c.getDescriptor());
                     if (name.equals("<init>") || name.equals("<clinit>") || name.equals("main"))
                         continue;
 
-                    long stssart = System.currentTimeMillis();
                     final String descriptor = new SignatureReader(c).getRawAugmentingTypes();
 
                     for (Map.Entry<String, HashSet<String>> en : overloads.entrySet()) {
-                        System.out.println("Checking for potential overloads");
                         if (!en.getValue().contains(descriptor)) {
                             String key = en.getKey();
                             c.setName(key);
@@ -130,7 +124,6 @@ public class Obfuscator {
 
                     String obfuscatedName = "";
                     while (true) {
-                        System.out.println("Generating random name");
                         obfuscatedName = Obfuscation.randomString(new Random().nextInt(1) + 1);
                         if (!overloads.containsKey(obfuscatedName))
                             break;
@@ -139,7 +132,6 @@ public class Obfuscator {
                     overloads.put(obfuscatedName, new HashSet<String>() {{
                         add(descriptor);
                     }});
-                    System.out.println("Method renaming: " + (System.currentTimeMillis() - stssart) + "ms");
                 }
             }
 
