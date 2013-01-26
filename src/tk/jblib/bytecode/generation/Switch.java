@@ -1,0 +1,20 @@
+package tk.jblib.bytecode.generation;
+
+import tk.jblib.bytecode.util.ByteStream;
+
+public abstract class Switch extends Instruction {
+    final int padding;
+    int defaultJump, length;
+    int[] match, indices;
+
+    public Switch(int address, ByteStream stream) {
+        this.address = address;
+        padding = (4 - (stream.position() % 4)) % 4;
+        stream.read(padding);
+        defaultJump = stream.readInt();
+    }
+
+    public byte[] getArguments() {
+        return new ByteStream().write(new byte[padding]).write(defaultJump).toByteArray();
+    }
+}
