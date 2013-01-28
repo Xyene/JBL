@@ -20,6 +20,7 @@ public class CodeGenerator {
     ExceptionPool exceptionPool = new ExceptionPool();
     Member method = null;
     private int length;
+    private boolean sorted = false;
 
     public CodeGenerator(Code code, Member member) {
         this(code);
@@ -32,6 +33,7 @@ public class CodeGenerator {
     }
 
     public CodeGenerator(byte[] bytes, int pos) {
+        length = bytes.length;
         ByteStream in = new ByteStream(bytes);
         boolean wide = false;
         for (int i = 0; i != bytes.length; i++) {
@@ -99,11 +101,10 @@ public class CodeGenerator {
                         instructions.add(new Instruction(opcode, address, new byte[]{}));
             }
         }
-        System.out.println("::: " + instructions) ;
     }
 
     public byte[] synthesize() {
-//        sort();
+        sort();
         ByteStream out = new ByteStream();
         for (Instruction i : instructions) {
             out.write(i.getBytes());
@@ -112,78 +113,92 @@ public class CodeGenerator {
     }
 
     public int size() {
-        //  synthesize().length;
-        System.out.println("size() returned " + (synthesize().length));
-        return synthesize().length;
+        return length;
     }
 
     public CodeGenerator inject(int pc, byte... bytes) {
-        System.out.println("Injecting " + Bytes.bytesToString(bytes) + " at pc " + pc);
+        length += bytes.length;
+        sorted = false;
         if (pc == -1) {
             pc = size();
         }
+//TODO: Paradox: switch recalibration needs these to already be in, but sorting cannot run if they are in
+        instructions.addAll(new CodeGenerator(bytes, pc).instructions);
+        expand(pc, bytes.length);
 
-        System.out.println(">>> " + new CodeGenerator(bytes, pc).instructions);
 
+        return this;
+    }
+
+
+    protected int recalculateJump(int pc, int length, int address, int jump) {
+        if (address < pc && jump > pc)
+            jump += length;
+        else if (address > pc && jump < 0 && address - Math.abs(jump) < pc)
+            jump += -length;
+        return jump;
+    }
+
+
+
+    protected void expand(int pc, int len) {
         for (Instruction i : instructions) {
             if (i.address >= pc) {
-                i.address += bytes.length;
+                i.address += len;
             }
 
             if (i instanceof Branch) {
                 Branch j = (Branch) i;
-                //Above injection
-                if (j.address < pc && j.jump > pc)
-                    j.jump += bytes.length;
-                    //Below injection
-                else if (j.address > pc && j.jump < 0 && j.address - Math.abs(j.jump) < pc)
-                    j.jump += -bytes.length;
-
-                if (j.address >= pc) {
-                    j.address += bytes.length;
+                j.jump = recalculateJump(pc, len, j.address, j.jump);
+            } else if (i instanceof Switch) {
+                Switch s = (Switch) i;
+                int off = s.padding;
+                s.padding = (4 - ((s.address + 1) % 4)) % 4;
+                off = s.padding - off;
+                System.out.println("Padding grew/shrunk by " + off + " bytes.");
+                length += off;
+                s.defaultJump = recalculateJump(pc, len, s.address, s.defaultJump) + off;
+                for (Switch.Case c : s) {
+                    c.target = recalculateJump(pc, len, s.address, c.target) + off;
                 }
+                if(off > 0) expand(s.address-1, off);  //If padding changed, expand offsets by the number it changed  << TODO: Doesn't expand correctly at all
             }
         }
 
         for (TryCatch e : exceptionPool) {
             if (e.getEndPC() >= pc) {
-                e.setEndPC(e.getEndPC() + bytes.length);
+                e.setEndPC(e.getEndPC() +len);
             } else if (e.getStartPC() >= pc) {
-                e.setStartPC(e.getStartPC() + bytes.length);
+                e.setStartPC(e.getStartPC() + len);
             }
             if (e.getHandlerPC() >= pc) {
-                e.setHandlerPC(e.getHandlerPC() + bytes.length);
+                e.setHandlerPC(e.getHandlerPC() +len);
             }
         }
-
-        instructions.addAll(new CodeGenerator(bytes, pc).instructions);
-        return this;
     }
 
     public CodeGenerator inject(int pc, Instruction... instrs) {  //TODO: Has to recalibrate
-        instructions.addAll(instructions);
+        sorted = false;
+        for (int i = 0; i != instrs.length; i++) {
+            length += instrs[i].trueLen + 1;
+            instructions.add(instrs[i]);
+        }
         return this;
     }
 
-    private void recalculateSize() {
-        length = 0;
-        for (int i = 0; i != instructions.size(); i++) {
-            length += (instructions.get(i).trueLen + 1);
+    public void sort() {
+        if (!sorted) {
+            Collections.sort(instructions, new Comparator<Instruction>() {
+                public int compare(Instruction f, Instruction s) {
+                    return f.address - s.address;
+                }
+            });
+            sorted = true;
         }
     }
 
-    public void sort() {
-        Collections.sort(instructions, new Comparator<Instruction>() {
-            public int compare(Instruction f, Instruction s) {
-                if (f.address == s.address) {
-                    throw new RuntimeException("Invalid same address for instructions " + f + ", " + s);
-                }
-                return f.address - s.address;
-            }
-        });
-    }
-
     public int computeStackSize() {
+        sort();
         if (method == null) {
             throw new RuntimeException("Cannot compute max stack size without method descriptor");
         }

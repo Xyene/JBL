@@ -1,6 +1,9 @@
 package core.obfuscator;
 
+import tk.jblib.bytecode.generation.Branch;
 import tk.jblib.bytecode.generation.CodeGenerator;
+import tk.jblib.bytecode.generation.Groups;
+import tk.jblib.bytecode.generation.Instruction;
 import tk.jblib.bytecode.introspection.ClassFile;
 import tk.jblib.bytecode.introspection.Member;
 import tk.jblib.bytecode.introspection.members.TryCatch;
@@ -31,8 +34,6 @@ public class Obfuscator {
                 start = System.currentTimeMillis();
 
                 ClassFile cc = new ClassFile(clazz);
-                System.out.println(cc.getConstantPool());
-                System.out.println(Bytes.bytesToString(Bytes.read(clazz)));
 
                 MemberPool mp = cc.getMethodPool();
                 ConstantPool cpool = cc.getConstantPool();
@@ -51,6 +52,8 @@ public class Obfuscator {
                     _outer:
                     for (Member c : mp) {
 
+                       // if (c.getName().equals("main")) continue;
+
                         String name = c.getName();
 
                         System.out.println("Handling method " + name);
@@ -65,28 +68,25 @@ public class Obfuscator {
 
                         CodeGenerator gen = new CodeGenerator(code, c);
 
-                 /*   //Indirect ifs.
-                    {
-                        for (int i = 0; i != gen.instructions.size(); i++) {
-                            Instruction inc = gen.instructions.get(i);
-                            if (inc.getOpcode() != GOTO && Groups.IFS.contains(inc.getOpcode())) {
-                                short loc = (byte) ((inc.getAddress() + Bytes.toShort(inc.getArguments(), 0)));
-                                loc -= gen.size();
-                                byte[] back = Bytes.toByteArray(loc);
-                                gen.inject(
-                                        START,
-                                        (byte) GOTO,
-                                        back[0],
-                                        back[1]
-                                );
+                        //Indirect ifs.
+                        {
+                            for (int i = 0; i != gen.instructions.size(); i++) {
+                                Instruction inc = gen.instructions.get(i);
+                                if (inc.getOpcode() != GOTO && Groups.IFS.contains(inc.getOpcode())) {
+                                    short loc = (byte) ((inc.getAddress() + Bytes.toShort(inc.getArguments(), 0)));
+                                    loc -= gen.size();
+                                    byte[] back = Bytes.toByteArray(loc);
+                                    gen.inject(
+                                            END,
+                                            (byte) GOTO,
+                                            back[0],
+                                            back[1]
+                                    );
 
-                            //    byte[] to = Bytes.toByteArray((short) ((gen.size() - inc.getAddress()) - 3));
-                                ((Branch)inc).setTarget(gen.size() - inc.getAddress() - 3);
-                             //   gen.raw[inc.getAddress() + 1] = to[0];
-                               // gen.raw[inc.getAddress() + 2] = to[1];
+                                    ((Branch) inc).setTarget(gen.size() - inc.getAddress() - 3);
+                                }
                             }
                         }
-                    }        */
 
 
                         { //Branch to a JSR instruction at end of method

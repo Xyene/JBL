@@ -1,5 +1,6 @@
 package tk.jblib.bytecode.generation;
 
+import tk.jblib.bytecode.util.ByteStream;
 import tk.jblib.bytecode.util.Bytes;
 
 public class Instruction {
@@ -27,7 +28,7 @@ public class Instruction {
     }
 
     public byte[] getArguments() {
-        return args;
+        return args != null ? args : new byte[] {};
     }
 
     public int getOpcode() {

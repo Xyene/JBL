@@ -7,45 +7,45 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="19576d7b-54e5-45f4-b6a2-ec141e46edb6" name="Default" comment="First  commit to Git.">
+      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\AttributeAdapter.java" />
       <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\FieldAdapter.java" />
       <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\MethodAdapter.java" />
-      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\disassembler\NameAndTypeDescriptor.java" />
-      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\AttributeAdapter.java" />
       <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\adapter\PropertyAdapter.java" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\ExceptionAttribute.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\ConstantValueAttribute.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\disassembler\NameAndTypeDescriptor.java" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\PropertyAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\UnknownAttribute.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\SourceFileAttribute.java" afterPath="" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\FieldAdapter.java" afterPath="" />
-      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\AttributeAdapter.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\ExceptionAttribute.java" afterPath="" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\MethodAdapter.java" afterPath="" />
       <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\CodeAttribute.java" afterPath="" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ExceptionPool.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/code/ExceptionPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\ByteStream.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/util/ByteStream.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ConstantPool.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/ConstantPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Constant.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Constant.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Opcodes.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Opcode.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\InterfacePool.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/InterfacePool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\PropertyPool.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\PropertyPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\AttributePool.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/AttributePool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Attribute.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Attribute.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Interface.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Interface.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\Disassembler.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\disassembler\Disassembler.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\ClassFile.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/ClassFile.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Property.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Property.java" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\UnknownAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\attributes\SourceFileAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\attributes\ConstantValueAttribute.java" afterPath="" />
+      <change type="DELETED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\adapter\AttributeAdapter.java" afterPath="" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\Bytes.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\util\Bytes.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Tag.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Tag.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\ByteStream.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\util\ByteStream.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\Disassembler.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\disassembler\Disassembler.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\Opcodes.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\Opcode.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Constant.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Constant.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\AttributePool.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\AttributePool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\PropertyPool.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\PropertyPool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\ClassFile.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\ClassFile.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Attribute.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Attribute.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\AccessFlag.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\AccessFlag.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Exception.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/TryCatch.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ExceptionPool.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\code\ExceptionPool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Exception.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\TryCatch.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\ConstantPool.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\ConstantPool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\InterfacePool.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\InterfacePool.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Interface.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Interface.java" />
       <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\pools\InstructionPool.java" afterPath="H:\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\pools\InstructionPool.java" />
-      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\util\Bytes.java" afterPath="$PROJECT_DIR$/src/tk/jblib/bytecode/util/Bytes.java" />
       <change type="MODIFICATION" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\profiler\Test\Agent.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\profiler\Test\Agent.java" />
+      <change type="MOVED" beforePath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\disassembler\internal\objects\Property.java" afterPath="C:\Documents and Settings\Tudor\Desktop\Java Disassembler\src\com\github\Icyene\bytecode\introspection\internal\members\Property.java" />
     </list>
     <ignored path="Java Disassembler.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/DecompiledInstructionPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355957576453" ignored="false" />
     <file path="/DecompiledMethod.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355957293062" ignored="false" />
-    <file path="/ClassFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359171072296" ignored="false" />
+    <file path="/ClassFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359224444187" ignored="false" />
     <file path="/Decompiler.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357596196270" ignored="false" />
     <file path="/InstructionStack.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355956083437" ignored="false" />
     <file path="/ScopedWriter.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355881770703" ignored="false" />
@@ -67,27 +67,27 @@
     <file path="/Stack.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355956145359" ignored="false" />
     <file path="/ClassRef.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355712895921" ignored="false" />
     <file path="/ImportList.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1355955162312" ignored="false" />
-    <file path="/fragment.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359165896468" ignored="false" />
+    <file path="/fragment.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359219686953" ignored="false" />
     <file path="/Member.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358621956187" ignored="false" />
     <file path="/DecompiledMethodPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357942542078" ignored="false" />
     <file path="/Groovy Console" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357073907125" ignored="false" />
     <file path="/ClassMetadata.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356114355468" ignored="false" />
     <file path="/DClassMeta.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356052105234" ignored="false" />
     <file path="$PROJECT_DIR$/src/disassembler/decompiling/DClassMeta.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1356052198453" ignored="false" />
-    <file path="/Obfuscator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359045519296" ignored="false" />
+    <file path="/Obfuscator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359238972562" ignored="false" />
     <file path="/MemberPool.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358622182093" ignored="false" />
     <file path="/AccessibleMember.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358621920203" ignored="false" />
     <file path="/ConstantValueAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357058731484" ignored="false" />
     <file path="/Obfuscation.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357167968406" ignored="false" />
-    <file path="/ByteStream.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978771203" ignored="false" />
+    <file path="/ByteStream.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359219434468" ignored="false" />
     <file path="/SourceFileAttribute.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357138225093" ignored="false" />
     <file path="/LineNumberTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358984413031" ignored="false" />
     <file path="/LocalVariableTable.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623695546" ignored="false" />
     <file path="/SourceFile.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623557328" ignored="false" />
     <file path="/Exception.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357145780015" ignored="false" />
     <file path="/Code.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358623484703" ignored="false" />
-    <file path="/CodeGenerator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359166371765" ignored="false" />
-    <file path="/Dummy.txt" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358888513625" ignored="false" />
+    <file path="/CodeGenerator.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359341522906" ignored="false" />
+    <file path="/Dummy.txt" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359317342562" ignored="false" />
     <file path="$USER_HOME$/Desktop/Storm/src/com/github/StormTeam/Storm/ReflectCommand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357242574250" ignored="false" />
     <file path="/ReflectCommand.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1357158882671" ignored="false" />
     <file path="/TryCatch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358621846718" ignored="false" />
@@ -183,11 +183,11 @@
     <file path="$USER_HOME$/Desktop/Surge/src/main/java/net/minecraft/server/MinecraftServer.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358635690484" ignored="false" />
     <file path="/Hello World.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358719013671" ignored="false" />
     <file path="/Jump.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358896717044" ignored="false" />
-    <file path="/Branch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359045469593" ignored="false" />
-    <file path="/LookupSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358972487796" ignored="false" />
-    <file path="/Instruction.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359044993296" ignored="false" />
-    <file path="/TableSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358978335156" ignored="false" />
-    <file path="/Switch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358979623046" ignored="false" />
+    <file path="/Branch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359216458187" ignored="false" />
+    <file path="/LookupSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359231520265" ignored="false" />
+    <file path="/Instruction.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359219572609" ignored="false" />
+    <file path="/TableSwitch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359231551296" ignored="false" />
+    <file path="/Switch.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359232787250" ignored="false" />
     <file path="/CodePoint.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1358986976437" ignored="false" />
     <file path="/Visitor.java" changelist="19576d7b-54e5-45f4-b6a2-ec141e46edb6" time="1359165950265" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -253,58 +253,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="CodeGenerator.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/CodeGenerator.java">
+      <file leaf-file-name="Switch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Switch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="134" column="31" selection-start="4663" selection-end="4663" vertical-scroll-proportion="0.0">
+            <state line="52" column="73" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.0">
               <folding>
-                <element signature="e#5974#6307#0" expanded="true" />
-                <element signature="e#6296#6297#0" expanded="true" />
+                <element signature="imports" expanded="true" />
+                <element signature="e#312#318#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ClassFile.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/ClassFile.java">
+      <file leaf-file-name="TableSwitch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/TableSwitch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="25" column="34" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Branch.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Branch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="14" column="74" selection-start="418" selection-end="418" vertical-scroll-proportion="0.4160839">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Member.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/Member.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="27" column="0" selection-start="957" selection-end="957" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MemberPool.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/MemberPool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="23" column="0" selection-start="691" selection-end="691" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ConstantPool.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/ConstantPool.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="129" column="0" selection-start="3401" selection-end="3401" vertical-scroll-proportion="0.0">
+            <state line="14" column="77" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -313,17 +277,31 @@
       <file leaf-file-name="Obfuscator.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="42" column="0" selection-start="1640" selection-end="1640" vertical-scroll-proportion="0.0">
+            <state line="54" column="25" selection-start="1979" selection-end="1979" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CodePoint.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/instructions/CodePoint.java">
+      <file leaf-file-name="Branch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Branch.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="6" column="42" selection-start="120" selection-end="120" vertical-scroll-proportion="0.0">
+            <state line="18" column="90" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
               <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CodeGenerator.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/CodeGenerator.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="163" column="46" selection-start="5657" selection-end="5657" vertical-scroll-proportion="0.7325175">
+              <folding>
+                <element signature="method#inject#1;class#CodeGenerator#0" expanded="false" />
+                <element signature="method#sort#0;class#CodeGenerator#0" expanded="false" />
+                <element signature="method#computeStackSize#0;class#CodeGenerator#0" expanded="false" />
+                <element signature="method#computeMaxLocals#0;class#CodeGenerator#0" expanded="false" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -331,16 +309,34 @@
       <file leaf-file-name="Obfuscation.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="50" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0">
+            <state line="6" column="13" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Groups.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Groups.java">
+      <file leaf-file-name="Opcode.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/metadata/Opcode.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="31" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
+            <state line="410" column="22" selection-start="10278" selection-end="10282" vertical-scroll-proportion="-7.28">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassFile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/ClassFile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="80" column="0" selection-start="2628" selection-end="2628" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="LookupSwitch.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/LookupSwitch.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="18" column="22" selection-start="520" selection-end="520" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -366,22 +362,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LocalVariableTable.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/attributes/LineNumberTable.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/ByteStream.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/instructions/CodePoint.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/internal/members/Constant.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Switch.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Instruction.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/Branch.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/introspection/util/Bytes.java" />
-        <option value="$PROJECT_DIR$/src/com/github/Icyene/bytecode/generation/CodeGenerator.java" />
-        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Branch.java" />
         <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/internal/ClassFile.java" />
         <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/visitor/Visitor.java" />
-        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/CodeGenerator.java" />
-        <option value="$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Branch.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/util/ByteStream.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/code/ExceptionPool.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Instruction.java" />
         <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/ClassFile.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/Member.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Attribute.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Constant.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Interface.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/LookupSwitch.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/TableSwitch.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Switch.java" />
+        <option value="$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java" />
+        <option value="$PROJECT_DIR$/src/tk/jblib/bytecode/generation/CodeGenerator.java" />
       </list>
     </option>
   </component>
@@ -455,6 +451,16 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
       <pane id="Scope">
         <subPane subId="Project Files">
           <PATH>
@@ -491,10 +497,6 @@
               <option name="myItemId" value="tk.jblib.bytecode" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="visitor" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -507,6 +509,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="tk.jblib.bytecode" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="introspection" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -525,6 +531,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="metadata" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PackageElementNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -584,29 +594,19 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Java Disassembler" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GenerateAntBuildDialog.generateIdeaHomeProperty" value="false" />
     <property name="project.structure.last.edited" value="Project" />
-    <property name="OverrideImplement.combined" value="false" />
     <property name="project.structure.proportion" value="0.0" />
+    <property name="OverrideImplement.combined" value="false" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="recentsLimit" value="5" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="GenerateAntBuildDialog.generateSingleFile" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="recentsLimit" value="5" />
     <property name="GenerateAntBuildDialog.inclineRuntiemClasspath" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="GenerateAntBuildDialog.outputFileNameProperty" value="java_disassembler" />
     <property name="GenerateAntBuildDialog.enableUiFormCompile" value="true" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
@@ -620,8 +620,8 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="restartRequiresConfirmation" value="true" />
     <property name="GenerateAntBuildDialog.backupFiles" value="true" />
-    <property name="dynamic.classpath" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
@@ -678,6 +678,19 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <module name="" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
@@ -703,19 +716,6 @@
       <envs />
       <properties />
       <listeners />
-      <method />
-    </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -818,7 +818,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1688" height="1024" extended-state="6" />
+    <frame x="-4" y="-4" width="1688" height="1024" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="IntelliGuard" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -835,14 +835,14 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.329455" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39987752" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21607143" sideWeight="0.66815645" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21904762" sideWeight="0.66815645" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.33184358" sideWeight="0.32619047" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32468995" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="IRC Favorites" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="IntellIRC" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="IntelliHeap" active="false" anchor="bottom" auto_hide="true" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32912844" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="IntellIRC" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="ASM" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23086344" sideWeight="0.67087156" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="FindBugs-IDEA" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32960895" sideWeight="0.49761903" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JProfiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298611" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -923,118 +923,123 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/visitor/ClassVisitor.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Instruction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="25" selection-start="61" selection-end="61" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/visitor/MethodVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="26" selection-start="62" selection-end="62" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/visitor/AttributeVisitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="71" selection-start="70" selection-end="70" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/visitor/misc/ReferenceRemapper.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="6" selection-start="75" selection-end="76" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/visitor/Visitor.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="21" selection-start="65" selection-end="65" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Switch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="45" selection-start="257" selection-end="257" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Groups.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="31" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/instructions/CodePoint.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="6" column="42" selection-start="120" selection-end="120" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/ConstantPool.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="129" column="0" selection-start="3401" selection-end="3401" vertical-scroll-proportion="0.0">
+        <state line="30" column="75" selection-start="786" selection-end="786" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/Member.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="0" selection-start="957" selection-end="957" vertical-scroll-proportion="0.0">
+        <state line="43" column="0" selection-start="1497" selection-end="1497" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/MemberPool.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/pools/AttributePool.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="23" column="0" selection-start="691" selection-end="691" vertical-scroll-proportion="0.0">
+        <state line="16" column="13" selection-start="478" selection-end="478" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Attribute.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="50" selection-start="835" selection-end="835" vertical-scroll-proportion="0.0">
+        <state line="40" column="0" selection-start="1073" selection-end="1073" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Constant.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1640" selection-end="1640" vertical-scroll-proportion="0.0">
+        <state line="53" column="0" selection-start="1560" selection-end="1560" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/CodeGenerator.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/Interface.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="134" column="31" selection-start="4663" selection-end="4663" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="e#5974#6307#0" expanded="true" />
-            <element signature="e#6296#6297#0" expanded="true" />
-          </folding>
+        <state line="34" column="0" selection-start="839" selection-end="839" vertical-scroll-proportion="0.0">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/ClassFile.java">
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/members/TryCatch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="34" selection-start="887" selection-end="887" vertical-scroll-proportion="0.0">
+        <state line="59" column="46" selection-start="1592" selection-end="1592" vertical-scroll-proportion="0.2972028">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/LookupSwitch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="22" selection-start="520" selection-end="520" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Branch.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="14" column="74" selection-start="418" selection-end="418" vertical-scroll-proportion="0.4160839">
+        <state line="18" column="90" selection-start="541" selection-end="541" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/Switch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="52" column="73" selection-start="1209" selection-end="1209" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#312#318#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/TableSwitch.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="14" column="77" selection-start="456" selection-end="456" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/metadata/Opcode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="410" column="22" selection-start="10278" selection-end="10282" vertical-scroll-proportion="-7.28">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/introspection/ClassFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="80" column="0" selection-start="2628" selection-end="2628" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscation.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="13" selection-start="117" selection-end="117" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/core/obfuscator/Obfuscator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="25" selection-start="1979" selection-end="1979" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/tk/jblib/bytecode/generation/CodeGenerator.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="163" column="46" selection-start="5657" selection-end="5657" vertical-scroll-proportion="0.7325175">
+          <folding>
+            <element signature="method#inject#1;class#CodeGenerator#0" expanded="false" />
+            <element signature="method#sort#0;class#CodeGenerator#0" expanded="false" />
+            <element signature="method#computeStackSize#0;class#CodeGenerator#0" expanded="false" />
+            <element signature="method#computeMaxLocals#0;class#CodeGenerator#0" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>

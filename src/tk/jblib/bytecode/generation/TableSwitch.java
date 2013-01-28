@@ -13,19 +13,19 @@ public class TableSwitch extends Switch {
 
         length = high - low + 1;
         trueLen = (short) ((12 + (length << 2)) + padding);
-        match = new int[length];
-        indices = new int[length];
 
-        for (int i = low; i <= high; i++)
-            match[i - low] = i;
-        for (int i = 0; i < length; i++)
-            indices[i] = stream.readInt();
+        for (int match = low; match <= high; match++) {
+            addCase(new Case(match, stream.readInt()));
+        }
     }
 
+    public TableSwitch() {}
+
     public byte[] getArguments() {
-        ByteStream out = new ByteStream(super.getArguments()).write((length > 0) ? match[0] : 0).write((length > 0) ? match[length - 1] : 0);
+        ByteStream out = new ByteStream(super.getArguments());
+        out.write((length > 0) ? getCase(0).match : 0).write((length > 0) ? getCase(length - 1).match : 0);
         for (int i = 0; i < length; i++)
-            out.write(indices[i]);
+            out.write(getCase(i).target);
         return out.toByteArray();
     }
 }

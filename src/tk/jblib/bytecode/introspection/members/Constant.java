@@ -1,6 +1,7 @@
 package tk.jblib.bytecode.introspection.members;
 
 import tk.jblib.bytecode.introspection.pools.ConstantPool;
+import tk.jblib.bytecode.util.ByteStream;
 import tk.jblib.bytecode.util.Bytes;
 
 import static tk.jblib.bytecode.introspection.metadata.Opcode.*;

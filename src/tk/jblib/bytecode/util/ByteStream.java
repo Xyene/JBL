@@ -27,6 +27,12 @@ public class ByteStream {
         return this;
     }
 
+    //Ugly hack because calling an overload of write() on a byte will redirect to the short overload...
+    public ByteStream write(byte byt) {
+        bytes = Bytes.concat(bytes, byt);
+        return this;
+    }
+
     public ByteStream write(String s) {
         for (char c : s.toCharArray()) {
             write(c);
@@ -112,6 +118,10 @@ public class ByteStream {
 
     public int remaining() {
         return bytes.length - pos;
+    }
+
+    public String toString() {
+        return "{ByteStream" + Bytes.bytesToString(toByteArray()) + "}";
     }
 }
 

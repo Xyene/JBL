@@ -22,7 +22,7 @@ public class Branch extends Instruction {
     }
 
     public void setTarget(int target) {
-        this.jump = target;
+        jump = target;
     }
 
     public String toString() {

@@ -11,21 +11,19 @@ public class LookupSwitch extends Switch {
         opcode = LOOKUPSWITCH;
 
         length = stream.readInt();
-        trueLen = (short) ((short) (12 + (length << 3)) + padding);
-
-        match = new int[length];
-        indices = new int[length];
+        trueLen = (12 + (length << 3) + padding);
 
         for (int i = 0; i < length; i++) {
-            match[i] = stream.readInt();
-            indices[i] = stream.readInt();
+            addCase(stream.readInt(), stream.readInt());
         }
     }
 
+    public LookupSwitch() {}
+
     public byte[] getArguments() {
-        ByteStream out = new ByteStream().write(super.getArguments());
-        for(int i = 0; i != match.length; i++) {
-            out.write(match[i]).write(indices[i]);
+        ByteStream out = new ByteStream(super.getArguments());
+        for (Case c : this) {
+            out.write(c.match).write(c.target);
         }
         return out.toByteArray();
     }

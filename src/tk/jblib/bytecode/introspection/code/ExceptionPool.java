@@ -39,4 +39,8 @@ public class ExceptionPool extends ArrayList<TryCatch> {
             raw = Bytes.concat(raw, e.getBytes());
         return raw;
     }
+
+    public void getBytes(ByteStream stream) {
+        stream.write(getBytes());
+    }
 }
