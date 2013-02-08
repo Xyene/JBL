@@ -11,8 +11,7 @@ public class MemberAdapter {
     protected LinkedList<MemberVisitor> visitors = new LinkedList<MemberVisitor>();
 
     public MemberAdapter(MemberVisitor... visit) {
-        for (MemberVisitor mv : visit)
-            visitors.add(mv);
+        addVisitors(visit);
     }
 
     public MemberAdapter(Collection<MemberVisitor> visits) {
@@ -23,8 +22,9 @@ public class MemberAdapter {
         visitors.addAll(visits);
     }
 
-    public void addVisitors(ClassVisitor... visits) {
-
+    public void addVisitors(MemberVisitor... visits) {
+        for (MemberVisitor mv : visits)
+            visitors.add(mv);
     }
 
     public void adapt(Member member) {

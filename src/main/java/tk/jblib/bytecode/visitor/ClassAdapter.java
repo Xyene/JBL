@@ -13,8 +13,7 @@ public class ClassAdapter {
     protected LinkedList<ClassVisitor> visitors = new LinkedList<ClassVisitor>();
 
     public ClassAdapter(ClassVisitor... visit) {
-        for (ClassVisitor cv : visit)
-            visitors.add(cv);
+        addVisitors(visit);
     }
 
     public ClassAdapter(Collection<ClassVisitor> visits) {
@@ -26,7 +25,8 @@ public class ClassAdapter {
     }
 
     public void addVisitors(ClassVisitor... visits) {
-
+        for (ClassVisitor cv : visits)
+            visitors.add(cv);
     }
 
     public LinkedList<ClassVisitor> visitors() {
