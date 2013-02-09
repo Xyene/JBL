@@ -22,7 +22,7 @@ Though not enforced, if you are used with ASM or BCEL, you may find this more su
 public void publicWithVisitor(ClassFile clazz) {
    new ClassAdapter(new ClassVisitor() {
       @Override
-	  public int visitAccessFlags(int flag) {
+    public int visitAccessFlags(int flag) {
 	     return flag & Modifier.PUBLIC;
 	  }
    }).adapt(clazz);
