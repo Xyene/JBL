@@ -3,6 +3,18 @@ JBL - Java Bytecode Library
 
 JBL, as its expanded name might suggest, is a library for manipulating JVM bytecode on the fly. It is written, as one might expect, in Java. Bytecode support for other languages is planned, but currently not supported. JBL attempts to merge the things which make other bytecode libraries, namely ASM, BCEL, and SERP useful, maintaining an equally simply (and sometimes simpler!) api, while not sacrificing usability by enforcing visitor pattern usage. JBL abstracts the internal bytecode in class files to trivial notions, yet also allows the delving into direct class pool manipulation et al. It also provides structures for doing common things (like class reference remapping), and has a simple OO structure making it easy for you to define your own. Additionally, each JBL object has methods you'd logically expect it to have, making it relatively simple to do work even without constantly glancing at the JBL JavaDocs.
 
+###Performance
+Speed and loading time is always essential when deciding on a library, and we are proud to inform you that JBL is //very// fast. JBL has been tested against other popular bytecode manipulation frameworks, mainly ASM, BCEL, and SERP. The benchmark consisted of an iteration of 500 class loads, and the average time of loading. The results are displayed below.
+
+<code>
+JBL Time: 1ms
+ASM Time: 0ms
+BCEL Time: 3ms
+SERP Time: 10ms
+</code>
+
+As is apparent, JBL performs much faster than SERP and BCEL, and almost on par with ASM's performance. The benchmarking code for this experiment can be found in src/test/java/BenchmarkTest.
+
 ###Defining a ClassFile object
 For you to do anything, you must first define a ClassFile object. This is the core of JBL, and can be constructed simply, in many ways. You can pass a byte[], stream, or file. Or use its public no-args constructor. Whatever floats your boat.
 
@@ -14,18 +26,6 @@ ClassFile noArgs = new ClassFile(); //Or even empty, if you wish to start from s
 </code></pre>
 
 Take note that JBL does minimal verification when loading files, so you may get funky behavior if you pass a truncated stream or such. JBL uses an incremental loading scheme to streamline class loading time, meaning classfile parts will only be loaded if they are requested. Overall, this increases ClassFile object construction speed to practically nothing, and allows light modification of the class (access flags etc.) to be done with less memory and latency.
-
-###Speed
-Speed and loading time is always essential when deciding on a library, and we are proud to inform you that JBL is //very// fast. JBL has been tested against other popular bytecode manipulation frameworks, mainly ASM, BCEL, and SERP. The benchmark consisted of an iteration of 500 class loads, and the average time of loading. The results are displayed below.
-
-<code>
-JBL Time: 1ms
-ASM Time: 0ms
-BCEL Time: 3ms
-SERP Time: 10ms
-</code>
-
-As is apparent, JBL performs much faster than SERP and BCEL, and almost on par with ASM's performance. The benchmarking code for this experiment can be found in src/test/java/BenchmarkTest.
 
 ###Visitor pattern
 Though not enforced, if you are used with ASM or BCEL, you may find this more suitable to your taste. In some cases, ASM visitors will run out of the box when their extending classes are changed to point JBL classes. JBL is packaged with two visitor interfaces: ClassVisitor and MemberVisitor. The latter is a further abstraction over both method and field structures, since they share the same format. In most cases, however, simply manipulating a ClassFile object suffices and may be cleaner than using a visitor. Consider the following example:
