@@ -15,6 +15,18 @@ ClassFile noArgs = new ClassFile(); //Or even empty, if you wish to start from s
 
 Take note that JBL does minimal verification when loading files, so you may get funky behavior if you pass a truncated stream or such. JBL uses an incremental loading scheme to streamline class loading time, meaning classfile parts will only be loaded if they are requested. Overall, this increases ClassFile object construction speed to practically nothing, and allows light modification of the class (access flags etc.) to be done with less memory and latency.
 
+###Speed
+Speed and loading time is always essential when deciding on a library, and we are proud to inform you that JBL is //very// fast. JBL has been tested against other popular bytecode manipulation frameworks, mainly ASM, BCEL, and SERP. The benchmark consisted of an iteration of 500 class loads, and the average time of loading. The results are displayed below.
+
+<code>
+JBL Time: 1ms
+ASM Time: 0ms
+BCEL Time: 3ms
+SERP Time: 10ms
+</code>
+
+As is apparent, JBL performs much faster than SERP and BCEL, and almost on par with ASM's performance. The benchmarking code for this experiment can be found in src/test/java/BenchmarkTest.
+
 ###Visitor pattern
 Though not enforced, if you are used with ASM or BCEL, you may find this more suitable to your taste. In some cases, ASM visitors will run out of the box when their extending classes are changed to point JBL classes. JBL is packaged with two visitor interfaces: ClassVisitor and MemberVisitor. The latter is a further abstraction over both method and field structures, since they share the same format. In most cases, however, simply manipulating a ClassFile object suffices and may be cleaner than using a visitor. Consider the following example:
 
@@ -22,7 +34,7 @@ Though not enforced, if you are used with ASM or BCEL, you may find this more su
 public void publicWithVisitor(ClassFile clazz) {
    new ClassAdapter(new ClassVisitor() {
       @Override
-    public int visitAccessFlags(int flag) {
+	  public int visitAccessFlags(int flag) {
 	     return flag & Modifier.PUBLIC;
 	  }
    }).adapt(clazz);
@@ -57,3 +69,34 @@ This is a bulleted collection of tips and tricks on the usage of JBL, which know
 * A very rough work-in-progress code generator can be found in package `tk.jblib.generation`.
 * Simple test programs that will help you get the hang of JBL can be found in root package `core`.
 
+---
+
+##Coding and Pull Request Conventions
+* We generally follow the Sun/Oracle coding standards.
+* No tabs; use 4 spaces instead.
+* No trailing whitespaces.
+* No CRLF line endings, LF only, put your gits 'core.autocrlf' on 'true'.
+* No 80 column limit or 'weird' midstatement newlines.
+* The number of commits in a pull request should be kept to a minimum (squish them into one most of the time - use common sense!).
+* No merges should be included in pull requests unless the pull request's purpose is a merge.
+* Pull requests should be tested (does it compile? AND does it work?) before submission.
+* Any major additions should have documentation ready and provided if applicable (this is usually the case).
+* Most pull requests should be accompanied by a corresponding Leaky ticket so we can associate commits with Leaky issues (this is primarily for changelog generation on dl.bukkit.org).
+* Try to follow test driven development where applicable.
+
+##Tips to get your pull request accepted
+Making sure you follow the above conventions is important, but just the beginning. Follow these tips to better the chances of your pull request being accepted and pulled.
+
+* Make sure you follow all of our conventions to the letter.
+* Make sure your code compiles under Java 5.
+* Provide proper JavaDocs where appropriate.
+* Provide proper accompanying documentation where appropriate.
+* Test your code.
+* Make sure to follow coding best practises.
+* Provide a test plugin binary and source for us to test your code with.
+* Your pull request should link to accompanying pull requests.
+* The description of your pull request should provide detailed information on the pull along with justification of the changes where applicable.
+But really, if your code is good and needed, we'll add it even if it lacks formatting.
+
+##License 
+JBL is licensed under the LGPL. More info can be found in LICENSE.txt.
