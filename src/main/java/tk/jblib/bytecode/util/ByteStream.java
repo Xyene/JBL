@@ -21,9 +21,9 @@ public class ByteStream implements Flushable {
     }
 
     public ByteStream(byte[] bytes, int index) {
-        this.pos = index;
-        in = new DataInputStream(new ByteArrayInputStream(bytes));
-        out = new DataOutputStream(array = new ByteArrayOutputStream(0));
+        pos = index;
+        in = new DataInputStream(new BufferedInputStream(new ByteArrayInputStream(bytes), 8192));
+        out = new DataOutputStream(new BufferedOutputStream(array = new ByteArrayOutputStream(8192), 8192));
         try {
             in.skipBytes(index);
         } catch (IOException e) {
