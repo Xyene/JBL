@@ -3,23 +3,20 @@ package tk.jblib.bytecode.introspection;
 import tk.jblib.bytecode.introspection.members.Attribute;
 import tk.jblib.bytecode.introspection.members.Constant;
 import tk.jblib.bytecode.introspection.metadata.Metadatable;
-import tk.jblib.bytecode.introspection.metadata.XMLAttribute;
 import tk.jblib.bytecode.util.ByteStream;
 import tk.jblib.bytecode.util.Bytes;
 
-import java.io.IOException;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Collection;
 
 import static tk.jblib.bytecode.introspection.Opcode.*;
 
 /**
  * A generic class member. Can refer to either a field or a member, depending on the pool it is generated from.
  */
-public class Member extends AccessibleMember implements Metadatable<Attribute> {
+public class Member extends AccessibleMember implements Metadatable<Attribute>{
     protected Constant name;
     protected Constant descriptor;
-    protected Pool<Attribute> attributePool;
+    protected Metadatable.Container metadata;
 
     /**
      * Constructs a member.
@@ -31,7 +28,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
         flag = stream.readShort();
         name = pool.get(stream.readShort());
         descriptor = pool.get(stream.readShort());
-        attributePool = new Pool<Attribute>(stream, Pool.ATTRIBUTE_PARSER, pool);
+        metadata = new Metadatable.Container(new Pool<Attribute>(stream, Pool.ATTRIBUTE_PARSER, pool), pool);
     }
 
     /**
@@ -42,7 +39,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
         out.write(Bytes.toByteArray((short) flag));
         out.write(Bytes.toByteArray((short) name.getIndex()));
         out.write(Bytes.toByteArray((short) descriptor.getIndex()));
-        out.write(attributePool.getBytes());
+        out.write(metadata.getAttributes().getBytes());
         return out.toByteArray();
     }
 
@@ -88,7 +85,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
      * @return the attribute pool of this member.
      */
     public Pool<Attribute> getAttributePool() {
-        return attributePool;
+        return metadata.getAttributes();
     }
 
     /**
@@ -97,7 +94,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
      * @param attributePool the new attribute pool.
      */
     public void setAttributePool(Pool<Attribute> attributePool) {
-        this.attributePool = attributePool;
+        metadata.setAttributes(attributePool);
     }
 
     /**
@@ -106,7 +103,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
      * @return True if this member is deprecated, false otherwise.
      */
     public boolean isDeprecated() {
-        return attributePool.contains("Deprecated");
+        return metadata.getAttributes().contains("Deprecated");
     }
 
     /**
@@ -115,12 +112,10 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
      * @param flag True if intent is to make this member deprecated, false if it is to make it not deprecated.
      */
     public void setDeprecated(boolean flag) {
-        if (flag && !attributePool.contains("Deprecated")) {
-            Constant dep = new Constant(TAG_UTF_STRING, "Deprecated".getBytes());
-            name.getOwner().add(dep); //I would like to use something other than depend on the value of name.owner, but this will have to do for now
-            attributePool.add(new Attribute(dep, 0));
+        if (flag && !metadata.getAttributes().contains("Deprecated")) {
+            metadata.addMetadata("Deprecated", null);
         } else {
-            removeMetadata("Deprecated");
+            metadata.removeMetadata("Deprecated");
         }
     }
 
@@ -160,37 +155,28 @@ public class Member extends AccessibleMember implements Metadatable<Attribute> {
         flag = i ? flag | ACC_NATIVE : flag & ~ACC_NATIVE;
     }
 
-    public Set<Attribute> getMetadataInstances(String meta) {
-        Set<Attribute> out = new HashSet<Attribute>();
-        for (Attribute a : attributePool)
-            if (a.getName().equals(meta))
-                out.add(a);
-        return out;
+    @Override
+    public Collection<Attribute> getMetadataInstances(String meta) {
+        return metadata.getAttributes();
     }
 
+    @Override
     public void removeMetadata(String meta) {
-        attributePool.removeAll(getMetadataInstances(meta));
+        metadata.removeMetadata(meta);
+    }
+
+    @Override
+    public Object getMetadata(String meta) {
+        return metadata.getMetadata(meta);
     }
 
     @Override
     public boolean hasMetadata(String meta) {
-        return getMetadataInstances(meta).size() > 0;
-    }
-
-    public Attribute getMetadata(String meta) {
-        return getMetadataInstances(meta).iterator().next();
+        return metadata.hasMetadata(meta);
     }
 
     @Override
     public <V> void addMetadata(String meta, V value) {
-        if (value instanceof Attribute)
-            attributePool.add((Attribute) value);
-        else {
-            try {
-                attributePool.add(new XMLAttribute<V>(meta, value));
-            } catch (IOException e) {
-                throw new RuntimeException("could not encode attribute '" + meta + "' with value '" + value + "'", e);
-            }
-        }
+        metadata.addMetadata(meta, value);
     }
 }
