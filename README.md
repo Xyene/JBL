@@ -6,12 +6,10 @@ JBL, as its expanded name might suggest, is a library for manipulating JVM bytec
 ###Performance
 Speed and loading time is always essential when deciding on a library, and we are proud to inform you that JBL is //very// fast. JBL has been tested against other popular bytecode manipulation frameworks, mainly ASM, BCEL, and SERP. The benchmark consisted of an iteration of 500 class loads, and the average time of loading. The results are displayed below.
 
-<code>
-JBL Time: 1ms
-ASM Time: 0ms
-BCEL Time: 3ms
-SERP Time: 10ms
-</code>
+* JBL Time: 1ms
+* ASM Time: 0ms
+* BCEL Time: 3ms
+* SERP Time: 10ms
 
 As is apparent, JBL performs much faster than SERP and BCEL, and almost on par with ASM's performance. The benchmarking code for this experiment can be found in src/test/java/BenchmarkTest.
 
