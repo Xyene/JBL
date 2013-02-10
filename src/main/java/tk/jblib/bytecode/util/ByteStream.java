@@ -7,128 +7,211 @@ import java.util.Arrays;
  * A container designed around the Bytes utility class.
  */
 public class ByteStream implements Flushable {
-    private byte[] bytes;
     private int pos = 0;
+    private DataInputStream in;
+    private DataOutputStream out;
+    private ByteArrayOutputStream array;
 
     public ByteStream(byte[] bytes) {
-        this.bytes = bytes;
+        this(bytes, 0);
     }
 
     public ByteStream() {
-        this.bytes = new byte[]{};
+        this(new byte[0]);
     }
 
     public ByteStream(byte[] bytes, int index) {
-        this.bytes = bytes;
         this.pos = index;
+        in = new DataInputStream(new ByteArrayInputStream(bytes));
+        out = new DataOutputStream(array = new ByteArrayOutputStream(0));
+        try {
+            in.skipBytes(index);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public ByteStream write(byte... byt) {
-        bytes = Bytes.concat(bytes, byt);
+        try {
+            out.write(byt);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
         return this;
     }
 
-    //Ugly hack because calling an overload of write() on a byte will redirect to the short overload...
     public ByteStream write(byte byt) {
-        bytes = Bytes.concat(bytes, byt);
+        try {
+            out.write(byt);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
         return this;
     }
 
-    public ByteStream write(String s) {
-        for (char c : s.toCharArray()) {
-            write(c);
+    public ByteStream write(String utf) {
+        try {
+            out.writeUTF(utf);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
         }
         return this;
     }
 
     public ByteStream write(int i) {
-        write(Bytes.toByteArray(i));
+        try {
+            out.writeInt(i);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
         return this;
     }
 
     public ByteStream write(short s) {
-        write((char) s);
+        try {
+            out.writeShort(s);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
         return this;
     }
 
     public ByteStream write(char c) {
-        write(Bytes.toByteArray((short) c));
+        try {
+            out.writeChar(c);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
         return this;
     }
 
     public boolean readBoolean() {
-        return readByte() != 0;
+        try {
+            pos += 1;
+            return in.readBoolean();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public int readUnsignedByte() {
-        return readByte();
+        try {
+            pos += 1;
+            return in.readUnsignedByte();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public short readShort() {
-        return (short) readUnsignedShort();
+        try {
+            pos += 2;
+            return in.readShort();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public int readUnsignedShort() {
-        return ((readByte() & 0xFF) << 8) + (readByte() & 0xFF);
+        try {
+            pos += 2;
+            return in.readUnsignedShort();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public char readChar() {
-        return (char) readUnsignedShort();
+        try {
+            pos += 2;
+            return in.readChar();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public int readInt() {
-        return ((readByte() & 0xFF) << 24) + ((readByte() & 0xFF) << 16) + ((readByte() & 0xFF) << 8) + (readByte() & 0xFF);
+        try {
+            pos += 4;
+            return in.readInt();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public long readLong() {
-        return (readInt() << 32) + (readInt());
+        try {
+            pos += 8;
+            return in.readLong();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public float readFloat() {
-        return Float.intBitsToFloat(readInt());
+        try {
+            pos += 4;
+            return in.readFloat();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public double readDouble() {
-        return Double.longBitsToDouble(readLong());
+        try {
+            pos += 8;
+            return in.readDouble();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public byte readByte() {
-        if (pos > bytes.length)
-            throw new ArrayIndexOutOfBoundsException("stream holds " + bytes.length + " byte(s), requested " + pos);
-        return bytes[pos++];
+        try {
+            pos += 1;
+            return in.readByte();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public byte[] read(int n) {
-        return Arrays.copyOfRange(bytes, pos, pos += n);
+        byte[] arr = new byte[n];
+        for(int i = 0; i != n; i++)
+            arr[i] = readByte();
+        pos += n;
+        return arr;
     }
 
     public byte[] toByteArray() {
-        return bytes;
-    }
-
-    public ByteStream seek(int pos) {
-        this.pos = pos;
-        return this;
+        try {
+            out.flush();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
+        return array.toByteArray();
     }
 
     public int position() {
         return pos;
     }
 
-    public void backtrack(int n) {
-        pos = pos - n;
-    }
-
-    public int remaining() {
-        return bytes.length - pos;
-    }
-
     public void flush() {
-        bytes = new byte[]{};
+        try {
+            out.flush();
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
     }
 
     public byte[] readFully() {
-        return Bytes.slice(bytes, pos, bytes.length);
+        byte[] out = new byte[0];
+        try {
+            in.readFully(out);
+        } catch (IOException e) {
+            throw new IllegalStateException("data stream ended prematurely", e);
+        }
+        return out;
     }
 
     public String toString() {
