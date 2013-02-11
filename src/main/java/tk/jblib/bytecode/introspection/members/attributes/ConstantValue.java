@@ -49,8 +49,8 @@ public class ConstantValue extends Attribute {
      *
      * @return a constant.
      */
-    public int getConstantIndex() {
-        return constantIndex.getIndex();
+    public int getValue() {
+        return Bytes.toShort(constantIndex.getRawValue(), 0);
     }
 
     /**
@@ -58,7 +58,7 @@ public class ConstantValue extends Attribute {
      *
      * @param index the new index.
      */
-    public void setConstantIndex(int index) {
+    public void setValue(int index) {
         constantIndex.getOwner().set(constantIndex.getIndex(), (constantIndex = new Constant(constantIndex.getIndex(), TAG_INTEGER, Bytes.toByteArray((short) index))));
     }
 }
