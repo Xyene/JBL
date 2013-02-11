@@ -262,6 +262,15 @@ public interface Opcode {
     int H_NEWINVOKESPECIAL = 8;
     int H_INVOKEINTERFACE = 9;
 
+    int JDK_1_1 = 45;
+    int JDK_1_2 = 46;
+    int JDK_1_3 = 47;
+    int JDK_1_4 = 48;
+    int JDK_5 = 49;
+    int JDK_6 = 50;
+    int JDK_7 = 51;
+    int JDK_8 = 52;
+
     //Credit: Javaassist
     int[] STACK_GROWTH = {
             0, // nop, 0
