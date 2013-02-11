@@ -10,8 +10,6 @@ import tk.jblib.bytecode.util.Bytes;
 
 import java.util.*;
 
-import static tk.jblib.bytecode.generation.Groups.JUMPS;
-import static tk.jblib.bytecode.generation.Groups.JUMPS_W;
 import static tk.jblib.bytecode.introspection.Opcode.*;
 
 public class CodeGenerator {
@@ -90,14 +88,19 @@ public class CodeGenerator {
                     instructions.add(table);
                     i += table.trueLen;
                     continue;
+                case INVOKEDYNAMIC:
+                    instructions.add(new Instruction(opcode, address, in.read(4)));
+                    i += 4;
+                    continue;
                 default:
-                    if (JUMPS.contains(opcode)) {
+                    //TODO: readd
+                  /*  if (JUMPS.contains(opcode)) {
                         instructions.add(new Branch(opcode, false, address, Bytes.toShort(in.read(2), 0)));
                         i += 2;
                     } else if (JUMPS_W.contains(opcode)) {
                         instructions.add(new Branch(opcode, true, address, Bytes.toInteger(in.read(4), 0)));
                         i += 4;
-                    } else
+                    } else*/
                         instructions.add(new Instruction(opcode, address, new byte[]{}));
             }
         }
@@ -119,13 +122,18 @@ public class CodeGenerator {
     public CodeGenerator inject(int pc, byte... bytes) {
         length += bytes.length;
         sorted = false;
-        if (pc == -1) {
-            pc = size();
-        }
         //TODO: switch recalibration needs these to already be in, but sorting cannot run if they are in
         instructions.addAll(new CodeGenerator(bytes, pc - 1).instructions);
         expand(pc, bytes.length);
         return this;
+    }
+
+    public CodeGenerator injectEnd(byte... bytes) {
+        return inject(size(), bytes);
+    }
+
+    public CodeGenerator injectStart(byte... bytes) {
+        return inject(0, bytes);
     }
 
     protected int recalculateJump(int pc, int length, int address, int jump) {
@@ -134,7 +142,8 @@ public class CodeGenerator {
             if (length > 0)
                 jump += length;
             else  {
-                jump -= length;}
+                jump -= length;
+            }
         return jump;
     }
 

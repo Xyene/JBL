@@ -206,6 +206,7 @@ public interface Opcode {
     int SWAP = 95;
     int TABLESWITCH = 170;
     int WIDE = 196;
+    int INVOKEDYNAMIC = 186;
 
     int T_BOOLEAN = 4;
     int T_CHAR = 5;
