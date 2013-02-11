@@ -246,6 +246,9 @@ public interface Opcode {
     int TAG_METHOD = 10;
     int TAG_INTERFACE_METHOD = 11;
     int TAG_DESCRIPTOR = 12;
+    int TAG_METHOD_HANDLE = 15;
+    int TAG_METHOD_TYPE = 16;
+    int TAG_INVOKEDYNAMIC = 18;
     int TAG_PHANTOM = -1;
 
     //Credit: Javaassist
