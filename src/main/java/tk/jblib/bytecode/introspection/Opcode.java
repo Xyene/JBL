@@ -251,6 +251,17 @@ public interface Opcode {
     int TAG_INVOKEDYNAMIC = 18;
     int TAG_PHANTOM = -1;
 
+    //For invokedynamic opcodes
+    int H_GETFIELD = 1;
+    int H_GETSTATIC = 2;
+    int H_PUTFIELD = 3;
+    int H_PUTSTATIC = 4;
+    int H_INVOKEVIRTUAL = 5;
+    int H_INVOKESTATIC = 6;
+    int H_INVOKESPECIAL = 7;
+    int H_NEWINVOKESPECIAL = 8;
+    int H_INVOKEINTERFACE = 9;
+
     //Credit: Javaassist
     int[] STACK_GROWTH = {
             0, // nop, 0
