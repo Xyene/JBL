@@ -9,6 +9,7 @@ import tk.jblib.bytecode.util.ByteStream;
 import tk.jblib.bytecode.util.Bytes;
 
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -97,9 +98,8 @@ public class Pool<T> extends LinkedList<T> {
         }
     }
 
+    private final static HashSet<String> recognized = new HashSet<String>(Arrays.asList("Code", "ConstantValue", "LineNumberTable", "LocalVariableTable", "SourceFile"));
     public static final Parser<Attribute> ATTRIBUTE_PARSER = new Parser<Attribute>() {
-        final List<String> recognized = Arrays.asList("Code", "ConstantValue", "LineNumberTable", "LocalVariableTable", "SourceFile");
-
         @Override
         public Attribute parse(ByteStream stream, Pool<Constant> pool, Pool<Attribute> owner) {
             Constant name = pool.get(stream.readShort());
@@ -161,6 +161,7 @@ public class Pool<T> extends LinkedList<T> {
                     break;
                 case TAG_CLASS:
                 case TAG_STRING:
+                case TAG_METHOD_TYPE:
                     par = new Constant(info, stream.read(2));
                     break;
                 case TAG_INTEGER:
@@ -169,6 +170,7 @@ public class Pool<T> extends LinkedList<T> {
                 case TAG_METHOD:
                 case TAG_INTERFACE_METHOD:
                 case TAG_DESCRIPTOR:
+                case TAG_INVOKEDYNAMIC:
                     par = new Constant(info, stream.read(4));
                     break;
                 case TAG_LONG:
@@ -177,6 +179,9 @@ public class Pool<T> extends LinkedList<T> {
                     phantom.setOwner(owner);
                     owner.add(phantom);
                     par = new Constant(TAG_PHANTOM, null);
+                    break;
+                case TAG_METHOD_HANDLE:
+                    par = new Constant(info, stream.read(3));
                     break;
                 default:
                     par = new Constant(TAG_PHANTOM, null);
