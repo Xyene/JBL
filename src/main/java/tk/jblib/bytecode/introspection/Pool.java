@@ -114,6 +114,8 @@ public class Pool<T> extends LinkedList<T> {
                 return new LineNumberTable(stream, name);
             } else if (str.equals("LocalVariableTable")) {
                 return new LocalVariableTable(stream, name, pool);
+            } else if (str.equals("Signature")) {
+                return new Signature(stream, name, pool);
             } else if (str.equals("SourceFile")) {
                 return new SourceFile(stream, name, pool);
             }
