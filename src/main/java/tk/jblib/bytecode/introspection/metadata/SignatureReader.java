@@ -8,7 +8,7 @@ import java.util.regex.Pattern;
 /**
  * Reads field & method signatures, and provides information on them.
  */
-public class SignatureReader { //TODO: validate(String) for checking if a signature is valid
+public class SignatureReader {
 
     protected String returnType;
     protected LinkedList<String> parameterTypes = new LinkedList<String>();
@@ -90,7 +90,7 @@ public class SignatureReader { //TODO: validate(String) for checking if a signat
                     arrayDepth = 0;
                     break;
                 default:
-                    if (c != 'Z' && c != 'I' && c != 'F' && c != 'J' && c != 'V')
+                    if (c != 'Z' && c != 'I' && c != 'F' && c != 'J' && c != 'V' && c != 'C' && c != 'S' && c != 'B' && c != 'D')
                         throw new VerifyError("invalid type char '" + c + "' in descriptor");
                     params.add(repeat("[", arrayDepth) + c);
                     remainingParams = remainingParams.substring(1, remainingParams.length());
