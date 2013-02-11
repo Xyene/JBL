@@ -55,9 +55,14 @@ public interface Metadatable<T> {
 
         public Object getMetadata(String meta) {
             Attribute ab = getMetadataInstances(meta).iterator().next();
-            if (ab instanceof UnknownAttribute && dispatch.containsKey(ab.getName())) {
+            String name = ab.getName();
+            if (ab instanceof UnknownAttribute && dispatch.containsKey(name)) {
                 UnknownAttribute data = (UnknownAttribute) ab;
-                switch (dispatch.get(data.getName())) {
+
+                if(name.equals("SourceFile") || name.equals("Signature"))
+                    return constants.get(Bytes.toShort(data.getValue(), 0)).stringValue();
+
+                switch (dispatch.get(name)) {
                     case TAG_UTF_STRING:
                         return new String(data.getValue());
                     case TAG_DOUBLE:
@@ -86,6 +91,12 @@ public interface Metadatable<T> {
                         attributes.add((Attribute) value);
                         return;
                     }
+
+                    if(meta.equals("SourceFile") || meta.equals("Signature")) {
+                        constants.add(new Constant(TAG_UTF_STRING, meta.getBytes()));
+                        return;
+                    }
+
                     byte[] data;
                     int tag;
                     if (value != null) {

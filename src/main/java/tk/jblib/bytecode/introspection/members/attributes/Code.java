@@ -47,7 +47,7 @@ public class Code extends Attribute {
         ByteStream out = new ByteStream();
         out.write((short) maxStack);
         out.write((short) maxLocals);
-        out.write(Bytes.toByteArray(codePool.length));
+        out.write(codePool.length);
         out.write(codePool);
         out.write(exceptionPool.getBytes());
         out.write(attributePool.getBytes());
