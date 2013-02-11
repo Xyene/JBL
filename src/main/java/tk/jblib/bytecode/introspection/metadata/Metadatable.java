@@ -59,8 +59,11 @@ public interface Metadatable<T> {
             if (ab instanceof UnknownAttribute && dispatch.containsKey(name)) {
                 UnknownAttribute data = (UnknownAttribute) ab;
 
-                if(name.equals("SourceFile") || name.equals("Signature"))
+                if (name.equals("SourceFile") || name.equals("Signature"))
                     return constants.get(Bytes.toShort(data.getValue(), 0)).stringValue();
+                if (name.equals("ConstantValue"))
+                    //Integer.parseInt because getRawValue is dependent on if the constant value points to a long, int, or short TODO: clean up
+                    return Integer.parseInt(constants.get(Bytes.toShort(data.getValue(), 0)).stringValue());
 
                 switch (dispatch.get(name)) {
                     case TAG_UTF_STRING:
@@ -91,41 +94,52 @@ public interface Metadatable<T> {
                         attributes.add((Attribute) value);
                         return;
                     }
-
-                    if(meta.equals("SourceFile") || meta.equals("Signature")) {
-                        constants.add(new Constant(TAG_UTF_STRING, meta.getBytes()));
-                        return;
-                    }
-
                     byte[] data;
-                    int tag;
-                    if (value != null) {
-                        if (value instanceof String) {
-                            data = ((String) value).getBytes();
-                            tag = TAG_UTF_STRING;
-                        } else if (value instanceof Double || value instanceof Float) {
-                            data = Bytes.toByteArray(((Double) value));
-                            tag = TAG_DOUBLE;
-                        } else if (value instanceof Short) {
-                            data = Bytes.toByteArray(((Short) value));
-                            tag = 13;
-                        } else if (value instanceof Byte) {
-                            data = new byte[]{(Byte) value};
-                            tag = 14;
-                        } else if (value instanceof Boolean) {
-                            data = new byte[]{(byte) (((Boolean) value) ? 1 : 0)};
-                            tag = 15;
-                        } else if (value instanceof Long) {
-                            data = Bytes.toByteArray((Long) value);
-                            tag = TAG_LONG;
-                        } else {
-                            data = xmlBytes(value);
-                            tag = 16;
-                        }
-                        dispatch.put(meta, tag);
-                    } else
-                        data = new byte[]{}; //Some attributes, like Deprecated, Synthetic etc work on the basis of being present, nothing else.
 
+                    if (meta.equals("SourceFile") || meta.equals("Signature")) {
+                        constants.add(new Constant(TAG_UTF_STRING, meta.getBytes()));
+                        data = Bytes.toByteArray((short) constants.size());
+                    } else if (meta.equals("ConstantValue")) {
+                        if (value instanceof Long)
+                            constants.add(new Constant(TAG_LONG, Bytes.toByteArray((Long) value)));
+                        else if (value instanceof Double)
+                            constants.add(new Constant(TAG_DOUBLE, Bytes.toByteArray((Double) value)));
+                        else if (value instanceof Integer)
+                            constants.add(new Constant(TAG_INTEGER, Bytes.toByteArray((Integer) value)));
+                        else if (value instanceof Float)
+                            constants.add(new Constant(TAG_FLOAT, Bytes.toByteArray((Float) value)));
+                        else
+                            throw new IllegalArgumentException("value for ConstantValue must be of type long, double, integer, or float");
+                        data = Bytes.toByteArray((short) constants.size());
+                    } else {
+                        int tag;
+                        if (value != null) {
+                            if (value instanceof String) {
+                                data = ((String) value).getBytes();
+                                tag = TAG_UTF_STRING;
+                            } else if (value instanceof Double || value instanceof Float) {
+                                data = Bytes.toByteArray(((Double) value));
+                                tag = TAG_DOUBLE;
+                            } else if (value instanceof Short) {
+                                data = Bytes.toByteArray(((Short) value));
+                                tag = 13;
+                            } else if (value instanceof Byte) {
+                                data = new byte[]{(Byte) value};
+                                tag = 14;
+                            } else if (value instanceof Boolean) {
+                                data = new byte[]{(byte) (((Boolean) value) ? 1 : 0)};
+                                tag = 15;
+                            } else if (value instanceof Long) {
+                                data = Bytes.toByteArray((Long) value);
+                                tag = TAG_LONG;
+                            } else {
+                                data = xmlBytes(value);
+                                tag = 16;
+                            }
+                            dispatch.put(meta, tag);
+                        } else
+                            data = new byte[]{}; //Some attributes, like Deprecated, Synthetic etc work on the basis of being present, nothing else.
+                    }
                     UnknownAttribute encoded = new UnknownAttribute();
                     encoded.setName(meta);
                     encoded.setValue(data);
