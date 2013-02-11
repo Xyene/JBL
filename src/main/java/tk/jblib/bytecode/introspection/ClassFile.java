@@ -17,7 +17,7 @@ import static tk.jblib.bytecode.introspection.Opcode.TAG_UTF_STRING;
 /**
  * A class file structure, used for introspection and modification of classes.
  */
-public class ClassFile extends AccessibleMember implements Metadatable<Attribute>{
+public class ClassFile extends AccessibleMember implements Metadatable<Attribute> {
 
     protected int majorVersion;
     protected int minorVersion;
@@ -41,6 +41,8 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
 
         minorVersion = in.readShort();
         majorVersion = in.readShort();
+        if(minorVersion > Opcode.JDK_8)
+            throw new UnsupportedOperationException("unknown major version: " + majorVersion);
 
         constantPool = new Pool<Constant>(in, Pool.CONSTANT_PARSER);
 
@@ -77,13 +79,13 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      */
     public byte[] getBytes() {
         ByteStream out = new ByteStream();
-        out.write(Bytes.toByteArray(0xCAFEBABE));
-        out.write(Bytes.toByteArray((short) minorVersion));
-        out.write(Bytes.toByteArray((short) majorVersion));
+        out.write(0xCAFEBABE);
+        out.write((short) minorVersion);
+        out.write((short) majorVersion);
         out.write(constantPool.getBytes());
-        out.write(Bytes.toByteArray((short) flag));
-        out.write(Bytes.toByteArray((short) thisClass.getIndex()));
-        out.write(Bytes.toByteArray((short) superClass.getIndex()));
+        out.write((short) flag);
+        out.write((short) thisClass.getIndex());
+        out.write((short) superClass.getIndex());
         out.write(interfacePool.getBytes());
         out.write(fieldPool.getBytes());
         out.write(methodPool.getBytes());
