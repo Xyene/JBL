@@ -208,6 +208,11 @@ public interface Opcode {
     int WIDE = 196;
     int INVOKEDYNAMIC = 186;
 
+    //Implementation - specific opcodes
+    int BREAKPOINT = 202;
+    int IMPDEP1 = 254;
+    int IMPDEP2 = 255;
+
     int T_BOOLEAN = 4;
     int T_CHAR = 5;
     int T_FLOAT = 6;
@@ -460,7 +465,7 @@ public interface Opcode {
             0, // invokespecial, 183        depends on the type
             0, // invokestatic, 184         depends on the type
             0, // invokeinterface, 185      depends on the type
-            0, // undefined, 186
+            0, // invokedynamic, 186        depends on the type
             1, // new, 187
             0, // newarray, 188
             0, // anewarray, 189
