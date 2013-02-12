@@ -5,6 +5,7 @@ import tk.jblib.bytecode.introspection.Member;
 import tk.jblib.bytecode.introspection.Pool;
 import tk.jblib.bytecode.introspection.members.Attribute;
 import tk.jblib.bytecode.introspection.members.Constant;
+import tk.jblib.bytecode.introspection.members.Interface;
 
 import java.util.Collection;
 import java.util.LinkedList;
@@ -45,6 +46,14 @@ public class ClassAdapter {
             clazz.setSuperClass(cv.visitSuperClass(clazz.getSuperClass()));
 
             cv.visitInterfacePool(clazz.getInterfaces());
+
+            Pool<Interface> interfaces = clazz.getInterfaces();
+            cv.visitInterfacePool(interfaces);
+            for (int i = 0; i != interfaces.size(); i++) {
+                Interface in = interfaces.get(i);
+                cv.visitInterface(in);
+                interfaces.set(i, in);
+            }
 
             Pool<Constant> constants = clazz.getConstants();
             cv.visitConstantPool(constants);
