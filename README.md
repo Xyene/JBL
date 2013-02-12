@@ -1,5 +1,5 @@
-JBL - Java Bytecode Library [![Build Status](http://jenkins-javabl.rhcloud.com/job/JBL/badge/icon)](http://jenkins-javabl.rhcloud.com/job/JBL/) 
-=========================== 
+JBL - Java Bytecode Library [![Build Status](http://jenkins-icyene.rhcloud.com/job/JBL/badge/icon)](http://jenkins-icyene.rhcloud.com/job/JBL/)
+==========================
 JBL, as its expanded name might suggest, is a library for manipulating JVM bytecode on the fly. It is written, as one might expect, in Java. Bytecode support for other languages is planned, but currently not supported. JBL attempts to merge the things which make other bytecode libraries, namely ASM, BCEL, and SERP useful, maintaining an equally simply (and sometimes simpler!) api, while not sacrificing usability by enforcing visitor pattern usage. JBL abstracts the internal bytecode in class files to trivial notions, yet also allows the delving into direct class pool manipulation et al. It also provides structures for doing common things (like class reference remapping), and has a simple OO structure making it easy for you to define your own. Additionally, each JBL object has methods you'd logically expect it to have, making it relatively simple to do work even without constantly glancing at the JBL JavaDocs.
 
 ##Resources
