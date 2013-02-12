@@ -21,12 +21,12 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
 
     protected int majorVersion;
     protected int minorVersion;
-    protected Pool<Constant> constantPool;
+    protected Pool<Constant> constants;
     protected Constant thisClass;
     protected Constant superClass;
-    protected Pool<Interface> interfacePool;
-    protected Pool<Member> fieldPool;
-    protected Pool<Member> methodPool;
+    protected Pool<Interface> interfaces;
+    protected Pool<Member> fields;
+    protected Pool<Member> methods;
     protected Metadatable.Container metadata;
 
     /**
@@ -44,16 +44,16 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
         if(minorVersion > Opcode.JDK_8)
             throw new UnsupportedOperationException("unknown major version: " + majorVersion);
 
-        constantPool = new Pool<Constant>(in, Pool.CONSTANT_PARSER);
+        constants = new Pool<Constant>(in, Pool.CONSTANT_PARSER);
 
         flag = in.readShort();
-        thisClass = constantPool.get(in.readShort());
-        superClass = constantPool.get(in.readShort());
+        thisClass = constants.get(in.readShort());
+        superClass = constants.get(in.readShort());
 
-        interfacePool = new Pool<Interface>(in, Pool.INTERFACE_PARSER, constantPool);
-        fieldPool = new Pool<Member>(in, Pool.MEMBER_PARSER, constantPool);
-        methodPool = new Pool<Member>(in, Pool.MEMBER_PARSER, constantPool);
-        metadata = new Metadatable.Container(new Pool<Attribute>(in, Pool.ATTRIBUTE_PARSER, constantPool), constantPool);
+        interfaces = new Pool<Interface>(in, Pool.INTERFACE_PARSER, constants);
+        fields = new Pool<Member>(in, Pool.MEMBER_PARSER, constants);
+        methods = new Pool<Member>(in, Pool.MEMBER_PARSER, constants);
+        metadata = new Metadatable.Container(new Pool<Attribute>(in, Pool.ATTRIBUTE_PARSER, constants), constants);
     }
 
     /**
@@ -74,6 +74,9 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
         this(Bytes.read(file));
     }
 
+    public ClassFile() {
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -82,13 +85,13 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
         out.write(0xCAFEBABE);
         out.write((short) minorVersion);
         out.write((short) majorVersion);
-        out.write(constantPool.getBytes());
+        out.write(constants.getBytes());
         out.write((short) flag);
         out.write((short) thisClass.getIndex());
         out.write((short) superClass.getIndex());
-        out.write(interfacePool.getBytes());
-        out.write(fieldPool.getBytes());
-        out.write(methodPool.getBytes());
+        out.write(interfaces.getBytes());
+        out.write(fields.getBytes());
+        out.write(methods.getBytes());
         out.write(metadata.getAttributes().getBytes());
         return out.toByteArray();
     }
@@ -147,17 +150,17 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a constant pool.
      */
-    public Pool<Constant> getConstantPool() {
-        return constantPool;
+    public Pool<Constant> getConstants() {
+        return constants;
     }
 
     /**
      * Sets this class' constant pool.
      *
-     * @param constantPool the pool to set it to.
+     * @param constants the pool to set it to.
      */
-    public void setConstantPool(Pool<Constant> constantPool) {
-        this.constantPool = constantPool;
+    public void setConstants(Pool<Constant> constants) {
+        this.constants = constants;
     }
 
     /**
@@ -201,17 +204,17 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return an interface pool.
      */
-    public Pool<Interface> getInterfacePool() {
-        return interfacePool;
+    public Pool<Interface> getInterfaces() {
+        return interfaces;
     }
 
     /**
      * Sets this class' interface pool.
      *
-     * @param interfacePool the pool to set it to.
+     * @param interfaces the pool to set it to.
      */
-    public void setInterfacePool(Pool<Interface> interfacePool) {
-        this.interfacePool = interfacePool;
+    public void setInterfaces(Pool<Interface> interfaces) {
+        this.interfaces = interfaces;
     }
 
     /**
@@ -219,17 +222,17 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a field pool.
      */
-    public Pool<Member> getFieldPool() {
-        return fieldPool;
+    public Pool<Member> getFields() {
+        return fields;
     }
 
     /**
      * Sets this class' field pool.
      *
-     * @param fieldPool the pool to set it to.
+     * @param fields the pool to set it to.
      */
-    public void setFieldPool(Pool<Member> fieldPool) {
-        this.fieldPool = fieldPool;
+    public void setFields(Pool<Member> fields) {
+        this.fields = fields;
     }
 
     /**
@@ -237,17 +240,17 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a method pool.
      */
-    public Pool<Member> getMethodPool() {
-        return methodPool;
+    public Pool<Member> getMethods() {
+        return methods;
     }
 
     /**
      * Sets this class' method pool.
      *
-     * @param methodPool the pool to set it to.
+     * @param methods the pool to set it to.
      */
-    public void setMethodPool(Pool<Member> methodPool) {
-        this.methodPool = methodPool;
+    public void setMethods(Pool<Member> methods) {
+        this.methods = methods;
     }
 
     /**
@@ -255,7 +258,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a method pool.
      */
-    public Pool<Attribute> getAttributePool() {
+    public Pool<Attribute> getAttributes() {
         return metadata.getAttributes();
     }
 
@@ -264,7 +267,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param attributePool the pool to set it to.
      */
-    public void setAttributePool(Pool<Attribute> attributePool) {
+    public void setAttributes(Pool<Attribute> attributePool) {
         metadata.setAttributes(attributePool);
     }
 

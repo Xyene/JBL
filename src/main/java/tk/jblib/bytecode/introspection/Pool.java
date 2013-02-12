@@ -98,22 +98,15 @@ public class Pool<T> extends LinkedList<T> {
         }
     }
 
-    private final static HashSet<String> recognized = new HashSet<String>(Arrays.asList("Code", "LineNumberTable", "LocalVariableTable"));
     public static final Parser<Attribute> ATTRIBUTE_PARSER = new Parser<Attribute>() {
         @Override
         public Attribute parse(ByteStream stream, Pool<Constant> pool, Pool<Attribute> owner) {
             Constant name = pool.get(stream.readShort());
             String str = name.stringValue();
-            if (!recognized.contains(str)) {
-                return new UnknownAttribute(stream, name);
-            } else if (str.equals("Code")) {
-                return new Code(stream, name, pool);
-            } else if (str.equals("LineNumberTable")) {
-                return new LineNumberTable(stream, name);
-            } else if (str.equals("LocalVariableTable")) {
-                return new LocalVariableTable(stream, name, pool);
-            }
-            return null;
+            if (str.equals("Code")) return new Code(stream, name, pool);
+            else if (str.equals("LineNumberTable")) return new LineNumberTable(stream, name);
+            else if (str.equals("LocalVariableTable")) return new LocalVariableTable(stream, name, pool);
+            else return new UnknownAttribute(stream, name);
         }
 
         @Override

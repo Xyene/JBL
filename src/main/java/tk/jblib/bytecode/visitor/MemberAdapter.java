@@ -35,13 +35,15 @@ public class MemberAdapter {
             member.setName(mv.visitName(member.getName()));
             member.setDescriptor(mv.visitDescriptor(member.getDescriptor()));
 
-            Pool<Attribute> attrs = member.getAttributePool();
+            Pool<Attribute> attrs = member.getAttributes();
             mv.visitAttributePool(attrs);
             for (int i = 0; i != attrs.size(); i++) {
                 Attribute a = attrs.get(i);
                 mv.visitAttribute(a);
                 attrs.set(i, a);
             }
+
+            mv.visitEnd();
         }
     }
 

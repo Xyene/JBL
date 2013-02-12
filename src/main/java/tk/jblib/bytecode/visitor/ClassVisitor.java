@@ -7,39 +7,39 @@ import tk.jblib.bytecode.introspection.members.Attribute;
 import tk.jblib.bytecode.introspection.members.Constant;
 import tk.jblib.bytecode.introspection.members.Interface;
 
-public abstract interface ClassVisitor {
+public interface ClassVisitor {
 
-    abstract void visitAttribute(Attribute a);
+    void visitAttribute(Attribute a);
 
-    abstract void visitConstant(Constant c);
+    void visitConstant(Constant c);
 
-    abstract void visitMethodPool(Pool<Member> methods);
+    void visitMethodPool(Pool<Member> methods);
 
-    abstract void visitFieldPool(Pool<Member> fields);
+    void visitFieldPool(Pool<Member> fields);
 
-    abstract void visitClass(ClassFile clazz);
+    void visitClass(ClassFile clazz);
 
-    abstract int visitAccessFlags(int mask);
+    int visitAccessFlags(int mask);
 
-    abstract String visitName(String name);
+    String visitName(String name);
 
-    abstract void visitConstantPool(Pool<Constant> constantPool);
+    void visitConstantPool(Pool<Constant> constantPool);
 
-    abstract void visitMember(Member m);
+    void visitMember(Member m);
 
-    abstract void visitMethod(Member method);
+    void visitMethod(Member method);
 
-    abstract void visitField(Member field);
+    void visitField(Member field);
 
-    abstract void visitAttributePool(Pool<Attribute> attributePool);
+    void visitAttributePool(Pool<Attribute> attributePool);
 
-    abstract void visitInterfacePool(Pool<Interface> interfacePool);
+    void visitInterfacePool(Pool<Interface> interfacePool);
 
-    abstract int visitMinorVersion(int minorVersion);
+    int visitMinorVersion(int minorVersion);
 
-    abstract int visitMajorVersion(int majorVersion);
+    int visitMajorVersion(int majorVersion);
 
-    abstract String visitSuperClass(String superClass);
+    String visitSuperClass(String superClass);
 
-    abstract void visitEnd();
+    void visitEnd();
 }

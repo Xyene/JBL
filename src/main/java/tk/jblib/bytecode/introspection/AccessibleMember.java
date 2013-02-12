@@ -170,6 +170,14 @@ public class AccessibleMember {
         flag = i ? flag | ACC_STRICT : flag & ~ACC_STRICT;
     }
 
+    public boolean isVolatile() {
+        return is(ACC_VOLATILE);
+    }
+
+    public void setVolatile(boolean i) {
+        flag = i ? flag | ACC_VOLATILE : flag & ~ACC_VOLATILE;
+    }
+
     /**
      * Checks if this member matches the given mask, determined by a flag & mask > 0 operation.
      *

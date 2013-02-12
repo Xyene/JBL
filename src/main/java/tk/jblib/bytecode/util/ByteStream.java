@@ -4,13 +4,14 @@ import java.io.*;
 import java.util.Arrays;
 
 /**
- * A container designed around the Bytes utility class.
+ * A one-size-fit-all IO stream
  */
 public class ByteStream implements Flushable {
     private int pos = 0;
     private DataInputStream in;
     private DataOutputStream out;
     private ByteArrayOutputStream array;
+    private final String err = "data stream ended prematurely";
 
     public ByteStream(byte[] bytes) {
         this(bytes, 0);
@@ -27,7 +28,7 @@ public class ByteStream implements Flushable {
         try {
             in.skipBytes(index);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+            throw new IllegalStateException(err, e);
         }
     }
 
@@ -35,7 +36,7 @@ public class ByteStream implements Flushable {
         try {
             out.write(byt);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+            throw new IllegalStateException(err, e);
         }
         return this;
     }
@@ -44,7 +45,7 @@ public class ByteStream implements Flushable {
         try {
             out.write(byt);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return this;
     }
@@ -53,7 +54,7 @@ public class ByteStream implements Flushable {
         try {
             out.writeUTF(utf);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return this;
     }
@@ -62,7 +63,7 @@ public class ByteStream implements Flushable {
         try {
             out.writeInt(i);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return this;
     }
@@ -71,7 +72,7 @@ public class ByteStream implements Flushable {
         try {
             out.writeShort(s);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return this;
     }
@@ -80,7 +81,7 @@ public class ByteStream implements Flushable {
         try {
             out.writeChar(c);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return this;
     }
@@ -90,7 +91,7 @@ public class ByteStream implements Flushable {
             pos += 1;
             return in.readBoolean();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -99,7 +100,7 @@ public class ByteStream implements Flushable {
             pos += 1;
             return in.readUnsignedByte();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -108,7 +109,7 @@ public class ByteStream implements Flushable {
             pos += 2;
             return in.readShort();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -117,7 +118,7 @@ public class ByteStream implements Flushable {
             pos += 2;
             return in.readUnsignedShort();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -126,7 +127,7 @@ public class ByteStream implements Flushable {
             pos += 2;
             return in.readChar();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -135,7 +136,7 @@ public class ByteStream implements Flushable {
             pos += 4;
             return in.readInt();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -144,7 +145,7 @@ public class ByteStream implements Flushable {
             pos += 8;
             return in.readLong();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -153,7 +154,7 @@ public class ByteStream implements Flushable {
             pos += 4;
             return in.readFloat();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -162,7 +163,7 @@ public class ByteStream implements Flushable {
             pos += 8;
             return in.readDouble();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -171,7 +172,7 @@ public class ByteStream implements Flushable {
             pos += 1;
             return in.readByte();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -187,7 +188,7 @@ public class ByteStream implements Flushable {
         try {
             out.flush();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return array.toByteArray();
     }
@@ -200,7 +201,7 @@ public class ByteStream implements Flushable {
         try {
             out.flush();
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
     }
 
@@ -209,13 +210,13 @@ public class ByteStream implements Flushable {
         try {
             in.readFully(out);
         } catch (IOException e) {
-            throw new IllegalStateException("data stream ended prematurely", e);
+          throw new IllegalStateException(err, e);
         }
         return out;
     }
 
     public String toString() {
-        return "{ByteStream" + Bytes.bytesToString(toByteArray()) + "}";
+        return "{ByteStream" + Arrays.toString(toByteArray()) + "}";
     }
 }
 

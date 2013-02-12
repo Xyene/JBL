@@ -44,9 +44,9 @@ public class ClassAdapter {
             clazz.setName(cv.visitName(clazz.getName()));
             clazz.setSuperClass(cv.visitSuperClass(clazz.getSuperClass()));
 
-            cv.visitInterfacePool(clazz.getInterfacePool());
+            cv.visitInterfacePool(clazz.getInterfaces());
 
-            Pool<Constant> constants = clazz.getConstantPool();
+            Pool<Constant> constants = clazz.getConstants();
             cv.visitConstantPool(constants);
             for (int i = 1; i != constants.size(); i++) {
                 Constant c = constants.get(i);
@@ -54,7 +54,7 @@ public class ClassAdapter {
                 constants.set(i, c);
             }
 
-            Pool<Member> fields = clazz.getFieldPool();
+            Pool<Member> fields = clazz.getFields();
             cv.visitFieldPool(fields);
             for (int i = 0; i != fields.size(); i++) {
                 Member f = fields.get(i);
@@ -63,7 +63,7 @@ public class ClassAdapter {
                 fields.set(i, f);
             }
 
-            Pool<Member> methods = clazz.getMethodPool();
+            Pool<Member> methods = clazz.getMethods();
             cv.visitMethodPool(methods);
             for (int i = 0; i != methods.size(); i++) {
                 Member m = methods.get(i);
@@ -72,13 +72,15 @@ public class ClassAdapter {
                 methods.set(i, m);
             }
 
-            Pool<Attribute> attrs = clazz.getAttributePool();
+            Pool<Attribute> attrs = clazz.getAttributes();
             cv.visitAttributePool(attrs);
             for (int i = 0; i != attrs.size(); i++) {
                 Attribute a = attrs.get(i);
                 cv.visitAttribute(a);
                 attrs.set(i, a);
             }
+
+            cv.visitEnd();
         }
     }
 }

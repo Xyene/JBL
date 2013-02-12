@@ -1,7 +1,6 @@
 package tk.jblib.bytecode.util;
 
 import java.io.*;
-import java.util.Arrays;
 
 /**
  * Utility class for operations on byte( array)s.
@@ -67,10 +66,6 @@ public class Bytes {
         return new byte[]{(byte) (in >> 24), (byte) (in >>> 16), (byte) (in >>> 8), (byte) in};
     }
 
-    public static byte[] slice(byte[] bytes, int start, int end) {
-        return Arrays.copyOfRange(bytes, start, end);
-    }
-
     public static byte[] read(InputStream stream) throws IOException {
         ByteArrayOutputStream buffer = new ByteArrayOutputStream();
         byte[] data = new byte[655653];
@@ -82,16 +77,6 @@ public class Bytes {
 
     public static byte[] read(File file) throws IOException {
         return read(new FileInputStream(file));
-    }
-
-    public static String bytesToString(byte... bytes) {
-        StringBuilder build = new StringBuilder();
-        if (bytes == null)
-            return "[]";
-        for (int i = 0; i != bytes.length; i++) {
-            build.append(bytes[i]).append(i < bytes.length - 1 ? ", " : "");
-        }
-        return "[" + build.toString() + "]";
     }
 
     public static void writeBytesToFile(byte[] bytes, String file) throws IOException {

@@ -4,17 +4,19 @@ import tk.jblib.bytecode.introspection.Member;
 import tk.jblib.bytecode.introspection.Pool;
 import tk.jblib.bytecode.introspection.members.Attribute;
 
-public abstract interface MemberVisitor {
+public interface MemberVisitor {
 
-    public abstract void visitAttribute(Attribute a);
+    void visitAttribute(Attribute a);
 
-    public abstract void visitMember(Member member);
+    void visitMember(Member member);
 
-    public abstract int visitAccessFlags(int mask);
+    int visitAccessFlags(int mask);
 
-    public abstract String visitName(String name);
+    String visitName(String name);
 
-    public abstract String visitDescriptor(String descriptor);
+    String visitDescriptor(String descriptor);
 
-    public abstract void visitAttributePool(Pool<Attribute> attributePool);
+    void visitAttributePool(Pool<Attribute> attributePool);
+
+    void visitEnd();
 }

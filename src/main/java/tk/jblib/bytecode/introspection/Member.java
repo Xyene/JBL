@@ -84,7 +84,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      *
      * @return the attribute pool of this member.
      */
-    public Pool<Attribute> getAttributePool() {
+    public Pool<Attribute> getAttributes() {
         return metadata.getAttributes();
     }
 
@@ -93,7 +93,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      *
      * @param attributePool the new attribute pool.
      */
-    public void setAttributePool(Pool<Attribute> attributePool) {
+    public void setAttributes(Pool<Attribute> attributePool) {
         metadata.setAttributes(attributePool);
     }
 
@@ -103,7 +103,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      * @return True if this member is deprecated, false otherwise.
      */
     public boolean isDeprecated() {
-        return metadata.getAttributes().contains("Deprecated");
+        return metadata.hasMetadata("Deprecated");
     }
 
     /**
@@ -112,7 +112,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      * @param flag True if intent is to make this member deprecated, false if it is to make it not deprecated.
      */
     public void setDeprecated(boolean flag) {
-        if (flag && !metadata.getAttributes().contains("Deprecated")) {
+        if (flag && !isDeprecated()) {
             metadata.addMetadata("Deprecated", null);
         } else {
             metadata.removeMetadata("Deprecated");

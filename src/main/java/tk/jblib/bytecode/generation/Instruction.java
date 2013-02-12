@@ -1,7 +1,8 @@
 package tk.jblib.bytecode.generation;
 
-import tk.jblib.bytecode.util.ByteStream;
 import tk.jblib.bytecode.util.Bytes;
+
+import java.util.Arrays;
 
 public class Instruction {
     int address, opcode, trueLen;
@@ -52,6 +53,6 @@ public class Instruction {
     }
 
     public String toString() {
-        return String.format("[Opcode @ %s of type %s with args %s]", address, opcode, Bytes.bytesToString(args));
+        return String.format("[Opcode @ %s of type %s with args %s]", address, opcode, Arrays.toString(args));
     }
 }

@@ -61,15 +61,24 @@ public interface Metadatable<T> {
 
                 if (name.equals("SourceFile") || name.equals("Signature"))
                     return constants.get(Bytes.toShort(data.getValue(), 0)).stringValue();
-                if (name.equals("ConstantValue"))
-                    //Integer.parseInt because getRawValue is dependent on if the constant value points to a long, int, or short TODO: clean up
-                    return Integer.parseInt(constants.get(Bytes.toShort(data.getValue(), 0)).stringValue());
+                if (name.equals("ConstantValue"))   {
+                    Constant value = constants.get(Bytes.toShort(data.getValue(), 0));
+                    switch(value.getType()) {
+                        case TAG_UTF_STRING:
+                            return new String(value.getRawValue());
+                        case TAG_DOUBLE:
+                        case TAG_LONG:
+                            return Bytes.toDouble(value.getRawValue(), 0);
+                        case TAG_FLOAT:
+                        case TAG_INTEGER:
+                            return Bytes.toInteger(value.getRawValue(), 0);
+                    }
+                }
 
                 switch (dispatch.get(name)) {
                     case TAG_UTF_STRING:
                         return new String(data.getValue());
                     case TAG_DOUBLE:
-                        return Bytes.toDouble(data.getValue(), 0);
                     case TAG_LONG:
                         return Bytes.toLong(data.getValue(), 0);
                     case TAG_INTEGER:
@@ -94,23 +103,21 @@ public interface Metadatable<T> {
                         attributes.add((Attribute) value);
                         return;
                     }
+
                     byte[] data;
 
+                    //SourceFile & Signature share the same structure: to avoid their own class we can just do this
                     if (meta.equals("SourceFile") || meta.equals("Signature")) {
                         constants.add(new Constant(TAG_UTF_STRING, meta.getBytes()));
                         data = Bytes.toByteArray((short) constants.size());
                     } else if (meta.equals("ConstantValue")) {
-                        if (value instanceof Long)
-                            constants.add(new Constant(TAG_LONG, Bytes.toByteArray((Long) value)));
-                        else if (value instanceof Double)
-                            constants.add(new Constant(TAG_DOUBLE, Bytes.toByteArray((Double) value)));
-                        else if (value instanceof Integer)
-                            constants.add(new Constant(TAG_INTEGER, Bytes.toByteArray((Integer) value)));
-                        else if (value instanceof Float)
-                            constants.add(new Constant(TAG_FLOAT, Bytes.toByteArray((Float) value)));
-                        else
-                            throw new IllegalArgumentException("value for ConstantValue must be of type long, double, integer, or float");
-                        data = Bytes.toByteArray((short) constants.size());
+                        //Constant values depend on the type of generic value
+                        if (value instanceof Long)         constants.add(new Constant(TAG_LONG, Bytes.toByteArray((Long) value)));
+                        else if (value instanceof Double)  constants.add(new Constant(TAG_DOUBLE, Bytes.toByteArray((Double) value)));
+                        else if (value instanceof Integer) constants.add(new Constant(TAG_INTEGER, Bytes.toByteArray((Integer) value)));
+                        else if (value instanceof Float)   constants.add(new Constant(TAG_FLOAT, Bytes.toByteArray((Float) value)));
+                        else throw new IllegalArgumentException("value for ConstantValue must be of type long, double, integer, or float");
+                        data = Bytes.toByteArray((short) constants.getLast().getIndex()); //Point to the last index: the constant we just added
                     } else {
                         int tag;
                         if (value != null) {
@@ -150,15 +157,7 @@ public interface Metadatable<T> {
         }
 
         public Pool<Attribute> getAttributes() {
-            save(); //Update keystore
-            return attributes;
-        }
-
-        public void setAttributes(Pool<Attribute> attributes) {
-            this.attributes = attributes;
-        }
-
-        public void save() {
+            //Update keystore
             try {
                 UnknownAttribute saved = new UnknownAttribute();
                 saved.setName("__JBLMeta__");
@@ -167,6 +166,11 @@ public interface Metadatable<T> {
             } catch (IOException e) {
                 throw new RuntimeException("could not save to JBL metadata store", e);
             }
+            return attributes;
+        }
+
+        public void setAttributes(Pool<Attribute> attributes) {
+            this.attributes = attributes;
         }
 
         protected byte[] xmlBytes(Object value) throws IOException {
