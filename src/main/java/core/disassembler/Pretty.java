@@ -1,17 +1,17 @@
 package core.disassembler;
 
-import tk.jblib.bytecode.introspection.AccessibleMember;
-import tk.jblib.bytecode.introspection.Member;
-import tk.jblib.bytecode.introspection.members.Attribute;
-import tk.jblib.bytecode.introspection.members.attributes.LineNumberTable;
-import tk.jblib.bytecode.introspection.members.attributes.LocalVariableTable;
-import tk.jblib.bytecode.introspection.members.attributes.UnknownAttribute;
-import tk.jblib.bytecode.introspection.metadata.SignatureReader;
-import tk.jblib.bytecode.util.Bytes;
+import net.sf.jbl.introspection.AccessibleMember;
+import net.sf.jbl.introspection.Member;
+import net.sf.jbl.introspection.members.Attribute;
+import net.sf.jbl.introspection.members.attributes.LineNumberTable;
+import net.sf.jbl.introspection.members.attributes.LocalVariableTable;
+import net.sf.jbl.introspection.members.attributes.UnknownAttribute;
+import net.sf.jbl.introspection.metadata.SignatureReader;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
-import static tk.jblib.bytecode.introspection.Opcode.*;
+import static net.sf.jbl.introspection.Opcode.*;
 
 public class Pretty {
     public static String constantName(int id) {
@@ -153,7 +153,7 @@ public class Pretty {
             }
             out += "\n" + pad + "      }";
         } else {
-            out += a instanceof UnknownAttribute ? Bytes.bytesToString(((UnknownAttribute) a).getValue()) : "";
+            out += a instanceof UnknownAttribute ? Arrays.toString(((UnknownAttribute) a).getValue()) : "";
         }
 
         return out;

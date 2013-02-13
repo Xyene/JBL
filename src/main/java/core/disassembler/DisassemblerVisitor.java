@@ -1,19 +1,20 @@
 package core.disassembler;
 
-import tk.jblib.bytecode.generation.Branch;
-import tk.jblib.bytecode.generation.CodeGenerator;
-import tk.jblib.bytecode.generation.Instruction;
-import tk.jblib.bytecode.introspection.Member;
-import tk.jblib.bytecode.introspection.Pool;
-import tk.jblib.bytecode.introspection.members.Attribute;
-import tk.jblib.bytecode.introspection.members.Constant;
-import tk.jblib.bytecode.introspection.members.Interface;
-import tk.jblib.bytecode.introspection.members.attributes.Code;
-import tk.jblib.bytecode.introspection.members.attributes.ConstantValue;
-import tk.jblib.bytecode.util.Bytes;
-import tk.jblib.bytecode.visitor.ClassVisitor;
+import net.sf.jbl.generation.Branch;
+import net.sf.jbl.generation.CodeGenerator;
+import net.sf.jbl.generation.Instruction;
+import net.sf.jbl.introspection.ClassFile;
+import net.sf.jbl.introspection.Member;
+import net.sf.jbl.introspection.Pool;
+import net.sf.jbl.introspection.members.Attribute;
+import net.sf.jbl.introspection.members.Constant;
+import net.sf.jbl.introspection.members.Interface;
+import net.sf.jbl.introspection.members.attributes.Code;
+import net.sf.jbl.visitor.ClassVisitor;
 
-public class DisassemblerVisitor extends ClassVisitor {
+import java.util.Arrays;
+
+public class DisassemblerVisitor implements ClassVisitor {
 
     private final ScopedWriter scope;
 
@@ -25,45 +26,58 @@ public class DisassemblerVisitor extends ClassVisitor {
         return scope.getText();
     }
 
-    protected void visitAttribute(Attribute a) {
+    public void visitAttribute(Attribute a) {
 
     }
 
-    protected void visitConstant(Constant c) {
+    public void visitConstant(Constant c) {
         scope.write("#" + c.getIndex() + " (" + Pretty.constantName(c.getType()) + ") " + c.stringValue() + "\n");
     }
 
-    protected void visitMethodPool(Pool<Member> methods) {
+    public void visitMethodPool(Pool<Member> methods) {
         scope.writeln("Method pool (" + methods.size() + " item(s)): \n");
     }
 
-    protected int visitAccessFlags(int mask) {
+    @Override
+    public void visitFieldPool(Pool<Member> fields) {
+    }
+
+    @Override
+    public void visitClass(ClassFile clazz) {
+    }
+
+    public int visitAccessFlags(int mask) {
         scope.writeln("\n" + Pretty.modifiers(mask));
         return mask;
     }
 
-    protected String visitName(String name) {
+    public String visitName(String name) {
         scope.write(" class " + name + " ");
         return name;
     }
 
-    protected String visitSuperClass(String superClass) {
+    public String visitSuperClass(String superClass) {
         scope.write(" extends " + superClass + " {");
         scope.increasePad(3);
         return superClass;
     }
 
-    protected void visitConstantPool(Pool<Constant> constantPool) {
+
+    public void visitEnd() {
+        scope.write("\n}");
+    }
+
+    public void visitConstantPool(Pool<Constant> constantPool) {
         scope.writeln("Constant pool (" + constantPool.size() + " item(s)): \n");
     }
 
-    protected void visitMember(Member m) {
+    public void visitMember(Member m) {
         scope.writeln("");
         scope.write(m.isDeprecated() ? "@Deprecated\n" : "");
         scope.write(Pretty.memberHeader(m));
     }
 
-    protected void visitMethod(Member method) {
+    public void visitMethod(Member method) {
         scope.writeNoPad(" {\n");
         scope.increasePad(3);
 
@@ -74,7 +88,8 @@ public class DisassemblerVisitor extends ClassVisitor {
                 int jump = ((Branch) i).getTarget();
                 scope.writeNoPad("[" + (jump > 0 ? "+" + jump : jump + "") + " -> " + (i.getAddress() + jump) + "]");
             } else {
-                scope.writeNoPad(Bytes.bytesToString(i.getArguments())); //Its not an opcode we have more info on, so just dump the bytes
+
+                scope.writeNoPad(Arrays.toString(i.getArguments())); //Its not an opcode we have more info on, so just dump the bytes
             }
             scope.writeNoPad("\n"); //End instruction line
         }
@@ -83,24 +98,23 @@ public class DisassemblerVisitor extends ClassVisitor {
         scope.write("}\n");
     }
 
-    protected void visitField(Member field) {
-        scope.write((field.isStatic() && field.hasMetadata("ConstantValue") ? " = " +
-                ((ConstantValue) field.getMetadata("ConstantValue")).getConstantIndex() : "") + ";");
+    public void visitField(Member field) {
+        scope.write((field.isStatic() && field.hasMetadata("ConstantValue") ? " = " + field.getMetadata("ConstantValue") : "") + ";");
     }
 
-    protected void visitAttributePool(Pool<Attribute> attributePool) {
+    public void visitAttributePool(Pool<Attribute> attributePool) {
         scope.writeln("Attribute pool (" + attributePool.size() + " item(s)): \n");
     }
 
-    protected void visitInterfacePool(Pool<Interface> interfacePool) {
+    public void visitInterfacePool(Pool<Interface> interfacePool) {
     }
 
-    protected int visitMinorVersion(int minor) {
+    public int visitMinorVersion(int minor) {
         scope.write("\nMajor version: " + minor);
         return minor;
     }
 
-    protected int visitMajorVersion(int major) {
+    public int visitMajorVersion(int major) {
         scope.write("\nMajor version: " + major);
         scope.write("\nCompiler version: " + Pretty.compilerVersion(major));
         return major;

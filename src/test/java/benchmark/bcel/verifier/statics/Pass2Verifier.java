@@ -326,7 +326,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		private Class CONST_Utf8;
 
 		private final JavaClass jc;
-		private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work and computing power.
+		private final ConstantPool cp; // ==jc.getConstants() -- only here to save typing work and computing power.
 		private final int cplen; // == cp.getLength() -- to save computing power.
 		private DescendingVisitor carrier;
 
@@ -1184,7 +1184,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 	 * @see benchmark.bcel.classfile.ConstantCP
 	 */
 	private class FAMRAV_Visitor extends EmptyVisitor implements Visitor{
-		private final ConstantPool cp; // ==jc.getConstantPool() -- only here to save typing work.
+		private final ConstantPool cp; // ==jc.getConstants() -- only here to save typing work.
 		private FAMRAV_Visitor(JavaClass _jc){
 			cp = _jc.getConstantPool();
 		}

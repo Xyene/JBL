@@ -1,26 +1,21 @@
 package core.obfuscator;
 
 import core.disassembler.Disassembler;
-import tk.jblib.bytecode.generation.Branch;
-import tk.jblib.bytecode.generation.CodeGenerator;
-import tk.jblib.bytecode.generation.Groups;
-import tk.jblib.bytecode.generation.Instruction;
-import tk.jblib.bytecode.introspection.ClassFile;
-import tk.jblib.bytecode.introspection.Member;
-import tk.jblib.bytecode.introspection.Pool;
-import tk.jblib.bytecode.introspection.members.Constant;
-import tk.jblib.bytecode.introspection.members.TryCatch;
-import tk.jblib.bytecode.introspection.members.attributes.Code;
-import tk.jblib.bytecode.introspection.metadata.SignatureReader;
-import tk.jblib.bytecode.util.Bytes;
-
-import static tk.jblib.bytecode.generation.instructions.CodePoint.*;
+import net.sf.jbl.generation.Branch;
+import net.sf.jbl.generation.CodeGenerator;
+import net.sf.jbl.generation.Instruction;
+import net.sf.jbl.introspection.ClassFile;
+import net.sf.jbl.introspection.Member;
+import net.sf.jbl.introspection.Pool;
+import net.sf.jbl.introspection.members.Constant;
+import net.sf.jbl.introspection.members.TryCatch;
+import net.sf.jbl.introspection.members.attributes.Code;
+import net.sf.jbl.introspection.metadata.SignatureReader;
+import net.sf.jbl.util.Bytes;
 
 import java.io.File;
 import java.io.IOException;
 import java.util.*;
-
-import static tk.jblib.bytecode.introspection.Opcode.*;
 
 public class Obfuscator {
     private static Random rnd = new Random();
@@ -35,8 +30,8 @@ public class Obfuscator {
 
                 ClassFile cc = new ClassFile(clazz);
 
-                Pool<Member> mp = cc.getMethodPool();
-                Pool<Constant> cpool = cc.getConstantPool();
+                Pool<Member> mp = cc.getMethods();
+                Pool<Constant> cpool = cc.getConstants();
 
                 //Class obfuscation
                 {
@@ -70,7 +65,7 @@ public class Obfuscator {
                         {
                             for (int i = 0; i != gen.instructions.size(); i++) {
                                 Instruction inc = gen.instructions.get(i);
-                                if (inc.getOpcode() != GOTO && Groups.IFS.contains(inc.getOpcode())) {
+                              /*  if (inc.getOpcode() != GOTO && Groups.IFS.contains(inc.getOpcode())) {
                                     short loc = (byte) ((inc.getAddress() + Bytes.toShort(inc.getArguments(), 0)));
                                     loc -= gen.size();
                                     byte[] back = Bytes.toByteArray(loc);
@@ -79,19 +74,18 @@ public class Obfuscator {
                                             (byte) GOTO,
                                             back[0],
                                             back[1]
-                                    );
+                                    );   */
 
                                     ((Branch) inc).setTarget(gen.size() - inc.getAddress() - 3);
                                 }
                             }
-                        }
 
 
                         { //Branch to a JSR instruction at end of method
                             byte[] jumpTo = Bytes.toByteArray((short) (gen.size()));
                             //Branch back to the POP instruction
                             byte[] jumpBack = Bytes.toByteArray((short) -(gen.size()));
-                            gen.inject(START,
+                            /*gen.inject(START,
                                     (byte) GOTO,
                                     jumpTo[0],
                                     jumpTo[1]
@@ -101,7 +95,7 @@ public class Obfuscator {
                                     jumpBack[0],
                                     jumpBack[1],
                                     (byte) ATHROW
-                            );
+                            ); */
                             //Manufacture exception block to protect indirection
                             epool.add(new TryCatch(0, gen.size() - 4, gen.size() - 1));
                         }
@@ -138,7 +132,7 @@ public class Obfuscator {
 
                 {
                     Set<String> overloads = new HashSet<String>();
-                    Pool<Member> fieldPool = cc.getFieldPool();
+                    Pool<Member> fieldPool = cc.getFields();
                     for (Member f : fieldPool) {
                         String obfuscatedName = "";
                         while (true) {

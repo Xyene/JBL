@@ -1,0 +1,1312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BookmarkManager">
+    <bookmark url="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/introspection/Pool.java" line="23" mnemonic="1" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="7720b7d5-0073-470d-bea8-21beabe506fd" name="Default" comment="Ad">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/artifacts/Disassembler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/core/verifier/Verification.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/core/verifier/VerificationVisitor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/main/java/core/verifier/Verifier.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/libraries/tools.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/BenchmarkTest.java" afterPath="$PROJECT_DIR$/src/test/java/BenchmarkTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/benchmark/bcel/generic/ConstantPoolGen.java" afterPath="$PROJECT_DIR$/src/test/java/benchmark/bcel/generic/ConstantPoolGen.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/disassembler/Disassembler.java" afterPath="$PROJECT_DIR$/src/main/java/core/disassembler/Disassembler.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/disassembler/DisassemblerVisitor.java" afterPath="$PROJECT_DIR$/src/main/java/core/disassembler/DisassemblerVisitor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/obfuscator/Obfuscator.java" afterPath="$PROJECT_DIR$/src/main/java/core/obfuscator/Obfuscator.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/benchmark/bcel/verifier/statics/Pass2Verifier.java" afterPath="$PROJECT_DIR$/src/test/java/benchmark/bcel/verifier/statics/Pass2Verifier.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/core/disassembler/Pretty.java" afterPath="$PROJECT_DIR$/src/main/java/core/disassembler/Pretty.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/test/java/XMLAttributeTest.java" afterPath="$PROJECT_DIR$/src/test/java/XMLAttributeTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pom.xml" afterPath="$PROJECT_DIR$/pom.xml" />
+    </list>
+    <ignored path="untitled1.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="/AccessibleMember.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360639349000" ignored="false" />
+    <file path="/Member.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360529758031" ignored="false" />
+    <file path="/JDK.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360107061515" ignored="false" />
+    <file path="/Attributes.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360107145437" ignored="false" />
+    <file path="/fragment.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360707771109" ignored="false" />
+    <file path="/Opcode.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360627734578" ignored="false" />
+    <file path="/DisassemblerVisitor.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360547242281" ignored="false" />
+    <file path="/Pretty.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360281220562" ignored="false" />
+    <file path="/ScopedWriter.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360281417828" ignored="false" />
+    <file path="/Disassembler.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360375583875" ignored="false" />
+    <file path="/Dummy.txt" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360708231875" ignored="false" />
+    <file path="/Pool.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360547363046" ignored="false" />
+    <file path="/ClassFile.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360707400375" ignored="false" />
+    <file path="/Code.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360278457062" ignored="false" />
+    <file path="/ConstantValue.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360545350796" ignored="false" />
+    <file path="/LineNumberTable.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360187904701" ignored="false" />
+    <file path="/MemberVisitor.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360376327437" ignored="false" />
+    <file path="/Remapper.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360366598453" ignored="false" />
+    <file path="/ClassVisitor.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360707648593" ignored="false" />
+    <file path="/Metadatable.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360547580421" ignored="false" />
+    <file path="/Obfuscator.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360193401138" ignored="false" />
+    <file path="/ByteStream.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360537080421" ignored="false" />
+    <file path="/Constant.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360203220279" ignored="false" />
+    <file path="/XMLAttribute.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360379666265" ignored="false" />
+    <file path="/SignatureReader.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360543325953" ignored="false" />
+    <file path="$PROJECT_DIR$/../NBTFixer/src/com/github/Icyene/NBTFixer/NBTFixer.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360363043703" ignored="false" />
+    <file path="/NBTFixer.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360363033109" ignored="false" />
+    <file path="$PROJECT_DIR$/../NBTFixer/src/plugin.yml" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360362817000" ignored="false" />
+    <file path="/plugin.yml" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360362817000" ignored="false" />
+    <file path="/ClassAdapter.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360707820859" ignored="false" />
+    <file path="/MemberAdapter.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360367763406" ignored="false" />
+    <file path="/README.md" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360633130406" ignored="false" />
+    <file path="/Dumpable.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360376551859" ignored="false" />
+    <file path="/CodeGenerator.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360545748484" ignored="false" />
+    <file path="/Groovy Console" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360544761062" ignored="false" />
+    <file path="/XMLAttributeTest.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360514896906" ignored="false" />
+    <file path="$PROJECT_DIR$/../Surge/.idea/workspace.xml" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360383308203" ignored="false" />
+    <file path="/MetaMember.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360382876437" ignored="false" />
+    <file path="/BaseMember.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360383220265" ignored="false" />
+    <file path="/MetadataContainer.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360511712953" ignored="false" />
+    <file path="/BenchmarkTest.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360541920406" ignored="false" />
+    <file path="$PROJECT_DIR$/src/test/java/bcel-5.2/build.xml" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360524605375" ignored="false" />
+    <file path="$PROJECT_DIR$/src/test/java/bcel-5.2/project.xml" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360524606296" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/Meteors/Entities/EntityMeteor.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935328" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/Volcano/Tasks/LifeTask.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935187" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/Volcano/VolcanoControl.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935187" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/ErrorLogger.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935312" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/StormUtil.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935312" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/Blizzard/Blocks/SnowLayer.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935312" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/Storm.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935328" ignored="false" />
+    <file path="$PROJECT_DIR$/../Storm/src/com/github/StormTeam/Storm/Lightning/Listeners/StrikeListener.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360526935328" ignored="false" />
+    <file path="/Bytes.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360529572281" ignored="false" />
+    <file path="/BootstrapMethods.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360544584640" ignored="false" />
+    <file path="/Signature.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360544943296" ignored="false" />
+    <file path="/EnclosingMethod.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360545260656" ignored="false" />
+    <file path="/VerificationVisitor.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360639970687" ignored="false" />
+    <file path="/Verifier.java" changelist="7720b7d5-0073-470d-bea8-21beabe506fd" time="1360639168468" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="untitled1" />
+    <favorites_list name="JBL" />
+    <favorites_list name="Java Disassembler" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="VerificationVisitor.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/core/verifier/VerificationVisitor.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="107" column="77" selection-start="3370" selection-end="3370" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="XMLAttributeTest.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/test/java/XMLAttributeTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="8" column="13" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="BenchmarkTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/test/java/BenchmarkTest.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="41" column="65" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.42988506">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pom.xml" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pom.xml">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="7" column="64" selection-start="391" selection-end="391" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ClassFile.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/introspection/ClassFile.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="257" column="42" selection-start="6937" selection-end="6937" vertical-scroll-proportion="0.0">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="master" />
+      </map>
+    </option>
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="changedFiles">
+      <list>
+        <option value="$PROJECT_DIR$/src/main/java/core/obfuscator/Obfuscator.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/metadata/Metadatable.java" />
+        <option value="$PROJECT_DIR$/src/test/java/BenchmarkTest.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/Pool.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/Field.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/Opcode.java" />
+        <option value="$PROJECT_DIR$/README.md" />
+        <option value="$PROJECT_DIR$/src/main/java/core/verifier/Verifier.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/AccessibleMember.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/ClassFile.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/introspection/Member.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/visitor/ClassVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/visitor/MemberVisitor.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tk/jblib/bytecode/visitor/ClassAdapter.java" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/java/core/verifier/VerificationVisitor.java" />
+      </list>
+    </option>
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="importAutomatically" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="NamedScopeManager">
+    <scope name="JBL" pattern="file:src/main/java//*" />
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="-4" />
+    <option name="y" value="-4" />
+    <option name="width" value="1688" />
+    <option name="height" value="1024" />
+  </component>
+  <component name="ProjectInspectionProfilesVisibleTreeState">
+    <entry key="Project Default">
+      <profile-state>
+        <expanded-state>
+          <State>
+            <id />
+          </State>
+        </expanded-state>
+        <selected-state>
+          <State>
+            <id>HTML</id>
+          </State>
+        </selected-state>
+      </profile-state>
+    </entry>
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jbl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="introspection" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="verifier" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Java Disassembler" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="JBL" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="core" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth0" value="242" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="OverrideImplement.combined" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth1" value="242" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth0" value="248" />
+    <property name="recentsLimit" value="5" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder0" value="0" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth2" value="249" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth3" value="922" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatWidth3" value="917" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth2" value="244" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeWidth1" value="236" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder2" value="2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_flatOrder3" value="3" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder0" value="0" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder3" value="3" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder1" value="1" />
+    <property name="FileHistory.git4idea.history.GitHistoryProvider_treeOrder2" value="2" />
+    <property name="options.lastSelected" value="copyright.profiles" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.searchVisible" value="true" />
+    <property name="dynamic.classpath" value="false" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CreateClassDialog.RecentsKey">
+      <recent name="tk.jblib.bytecode.introspection" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="benchmark" />
+      <recent name="benchmark.bcel" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.JBL-2">
+    <configuration default="false" name="XMLAttributeTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="JBL" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="XMLAttributeTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="false" name="BenchmarkTest" type="JUnit" factoryName="JUnit" temporary="true">
+      <module name="JBL" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="BenchmarkTest" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method />
+    </configuration>
+    <configuration default="true" type="AndroidTestRunConfigurationType" factoryName="Android Tests">
+      <module name="" />
+      <option name="TESTING_TYPE" value="0" />
+      <option name="INSTRUMENTATION_RUNNER_CLASS" value="" />
+      <option name="METHOD_NAME" value="" />
+      <option name="CLASS_NAME" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="TARGET_SELECTION_MODE" value="EMULATOR" />
+      <option name="PREFERRED_AVD" value="" />
+      <option name="COMMAND_LINE" value="" />
+      <option name="WIPE_USER_DATA" value="false" />
+      <option name="DISABLE_BOOT_ANIMATION" value="false" />
+      <option name="NETWORK_SPEED" value="full" />
+      <option name="NETWORK_LATENCY" value="none" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <method />
+    </configuration>
+    <configuration default="true" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="workingDirPath" value="" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="core.disassembler.Disassembler" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/target/classes" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="JBL" />
+      <envs />
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="JBL:jar" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <configuration default="false" name="JBL-2" type="Application" factoryName="Application">
+      <option name="MAIN_CLASS_NAME" value="core.disassembler.Disassembler" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PROGRAM_PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$/target/classes" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="JBL" />
+      <envs />
+      <RunnerSettings RunnerId="Debug">
+        <option name="DEBUG_PORT" value="" />
+        <option name="TRANSPORT" value="0" />
+        <option name="LOCAL" value="true" />
+      </RunnerSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Debug" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="BuildArtifacts" enabled="true">
+          <artifact name="JBL" />
+        </option>
+      </method>
+    </configuration>
+    <configuration default="false" name="XMLAttributeTest.verifyEncoding" type="JUnit" factoryName="JUnit">
+      <module name="JBL" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="XMLAttributeTest" />
+      <option name="METHOD_NAME" value="verifyEncoding" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="false" name="JBL" type="MavenRunConfiguration" factoryName="Maven">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list />
+            </option>
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <RunnerSettings RunnerId="Run" />
+      <ConfigurationWrapper RunnerId="Run" />
+      <method>
+        <option name="Make" enabled="true" />
+        <option name="BuildArtifacts" enabled="true" />
+      </method>
+    </configuration>
+    <list size="5">
+      <item index="0" class="java.lang.String" itemvalue="Application.JBL-2" />
+      <item index="1" class="java.lang.String" itemvalue="JUnit.XMLAttributeTest.verifyEncoding" />
+      <item index="2" class="java.lang.String" itemvalue="Maven.JBL" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.XMLAttributeTest" />
+      <item index="4" class="java.lang.String" itemvalue="JUnit.BenchmarkTest" />
+    </list>
+    <recent_temporary>
+      <list size="2">
+        <item index="0" class="java.lang.String" itemvalue="JUnit.BenchmarkTest" />
+        <item index="1" class="java.lang.String" itemvalue="JUnit.XMLAttributeTest" />
+      </list>
+    </recent_temporary>
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SliceManager">
+    <option name="analysisUIOptions">
+      <AnalysisUIOptions />
+    </option>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="7720b7d5-0073-470d-bea8-21beabe506fd" name="Default" comment="" />
+      <created>1360104945421</created>
+      <updated>1360104945421</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Implement new generic Pool to replace lots of identical code.">
+      <created>1360367090937</created>
+      <updated>1360367090937</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add AccessibleMember.setFlag() to set raw access flag">
+      <created>1360367130468</created>
+      <updated>1360367130468</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Add ByteStream.readFully to fully read the stream">
+      <created>1360367158718</created>
+      <updated>1360367158718</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Complete Class/Method Visitor abstract interfaces">
+      <created>1360367356640</created>
+      <updated>1360367356640</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Complete Class/Method Visitor adapters">
+      <created>1360367396250</created>
+      <updated>1360367396250</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Add Remapper ClassVisitor implementation for remapping class references">
+      <created>1360367435593</created>
+      <updated>1360367435593</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Add signature validation in SignatureReader, throws VerifyError">
+      <created>1360367545562</created>
+      <updated>1360367545562</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Create Metadatable interface to replace Pool&lt;Attribute&gt; level fetching">
+      <created>1360367573062</created>
+      <updated>1360367573062</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Add a proper add visitors varargs">
+      <created>1360367811937</created>
+      <updated>1360367811937</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Add WIP XMLAttribute for storing arbitrary values (i.e. a HashMap) as an attribute">
+      <created>1360367859953</created>
+      <updated>1360367859953</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Begin implementation of metadata store">
+      <created>1360514211562</created>
+      <updated>1360514211562</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Removed incremental loading and updated Metadatable implementation">
+      <created>1360514239984</created>
+      <updated>1360514239984</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Update Metadatable implementation">
+      <created>1360514259093</created>
+      <updated>1360514259093</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Add XML decoding/encoding">
+      <created>1360514289546</created>
+      <updated>1360514289546</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Optimization of ByteStream">
+      <created>1360522722265</created>
+      <updated>1360522722265</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Use a larger buffer">
+      <created>1360523017843</created>
+      <updated>1360523017843</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Added benchmark test: JBL, ASM, BCEL, and SERP">
+      <created>1360525009656</created>
+      <updated>1360525009656</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Add speed test">
+      <created>1360525431125</created>
+      <updated>1360525431125</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Refactor README">
+      <created>1360525476281</created>
+      <updated>1360525476281</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Bulleted lists look nicer than code tags">
+      <created>1360525568750</created>
+      <updated>1360525568750</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Support JVM 6 additions">
+      <created>1360543436281</created>
+      <updated>1360543436281</updated>
+    </task>
+    <task id="LOCAL-00022" summary="JVM 7 constants update">
+      <created>1360543784921</created>
+      <updated>1360543784921</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Parse JVM 7 constant pools properly">
+      <created>1360543933093</created>
+      <updated>1360543933093</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Addition of &quot;Signature&quot; attribute">
+      <created>1360545026953</created>
+      <updated>1360545026953</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Proper constant value access methods">
+      <created>1360545372046</created>
+      <updated>1360545372046</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Add handle opcodes">
+      <created>1360545492546</created>
+      <updated>1360545492546</updated>
+    </task>
+    <task id="LOCAL-00027" summary="Add JDK versions&#10;">
+      <created>1360545604296</created>
+      <updated>1360545604296</updated>
+    </task>
+    <task id="LOCAL-00028" summary="Add INVOKEDYNAMIC opcode">
+      <created>1360545791078</created>
+      <updated>1360545791078</updated>
+    </task>
+    <task id="LOCAL-00029" summary="Throw exception if major version &gt; 52 (JDK 8)">
+      <created>1360546037015</created>
+      <updated>1360546037015</updated>
+    </task>
+    <task id="LOCAL-00030" summary="Remove Signature &amp; SourceFile attributes by adding a case to Metadatable.Container">
+      <created>1360546328968</created>
+      <updated>1360546328968</updated>
+    </task>
+    <task id="LOCAL-00031" summary="Removed ConstantValue, Signature, and SourceFile attributes">
+      <created>1360546908328</created>
+      <updated>1360546908328</updated>
+    </task>
+    <task id="LOCAL-00032" summary="Add implementation-dependent opcodes">
+      <created>1360627769125</created>
+      <updated>1360627769125</updated>
+    </task>
+    <task id="LOCAL-00033" summary="Add Jenkins">
+      <created>1360633324218</created>
+      <updated>1360633324218</updated>
+    </task>
+    <task id="LOCAL-00034" summary="Make pool getter names more concise">
+      <created>1360707509062</created>
+      <updated>1360707509062</updated>
+    </task>
+    <task id="LOCAL-00035" summary="Refactor visitors to be easier to auto-implement in smart IDEs">
+      <created>1360707855578</created>
+      <updated>1360707855578</updated>
+    </task>
+    <task id="LOCAL-00036" summary="Change namespace to SourgeForge">
+      <created>1360707978062</created>
+      <updated>1360707978062</updated>
+    </task>
+    <option name="localTasksCounter" value="37" />
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-4" y="-4" width="1688" height="1024" extended-state="0" />
+    <editor active="false" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39977476" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.81584823" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.37611607" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.18415178" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.328125" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" value="Change namespace to SourgeForge" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+    <MESSAGE value="Removed incremental loading and updated Metadatable implementation" />
+    <MESSAGE value="Update Metadatable implementation" />
+    <MESSAGE value="Add XML decoding/encoding" />
+    <MESSAGE value="Optimization of ByteStream" />
+    <MESSAGE value="Use a larger buffer" />
+    <MESSAGE value="Added benchmark test: JBL, ASM, BCEL, and SERP" />
+    <MESSAGE value="Add speed test" />
+    <MESSAGE value="Refactor README" />
+    <MESSAGE value="Bulleted lists look nicer than code tags" />
+    <MESSAGE value="Support JVM 6 additions" />
+    <MESSAGE value="JVM 7 constants update" />
+    <MESSAGE value="Parse JVM 7 constant pools properly" />
+    <MESSAGE value="Addition of &quot;Signature&quot; attribute" />
+    <MESSAGE value="Proper constant value access methods" />
+    <MESSAGE value="Add handle opcodes" />
+    <MESSAGE value="Add JDK versions&#10;" />
+    <MESSAGE value="Add INVOKEDYNAMIC opcode" />
+    <MESSAGE value="Throw exception if major version &gt; 52 (JDK 8)" />
+    <MESSAGE value="Remove Signature &amp; SourceFile attributes by adding a case to Metadatable.Container" />
+    <MESSAGE value="Removed ConstantValue, Signature, and SourceFile attributes" />
+    <MESSAGE value="Add implementation-dependent opcodes" />
+    <MESSAGE value="Add Jenkins" />
+    <MESSAGE value="Make pool getter names more concise" />
+    <MESSAGE value="Refactor visitors to be easier to auto-implement in smart IDEs" />
+    <MESSAGE value="Change namespace to SourgeForge" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <PATH>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="untitled1" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+      </PATH_ELEMENT>
+      <PATH_ELEMENT>
+        <option name="myItemId" value="JBL" />
+        <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+      </PATH_ELEMENT>
+    </PATH>
+  </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/introspection/Opcode.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="5" column="17" selection-start="135" selection-end="135" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/introspection/Field.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="18" selection-start="60" selection-end="60" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://C:/Program Files/Java/jdk1.6.0_26/jre/lib/rt.jar!/java/lang/Character.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="17" column="22" selection-start="761" selection-end="761" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/benchmark/bcel/verifier/Verifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="84" column="29" selection-start="3036" selection-end="3036" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="e#0#9122#0" expanded="false" />
+            <element signature="imports" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/benchmark/bcel/verifier/statics/Pass2Verifier.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1305" column="24" selection-start="58146" selection-end="58146" vertical-scroll-proportion="0.7153179">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/introspection/Member.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="92" column="6" selection-start="2736" selection-end="2736" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/visitor/ClassVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="16" column="0" selection-start="466" selection-end="466" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/visitor/MemberVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="0" selection-start="267" selection-end="267" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/visitor/MemberAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="13" selection-start="231" selection-end="231" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/visitor/ClassAdapter.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="54" column="23" selection-start="1791" selection-end="1791" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="26" column="66" selection-start="2424" selection-end="2424" vertical-scroll-proportion="0.6387283">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/net/sf/jbl/introspection/ClassFile.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="257" column="42" selection-start="6937" selection-end="6937" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="64" selection-start="391" selection-end="391" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/core/verifier/VerificationVisitor.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="107" column="77" selection-start="3370" selection-end="3370" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/XMLAttributeTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="13" selection-start="199" selection-end="199" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/test/java/BenchmarkTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="41" column="65" selection-start="1342" selection-end="1342" vertical-scroll-proportion="0.42988506">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor>
+            <show-content>
+              <type id="library" />
+              <type id="artifact" />
+            </show-content>
+          </artifact-editor>
+          <last-edited>JBL</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="Copyright.UI">
+        <settings>
+          <last-edited>JBL</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>JBL</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.5" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ScopeChooserConfigurable.UI">
+        <settings>
+          <last-edited>JBL</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.19999999" />
+              </list>
+            </option>
+          </splitter-proportions>
+          <order>
+            <scope name="JBL" />
+          </order>
+        </settings>
+      </state>
+    </states>
+  </component>
+</project>
+
