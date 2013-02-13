@@ -109,6 +109,10 @@ public class DisassemblerVisitor implements ClassVisitor {
     public void visitInterfacePool(Pool<Interface> interfacePool) {
     }
 
+    @Override
+    public void visitInterface(Interface iface) {
+    }
+
     public int visitMinorVersion(int minor) {
         scope.write("\nMajor version: " + minor);
         return minor;
