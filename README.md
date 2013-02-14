@@ -1,12 +1,14 @@
-JBL - Java Bytecode Library [![Build Status](http://jenkins-icyene.rhcloud.com/job/JBL/badge/icon)](http://jenkins-icyene.rhcloud.com/job/JBL/)
+JBL - Java Bytecode Library 
 ==========================
 JBL, as its expanded name might suggest, is a library for manipulating JVM bytecode on the fly. It is written, as one might expect, in Java. Bytecode support for other languages is planned, but currently not supported. JBL attempts to merge the things which make other bytecode libraries, namely ASM, BCEL, and SERP useful, maintaining an equally simply (and sometimes simpler!) api, while not sacrificing usability by enforcing visitor pattern usage. JBL abstracts the internal bytecode in class files to trivial notions, yet also allows the delving into direct class pool manipulation et al. It also provides structures for doing common things (like class reference remapping), and has a simple OO structure making it easy for you to define your own. Additionally, each JBL object has methods you'd logically expect it to have, making it relatively simple to do work even without constantly glancing at the JBL JavaDocs.
+
+<a href='http://jenkins-icyene.rhcloud.com/job/JBL/'><img src='http://jenkins-icyene.rhcloud.com/job/JBL/badge/icon'></a>
 
 ##Resources
 * [Jenkins](http://jenkins-icyene.rhcloud.com/job/JBL/)
 
 ###Performance
-Speed and loading time is always essential when deciding on a library, and we are proud to inform you that JBL is //very// fast. JBL has been tested against other popular bytecode manipulation frameworks, mainly ASM, BCEL, and SERP. The benchmark consisted of an iteration of 500 class loads, and the average time of loading. The results are displayed below.
+Speed and loading time is always essential when deciding on a library, and we are proud to inform you that JBL is //very// fast. JBL has been tested against other popular bytecode manipulation frameworks, mainly ASM, BCEL, and SERP. The benchmark consisted of an iteration of 500 class loads, and the average time of loading. The results are displayed below: take them with a grain of salt, as ASM performs in 0ms simply due to its structure only loading the constant pool of a class. JBL, BCEL, and SERP all parse the entire class in object construction.
 
 * JBL Time: 1ms
 * ASM Time: 0ms
@@ -25,9 +27,7 @@ ClassFile bytes = new ClassFile(new byte[0]); //! byte array...
 ClassFile noArgs = new ClassFile(); //Or even empty, if you wish to start from scratch.
 </code></pre>
 
-Take note that JBL does minimal verification when loading files, so you may get funky behavior if you pass a truncated stream or such. JBL uses an incremental loading scheme to streamline class loading time, meaning classfile parts will only be loaded if they are requested. Overall, this increases ClassFile object construction speed to practically nothing, and allows light modification of the class (access flags etc.) to be done with less memory and latency.
-
-Important note: JBL does a load of logic underneath each class parse, and so wrapping ClassFile instantiation in a try/catch block can be extremely negative to performance. For optimal performance, use the noargs or byte[] constructor. The other two throw IOExceptions, which by Java specification you will be forced to wrap. Use something like:
+Take note that JBL does minimal verification when loading files, so you may get funky behavior if you pass a truncated stream or such. Another thing to keep in mind is that JBL does a load of logic underneath each class parse, and so wrapping ClassFile instantiation in a try/catch block can be extremely negative to performance. For optimal performance, use the noargs or byte[] constructor. The other two throw IOExceptions, which by Java specification you will be forced to wrap. Use something like:
 
 <pre lang="java"><code>
 RandomAccessFile f = new RandomAccessFile(clazz, "r");
