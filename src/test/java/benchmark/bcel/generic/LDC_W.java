@@ -43,7 +43,7 @@ public class LDC_W extends LDC {
 
 
     /**
-     * Read needed data (i.e., index) from file.
+     * Read needed out (i.e., index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         setIndex(bytes.readUnsignedShort());

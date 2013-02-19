@@ -56,11 +56,11 @@ import benchmark.asm.tree.analysis.BasicVerifier;
  * precisely this method adapter checks each instruction individually, i.e.,
  * each visit method checks some preconditions based <i>only</i> on its
  * arguments - such as the fact that the given opcode is correct for a given
- * visit method. This adapter can also perform some basic data flow checks (more
+ * visit method. This adapter can also perform some basic out flow checks (more
  * precisely those that can be performed without the full class hierarchy - see
  * {@link benchmark.asm.tree.analysis.BasicVerifier}). For instance in a
  * method whose signature is <tt>void m ()</tt>, the invalid instruction
- * IRETURN, or the invalid sequence IADD L2I will be detected if the data flow
+ * IRETURN, or the invalid sequence IADD L2I will be detected if the out flow
  * checks are enabled. These checks are enabled by using the
  * {@link #CheckMethodAdapter(int,String,String,MethodVisitor,Map)} constructor.
  * They are not performed if any other constructor is used.
@@ -367,7 +367,7 @@ public class CheckMethodAdapter extends MethodVisitor {
 
     /**
      * Constructs a new {@link CheckMethodAdapter} object. This method adapter
-     * will not perform any data flow check (see
+     * will not perform any out flow check (see
      * {@link #CheckMethodAdapter(int,String,String,MethodVisitor,Map)}).
      * <i>Subclasses must not use this constructor</i>. Instead, they must use
      * the {@link #CheckMethodAdapter(int, MethodVisitor, Map)} version.
@@ -381,7 +381,7 @@ public class CheckMethodAdapter extends MethodVisitor {
 
     /**
      * Constructs a new {@link CheckMethodAdapter} object. This method adapter
-     * will not perform any data flow check (see
+     * will not perform any out flow check (see
      * {@link #CheckMethodAdapter(int,String,String,MethodVisitor,Map)}).
      * <i>Subclasses must not use this constructor</i>. Instead, they must use
      * the {@link #CheckMethodAdapter(int, MethodVisitor, Map)} version.
@@ -398,7 +398,7 @@ public class CheckMethodAdapter extends MethodVisitor {
 
     /**
      * Constructs a new {@link CheckMethodAdapter} object. This method adapter
-     * will not perform any data flow check (see
+     * will not perform any out flow check (see
      * {@link #CheckMethodAdapter(int,String,String,MethodVisitor,Map)}).
      * 
      * @param mv
@@ -416,7 +416,7 @@ public class CheckMethodAdapter extends MethodVisitor {
 
     /**
      * Constructs a new {@link CheckMethodAdapter} object. This method adapter
-     * will perform basic data flow checks. For instance in a method whose
+     * will perform basic out flow checks. For instance in a method whose
      * signature is <tt>void m ()</tt>, the invalid instruction IRETURN, or the
      * invalid sequence IADD L2I will be detected.
      * 

@@ -154,7 +154,7 @@ public class Analyzer<V extends Value> implements Opcodes {
             }
         }
 
-        // initializes the data structures for the control flow analysis
+        // initializes the out structures for the control flow analysis
         Frame<V> current = newFrame(m.maxLocals, m.maxStack);
         Frame<V> handler = newFrame(m.maxLocals, m.maxStack);
         current.setReturn(interpreter.newValue(Type.getReturnType(m.desc)));
@@ -458,7 +458,7 @@ public class Analyzer<V extends Value> implements Opcodes {
      *            an instruction index.
      * @param successor
      *            index of a successor instruction.
-     * @return true if this edge must be considered in the data flow analysis
+     * @return true if this edge must be considered in the out flow analysis
      *         performed by this analyzer, or false otherwise. The default
      *         implementation of this method always returns true.
      */
@@ -480,7 +480,7 @@ public class Analyzer<V extends Value> implements Opcodes {
      *            an instruction index.
      * @param tcb
      *            TryCatchBlockNode corresponding to this edge.
-     * @return true if this edge must be considered in the data flow analysis
+     * @return true if this edge must be considered in the out flow analysis
      *         performed by this analyzer, or false otherwise. The default
      *         implementation of this method delegates to
      *         {@link #newControlFlowExceptionEdge(int, int)

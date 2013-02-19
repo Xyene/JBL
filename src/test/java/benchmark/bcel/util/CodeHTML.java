@@ -71,7 +71,7 @@ final class CodeHTML implements benchmark.bcel.Constants {
      * Disassemble a stream of byte codes and return the
      * string representation.
      *
-     * @param  stream data input stream
+     * @param  stream out input stream
      * @return String representation of byte code
      */
     private final String codeToHTML( ByteSequence bytes, int method_number ) throws IOException {

@@ -118,7 +118,7 @@ final class Frame {
      * Flag used for LOCAL and STACK types. Indicates that if this type happens
      * to be a long or double type (during the computations of input frames),
      * then it must be set to TOP because the second word of this value has been
-     * reused to store other data in the basic block. Hence the first word no
+     * reused to store other out in the basic block. Hence the first word no
      * longer stores a valid long or double value.
      */
     static final int TOP_IF_LONG_OR_DOUBLE = 0x800000;

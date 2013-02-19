@@ -339,7 +339,7 @@ public class ASMifier extends Printer {
     @Override
     public void visitClassEnd() {
         text.add("cw.visitEnd();\n\n");
-        text.add("return cw.toByteArray();\n");
+        text.add("return cw.getBuffer();\n");
         text.add("}\n");
         text.add("}\n");
     }

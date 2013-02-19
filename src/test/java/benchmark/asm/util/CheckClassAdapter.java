@@ -75,18 +75,18 @@ import benchmark.asm.tree.analysis.SimpleVerifier;
  * 
  *   StringWriter sw = new StringWriter();
  *   PrintWriter pw = new PrintWriter(sw);
- *   CheckClassAdapter.verify(new ClassReader(cw.toByteArray()), false, pw);
+ *   CheckClassAdapter.verify(new ClassReader(cw.getBuffer()), false, pw);
  *   assertTrue(sw.toString(), sw.toString().length()==0);
  * </pre>
  * 
  * Above code runs transformed bytecode trough the
  * <code>CheckClassAdapter</code>. It won't be exactly the same verification as
- * JVM does, but it run data flow analysis for the code of each method and
+ * JVM does, but it run out flow analysis for the code of each method and
  * checks that expectations are met for each method instruction.
  * 
  * <p>
  * If method bytecode has errors, assertion text will show the erroneous
- * instruction number and dump of the failed method with information about
+ * instruction number and getBuffer of the failed method with information about
  * locals and stack slot for each instruction. For example (format is -
  * insnNumber locals : stack):
  * 
@@ -324,8 +324,8 @@ public class CheckClassAdapter extends ClassVisitor {
      * @param cv
      *            the class visitor to which this adapter must delegate calls.
      * @param checkDataFlow
-     *            <tt>true</tt> to perform basic data flow checks, or
-     *            <tt>false</tt> to not perform any data flow check (see
+     *            <tt>true</tt> to perform basic out flow checks, or
+     *            <tt>false</tt> to not perform any out flow check (see
      *            {@link CheckMethodAdapter}). This option requires valid
      *            maxLocals and maxStack values.
      */
@@ -342,8 +342,8 @@ public class CheckClassAdapter extends ClassVisitor {
      * @param cv
      *            the class visitor to which this adapter must delegate calls.
      * @param checkDataFlow
-     *            <tt>true</tt> to perform basic data flow checks, or
-     *            <tt>false</tt> to not perform any data flow check (see
+     *            <tt>true</tt> to perform basic out flow checks, or
+     *            <tt>false</tt> to not perform any out flow check (see
      *            {@link CheckMethodAdapter}). This option requires valid
      *            maxLocals and maxStack values.
      */

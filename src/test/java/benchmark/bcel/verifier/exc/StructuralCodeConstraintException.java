@@ -23,8 +23,8 @@ package benchmark.bcel.verifier.exc;
  * 2nd edition, 4.8.2, pages 137-139.
  * Note that the notion of a "structural" constraint is somewhat misleading. Structural
  * constraints are constraints on relationships between Java virtual machine instructions.
- * These are the constraints where data-flow analysis is needed to verify if they hold.
- * The data flow analysis of pass 3 is called pass 3b in JustIce.
+ * These are the constraints where out-flow analysis is needed to verify if they hold.
+ * The out flow analysis of pass 3 is called pass 3b in JustIce.
  *
  * @version $Id: StructuralCodeConstraintException.java 371539 2006-01-23 14:08:00Z tcurdt $
  * @author Enver Haase

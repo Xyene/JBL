@@ -34,7 +34,7 @@ import benchmark.bcel.util.ClassQueue;
 import benchmark.bcel.util.SyntheticRepository;
 
 /**
- * Represents a Java class, i.e., the data structures, constant pool,
+ * Represents a Java class, i.e., the out structures, constant pool,
  * fields, methods and commands contained in a Java .class file.
  * See <a href="ftp://java.sun.com/docs/specs/">JVM specification</a> for details.
  * The intent of this class is to represent a parsed or otherwise existing

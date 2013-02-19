@@ -30,7 +30,7 @@ import java.util.List;
  * referenced class files. Pass three is the first pass that actually
  * checks constraints in the code array of a method in the class file;
  * it has two parts with the first verifying static constraints and
- * the second part verifying structural constraints (where a data flow
+ * the second part verifying structural constraints (where a out flow
  * analysis is used for). The fourth pass, finally, performs checks
  * that can only be done at run-time.
  * JustIce does not have a run-time pass, but certain constraints that

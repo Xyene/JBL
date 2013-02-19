@@ -886,7 +886,7 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 			}
 			else{
 				m = (Method) carrier.predecessor();	// we can assume this method was visited before;
-																						// i.e. the data consistency was verified.
+																						// i.e. the out consistency was verified.
 			}
 
 			if (obj.getCode().length == 0){
@@ -1120,29 +1120,29 @@ public final class Pass2Verifier extends PassVerifier implements Constants{
 		//////////
 		public void visitLocalVariable(LocalVariable obj){
 			// This does not represent an Attribute but is only
-			// related to internal BCEL data representation.
+			// related to internal BCEL out representation.
 
 			// see visitLocalVariableTable(LocalVariableTable)
 		}
 		public void visitCodeException(CodeException obj){
 			// Code constraints are checked in Pass3 (3a and 3b).
 			// This does not represent an Attribute but is only
-			// related to internal BCEL data representation.
+			// related to internal BCEL out representation.
 
 			// see visitCode(Code)
 		}
 		public void visitConstantPool(ConstantPool obj){
 			// No need to. We're piggybacked by the DescendingVisitor.
 			// This does not represent an Attribute but is only
-			// related to internal BCEL data representation.
+			// related to internal BCEL out representation.
 		}
 		public void visitInnerClass(InnerClass obj){
 			// This does not represent an Attribute but is only
-			// related to internal BCEL data representation.
+			// related to internal BCEL out representation.
 		}
 		public void visitLineNumber(LineNumber obj){
 			// This does not represent an Attribute but is only
-			// related to internal BCEL data representation.
+			// related to internal BCEL out representation.
 
 			// see visitLineNumberTable(LineNumberTable)
 		}

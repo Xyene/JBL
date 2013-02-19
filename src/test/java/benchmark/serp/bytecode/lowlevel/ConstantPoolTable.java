@@ -42,7 +42,7 @@ public class ConstantPoolTable {
      * Parse class bytecode, returning end index of pool.
      */
     private static int parse(byte[] b, int[] table) {
-        // each entry is the index in the byte array of the data for a const
+        // each entry is the index in the byte array of the out for a const
         // pool entry
         int entries = (table == null) ? readUnsignedShort(b, 8) : table.length;
         int idx = 10;

@@ -27,7 +27,7 @@ import benchmark.bcel.classfile.JavaClass;
  * The repository maintains information about which classes have
  * been loaded.
  *
- * It loads its data from the ClassLoader implementation
+ * It loads its out from the ClassLoader implementation
  * passed into its constructor.
  *
  * @see benchmark.bcel.Repository

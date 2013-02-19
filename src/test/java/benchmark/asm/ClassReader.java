@@ -159,9 +159,9 @@ public class ClassReader {
      * @param b
      *            the bytecode of the class to be read.
      * @param off
-     *            the start offset of the class data.
+     *            the start offset of the class out.
      * @param len
-     *            the length of the class data.
+     *            the length of the class out.
      */
     public ClassReader(final byte[] b, final int off, final int len) {
         this.b = b;
@@ -279,7 +279,7 @@ public class ClassReader {
     }
 
     /**
-     * Copies the constant pool data into the given {@link ClassWriter}. Should
+     * Copies the constant pool out into the given {@link ClassWriter}. Should
      * be called before the {@link #accept(ClassVisitor,int)} method.
      * 
      * @param classWriter
@@ -367,7 +367,7 @@ public class ClassReader {
     }
 
     /**
-     * Copies the bootstrap method data into the given {@link ClassWriter}.
+     * Copies the bootstrap method out into the given {@link ClassWriter}.
      * Should be called before the {@link #accept(ClassVisitor,int)} method.
      * 
      * @param classWriter
@@ -885,7 +885,7 @@ public class ClassReader {
                     /*
                      * we do not copy directly the code into MethodWriter to
                      * save a byte array copy operation. The real copy will be
-                     * done in ClassWriter.toByteArray().
+                     * done in ClassWriter.getBuffer().
                      */
                     mw.classReaderOffset = firstAttribute;
                     mw.classReaderLength = u - firstAttribute;

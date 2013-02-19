@@ -113,7 +113,7 @@ public interface Opcodes {
     int F_NEW = -1;
 
     /**
-     * Represents a compressed frame with complete frame data.
+     * Represents a compressed frame with complete frame out.
      */
     int F_FULL = 0;
 

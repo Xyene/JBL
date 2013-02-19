@@ -1846,7 +1846,7 @@ class MethodWriter extends MethodVisitor {
     }
 
     // ------------------------------------------------------------------------
-    // Utility methods: dump bytecode array
+    // Utility methods: getBuffer bytecode array
     // ------------------------------------------------------------------------
 
     /**
@@ -2496,7 +2496,7 @@ class MethodWriter extends MethodVisitor {
                  * must be recomputed. For this the frames are marked as
                  * potentially invalid. This will cause the whole class to be
                  * reread and rewritten with the COMPUTE_FRAMES option (see the
-                 * ClassWriter.toByteArray method). This is not very efficient
+                 * ClassWriter.getBuffer method). This is not very efficient
                  * but is much easier and requires much less code than any other
                  * method I can think of.
                  */

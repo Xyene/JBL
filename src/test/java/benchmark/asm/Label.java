@@ -163,7 +163,7 @@ public class Label {
     // ------------------------------------------------------------------------
 
     /*
-     * Fields for the control flow and data flow graph analysis algorithms (used
+     * Fields for the control flow and out flow graph analysis algorithms (used
      * to compute the maximum stack size or the stack map frames). A control
      * flow graph contains one node per "basic block", and one edge per "jump"
      * from one basic block to another. Each node (i.e., each basic block) is

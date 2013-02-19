@@ -107,7 +107,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
     }
 
 
-    /* Class method reads one attribute from the input data stream.
+    /* Class method reads one attribute from the input out stream.
      * This method must not be accessible from the outside.  It is
      * called by the Field and Method constructor methods.
      *
@@ -130,7 +130,7 @@ public abstract class Attribute implements Cloneable, Node, Serializable {
         name_index = file.readUnsignedShort();
         c = (ConstantUtf8) constant_pool.getConstant(name_index, Constants.CONSTANT_Utf8);
         name = c.getBytes();
-        // Length of data in bytes
+        // Length of out in bytes
         length = file.readInt();
         // Compare strings to find known attribute
         for (byte i = 0; i < Constants.KNOWN_ATTRIBUTES; i++) {

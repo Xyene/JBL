@@ -1,14 +1,12 @@
 import benchmark.asm.ClassReader;
+import benchmark.asm.ClassWriter;
 import benchmark.bcel.classfile.ClassParser;
-import benchmark.bcel.classfile.JavaClass;
 import benchmark.serp.bytecode.Project;
 import org.junit.Test;
 import net.sf.jbl.introspection.ClassFile;
+import sun.reflect.ConstantPool;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.RandomAccessFile;
+import java.io.*;
 
 public class BenchmarkTest {
 
@@ -23,45 +21,45 @@ public class BenchmarkTest {
         //JBL benchmark
         double average = 0;
         Runtime.getRuntime().gc();
-        for (int i = 0; i != 512; i++) {
+        for (int i = 0; i != 1024; i++) {
             double start = System.nanoTime();
-            ClassFile cf = new ClassFile(bytes);
+            new ClassFile(bytes).toByteArray();
             average += System.nanoTime() - start;
         }
-        average /= 512;
+        average /= 1024;
         System.out.println("JBL Time: " + average/1000000 + "ms");
 
         //ASM benchmark
         average = 0;
         Runtime.getRuntime().gc();
-        for (int i = 0; i != 512; i++) {
+        for (int i = 0; i != 1024; i++) {
             double start = System.nanoTime();
-            ClassReader cr = new ClassReader(bytes);
+            new ClassWriter(new ClassReader(bytes), 0).toByteArray();
             average += System.nanoTime() - start;
         }
-        average /= 512;
+        average /= 1024;
         System.out.println("ASM Time: " + average/1000000 + "ms");
 
         //BCEL benchmark
         average = 0;
         Runtime.getRuntime().gc();
-        for (int i = 0; i != 512; i++) {
+        for (int i = 0; i != 1024; i++) {
             double start = System.nanoTime();
-            JavaClass jc = new ClassParser(new FileInputStream(clazz), "PhantomTest").parse();
+            new ClassParser(new FileInputStream(clazz), "PhantomTest").parse().getBytes();
             average += System.nanoTime() - start;
         }
-        average /= 512;
+        average /= 1024;
         System.out.println("BCEL Time: " + average/1000000 + "ms");
 
         //SERP benchmark
         average = 0;
         Runtime.getRuntime().gc();
-        for (int i = 0; i != 512; i++) {
+        for (int i = 0; i != 1024; i++) {
             double start = System.nanoTime();
-            new Project("Test").loadClass(clazz);
+            new Project("Test").loadClass(clazz).toByteArray();
             average += System.nanoTime() - start;
         }
-        average /= 512;
+        average /= 1024;
         System.out.println("SERP Time: " + average/1000000 + "ms");
     }
 }

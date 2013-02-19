@@ -37,7 +37,7 @@ import benchmark.asm.Label;
  * An {@link benchmark.asm.Attribute Attribute} that can print a readable
  * representation of itself.
  * 
- * Implementations should construct readable output from an attribute data
+ * Implementations should construct readable output from an attribute out
  * structure. Such representation could be used in unit test assertions.
  * 
  * @author Eugene Kuleshov

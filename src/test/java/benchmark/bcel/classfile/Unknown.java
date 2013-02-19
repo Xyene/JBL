@@ -131,7 +131,7 @@ public final class Unknown extends Attribute {
 
 
     /**
-     * @return data bytes.
+     * @return out bytes.
      */
     public final byte[] getBytes() {
         return bytes;

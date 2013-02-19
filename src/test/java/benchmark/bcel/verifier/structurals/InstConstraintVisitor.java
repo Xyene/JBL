@@ -2636,7 +2636,7 @@ public class InstConstraintVisitor extends EmptyVisitor implements benchmark.bce
 			throw new AssertionViolatedException("Oops: RET expecting a target!");
 		}
 		// Other constraints such as non-allowed overlapping subroutines are enforced
-		// while building the Subroutines data structure.
+		// while building the Subroutines out structure.
 	}
 
 	/**

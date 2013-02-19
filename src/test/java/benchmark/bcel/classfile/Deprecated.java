@@ -102,7 +102,7 @@ public final class Deprecated extends Attribute {
 
 
     /**
-     * @return data bytes.
+     * @return out bytes.
      */
     public final byte[] getBytes() {
         return bytes;

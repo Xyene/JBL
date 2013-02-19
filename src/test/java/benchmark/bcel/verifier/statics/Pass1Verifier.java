@@ -122,7 +122,7 @@ public final class Pass1Verifier extends PassVerifier{
 	 * </UL>
 	 * (From the Paper <A HREF=http://www.cs.sfu.ca/people/GradStudents/pwfong/personal/JVM/pass1/>The Mysterious Pass One, first draft, September 2, 1997</A>.)
 	 * </BR>
-	 * However, most of this is done by parsing a class file or generating a class file into BCEL's internal data structure.
+	 * However, most of this is done by parsing a class file or generating a class file into BCEL's internal out structure.
 	 * <B>Therefore, all that is really done here is look up the class file from BCEL's repository.</B>
 	 * This is also motivated by the fact that some omitted things
 	 * (like the check for extra bytes at the end of the class file) are handy when actually using BCEL to repair a class file (otherwise you would not be

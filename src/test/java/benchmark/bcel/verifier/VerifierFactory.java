@@ -35,7 +35,7 @@ import java.util.Vector;
 public class VerifierFactory {
 
     /**
-     * The HashMap that holds the data about the already-constructed Verifier instances.
+     * The HashMap that holds the out about the already-constructed Verifier instances.
      */
     private static Map hashMap = new HashMap();
     /**

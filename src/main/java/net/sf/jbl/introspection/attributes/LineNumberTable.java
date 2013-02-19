@@ -1,52 +1,51 @@
-package net.sf.jbl.introspection.members.attributes;
+package net.sf.jbl.introspection.attributes;
 
-import net.sf.jbl.introspection.members.Attribute;
-import net.sf.jbl.introspection.members.Constant;
+import net.sf.jbl.introspection.ConstantPool;
+import net.sf.jbl.introspection.Attribute;
 import net.sf.jbl.util.ByteStream;
-import net.sf.jbl.util.Bytes;
 
-import java.util.Iterator;
-import java.util.LinkedList;
+import java.util.*;
 
 /**
  * Represents a line number metadata table, used for stacktraces and debugging.
  */
 public class LineNumberTable extends Attribute implements Iterable<LineNumberTable.Entry> {
-
-    private final LinkedList<Entry> lines = new LinkedList<Entry>();
+    private final List<Entry> lines;
 
     /**
      * Constructs a LineNumberTable attribute.
-     * @param stream stream containing encoded data.
-     * @param name the name, "LineNumberTable"
+     *
+     * @param stream stream containing encoded out.
      */
-    public LineNumberTable(ByteStream stream, Constant name) {
-        super(name, stream.readInt());
-        short size = stream.readShort();
+    public LineNumberTable(ByteStream stream) {
+        super("LineNumberTable");
+        int size = stream.readShort();
+        lines = new ArrayList<Entry>(size);
         for (int i = 0; i != size; i++) {
             lines.add(new Entry(stream.readShort(), stream.readShort()));
         }
     }
 
-    /**
-     * Public no-args constructor for extending classes. Should not be used directly.
-     */
-    public LineNumberTable() {
-
+    public LineNumberTable(List<Entry> entries) {
+        super("LineNumberTable");
+        lines = entries;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public byte[] getBytes() {
-        ByteStream out = new ByteStream();
-        out.write((short) lines.size());
-        for (Entry e : lines) {
-            out.write(Bytes.toByteArray((short) e.startPC)).write(Bytes.toByteArray((short) e.lineNumber));
+    public LineNumberTable() {
+        super("LineNumberTable");
+        lines = new ArrayList<Entry>();
+    }
+
+    public void dump(ByteStream out, ConstantPool constants) {
+        int size = lines.size();
+        int len = (size << 2) + 2;
+        out.enlarge(len);
+        out.writeShort(constants.newUTF(name)).writeInt(len);
+        out.writeShort(size);
+        for (int i = 0; i != size; i++) {
+            Entry e = lines.get(i);
+            out.writeShort(e.startPC).writeShort(e.lineNumber);
         }
-        byte[] bytes = out.toByteArray();
-        length = bytes.length;
-        return Bytes.prepend(bytes, super.getBytes());
     }
 
     /**
@@ -55,6 +54,10 @@ public class LineNumberTable extends Attribute implements Iterable<LineNumberTab
     @Override
     public Iterator<Entry> iterator() {
         return lines.iterator();
+    }
+
+    public List<Entry> getLines() {
+        return lines;
     }
 
     /**

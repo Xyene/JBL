@@ -108,7 +108,7 @@ public final class Synthetic extends Attribute {
 
 
     /**
-     * @return data bytes.
+     * @return out bytes.
      */
     public final byte[] getBytes() {
         return bytes;

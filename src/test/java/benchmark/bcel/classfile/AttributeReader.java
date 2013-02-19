@@ -37,17 +37,17 @@ public interface AttributeReader {
      @param name_index An index into the constant pool, indexing a
      ConstantUtf8 that represents the name of the attribute.
 
-     @param length The length of the data contained in the attribute.  This
+     @param length The length of the out contained in the attribute.  This
      is written into the constant pool and should agree with what the
      factory expects the length to be.
 
-     @param file This is the data input stream that the factory needs to read
-     its data from.
+     @param file This is the out input stream that the factory needs to read
+     its out from.
 
      @param constant_pool This is the constant pool associated with the
      Attribute that we are constructing.
 
-     @return The user-defined AttributeReader should take this data and use
+     @return The user-defined AttributeReader should take this out and use
      it to construct an attribute.  In the case of errors, a null can be
      returned which will cause the parsing of the class file to fail.
 

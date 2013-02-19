@@ -54,7 +54,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
 
 
     /** 
-     * Initialize instance from file data.
+     * Initialize instance from file out.
      *
      * @param file Input stream
      * @throws IOException
@@ -89,7 +89,7 @@ public final class ConstantFloat extends Constant implements ConstantObject {
 
 
     /**
-     * @return data, i.e., 4 bytes.
+     * @return out, i.e., 4 bytes.
      */
     public final float getBytes() {
         return bytes;

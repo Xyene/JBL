@@ -53,7 +53,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
 
 
     /** 
-     * Initialize instance from file data.
+     * Initialize instance from file out.
      *
      * @param file Input stream
      * @throws IOException
@@ -88,7 +88,7 @@ public final class ConstantDouble extends Constant implements ConstantObject {
 
 
     /**
-     * @return data, i.e., 8 bytes.
+     * @return out, i.e., 8 bytes.
      */
     public final double getBytes() {
         return bytes;

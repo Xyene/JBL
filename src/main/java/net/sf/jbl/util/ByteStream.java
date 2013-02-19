@@ -6,217 +6,248 @@ import java.util.Arrays;
 /**
  * A one-size-fit-all IO stream
  */
-public class ByteStream implements Flushable {
-    private int pos = 0;
-    private DataInputStream in;
-    private DataOutputStream out;
-    private ByteArrayOutputStream array;
-    private final String err = "data stream ended prematurely";
+public class ByteStream {
+    protected byte[] buffer;
+    protected volatile int _in = 0;
+    protected volatile int _out = 0;
 
-    public ByteStream(byte[] bytes) {
-        this(bytes, 0);
+    protected int flag;
+
+    protected final static String err = "stream ended prematurely";
+
+    ByteStream(int flag) {
+        this.flag = flag;
     }
 
-    public ByteStream() {
-        this(new byte[0]);
+    public static ByteStream writeStream(int buffer) {
+        ByteStream stream = new ByteStream(0);
+        stream.buffer = new byte[buffer];//new DataOutputStream(stream.array = new ByteArrayOutputStream(buffer));
+        return stream;
     }
 
-    public ByteStream(byte[] bytes, int index) {
-        pos = index;
-        in = new DataInputStream(new BufferedInputStream(new ByteArrayInputStream(bytes), 8192));
-        out = new DataOutputStream(new BufferedOutputStream(array = new ByteArrayOutputStream(8192), 8192));
+    public static ByteStream writeStream() {
+        return writeStream(0);
+    }
+
+    public static ByteStream readStream(byte[] bytes, int pos) {
+        ByteStream stream = new ByteStream(1);
+        stream._in = pos;
+        stream.buffer = bytes;
+        return stream;
+    }
+
+    public static ByteStream readStream(byte[] bytes) {
+        return readStream(bytes, 0);
+    }
+
+    public static ByteStream readStream(File file) {
         try {
-            in.skipBytes(index);
-        } catch (IOException e) {
-            throw new IllegalStateException(err, e);
+            return readStream(new FileInputStream(file));
+        } catch (FileNotFoundException e) {
+            throw new IllegalStateException("stream ended prematurely", e);
         }
     }
 
-    public ByteStream write(byte... byt) {
+    public static ByteStream readStream(InputStream io) {
+        ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+        byte[] data = new byte[655653];
+        int nRead;
         try {
-            out.write(byt);
+            while ((nRead = io.read(data, 0, data.length)) != -1)
+                buffer.write(data, 0, nRead);
         } catch (IOException e) {
-            throw new IllegalStateException(err, e);
+            throw new IllegalStateException("stream ended prematurely", e);
         }
+        return readStream(buffer.toByteArray());
+    }
+
+    public boolean isRead() {
+        return flag == 1;
+    }
+
+    public boolean isWrite() {
+        return flag == 0;
+    }
+
+    public void enlarge(int size) {
+        int length1 = buffer.length << 1;
+        int length2 = _out + size;
+        byte[] newData = new byte[length1 > length2 ? length1 : length2];
+        System.arraycopy(buffer, 0, newData, 0, _out);
+        buffer = newData;
+    }
+
+    public ByteStream writeInt(final int i) {
+        int length = _out;
+        if (length + 4 > buffer.length) {
+            enlarge(4);
+        }
+        byte[] data = buffer;
+        data[length++] = (byte) (i >>> 24);
+        data[length++] = (byte) (i >>> 16);
+        data[length++] = (byte) (i >>> 8);
+        data[length++] = (byte) i;
         return this;
     }
 
-    public ByteStream write(byte byt) {
-        try {
-            out.write(byt);
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+    public ByteStream writeLong(final long l) {
+        writeInt((int) (l >>> 32));
+        writeInt((int) l);
         return this;
     }
 
-    public ByteStream write(String utf) {
-        try {
-            out.writeUTF(utf);
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
+    public ByteStream writeDouble(double d) {
+        return writeLong(Double.doubleToLongBits(d));
+    }
+
+    public final ByteStream writeUTF(String s) {
+        writeShort(s.length());
+        int charLength = s.length();
+        int len = _out;
+        if (len + 2 + charLength > buffer.length) {
+            enlarge(charLength + 2);
         }
+
+        byte[] data = buffer;
+        buffer[len++] = (byte) (charLength >>> 8);
+        data[len++] = (byte) charLength;
+
+        _top:
+        for (int i = 0; i < charLength; ++i) {
+            char c;
+            if ((c = s.charAt(i)) <= 0 || c > 127) {
+                int byteLength = i;
+                int j;
+                for (j = i; j < charLength; ++j) {
+                    if ((c = s.charAt(j)) > 0 && c <= 127) {
+                        ++byteLength;
+                    } else if (c > 2047) {
+                        byteLength += 3;
+                    } else {
+                        byteLength += 2;
+                    }
+                }
+                data[len] = (byte) (byteLength >>> 8);
+                data[len++] = (byte) byteLength;
+                if (len + 2 + byteLength > data.length) {
+                    enlarge(byteLength + 2);
+                    data = buffer;
+                }
+                j = i;
+                while (true) {
+                    j++;
+                    if (j >= charLength) {
+                        break _top;
+                    }
+
+                    if ((c = s.charAt(j)) > 0 && c <= 127) {
+                        data[len++] = (byte) c;
+                        continue;
+                    } else if (c > 2047) {
+                        data[len++] = (byte) (224 | c >> 12 & 15);
+                        data[len++] = (byte) (128 | c >> 6 & 63);
+                    } else {
+                        data[len++] = (byte) (192 | c >> 6 & 31);
+                    }
+                    data[len++] = (byte) (128 | c & 63);
+                }
+            }
+            data[len++] = (byte) c;
+        }
+        _out = len;
         return this;
     }
 
-    public ByteStream write(int i) {
-        try {
-            out.writeInt(i);
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
+
+    public ByteStream writeShort(int s) {
+        int length = _out;
+        if (length + 2 > buffer.length) {
+            enlarge(2);
         }
+        byte[] data = buffer;
+        data[length++] = (byte) (s >>> 8);
+        data[length++] = (byte) s;
+        _out = length;
         return this;
     }
 
-    public ByteStream write(short s) {
-        try {
-            out.writeShort(s);
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
+    public ByteStream writeByte(int b) {
+        int length = _out;
+        if (length + 2 > buffer.length) {
+            enlarge(2);
         }
+        buffer[length++] = (byte) b;
+        this._out = length;
         return this;
     }
 
-    public ByteStream write(char c) {
-        try {
-            out.writeChar(c);
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
+    public ByteStream writeBytes(byte[] b) {
+        if (b.length > 0) {
+            if (_out + b.length > buffer.length) {
+                enlarge(b.length);
+            }
+            System.arraycopy(b, 0, buffer, _out, b.length);
+            _out += b.length;
         }
         return this;
     }
 
     public boolean readBoolean() {
-        try {
-            pos += 1;
-            return in.readBoolean();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        return readByte() == 1 ? true : false;
     }
 
     public int readUnsignedByte() {
-        try {
-            pos += 1;
-            return in.readUnsignedByte();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        return buffer[_in++];
     }
 
     public short readShort() {
-        try {
-            pos += 2;
-            return in.readShort();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        byte[] b = buffer;
+        return (short) (((b[_in++] & 0xFF) << 8) | (b[_in++] & 0xFF));
     }
 
     public int readUnsignedShort() {
-        try {
-            pos += 2;
-            return in.readUnsignedShort();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
-    }
-
-    public char readChar() {
-        try {
-            pos += 2;
-            return in.readChar();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        byte[] b = buffer;
+        return ((b[_in++] & 0xFF) << 8) | (b[_in++] & 0xFF);
     }
 
     public int readInt() {
-        try {
-            pos += 4;
-            return in.readInt();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        byte[] b = buffer;
+        return ((b[_in++] & 0xFF) << 24) | ((b[_in++] & 0xFF) << 16) | ((b[_in++] & 0xFF) << 8) | (b[_in++] & 0xFF);
     }
 
     public long readLong() {
-        try {
-            pos += 8;
-            return in.readLong();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        return (readInt() << 32) | readInt() & 0xFFFFFFFFL;
     }
 
     public float readFloat() {
-        try {
-            pos += 4;
-            return in.readFloat();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        return Float.intBitsToFloat(readInt());
     }
 
     public double readDouble() {
-        try {
-            pos += 8;
-            return in.readDouble();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        return Double.longBitsToDouble(readLong());
     }
 
     public byte readByte() {
-        try {
-            pos += 1;
-            return in.readByte();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
+        return (byte) (buffer[_in++] & 0xFF);
     }
 
     public byte[] read(int n) {
         byte[] arr = new byte[n];
-        for(int i = 0; i != n; i++)
-            arr[i] = readByte();
-        pos += n;
+        System.arraycopy(buffer, _in, arr, 0, n);
+        _in += n;
         return arr;
     }
 
-    public byte[] toByteArray() {
-        try {
-            out.flush();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
-        return array.toByteArray();
+    public byte[] getBuffer() {
+        return buffer;
     }
 
     public int position() {
-        return pos;
-    }
-
-    public void flush() {
-        try {
-            out.flush();
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
-    }
-
-    public byte[] readFully() {
-        byte[] out = new byte[0];
-        try {
-            in.readFully(out);
-        } catch (IOException e) {
-          throw new IllegalStateException(err, e);
-        }
-        return out;
+        return isWrite() ? _out : _in;
     }
 
     public String toString() {
-        return "{ByteStream" + Arrays.toString(toByteArray()) + "}";
+        return "{ByteStream" + Arrays.toString(buffer) + "}";
     }
 }
 

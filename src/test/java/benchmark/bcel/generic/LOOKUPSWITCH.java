@@ -40,7 +40,7 @@ public class LOOKUPSWITCH extends Select {
     public LOOKUPSWITCH(int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
         super(benchmark.bcel.Constants.LOOKUPSWITCH, match, targets, defaultTarget);
         length = (short) (9 + match_length * 8); /* alignment remainder assumed
-         * 0 here, until dump time. */
+         * 0 here, until getBuffer time. */
         fixed_length = length;
     }
 
@@ -60,7 +60,7 @@ public class LOOKUPSWITCH extends Select {
 
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed out (e.g. index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide); // reads padding

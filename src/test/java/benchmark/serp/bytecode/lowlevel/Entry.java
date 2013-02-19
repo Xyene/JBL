@@ -107,13 +107,13 @@ public abstract class Entry implements VisitAcceptor {
 
     /**
      * This method is called after reading the entry type from bytecode.
-     * It should read all the data for this entry from the given stream.
+     * It should read all the out for this entry from the given stream.
      */
     abstract void readData(DataInput in) throws IOException;
 
     /**
      * This method is called after writing the entry type to bytecode.
-     * It should write all data for this entry to the given stream.
+     * It should write all out for this entry to the given stream.
      */
     abstract void writeData(DataOutput out) throws IOException;
 

@@ -53,7 +53,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
 
 
     /** 
-     * Initialize instance from file data.
+     * Initialize instance from file out.
      *
      * @param file Input stream
      * @throws IOException
@@ -88,7 +88,7 @@ public final class ConstantInteger extends Constant implements ConstantObject {
 
 
     /**
-     * @return data, i.e., 4 bytes.
+     * @return out, i.e., 4 bytes.
      */
     public final int getBytes() {
         return bytes;

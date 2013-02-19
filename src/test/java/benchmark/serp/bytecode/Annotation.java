@@ -872,7 +872,7 @@ public class Annotation implements BCEntity, VisitAcceptor {
         }
 
         /**
-         * Read data into the given value.
+         * Read out into the given value.
          */
         private void read(Value val, int tag, DataInput in) throws IOException {
             switch (tag) {
@@ -946,7 +946,7 @@ public class Annotation implements BCEntity, VisitAcceptor {
         }
 
         /**
-         * Write the data for the given value to the stream.
+         * Write the out for the given value to the stream.
          */
         private void write(Value val, DataOutput out) throws IOException {
             if (val.index2 != -1) {

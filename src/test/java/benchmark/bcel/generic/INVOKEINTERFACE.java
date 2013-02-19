@@ -75,7 +75,7 @@ public final class INVOKEINTERFACE extends InvokeInstruction {
 
 
     /**
-     * Read needed data (i.e., index) from file.
+     * Read needed out (i.e., index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);

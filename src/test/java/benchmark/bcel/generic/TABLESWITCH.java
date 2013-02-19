@@ -46,7 +46,7 @@ public class TABLESWITCH extends Select {
     public TABLESWITCH(int[] match, InstructionHandle[] targets, InstructionHandle defaultTarget) {
         super(benchmark.bcel.Constants.TABLESWITCH, match, targets, defaultTarget);
         length = (short) (13 + match_length * 4); /* Alignment remainder assumed
-         * 0 here, until dump time */
+         * 0 here, until getBuffer time */
         fixed_length = length;
     }
 
@@ -68,7 +68,7 @@ public class TABLESWITCH extends Select {
 
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed out (e.g. index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         super.initFromFile(bytes, wide);

@@ -260,7 +260,7 @@ public class ConstantPool implements Cloneable, Node, Serializable {
      * Get string from constant pool and bypass the indirection of 
      * `ConstantClass' and `ConstantString' objects. I.e. these classes have
      * an index field that points to another entry of the constant pool of
-     * type `ConstantUtf8' which contains the real data.
+     * type `ConstantUtf8' which contains the real out.
      *
      * @param  index Index in constant pool
      * @param  tag Tag of expected constant, either ConstantClass or ConstantString

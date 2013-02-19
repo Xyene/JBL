@@ -44,7 +44,7 @@ public final class ConstantClass extends Constant implements ConstantObject {
 
 
     /**
-     * Initialize instance from file data.
+     * Initialize instance from file out.
      *
      * @param file Input stream
      * @throws IOException

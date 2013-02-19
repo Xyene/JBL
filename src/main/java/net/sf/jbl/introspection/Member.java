@@ -1,46 +1,27 @@
 package net.sf.jbl.introspection;
 
-import net.sf.jbl.introspection.members.Attribute;
-import net.sf.jbl.introspection.members.Constant;
 import net.sf.jbl.introspection.metadata.Metadatable;
-import net.sf.jbl.util.ByteStream;
-import net.sf.jbl.util.Bytes;
 
-import java.util.Collection;
-
-import static net.sf.jbl.introspection.Opcode.*;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * A generic class member. Can refer to either a field or a member, depending on the pool it is generated from.
  */
-public class Member extends AccessibleMember implements Metadatable<Attribute>{
-    protected Constant name;
-    protected Constant descriptor;
-    protected Metadatable.Container metadata;
+public class Member extends AccessibleMember implements Metadatable<Attribute>, Opcode {
+    String name;
+    String descriptor;
+    Metadatable.Container metadata;
 
-    /**
-     * Constructs a member.
-     *
-     * @param stream The stream of bytes containing member data.
-     * @param pool   The associated constant pool.
-     */
-    public Member(ByteStream stream, Pool<Constant> pool) {
-        flag = stream.readShort();
-        name = pool.get(stream.readShort());
-        descriptor = pool.get(stream.readShort());
-        metadata = new Metadatable.Container(new Pool<Attribute>(stream, Pool.ATTRIBUTE_PARSER, pool), pool);
+    public Member(int access, String name, String descriptor, Container attributes) {
+        this.name = name;
+        this.descriptor = descriptor;
+        this.flag = access;
+        this.metadata = attributes;
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public byte[] getBytes() {
-        ByteStream out = new ByteStream();
-        out.write(Bytes.toByteArray((short) flag));
-        out.write(Bytes.toByteArray((short) name.getIndex()));
-        out.write(Bytes.toByteArray((short) descriptor.getIndex()));
-        out.write(metadata.getAttributes().getBytes());
-        return out.toByteArray();
+    public Member(int access, String name, String descriptor) {
+       this(access, name, descriptor, new Container(Collections.EMPTY_LIST)); //TODO: null constantpool....
     }
 
     /**
@@ -49,7 +30,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      * @return the name of this member.
      */
     public String getName() {
-        return name.stringValue();
+        return name;
     }
 
     /**
@@ -58,7 +39,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      * @param newName the new name of the member.
      */
     public void setName(String newName) {
-        name.getOwner().set(name.getIndex(), (name = new Constant(TAG_UTF_STRING, newName.getBytes())));
+       name = newName;
     }
 
     /**
@@ -67,7 +48,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      * @return the descriptor of this member.
      */
     public String getDescriptor() {
-        return descriptor.stringValue();
+        return descriptor;
     }
 
     /**
@@ -76,7 +57,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      * @param newDescriptor the new descriptor of the member.
      */
     public void setDescriptor(String newDescriptor) {
-        descriptor.getOwner().set(descriptor.getIndex(), (descriptor = new Constant(TAG_UTF_STRING, newDescriptor.getBytes())));
+        descriptor = newDescriptor;
     }
 
     /**
@@ -84,7 +65,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      *
      * @return the attribute pool of this member.
      */
-    public Pool<Attribute> getAttributes() {
+    public List<Attribute> getAttributes() {
         return metadata.getAttributes();
     }
 
@@ -93,7 +74,7 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
      *
      * @param attributePool the new attribute pool.
      */
-    public void setAttributes(Pool<Attribute> attributePool) {
+    public void setAttributes(List<Attribute> attributePool) {
         metadata.setAttributes(attributePool);
     }
 
@@ -119,47 +100,6 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
         }
     }
 
-    /**
-     * Is this member synchronized?
-     *
-     * @return True if it is, false otherwise.
-     */
-    public boolean isSynchronized() {
-        return is(ACC_SYNCHRONIZED);
-    }
-
-    /**
-     * Toggles synchronization of this member.
-     *
-     * @param i True if intent is to mark member synchronized, false otherwise.
-     */
-    public void setSynchronized(boolean i) {
-        flag = i ? flag | ACC_SYNCHRONIZED : flag & ~ACC_SYNCHRONIZED;
-    }
-
-    /**
-     * Is this member native?
-     *
-     * @return True if it is, false otherwise.
-     */
-    public boolean isNative() {
-        return is(ACC_NATIVE);
-    }
-
-    /**
-     * Toggles native flag of this member.
-     *
-     * @param i True if intent is to mark member native, false otherwise.
-     */
-    public void setNative(boolean i) {
-        flag = i ? flag | ACC_NATIVE : flag & ~ACC_NATIVE;
-    }
-
-    @Override
-    public Collection<Attribute> getMetadataInstances(String meta) {
-        return metadata.getAttributes();
-    }
-
     @Override
     public void removeMetadata(String meta) {
         metadata.removeMetadata(meta);
@@ -178,5 +118,13 @@ public class Member extends AccessibleMember implements Metadatable<Attribute>{
     @Override
     public <V> void addMetadata(String meta, V value) {
         metadata.addMetadata(meta, value);
+    }
+
+    public boolean isStatic() {
+        return is(ACC_STATIC);
+    }
+
+    public void setStatic(boolean i) {
+        flag = i ? flag | ACC_STATIC : flag & ~ACC_STATIC;
     }
 }

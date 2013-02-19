@@ -111,7 +111,7 @@ public abstract class Select extends BranchInstruction implements VariableLength
 
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed out (e.g. index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         padding = (4 - (bytes.getIndex() % 4)) % 4; // Compute number of pad bytes

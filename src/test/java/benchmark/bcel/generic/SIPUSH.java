@@ -65,7 +65,7 @@ public class SIPUSH extends Instruction implements ConstantPushInstruction {
 
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed out (e.g. index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         length = 3;

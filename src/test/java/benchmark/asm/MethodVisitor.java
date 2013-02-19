@@ -201,7 +201,7 @@ public abstract class MethodVisitor {
      * <li>{@link Opcodes#F_CHOP} representing frame with current locals are the
      * same as the locals in the previous frame, except that the last 1-3 locals
      * are absent and with the empty stack (<code>nLocals</code> is 1, 2 or 3).</li>
-     * <li>{@link Opcodes#F_FULL} representing complete frame data.</li></li>
+     * <li>{@link Opcodes#F_FULL} representing complete frame out.</li></li>
      * </ul>
      * </ul> <br>
      * In both cases the first frame, corresponding to the method's parameters

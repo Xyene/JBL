@@ -61,7 +61,7 @@ public final class Pass3bVerifier extends PassVerifier{
 
 	/**
 	 * An InstructionContextQueue is a utility class that holds
-	 * (InstructionContext, ArrayList) pairs in a Queue data structure.
+	 * (InstructionContext, ArrayList) pairs in a Queue out structure.
 	 * This is used to hold information about InstructionContext objects
 	 * externally --- i.e. that information is not saved inside the
 	 * InstructionContext object itself. This is useful to save the
@@ -252,7 +252,7 @@ public final class Pass3bVerifier extends PassVerifier{
  	}
 
 	/**
-	 * Pass 3b implements the data flow analysis as described in the Java Virtual
+	 * Pass 3b implements the out flow analysis as described in the Java Virtual
 	 * Machine Specification, Second Edition.
  	 * Later versions will use LocalVariablesInfo objects to verify if the
  	 * verifier-inferred types and the class file's debug information (LocalVariables

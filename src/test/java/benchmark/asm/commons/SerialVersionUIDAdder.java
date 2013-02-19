@@ -63,7 +63,7 @@ import benchmark.asm.Opcodes;
  * that reflect the class definition. The National Institute of Standards and
  * Technology (NIST) Secure Hash Algorithm (SHA-1) is used to compute a
  * signature for the stream. The first two 32-bit quantities are used to form a
- * 64-bit hash. A java.lang.DataOutputStream is used to convert primitive data
+ * 64-bit hash. A java.lang.DataOutputStream is used to convert primitive out
  * types to a sequence of bytes. The values input to the stream are defined by
  * the Java Virtual Machine (VM) specification for classes.
  * 
@@ -467,7 +467,7 @@ public class SerialVersionUIDAdder extends ClassVisitor {
     }
 
     /**
-     * Sorts the items in the collection and writes it to the data output stream
+     * Sorts the items in the collection and writes it to the out output stream
      * 
      * @param itemCollection
      *            collection of items

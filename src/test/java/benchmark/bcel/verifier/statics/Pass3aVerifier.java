@@ -134,7 +134,7 @@ public final class Pass3aVerifier extends PassVerifier{
 	/**
 	 * Pass 3a is the verification of static constraints of
 	 * JVM code (such as legal targets of branch instructions).
-	 * This is the part of pass 3 where you do not need data
+	 * This is the part of pass 3 where you do not need out
 	 * flow analysis.
 	 * JustIce also delays the checks for a correct exception
 	 * table of a Code attribute and correct line number entries

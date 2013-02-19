@@ -126,7 +126,7 @@ public abstract class Instruction implements Cloneable, Serializable {
 
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed out (e.g. index) from file.
      *
      * @param bytes byte sequence to read from
      * @param wide "wide" instruction flag

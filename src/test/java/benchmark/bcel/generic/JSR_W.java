@@ -54,7 +54,7 @@ public class JSR_W extends JsrInstruction {
 
 
     /**
-     * Read needed data (e.g. index) from file.
+     * Read needed out (e.g. index) from file.
      */
     protected void initFromFile( ByteSequence bytes, boolean wide ) throws IOException {
         index = bytes.readInt();

@@ -1,59 +1,60 @@
 package net.sf.jbl.introspection;
 
-import net.sf.jbl.introspection.members.Attribute;
-import net.sf.jbl.introspection.members.Constant;
-import net.sf.jbl.introspection.members.Interface;
+import net.sf.jbl.introspection.attributes.Code;
 import net.sf.jbl.introspection.metadata.Metadatable;
 import net.sf.jbl.util.ByteStream;
-import net.sf.jbl.util.Bytes;
 
 import java.io.File;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.Collection;
-
-import static net.sf.jbl.introspection.Opcode.TAG_UTF_STRING;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A class file structure, used for introspection and modification of classes.
  */
-public class ClassFile extends AccessibleMember implements Metadatable<Attribute> {
-
+public class ClassFile extends AccessibleMember implements Metadatable<Attribute>, Opcode, Cloneable {
     protected int majorVersion;
     protected int minorVersion;
-    protected Pool<Constant> constants;
-    protected Constant thisClass;
-    protected Constant superClass;
-    protected Pool<Interface> interfaces;
-    protected Pool<Member> fields;
-    protected Pool<Member> methods;
+    protected ConstantPool constants;
+    protected String thisClass;
+    protected String superClass;
+    protected List<String> interfaces;
+    protected List<Field> fields;
+    protected List<Method> methods;
     protected Metadatable.Container metadata;
 
-    /**
-     * Constructs a class file object.
-     *
-     * @param bytes The bytes to construct this object from.
-     */
-    public ClassFile(byte[] bytes) {
-        ByteStream in = new ByteStream(bytes);
+    public ClassFile(ByteStream in) {
         if (in.readInt() != 0xCAFEBABE)
-            throw new ClassFormatError("File does not contain magic number 0xCAFEBABE");
+            throw new ClassFormatError("file does not start with magic number 0xCAFEBABE");
 
         minorVersion = in.readShort();
         majorVersion = in.readShort();
-        if(minorVersion > Opcode.JDK_8)
-            throw new UnsupportedOperationException("unknown major version: " + majorVersion);
+        if (majorVersion > Opcode.JDK_8)
+            throw new UnsupportedClassVersionError("unknown major version: " + majorVersion);
 
-        constants = new Pool<Constant>(in, Pool.CONSTANT_PARSER);
+        constants = new ConstantPool(in);
 
         flag = in.readShort();
-        thisClass = constants.get(in.readShort());
-        superClass = constants.get(in.readShort());
+        thisClass = constants.getString(in.readShort());
+        superClass = constants.getString(in.readShort());
 
-        interfaces = new Pool<Interface>(in, Pool.INTERFACE_PARSER, constants);
-        fields = new Pool<Member>(in, Pool.MEMBER_PARSER, constants);
-        methods = new Pool<Member>(in, Pool.MEMBER_PARSER, constants);
-        metadata = new Metadatable.Container(new Pool<Attribute>(in, Pool.ATTRIBUTE_PARSER, constants), constants);
+        int ni = in.readShort();
+        interfaces = new ArrayList<String>(ni); //Allocate the size, saves time for not having to enlarge later
+        for (int i = 0; i != ni; i++)
+            interfaces.add(constants.getString(in.readShort()));
+
+        int nf = in.readShort();
+        fields = new ArrayList<Field>(nf);
+        for (int i = 0; i != nf; i++) {
+            fields.add(new Field(in.readShort(), constants.getUTF(in.readShort()), constants.getUTF(in.readShort()), new Container(readAttributes(in))));
+        }
+/*
+        int nm = in.readShort();
+        methods = new ArrayList<Method>(nm);
+        for (int i = 0; i != nm; i++)
+            methods.add(new Method(in.readShort(), constants.getUTF(in.readShort()), constants.getUTF(in.readShort())));      */
+
+       //  metadata = new Metadatable.Container(readAttributes(in));
     }
 
     /**
@@ -61,39 +62,84 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param stream The stream to construct this object from.
      */
-    public ClassFile(InputStream stream) throws IOException {
-        this(Bytes.read(stream));
+    public ClassFile(InputStream stream) {
+        this(ByteStream.readStream(stream));
     }
 
-    /**
-     * Constructs a class file object.
-     *
-     * @param file The file to construct this object from.
-     */
-    public ClassFile(File file) throws IOException {
-        this(Bytes.read(file));
+    public ClassFile(File file) {
+        this(ByteStream.readStream(file));
+    }
+
+    public ClassFile(Class clazz) {
+        this(clazz.getName());
+    }
+
+    public ClassFile(String name) {
+        this(ClassLoader.getSystemResourceAsStream(name.replace('.', '/') + ".class"));
+    }
+
+    public ClassFile(byte[] bytes) {
+        this(ByteStream.readStream(bytes));
     }
 
     public ClassFile() {
     }
 
-    /**
-     * {@inheritDoc}
-     */
-    public byte[] getBytes() {
-        ByteStream out = new ByteStream();
-        out.write(0xCAFEBABE);
-        out.write((short) minorVersion);
-        out.write((short) majorVersion);
-        out.write(constants.getBytes());
-        out.write((short) flag);
-        out.write((short) thisClass.getIndex());
-        out.write((short) superClass.getIndex());
-        out.write(interfaces.getBytes());
-        out.write(fields.getBytes());
-        out.write(methods.getBytes());
-        out.write(metadata.getAttributes().getBytes());
-        return out.toByteArray();
+    protected <E extends Member> void dumpMembers(ByteStream out, List<E> members) {
+        int ms = members.size();
+        out.writeShort(ms);
+        for (int i = 0; i != ms; i++) {
+            Member m = members.get(i);
+            out.writeShort(flag).writeShort(constants.newUTF(m.name)).writeShort(constants.newUTF(m.descriptor));
+
+            List<Attribute> meta = m.metadata.getAttributes();
+            int size;
+            out.writeShort(size = meta.size());
+            for (int a = 0; a != size; a++) {
+                meta.get(a).dump(out, constants);
+            }
+        }
+    }
+
+    protected List<Attribute> readAttributes(ByteStream in) {
+        int size;
+        List<Attribute> out = new ArrayList<Attribute>(size = in.readShort());
+        for (int i = 0; i != size; i++) {
+            String name = constants.getUTF(in.readShort());
+            int len = in.readInt();
+            if ("Code".equals(name)) out.add(new Code(in));
+            else out.add(new Attribute(name, in.read(len)));
+        }
+        return out;
+    }
+
+    public byte[] toByteArray() {
+        // We can guarantee that at least the magic number and the major/minor shorts
+        // will be written, so enlarge now to save 3 System.arraycopy calls in ByteStream.enlarge
+        ByteStream out = ByteStream.writeStream(8);
+        ByteStream body = ByteStream.writeStream();
+        body.writeShort(constants.newUTF(thisClass));
+        body.writeShort(constants.newUTF(superClass));
+
+        int is = interfaces.size();
+        body.writeShort(is);
+        for (int i = 0; i != is; i++)
+            body.writeShort(constants.newString(interfaces.get(i)));
+
+
+        dumpMembers(out, fields);
+        // dumpMembers(out, methods);
+
+        //dumpAttributes(out, metadata.getAttributes());
+
+        out.writeInt(0xCAFEBABE);
+        out.writeShort(minorVersion);
+        out.writeShort(majorVersion);
+        out.writeBytes(constants.cache.getBuffer());
+        out.writeShort(flag);
+
+        out.writeBytes(body.getBuffer());
+        return out.getBuffer();
     }
 
     /**
@@ -101,12 +147,16 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a defined class.
      */
+
     public Class define(final String name) {
         return new ClassLoader() {
+            // Here we have to define our own class loader due to the System one
+            // refusing to load classes from a byte[]. We also require the name of the class
+            // since the one parsed may be invalid.
             public Class defineClass(byte[] bytes) {
                 return super.defineClass(name, bytes, 0, bytes.length);
             }
-        }.defineClass(getBytes());
+        }.defineClass(toByteArray());
     }
 
     /**
@@ -150,7 +200,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a constant pool.
      */
-    public Pool<Constant> getConstants() {
+    public ConstantPool getConstants() {
         return constants;
     }
 
@@ -159,7 +209,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param constants the pool to set it to.
      */
-    public void setConstants(Pool<Constant> constants) {
+    public void setConstants(ConstantPool constants) {
         this.constants = constants;
     }
 
@@ -169,7 +219,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      * @return the fully qualified name of this class.
      */
     public String getName() {
-        return thisClass.stringValue();
+        return thisClass;
     }
 
     /**
@@ -178,7 +228,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      * @param clazz The new name for this class.
      */
     public void setName(String clazz) {
-        thisClass.getOwner().set(thisClass.getIndex(), (thisClass = new Constant(thisClass.getIndex(), TAG_UTF_STRING, clazz.getBytes())));
+        thisClass = clazz;
     }
 
     /**
@@ -187,16 +237,16 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      * @return the fully qualified name of this class' superclass.
      */
     public String getSuperClass() {
-        return superClass.stringValue();
+        return superClass;
     }
 
     /**
      * Sets the name of this class' superclass.
      *
-     * @param superclass The new name for this class' superclass.
+     * @param clazz The new name for this class' superclass.
      */
-    public void setSuperClass(String superclass) {
-        superClass.getOwner().set(superClass.getIndex(), (superClass = new Constant(superClass.getIndex(), TAG_UTF_STRING, superclass.getBytes())));
+    public void setSuperClass(String clazz) {
+        superClass = clazz;
     }
 
     /**
@@ -204,7 +254,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return an interface pool.
      */
-    public Pool<Interface> getInterfaces() {
+    public List<String> getInterfaces() {
         return interfaces;
     }
 
@@ -213,7 +263,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param interfaces the pool to set it to.
      */
-    public void setInterfaces(Pool<Interface> interfaces) {
+    public void setInterfaces(List<String> interfaces) {
         this.interfaces = interfaces;
     }
 
@@ -222,7 +272,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a field pool.
      */
-    public Pool<Member> getFields() {
+    public List<Field> getFields() {
         return fields;
     }
 
@@ -231,7 +281,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param fields the pool to set it to.
      */
-    public void setFields(Pool<Member> fields) {
+    public void setFields(List<Field> fields) {
         this.fields = fields;
     }
 
@@ -240,7 +290,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a method pool.
      */
-    public Pool<Member> getMethods() {
+    public List<Method> getMethods() {
         return methods;
     }
 
@@ -249,7 +299,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param methods the pool to set it to.
      */
-    public void setMethods(Pool<Member> methods) {
+    public void setMethods(List<Method> methods) {
         this.methods = methods;
     }
 
@@ -258,7 +308,7 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @return a method pool.
      */
-    public Pool<Attribute> getAttributes() {
+    public List<Attribute> getAttributes() {
         return metadata.getAttributes();
     }
 
@@ -267,13 +317,8 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
      *
      * @param attributePool the pool to set it to.
      */
-    public void setAttributes(Pool<Attribute> attributePool) {
+    public void setAttributes(List<Attribute> attributePool) {
         metadata.setAttributes(attributePool);
-    }
-
-    @Override
-    public Collection<Attribute> getMetadataInstances(String meta) {
-        return metadata.getAttributes();
     }
 
     @Override
@@ -294,5 +339,63 @@ public class ClassFile extends AccessibleMember implements Metadatable<Attribute
     @Override
     public <V> void addMetadata(String meta, V value) {
         metadata.addMetadata(meta, value);
+    }
+
+    //General purpose class access flags
+    public boolean isInterface() {
+        return is(ACC_INTERFACE);
+    }
+
+    public void setInterface(boolean i) {
+        flag = i ? flag | ACC_INTERFACE : flag & ~ACC_INTERFACE;
+    }
+
+    public boolean isEnum() {
+        return is(ACC_ENUM);
+    }
+
+    public void setEnum(boolean i) {
+        flag = i ? flag | ACC_ENUM : flag & ~ACC_ENUM;
+    }
+
+    public boolean isAnnotation() {
+        return is(ACC_ANNOTATION);
+    }
+
+    public void setAnnotation(boolean i) {
+        flag = i ? flag | ACC_ANNOTATION : flag & ~ACC_ANNOTATION;
+    }
+
+    public boolean isSuper() {
+        return is(ACC_SUPER);
+    }
+
+    public void setSuper(boolean i) {
+        flag = i ? flag | ACC_SUPER : flag & ~ACC_SUPER;
+    }
+
+    public boolean isAbstract() {
+        return is(ACC_ABSTRACT);
+    }
+
+    public void setAbstract(boolean i) {
+        flag = i ? flag | ACC_ABSTRACT : flag & ~ACC_ABSTRACT;
+    }
+
+    public boolean isClass() {
+        return !isInterface() && !isAnnotation() && isEnum();
+    }
+
+    @Override
+    public ClassFile clone() {
+        ClassFile clone = new ClassFile();
+        clone.minorVersion = minorVersion;
+        clone.majorVersion = majorVersion;
+        //TODO: clone constants
+        clone.flag = flag;
+        clone.thisClass = thisClass;
+        clone.superClass = superClass;
+        //TODO: clone interfaces, fields, methods, and attributes
+        return clone;
     }
 }

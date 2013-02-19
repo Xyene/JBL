@@ -481,7 +481,7 @@ public class JSRInlinerAdapter extends MethodNode implements Opcodes {
 
                 // Rather than JSRing, we will jump to the inline version and
                 // push NULL for what was once the return value. This hack
-                // allows us to avoid doing any sort of data flow analysis to
+                // allows us to avoid doing any sort of out flow analysis to
                 // figure out which instructions manipulate the old return value
                 // pointer which is now known to be unneeded.
                 newInstructions.add(new InsnNode(ACONST_NULL));

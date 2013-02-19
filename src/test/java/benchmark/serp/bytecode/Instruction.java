@@ -120,7 +120,7 @@ public class Instruction extends CodeEntry implements BCEntity, VisitAcceptor {
      * Instructions are equal if their opcodes are the same. Subclasses
      * should override this method to perform a template comparison:
      * instructions should compare equal to other instructions of the same
-     * type where the data is either the same or the data is unset.
+     * type where the out is either the same or the out is unset.
      */
     public boolean equalsInstruction(Instruction other) {
         if (other == this)
@@ -152,7 +152,7 @@ public class Instruction extends CodeEntry implements BCEntity, VisitAcceptor {
     }
 
     /**
-     * Copy the given instruction data.
+     * Copy the given instruction out.
      */
     void read(Instruction orig) {
     }

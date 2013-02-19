@@ -46,7 +46,7 @@ public abstract class ConstantCP extends Constant {
 
 
     /**
-     * Initialize instance from file data.
+     * Initialize instance from file out.
      *
      * @param tag  Constant type tag
      * @param file Input stream

@@ -298,7 +298,7 @@ public class ClassWriter extends ClassVisitor {
     final ByteVector pool;
 
     /**
-     * The constant pool's hash table data.
+     * The constant pool's hash table out.
      */
     Item[] items;
 
@@ -330,7 +330,7 @@ public class ClassWriter extends ClassVisitor {
     /**
      * A type table used to temporarily store internal names that will not
      * necessarily be stored in the constant pool. This type table is used by
-     * the control flow and data flow analysis algorithm used to compute stack
+     * the control flow and out flow analysis algorithm used to compute stack
      * map frames from scratch. This array associates to each index <tt>i</tt>
      * the Item whose index is <tt>i</tt>. All Item objects stored in this array
      * are also stored in the {@link #items} hash table. These two arrays allow
@@ -1203,7 +1203,7 @@ public class ClassWriter extends ClassVisitor {
                 continue;
             }
 
-            // because the data encode the size of the argument
+            // because the out encode the size of the argument
             // we don't need to test if these size are equals
             int resultPosition = result.intVal;
             for (int p = 0; p < length; p++) {

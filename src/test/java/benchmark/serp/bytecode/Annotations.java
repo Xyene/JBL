@@ -6,7 +6,7 @@ import java.util.*;
 import benchmark.serp.bytecode.visitor.*;
 
 /**
- * Java annotation data.
+ * Java annotation out.
  *
  * @author Abe White
  */
