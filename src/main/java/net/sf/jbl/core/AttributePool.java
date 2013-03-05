@@ -1,71 +1,68 @@
-package net.sf.jbl.introspection.metadata;
+/*
+ *  JBL
+ *  Copyright (C) 2013 Tudor Brindus
+ *  All wrongs reserved.
+ *
+ *  This program is free software: you can redistribute it and/or modify it under
+ *  the terms of the GNU Lesser General Public License as published by the Free
+ *  Software Foundation, either version 3 of the License, or (at your option) any
+ *  later version.
+ *
+ *  This program is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ *  details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import net.sf.jbl.introspection.Attribute;
+package net.sf.jbl.core;
 
-import java.beans.XMLDecoder;
+import net.sf.jbl.core.attributes.Code;
+
 import java.beans.XMLEncoder;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.util.*;
+import java.util.ArrayList;
 
-import static net.sf.jbl.introspection.Opcode.*;
+public class AttributePool extends ArrayList<Attribute> {
+    public AttributePool(int size) {
+        super(size);
+    }
 
-public interface Metadatable<T> {
+    public AttributePool() {
+        this(0);
+    }
 
-    void removeMetadata(String meta);
-
-    Object getMetadata(String meta);
-
-    boolean hasMetadata(String meta);
-
-    <V> void addMetadata(String meta, V value);
-
-    class Container {
-        protected List<Attribute> attributes;
-
-        public Container(List<Attribute> attributePool) {
-            attributes = attributePool;
-        }
-
-        protected Attribute getMetadataInstance(String meta) {
-            if(meta == null) throw new IllegalArgumentException("metadata lookup may not be null");
-            int size = attributes.size();
-            for (int i = 0; i != size; i++) {
-                Attribute a = attributes.get(i);
-                /*
-                   if (a instanceof UnknownAttribute) {
-                        UnknownAttribute ua = (UnknownAttribute)
-                        if ("Code".equals(name)) return new Code(ByteStream.readStream(), name, constants);
-                        else if ("LineNumberTable".equals(name)) return new LineNumberTable(stream, name);
-                        else if ("LocalVariableTable".equals(name))
-                            return new LocalVariableTable(stream, name, constants);
-                        return a;
-                    }
-
-                 */
-                if (a.getName().equals(meta)) {
-                    return a;
-                }
+    protected Attribute getMetadataInstance(String meta) {
+        if (meta == null) throw new IllegalArgumentException("metadata lookup may not be null");
+        int size = size();
+        for (int i = 0; i != size; i++) {
+            Attribute a = get(i);
+            if (a.getName().equals(meta)) {
+                return a;
             }
-            return null;
         }
+        return null;
+    }
 
-        public void removeMetadata(String meta) {
-            Attribute a;
-            if ((a = getMetadataInstance(meta)) != null) attributes.remove(a);
-        }
+    public void removeMetadata(String meta) {
+        Attribute a;
+        if ((a = getMetadataInstance(meta)) != null) remove(a);
+    }
 
-        public boolean hasMetadata(String meta) {
-            return getMetadataInstance(meta) != null;
-        }
+    public boolean hasMetadata(String meta) {
+        return getMetadataInstance(meta) != null;
+    }
 
-        public Object getMetadata(String meta) {
-            Attribute ab = getMetadataInstance(meta);
-            //TODO not done
-            return ab;
-        }
+    public Object getMetadata(String meta) {
+        Attribute ab = getMetadataInstance(meta);
+        //TODO not done
+        return ab;
+    }
 
-        public <V> void addMetadata(String meta, V value) {
+    public <V> void addMetadata(String meta, V value) {
           /*       if (!hasMetadata(meta))
                 try {
                     if (value instanceof Attribute) {
@@ -127,32 +124,41 @@ public interface Metadatable<T> {
                 } catch (IOException e) {
                     throw new RuntimeException("could not encode attribute '" + meta + "' with value '" + value + "'", e);
                 }*/
+    }
+
+    @Override
+    public String toString() {
+        return "{(" + size() + "):" + super.toString() + "}";
+    }
+
+    protected byte[] xmlBytes(Object value) throws IOException {
+        ByteArrayOutputStream out = new ByteArrayOutputStream();
+        XMLEncoder enc = new XMLEncoder(out);
+        enc.writeObject(value);
+        enc.close();
+        return out.toByteArray();
+    }
+
+    public static class Handler {
+        public static AttributePool readPool(ConstantPool constants, ByteStream in) {
+            int size = in.readShort();
+            AttributePool out = new AttributePool(size);
+            for (int i = 0; i != size; i++) {
+                int b = in.readShort();
+                String name = constants.getUTF(b);
+                int len = in.readInt();
+                if ("Code".equals(name)) out.add(new Code(constants, in));
+                else out.add(new Attribute(name, in.read(len)));
+            }
+            return out;
         }
 
-        public List<Attribute> getAttributes() {
-            //TODO: FINISH
-            //Update keystore
-            // try {
-            //   UnknownAttribute saved = new UnknownAttribute();
-//                saved.setName("__JBLMeta__");
-            //   saved.setValue(xmlBytes(dispatch));
-            //   attributes.add(saved);
-            // } catch (IOException e) {
-            //   throw new RuntimeException("could not save to JBL metadata store", e);
-            //  }
-            return attributes;
-        }
-
-        public void setAttributes(List<Attribute> attributes) {
-            this.attributes = attributes;
-        }
-
-        protected byte[] xmlBytes(Object value) throws IOException {
-            ByteArrayOutputStream out = new ByteArrayOutputStream();
-            XMLEncoder enc = new XMLEncoder(out);
-            enc.writeObject(value);
-            enc.close();
-            return out.toByteArray();
+        public static void writePool(AttributePool pool, ConstantPool constants, ByteStream out) {
+            int size;
+            out.writeShort(size = pool.size());
+            for (int a = 0; a != size; a++) {
+                pool.get(a).dump(out, constants);
+            }
         }
     }
 }

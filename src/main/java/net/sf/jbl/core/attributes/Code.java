@@ -1,9 +1,30 @@
-package net.sf.jbl.introspection.attributes;
+/*
+ *  JBL
+ *  Copyright (C) 2013 Tudor Brindus
+ *  All wrongs reserved.
+ *
+ *  This program is free software: you can redistribute it and/or modify it under
+ *  the terms of the GNU Lesser General Public License as published by the Free
+ *  Software Foundation, either version 3 of the License, or (at your option) any
+ *  later version.
+ *
+ *  This program is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ *  details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import net.sf.jbl.introspection.Attribute;
-import net.sf.jbl.introspection.ConstantPool;
-import net.sf.jbl.util.ByteStream;
+package net.sf.jbl.core.attributes;
 
+import net.sf.jbl.core.Attribute;
+import net.sf.jbl.core.AttributePool;
+import net.sf.jbl.core.ConstantPool;
+import net.sf.jbl.core.ByteStream;
+
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -15,44 +36,42 @@ public class Code extends Attribute {
     protected int maxLocals;
     protected byte[] codePool;
     protected List<Exception> exceptions;
-    protected List<Attribute> attributes;
+    protected AttributePool metadata;
 
-    /**
-     * Public no-args constructor for extending classes. Should not be used directly.
-     */
     public Code() {
-        this(0, 0, new byte[0], Collections.EMPTY_LIST, Collections.EMPTY_LIST);
+        this(0, 0, new byte[0], new ArrayList<Exception>(), new AttributePool());
     }
 
-    public Code(int maxStack, int maxLocals, byte[] code, List<Exception> exceptions, List<Attribute> meta) {
+    public Code(int maxStack, int maxLocals, byte[] code, List<Exception> exceptions, AttributePool meta) {
         super("Code");
         this.maxStack = maxStack;
         this.maxLocals = maxLocals;
         this.codePool = code;
         this.exceptions = exceptions;
-        this.attributes = meta;
+        this.metadata = meta;
     }
 
-    public Code(ByteStream in) {
+    public Code(ConstantPool constants, ByteStream in) {
         super("Code");
         maxStack = in.readShort();
         maxLocals = in.readShort();
         codePool = in.read(in.readInt());
         short size = in.readShort();
+        exceptions = new ArrayList<Exception>(size);
         for (int i = 0; i != size; i++)
             exceptions.add(new Exception(in.readShort(), in.readShort(), in.readShort(), in.readShort()));
-        //   attributePool = new Pool<Attribute>(Pool.ATTRIBUTE_PARSER, owner).read(in);
+        metadata = AttributePool.Handler.readPool(constants, in);
     }
 
     public void dump(ByteStream out, ConstantPool constants) {
-        ByteStream enc = ByteStream.writeStream(9);
+        ByteStream enc = ByteStream.writeStream(13);
         enc.writeShort(maxStack);
         enc.writeShort(maxLocals);
         enc.writeInt(codePool.length);
         enc.writeBytes(codePool);
 
-        int size;
-        enc.writeShort(size = exceptions.size());
+        int size = exceptions.size();
+        enc.writeShort(size);
         for (int i = 0; i != size; i++) {
             Exception ex = exceptions.get(i);
             enc.writeShort(ex.startPC);
@@ -60,10 +79,14 @@ public class Code extends Attribute {
             enc.writeShort(ex.handlerPC);
             enc.writeShort(ex.catchType);
         }
-        //  attributePool.dump(enc);
+        AttributePool.Handler.writePool(metadata, constants, enc);
         bytes = enc.getBuffer();
         super.dump(out, constants);
-        out.writeBytes(bytes);
+    }
+
+    @Override
+    public String toString() {
+        return "{Code<S(" + maxStack + ")|L(" + maxLocals + ")|CL(" + codePool.length + ")|EX(" + exceptions + ")|A(" + metadata + ")>}";
     }
 
     /**
@@ -143,17 +166,17 @@ public class Code extends Attribute {
      *
      * @return an attribute pool.
      */
-    public List<Attribute> getAttributes() {
-        return attributes;
+    public AttributePool getAttributes() {
+        return metadata;
     }
 
     /**
      * Sets the sub-attribute pool of this attribute.
      *
-     * @param attributePool the pool.
+     * @param attributes the pool.
      */
-    public void setAttributes(List<Attribute> attributePool) {
-        this.attributes = attributePool;
+    public void setAttributes(AttributePool attributes) {
+        metadata = attributes;
     }
 
     /**

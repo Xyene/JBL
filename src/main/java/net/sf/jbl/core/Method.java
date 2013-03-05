@@ -1,6 +1,25 @@
-package net.sf.jbl.introspection;
+/*
+ *  JBL
+ *  Copyright (C) 2013 Tudor Brindus
+ *  All wrongs reserved.
+ *
+ *  This program is free software: you can redistribute it and/or modify it under
+ *  the terms of the GNU Lesser General Public License as published by the Free
+ *  Software Foundation, either version 3 of the License, or (at your option) any
+ *  later version.
+ *
+ *  This program is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ *  details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import net.sf.jbl.introspection.attributes.Code;
+package net.sf.jbl.core;
+
+import net.sf.jbl.core.attributes.Code;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,18 +27,20 @@ import java.util.List;
 public class Method extends Member {
     Code code;
 
-    public Method( int access, String name, String descriptor, Container attributes) {
+    public Method(int access, String name, String descriptor, AttributePool attributes) {
         super(access, name, descriptor, attributes);
-        if((code = (Code)getMetadata("Code")) == null) throw new ClassFormatError("method '" + getName() + "' has no Code attribute");
+        if ((code = (Code) getMetadata("Code")) == null)
+            throw new ClassFormatError("method '" + getName() + "' has no Code attribute");
     }
 
     public Method(int access, String name, String descriptor) {
-        super(access, name, descriptor, new Container(new ArrayList<Attribute>(1))); //TODO: null constantpool....
-        metadata.getAttributes().add(new Code());
+        super(access, name, descriptor, new AttributePool());
+        code = new Code();
     }
 
     /**
      * Returns the max stack.
+     *
      * @return the max stack.
      */
     public int getMaxStack() {
@@ -28,6 +49,7 @@ public class Method extends Member {
 
     /**
      * Sets the max stack.
+     *
      * @param maxStack the max stack.
      */
     public void setMaxStack(int maxStack) {
@@ -36,6 +58,7 @@ public class Method extends Member {
 
     /**
      * Returns the max locals.
+     *
      * @return the max locals.
      */
     public int getMaxLocals() {
@@ -44,6 +67,7 @@ public class Method extends Member {
 
     /**
      * Sets the max locals.
+     *
      * @param maxLocals the max locals.
      */
     public void setMaxLocals(int maxLocals) {
@@ -52,6 +76,7 @@ public class Method extends Member {
 
     /**
      * Returns the raw code pool.
+     *
      * @return a byte[] containing all opcodes and augmenting bytes.
      */
     public byte[] getBytecode() {
@@ -60,6 +85,7 @@ public class Method extends Member {
 
     /**
      * Sets the raw code pool of this attribute.
+     *
      * @param codePool the pool.
      */
     public void setBytecode(byte[] codePool) {
@@ -68,6 +94,7 @@ public class Method extends Member {
 
     /**
      * Fetches all Try/Catch structures in a pool.
+     *
      * @return a pool of Try/Catch structures.
      */
     public List<Code.Exception> getExceptions() {
@@ -76,6 +103,7 @@ public class Method extends Member {
 
     /**
      * Sets the exception pool of this code segment.
+     *
      * @param exceptionPool the pool.
      */
     public void setExceptionPool(List<Code.Exception> exceptionPool) {
@@ -84,18 +112,28 @@ public class Method extends Member {
 
     /**
      * Returns the attributes relating to the code.
+     *
      * @return an attribute pool.
      */
-    public List<Attribute> getCodeAttributes() {
+    public AttributePool getCodeAttributes() {
         return code.getAttributes();
     }
 
     /**
      * Sets the sub-attribute pool of this attribute.
+     *
      * @param attributePool the pool.
      */
-    public void setCodeAttributes(List<Attribute> attributePool) {
+    public void setCodeAttributes(AttributePool attributePool) {
         code.setAttributes(attributePool);
+    }
+
+    public Code getCode() {
+        return code;
+    }
+
+    public void setCode(Code code) {
+        this.code = code;
     }
 
     public boolean isBridge() {

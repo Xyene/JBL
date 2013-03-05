@@ -1,4 +1,23 @@
-package net.sf.jbl.util;
+/*
+ *  JBL
+ *  Copyright (C) 2013 Tudor Brindus
+ *  All wrongs reserved.
+ *
+ *  This program is free software: you can redistribute it and/or modify it under
+ *  the terms of the GNU Lesser General Public License as published by the Free
+ *  Software Foundation, either version 3 of the License, or (at your option) any
+ *  later version.
+ *
+ *  This program is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ *  details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
+package net.sf.jbl.core;
 
 import java.io.*;
 import java.util.Arrays;
@@ -27,6 +46,12 @@ public class ByteStream {
 
     public static ByteStream writeStream() {
         return writeStream(0);
+    }
+
+    public static ByteStream writeStream(byte[] bytes) {
+        ByteStream stream = new ByteStream(0);
+        stream.buffer = bytes;
+        return stream;
     }
 
     public static ByteStream readStream(byte[] bytes, int pos) {
@@ -69,24 +94,15 @@ public class ByteStream {
         return flag == 0;
     }
 
-    public void enlarge(int size) {
-        int length1 = buffer.length << 1;
-        int length2 = _out + size;
-        byte[] newData = new byte[length1 > length2 ? length1 : length2];
-        System.arraycopy(buffer, 0, newData, 0, _out);
-        buffer = newData;
-    }
-
     public ByteStream writeInt(final int i) {
-        int length = _out;
-        if (length + 4 > buffer.length) {
+        if (_out + 4 > buffer.length) {
             enlarge(4);
         }
         byte[] data = buffer;
-        data[length++] = (byte) (i >>> 24);
-        data[length++] = (byte) (i >>> 16);
-        data[length++] = (byte) (i >>> 8);
-        data[length++] = (byte) i;
+        data[_out++] = (byte) (i >>> 24);
+        data[_out++] = (byte) (i >>> 16);
+        data[_out++] = (byte) (i >>> 8);
+        data[_out++] = (byte) i;
         return this;
     }
 
@@ -101,7 +117,6 @@ public class ByteStream {
     }
 
     public final ByteStream writeUTF(String s) {
-        writeShort(s.length());
         int charLength = s.length();
         int len = _out;
         if (len + 2 + charLength > buffer.length) {
@@ -127,7 +142,7 @@ public class ByteStream {
                         byteLength += 2;
                     }
                 }
-                data[len] = (byte) (byteLength >>> 8);
+                data[len++] = (byte) (byteLength >>> 8);
                 data[len++] = (byte) byteLength;
                 if (len + 2 + byteLength > data.length) {
                     enlarge(byteLength + 2);
@@ -173,11 +188,11 @@ public class ByteStream {
 
     public ByteStream writeByte(int b) {
         int length = _out;
-        if (length + 2 > buffer.length) {
-            enlarge(2);
+        if (length + 1 > buffer.length) {
+            enlarge(1);
         }
         buffer[length++] = (byte) b;
-        this._out = length;
+        _out = length;
         return this;
     }
 
@@ -239,7 +254,28 @@ public class ByteStream {
     }
 
     public byte[] getBuffer() {
+        int mx = Math.max(_in, _out);
+        if (mx < buffer.length) {
+            // This means that extra space has been allocated:
+            // we cannot return this because it is essentially
+            // corrupt. Hence, we truncate the end.
+            byte[] newBuf = new byte[mx];
+            System.arraycopy(buffer, 0, newBuf, 0, mx);
+            // System.out.println("Reallocated " + this);
+            // Set buffer to it so that we essentially return
+            // a pointer.
+            buffer = newBuf;
+        }
+
         return buffer;
+    }
+
+    public void enlarge(final int size) {
+        int mul = buffer.length << 1;
+        int ad = _out + size;
+        byte[] newData = new byte[mul > ad ? mul : ad];
+        System.arraycopy(buffer, 0, newData, 0, _out);
+        buffer = newData;
     }
 
     public int position() {
@@ -247,7 +283,7 @@ public class ByteStream {
     }
 
     public String toString() {
-        return "{ByteStream" + Arrays.toString(buffer) + "}";
+        return "{ByteStream(" + buffer.length + "):" + Arrays.toString(buffer) + "}";
     }
 }
 

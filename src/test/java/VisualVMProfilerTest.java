@@ -1,4 +1,4 @@
-import net.sf.jbl.introspection.ClassFile;
+import net.sf.jbl.core.ClassFile;
 import org.junit.Test;
 
 import java.io.File;

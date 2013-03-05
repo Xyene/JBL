@@ -353,8 +353,7 @@ public abstract class MethodVisitor {
      * @param desc
      *            the field's descriptor (see {@link Type Type}).
      */
-    public void visitFieldInsn(int opcode, String owner, String name,
-            String desc) {
+    public void visitFieldInsn(int opcode, String owner, String name, String desc) {
         if (mv != null) {
             mv.visitFieldInsn(opcode, owner, name, desc);
         }

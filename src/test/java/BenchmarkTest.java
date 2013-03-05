@@ -3,8 +3,7 @@ import benchmark.asm.ClassWriter;
 import benchmark.bcel.classfile.ClassParser;
 import benchmark.serp.bytecode.Project;
 import org.junit.Test;
-import net.sf.jbl.introspection.ClassFile;
-import sun.reflect.ConstantPool;
+import net.sf.jbl.core.ClassFile;
 
 import java.io.*;
 
@@ -24,10 +23,13 @@ public class BenchmarkTest {
         for (int i = 0; i != 1024; i++) {
             double start = System.nanoTime();
             new ClassFile(bytes).toByteArray();
+            //    ClassFile cf = new ClassFile();
+            //  cf.implement("java/lang/Object");
+            //   cf.implementationOf("java/lang/Serializable");
             average += System.nanoTime() - start;
         }
         average /= 1024;
-        System.out.println("JBL Time: " + average/1000000 + "ms");
+        System.out.println("JBL Time: " + average / 1000000 + "ms");
 
         //ASM benchmark
         average = 0;
@@ -38,7 +40,7 @@ public class BenchmarkTest {
             average += System.nanoTime() - start;
         }
         average /= 1024;
-        System.out.println("ASM Time: " + average/1000000 + "ms");
+        System.out.println("ASM Time: " + average / 1000000 + "ms");
 
         //BCEL benchmark
         average = 0;
@@ -46,10 +48,12 @@ public class BenchmarkTest {
         for (int i = 0; i != 1024; i++) {
             double start = System.nanoTime();
             new ClassParser(new FileInputStream(clazz), "PhantomTest").parse().getBytes();
+            // JavaClass jc = new ClassParser(new FileInputStream(clazz), "PhantomTest").parse();
+            // jc.isSuper()
             average += System.nanoTime() - start;
         }
         average /= 1024;
-        System.out.println("BCEL Time: " + average/1000000 + "ms");
+        System.out.println("BCEL Time: " + average / 1000000 + "ms");
 
         //SERP benchmark
         average = 0;
@@ -60,6 +64,6 @@ public class BenchmarkTest {
             average += System.nanoTime() - start;
         }
         average /= 1024;
-        System.out.println("SERP Time: " + average/1000000 + "ms");
+        System.out.println("SERP Time: " + average / 1000000 + "ms");
     }
 }

@@ -1,59 +1,82 @@
-package net.sf.jbl.introspection;
+/*
+ *  JBL
+ *  Copyright (C) 2013 Tudor Brindus
+ *  All wrongs reserved.
+ *
+ *  This program is free software: you can redistribute it and/or modify it under
+ *  the terms of the GNU Lesser General Public License as published by the Free
+ *  Software Foundation, either version 3 of the License, or (at your option) any
+ *  later version.
+ *
+ *  This program is distributed in the hope that it will be useful, but WITHOUT
+ *  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+ *  FOR A PARTICULAR PURPOSE. See the GNU General Public License for more
+ *  details.
+ *
+ *  You should have received a copy of the GNU Lesser General Public License
+ *  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
 
-import net.sf.jbl.util.ByteStream;
+package net.sf.jbl.core;
 
 import java.util.Arrays;
 
+// Based off of ASM's ClassReader/Writer constant pool modification,
+// but with most parsing changed (i.e. introduction of lazy-load constants).
 public class ConstantPool implements Opcode {
     // In this implementation of a constant pool, we assume that the latter is can be read, but only appended
     // to. This allows us to optimize it to an array rather than its slower ArrayList counterpart. Constants
     // are loaded lazily from this array.
-    private Entry[] items;
-    private int threshold;
+    Entry[] items;
     private short index = 0;
     final ByteStream cache;
+    Entry last;
+
+    public ConstantPool() {
+        this(0);
+    }
 
     public ConstantPool(int size) {
         items = new Entry[size];
-        threshold = (int) (size * 0.75D);
-        cache = ByteStream.writeStream(threshold);
+        cache = ByteStream.writeStream();
     }
 
     ConstantPool(ByteStream in) {
         short len = in.readShort();
-        items = new Entry[len];
+        items = new Entry[len + 1];
         // Store the current index of the positioned stream to allow forking of the stream after all constants
         // Are parsed and loaded into the constant array.
         int start = in.position();
-        for (short i = 1; i != len; i++) {
+        for (short i = 1; i != len; ++i) {
             byte tag = in.readByte();
-            Entry item = new Entry(i, tag);
+            Entry item = new Entry(i, this);
+            item.type = tag;
             switch (tag) {
                 case TAG_FIELD:
                 case TAG_METHOD:
                 case TAG_INTERFACE_METHOD:
-                    item.set_(tag, new Object[]{Short.valueOf(in.readShort()), Short.valueOf(in.readShort())});
+                    item.set(tag, new Short[]{in.readShort(), in.readShort()});
                     item.resolved = false;
                     break;
                 case TAG_INTEGER:
-                    item.set(tag, Integer.valueOf(in.readInt()));
+                    item.set(tag, in.readInt());
                     break;
                 case TAG_FLOAT:
-                    item.set(tag, Float.valueOf(in.readFloat()));
+                    item.set(tag, in.readFloat());
                     break;
                 case TAG_DESCRIPTOR:
-                    item.set_(tag, new Object[]{Short.valueOf(in.readShort()), Short.valueOf(in.readShort())});
+                    item.set(tag, new Short[]{in.readShort(), in.readShort()});
                     item.resolved = false;
                     break;
                 // Long and double values are considered wide by the JVM, meaning that they take up two slots in
                 // the constant pool. We simply increment the index. Any program accessing the phantom index in
                 // such a constant will be met with an appropriate null pointer.
                 case TAG_LONG:
-                    item.set(tag, Long.valueOf(in.readLong()));
+                    item.set(tag, in.readLong());
                     i++;
                     break;
                 case TAG_DOUBLE:
-                    item.set(tag, Double.valueOf(in.readDouble()));
+                    item.set(tag, in.readDouble());
                     i++;
                     break;
                 case TAG_UTF_STRING:
@@ -69,7 +92,7 @@ public class ConstantPool implements Opcode {
                     break;
                 case TAG_STRING:
                 case TAG_CLASS:
-                    item.set(tag, Short.valueOf(in.readShort()));
+                    item.set(tag, in.readShort());
                     item.resolved = false;
                     break;
                 case 2:
@@ -79,21 +102,23 @@ public class ConstantPool implements Opcode {
                     // Since this is part of the default, invalid case,
                     throw new ClassFormatError("unknown constant @ " + i + " with tag " + tag);
             }
-            item.next = items[i];
-            items[i] = item;
+
+            items[item.index] = item;
+            if(last != null)items[last.index].next = item;
+            last = item;
         }
-        threshold = (int) (0.75D * len);
         index = len;
-        // By deep forking the stream to a writable form, we save time on dumping, because the contents of pre-existing
+        // By forking the stream to a writable form, we save time on dumping, because the contents of pre-existing
         // constants are already stored in it. This means we no longer have to start from scratch every time the
-        // pool is dumped. All internal constant generators write to this stream: it is always up to date.
+        // pool is dumped.
+        // All internal constant generators write to this stream: it is always up to date.
         int size = in.position() - start;
         cache = ByteStream.writeStream(size);
-        System.arraycopy(in.getBuffer(), start, cache.getBuffer(), 0, size);
+        System.arraycopy(in.buffer, start, cache.buffer, 0, size);
     }
 
     public int size() {
-        return items.length;
+        return index + 1;
     }
 
     public int newConst(Object cst) {
@@ -124,7 +149,7 @@ public class ConstantPool implements Opcode {
         Entry result = get(TAG_UTF_STRING, value);
         if (result == null) {
             cache.writeByte(TAG_UTF_STRING).writeUTF(value);
-            (result = new Entry(index++)).set(TAG_UTF_STRING, value);
+            (result = new Entry(index++, this)).set(TAG_UTF_STRING, value);
             put(result);
         }
         return result.index;
@@ -133,8 +158,9 @@ public class ConstantPool implements Opcode {
     public int newString(String value) {
         Entry result = get(TAG_STRING, value);
         if (result == null) {
-            cache.writeByte(TAG_STRING).writeShort(newUTF(value));
-            (result = new Entry(index++)).set(TAG_UTF_STRING, value);
+            int utf = newUTF(value);
+            cache.writeByte(TAG_STRING).writeShort(utf);
+            (result = new Entry(index++, this)).set(TAG_STRING, value);
             put(result);
         }
         return result.index;
@@ -143,28 +169,35 @@ public class ConstantPool implements Opcode {
     public int newClass(String value) {
         Entry result = get(TAG_CLASS, value);
         if (result == null) {
-            cache.writeByte(TAG_CLASS).writeShort(newUTF(value));
-            (result = new Entry(index++)).set(TAG_CLASS, value);
+            int utf = newUTF(value);
+            cache.writeByte(TAG_CLASS).writeShort(utf);
+            (result = new Entry(index++, this)).set(TAG_CLASS, value);
             put(result);
         }
         return result.index;
     }
 
     public int newField(String owner, String name, String desc) {
-        Entry result = get(TAG_FIELD, owner, name, desc);
+        String[] proc = new String[]{owner, name, desc};
+        Entry result = get(TAG_FIELD, proc);
         if (result == null) {
-            cache.writeByte(TAG_FIELD).writeShort(newClass(owner)).writeShort(newNameType(name, desc));
-            (result = new Entry(index++)).set_(TAG_FIELD, owner, name, desc);
+            int cp = newClass(owner);
+            int ntp = newNameType(name, desc);
+            cache.writeByte(TAG_FIELD).writeShort(cp).writeShort(ntp);
+            (result = new Entry(index++, this)).set(TAG_FIELD, proc);
             put(result);
         }
         return result.index;
     }
 
     public int newMethod(String owner, String name, String desc) {
-        Entry result = get(TAG_METHOD, owner, name, desc);
+        String[] proc = new String[]{owner, name, desc};
+        Entry result = get(TAG_METHOD, proc);
         if (result == null) {
-            cache.writeByte(TAG_METHOD).writeShort(newClass(owner)).writeShort(newNameType(name, desc));
-            (result = new Entry(index++)).set_(TAG_METHOD, owner, name, desc);
+            int cp = newClass(owner);
+            int ntp = newNameType(name, desc);
+            cache.writeByte(TAG_METHOD).writeShort(cp).writeShort(ntp);
+            (result = new Entry(index++, this)).set(TAG_METHOD, proc);
             put(result);
         }
         return result.index;
@@ -174,7 +207,7 @@ public class ConstantPool implements Opcode {
         Entry result = get(TAG_INTEGER, value);
         if (result == null) {
             cache.writeByte(TAG_INTEGER).writeInt(value);
-            (result = new Entry(index++)).set(TAG_INTEGER, value);
+            (result = new Entry(index++, this)).set(TAG_INTEGER, value);
             put(result);
         }
         return result.index;
@@ -184,7 +217,7 @@ public class ConstantPool implements Opcode {
         Entry result = get(TAG_FLOAT, value);
         if (result == null) {
             cache.writeByte(TAG_FLOAT).writeInt((int) value);
-            (result = new Entry(index++)).set(TAG_FLOAT, value);
+            (result = new Entry(index++, this)).set(TAG_FLOAT, value);
             put(result);
         }
         return result.index;
@@ -193,8 +226,8 @@ public class ConstantPool implements Opcode {
     public int newLong(long value) {
         Entry result = get(TAG_LONG, value);
         if (result == null) {
-            cache.writeByte(TAG_LONG).writeDouble(value);
-            (result = new Entry(index)).set(TAG_LONG, value);
+            cache.writeByte(TAG_LONG).writeDouble(Double.longBitsToDouble(value));
+            (result = new Entry(index, this)).set(TAG_LONG, value);
             index += 2;
             put(result);
         }
@@ -205,7 +238,7 @@ public class ConstantPool implements Opcode {
         Entry result = get(TAG_DOUBLE, value);
         if (result == null) {
             cache.writeByte(TAG_DOUBLE).writeDouble(value);
-            (result = new Entry(index)).set(TAG_DOUBLE, value);
+            (result = new Entry(index, this)).set(TAG_DOUBLE, value);
             index += 2;
             put(result);
         }
@@ -213,65 +246,16 @@ public class ConstantPool implements Opcode {
     }
 
     public int newNameType(String name, String desc) {
-        Entry result = get(TAG_DESCRIPTOR, name, desc);
+        String[] proc = new String[]{name, desc};
+        Entry result = get(TAG_DESCRIPTOR, proc);
         if (result == null) {
-            cache.writeByte(TAG_DESCRIPTOR).writeShort(newUTF(name)).writeShort(newUTF(desc));
-            (result = new Entry(index++)).set_(TAG_DESCRIPTOR, name, desc);
+            int np = newUTF(name);
+            int dp = newUTF(desc);
+            cache.writeByte(TAG_DESCRIPTOR).writeShort(np).writeShort(dp);
+            (result = new Entry(index++, this)).set(TAG_DESCRIPTOR, proc);
             put(result);
         }
         return result.index;
-    }
-
-    private Entry get(byte tag, Object... value) {
-        Entry c = items[0];
-        // Here we use two almost identical while loops based on if the constant is initialized.
-        // This is to prevent the overhead of comparing a boolean in a value/resolved ternary
-        // possibly thousands of times when this method is called. Depending on the scenario,
-        // this micro-optimization's effects are large, resulting up to entire milliseconds of time saved.
-        while (c != null && c.type != tag) {
-            Object complex = c.complex;
-            if (c.resolved)
-                switch (tag) {
-                    case TAG_INTEGER:
-                    case TAG_LONG:
-                    case TAG_DOUBLE:
-                    case TAG_FLOAT:
-                        // Primitive types are parsed as singluar values, not an object[] as implied by
-                        // the fact that value is varargs. We can use the equality comparator
-                        // since complex and value[0] should be primitive ints.
-                        if (complex == value[0])
-                            return c;
-                }
-            else {
-                switch (tag) {
-                    case TAG_UTF_STRING:
-                        // Here we can simply compare via the byte array representation of this string
-                        if (complex.equals(((String) value[0]).getBytes()))
-                            return c;
-                    case TAG_DESCRIPTOR:
-                        // However, for descriptors, we must actually load the descriptor, and this
-                        // entails loading their referenced UTF-8 components.
-                        // The format of an unresolved descriptor is an index to name and params, respectively.
-                        // The need for the indexes means that this call must recurse. When it does, it will fall on the
-                        // TAG_UTF_STRING case.
-                        if (complex.equals(new Short[]{get(TAG_UTF_STRING, value[0]).index, get(TAG_UTF_STRING, value[1]).index}))
-                            return c;
-                    case TAG_FIELD:
-                    case TAG_METHOD:
-                    case TAG_INTERFACE_METHOD:
-                        if (complex.equals(new Short[]{get(TAG_CLASS, value[0]).index, get(TAG_DESCRIPTOR, value[1], value[2]).index}))
-                            return c;
-                    case TAG_CLASS:
-                    case TAG_STRING:
-                        if (complex.equals(get(TAG_CLASS, value[0]).index))
-                            return c;
-                }
-            }
-            if (complex == value)
-                return c;
-            c = c.next;
-        }
-        return c;
     }
 
     public Object get(int i) {
@@ -293,36 +277,38 @@ public class ConstantPool implements Opcode {
     }
 
     public String getUTF(int index) {
-        Entry dec;
-        if((dec = this.items[index]).resolved) {
-            return (String)dec.complex;
-        } else {
-            byte[] bc;
-            int size = (bc = (byte[])dec.complex).length;
-            int pos = 0;
-            char[] buf = new char[size];
-            int strLen = 0;
+        Entry dec = items[index];
+        if (dec != null)
+            if (dec.resolved) {
+                return (String) dec.complex;
+            } else {
+                byte[] bc;
+                int size = (bc = (byte[]) dec.complex).length;
+                int pos = 0;
+                char[] buf = new char[size];
+                int strLen = 0;
 
-            while(pos < size) {
-                int c;
-                if((c = bc[pos++] & 0xFF) < 0x80) {
-                    buf[strLen++] = (char)c;
-                } else {
-                    char cc;
-                    if(c < 0xE0 && c > 0xBF) {
-                        cc = (char)(c & 0x1F);
+                while (pos < size) {
+                    int c;
+                    if ((c = bc[pos++] & 0xFF) < 0x80) {
+                        buf[strLen++] = (char) c;
                     } else {
-                        cc = (char)((c & 0xF) << 0x6 | c & 0x3F);
+                        char cc;
+                        if (c < 0xE0 && c > 0xBF) {
+                            cc = (char) (c & 0x1F);
+                        } else {
+                            cc = (char) ((c & 0xF) << 0x6 | c & 0x3F);
+                        }
+                        buf[strLen++] = (char) (cc << 0x6 | c & 0x3F);
                     }
-                    buf[strLen++] = (char)(cc << 0x6 | c & 0x3F);
                 }
-            }
 
-            String str = new String(buf, 0, strLen);
-            this.items[index].complex = str;
-            this.items[index].resolved = true;
-            return str;
-        }
+                String str = new String(buf, 0, strLen);
+                items[index].complex = str;
+                items[index].resolved = true;
+                return str;
+            }
+        return null;
     }
 
     public String getString(int index) {
@@ -333,13 +319,23 @@ public class ConstantPool implements Opcode {
         return (String) (items[index].complex = getUTF((Short) con.complex));
     }
 
+    public String[] getMember(int index) {
+        Entry con = items[index];
+        if (con.resolved)
+            return (String[]) con.complex;
+        Short[] comp = (Short[]) con.complex;
+        items[index].resolved = true;
+        String[] desc = getDescriptor(comp[1]);
+        return (String[]) (items[index].complex = new String[]{getString(comp[0]), desc[0], desc[1]});
+    }
+
     public String[] getDescriptor(int index) {
         Entry con = items[index];
         if (con.resolved)
             return (String[]) con.complex;
-        Object[] comp = (Object[]) con.complex;
+        Short[] comp = (Short[]) con.complex;
         items[index].resolved = true;
-        return (String[]) (items[index].complex = new String[]{getUTF((Short) comp[0]), getUTF((Short) comp[1])});
+        return (String[]) (items[index].complex = new String[]{getUTF(comp[0]), getUTF(comp[1])});
     }
 
     public double getDouble(int index) {
@@ -355,50 +351,54 @@ public class ConstantPool implements Opcode {
     }
 
     private void put(Entry i) {
-        if (index > threshold) {
-            int len = items.length;
-            int size = (len << 1) + 1;
-            Entry[] newItems = new Entry[size];
-            for (int l = len - 1; l >= 0; --l) {
+        if (index + 2 > items.length) {
+            int ll = items.length;
+            int nl = (ll << 1) + 1;
+            Entry[] newItems = new Entry[nl];
+            for (int l = ll - 1; l >= 0; --l) {
                 Entry j = items[l];
                 while (j != null) {
-                    short index = j.index;
                     Entry k = j.next;
-                    j.next = newItems[index];
-                    newItems[index] = j;
+                    j.next = newItems[j.index];
+                    newItems[j.index] = j;
                     j = k;
                 }
             }
             items = newItems;
-            // Since everything is written to the cache the moment it is created, the only backdraw in guessing
-            // the size of the threshold is the possibility that some memory might be allocated that will never
-            // actually be used.
-            threshold = (int) (size * 0.75);
         }
-        short index = i.index;
-        i.next = items[index];
-        items[index] = i;
+
+        items[i.index] = i;
+        if(last != null)items[last.index].next = i;
+        last = i;
+    }
+
+    private Entry get(int type, Object... args) {
+        Entry x = new Entry((short) -1, this);
+        x.set((byte) type, args.length > 1 ? args : args[0]);
+        Entry i = items[1];
+        while (i != null && (i.type != type || !x.equals(i))) {
+            System.out.println("i is " + i + ", next is " + i.next);
+            i = i.next;
+        }
+        return i;
+    }
+
+    @Override
+    public String toString() {
+        return "{(" + size() + "):" + Arrays.toString(items) + "}";
     }
 
     private static final class Entry implements Opcode {
         byte type;
-        Entry next;
         Object complex;
+        Entry next;
         short index;
         boolean resolved = true;
+        ConstantPool owner;
 
-        private Entry(short index) {
-            this.index = index;
-        }
-
-        private Entry(short index, byte type) {
-            this.index = index;
-            this.type = type;
-        }
-
-        private final void set_(byte tag, Object... comp) {
-            type = tag;
-            complex = comp;
+        private Entry(short index, ConstantPool owner) {
+            this.index = (short) (index + 1);
+            this.owner = owner;
         }
 
         private final void set(byte tag, Object comp) {
@@ -406,9 +406,55 @@ public class ConstantPool implements Opcode {
             complex = comp;
         }
 
+        public boolean equals(Entry en) {
+            // The fastest, and simplest check
+            System.out.println(en.complex + "::" + complex + "::" + en.complex.equals(complex));
+            if (en.type == type) {
+                if (en.resolved)
+                    if (resolved) {
+
+                        return en.complex.equals(complex);
+                    } else {
+                        switch (type) {
+                            case TAG_UTF_STRING:
+                                return complex.equals(((String) en.complex).getBytes());
+                            case TAG_STRING:
+                            case TAG_CLASS:
+                                return owner.get(TAG_UTF_STRING, en.complex).index == (Short) complex;
+                            default:
+                                return true;
+
+
+                        }
+                    }
+            }
+            return false;
+        }
+
         @Override
         public String toString() {
             return "{" + type + "@" + index + "; " + (complex instanceof Object[] ? Arrays.toString((Object[]) complex) : complex) + "}";
+        }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+
+            Entry entry = (Entry) o;
+
+            if (type != entry.type) return false;
+            if (complex != null ? !complex.equals(entry.complex) : entry.complex != null) return false;
+            if (owner != null ? !owner.equals(entry.owner) : entry.owner != null) return false;
+
+            return true;
+        }
+
+        @Override
+        public int hashCode() {
+            int result = (int) type;
+            result = 31 * result + (complex != null ? complex.hashCode() : 0);
+            return result;
         }
     }
 }

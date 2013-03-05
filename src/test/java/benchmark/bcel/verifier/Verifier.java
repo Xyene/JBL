@@ -44,10 +44,12 @@ import benchmark.bcel.verifier.structurals.Pass3bVerifier;
  */
 public class Verifier {
 
+    public Verifier() {}
+
     /**
      * The name of the class this verifier operates on.
      */
-    private final String classname;
+    private String classname;
     /** A Pass1Verifier for this Verifier instance. */
     private Pass1Verifier p1v;
     /** A Pass2Verifier for this Verifier instance. */
